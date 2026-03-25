@@ -1,0 +1,65 @@
+{
+  "brand": {
+    "dark":  "#003DA5",
+    "mid":   "#336BBF",
+    "light": "#B3CDE3",
+    "wash":  "#E6EFF8"
+  },
+  "priority_labels": {
+    "1": "P1 - Urgent",
+    "2": "P2 - High",
+    "3": "P3 - Medium",
+    "4": "P4 - Low",
+    "5": "P5 - Background"
+  },
+  "priority_colors": {
+    "1": "#c0392b",
+    "2": "#e67e22",
+    "3": "#f39c12",
+    "4": "#7f8c8d",
+    "5": "#bdc3c7"
+  },
+  "treeview_tag_colors": {
+    "p1": "#fce4e4",
+    "p2": "#fef3e0",
+    "p3": "#fff9e6",
+    "p4": "#f0f0f0",
+    "p5": "#f7f7f7",
+    "project": "#dce6f5",
+    "deliverable_fg": "#555555"
+  },
+  "gantt_colors": {
+    "in_progress": "#336BBF",
+    "completed":   "#2E8B57",
+    "overdue":     "#C0392B",
+    "not_started": "#B0B0B0",
+    "header":      "#003DA5"
+  },
+  "gantt_colors_dark": {
+    "in_progress": "#4A90D9",
+    "completed":   "#3CB371",
+    "overdue":     "#E74C3C",
+    "not_started": "#6C6C6C",
+    "header":      "#1A1A2E",
+    "bg":          "#1E1E2E",
+    "row_even":    "#252538",
+    "row_odd":     "#1E1E2E",
+    "project_bg":  "#2A2A4A",
+    "section_bg":  "#3A3020",
+    "grid_line":   "#333355",
+    "text":        "#E0E0E0",
+    "text_dim":    "#A0A0B0",
+    "divider":     "#333355",
+    "today_line":  "#FF6B6B"
+  },
+  "status_colors": {
+    "Completed":       "#27ae60",
+    "In Progress":     "#336BBF",
+    "On Track":        "#2ecc71",
+    "Ongoing":         "#16a085",
+    "Recurring":       "#8e44ad",
+    "Complete/Pending": "#f39c12",
+    "On Hold":         "#e74c3c",
+    "Not Started":     "#95a5a6"
+  }
+}

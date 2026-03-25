@@ -1,0 +1,30 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# User Profiles — Weekly Report Generator
+# ──────────────────────────────────────────────────────────────────────────────
+
+active_profile: 0
+profiles:
+- name: Ashwin Conrad
+  role: Engineering Co-op Student
+  company: AltaGas Ltd.
+  email: ashwin.conrad@altagas.ca
+  phone: '4038269320'
+  recipient_name: Kurt MacKay
+  recipient_email: kurt.mackay@altagas.ca
+  workbook_filename: Catelogue of Projects Report - Ashwin Conrad.xlsx
+- role: Life Admin
+  email: conrad.ashwin@gmail.com
+  phone: '4038269320'
+  recipient_name: ''
+  recipient_email: ''
+  workbook_filename: Tracking.xlsx
+  name: Ashwin Conrad
+  company: Personal
+- name: Ashwin Conrad
+  role: Low Voltage Electrical Lead
+  company: UA FSAE
+  email: aconrad1@ualberta.ca
+  phone: '4038269320'
+  recipient_name: ''
+  recipient_email: ''
+  workbook_filename: Projects.xlsx

@@ -1,0 +1,37 @@
+{
+  "task": {
+    "Title":            "title",
+    "Supervisor":       "supervisor",
+    "Site":             "site",
+    "Description":      "description",
+    "Commentary":       "commentary",
+    "Status":           "status",
+    "Priority":         "priority",
+    "Start Date":       "start",
+    "End Date":         "end",
+    "Deadline":         "deadline",
+    "Date Completed":   "date_completed",
+    "Scheduled Date":   "scheduled_date"
+  },
+  "deliverable": {
+    "Title":            "title",
+    "Description":      "description",
+    "Status":           "status",
+    "Start Date":       "start",
+    "End Date":         "end",
+    "Deadline":         "deadline",
+    "% Complete":       "percent_complete",
+    "Time Allocated":   "time_allocated",
+    "Time Spent":       "time_spent"
+  },
+  "project": {
+    "Title":            "title",
+    "Category":         "category",
+    "Description":      "description",
+    "Status":           "status",
+    "Priority":         "priority",
+    "Start Date":       "start",
+    "End Date":         "end",
+    "Deadline":         "deadline"
+  }
+}

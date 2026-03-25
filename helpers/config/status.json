@@ -1,0 +1,21 @@
+{
+  "values": [
+    "Not Started",
+    "In Progress",
+    "On Track",
+    "Ongoing",
+    "Recurring",
+    "Complete/Pending",
+    "On Hold",
+    "Completed"
+  ],
+  "completed_statuses": [
+    "Completed"
+  ],
+  "active_statuses": [
+    "In Progress",
+    "On Track",
+    "Ongoing",
+    "Recurring"
+  ]
+}

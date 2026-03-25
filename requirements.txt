@@ -1,0 +1,6 @@
+openpyxl
+markdown
+pyyaml
+customtkinter
+pywin32
+tkinterdnd2

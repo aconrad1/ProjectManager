@@ -1,0 +1,6 @@
+{
+    "default_time_allocated_hours": 1.0,
+    "max_tasks_per_priority_slot": 3,
+    "week_start_day": "monday",
+    "enforce_weekly_budget": false
+}
