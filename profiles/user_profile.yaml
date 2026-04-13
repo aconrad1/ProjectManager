@@ -2,17 +2,8 @@
 # User Profiles — Weekly Report Generator
 # ──────────────────────────────────────────────────────────────────────────────
 
-active_profile: 1
+active_profile: 0
 profiles:
-- name: ''
-  role: ''
-  company: ''
-  email: ''
-  phone: ''
-  recipient_name: ''
-  recipient_email: ''
-  workbook_filename: ''
-  daily_hours_budget: 8.0
 - name: Dev Tester
   role: Developer
   company: _TestCompany

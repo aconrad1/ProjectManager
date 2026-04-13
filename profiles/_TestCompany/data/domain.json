@@ -1,8 +1,8 @@
 {
   "_meta": {
     "schema_version": 1,
-    "workbook_hash": null,
-    "last_modified": "2026-04-13T00:00:00"
+    "workbook_hash": "",
+    "last_modified": "2026-04-13T20:00:09.257417+00:00"
   },
   "id": "profile:_TestCompany",
   "title": "Dev Tester",
@@ -105,7 +105,7 @@
           "site": "North Plant",
           "commentary": "",
           "date_completed": null,
-          "scheduled_date": "2026-04-14",
+          "scheduled_date": "2026-04-16",
           "deliverables": []
         },
         {
@@ -247,7 +247,7 @@
           "site": "South Site",
           "commentary": "",
           "date_completed": null,
-          "scheduled_date": null,
+          "scheduled_date": "2026-04-16",
           "deliverables": []
         }
       ]
@@ -335,7 +335,7 @@
           "site": "South Site",
           "commentary": "Blocked until tag mapping is finalized.",
           "date_completed": null,
-          "scheduled_date": null,
+          "scheduled_date": "2026-04-16",
           "deliverables": []
         }
       ]
