@@ -46,7 +46,10 @@ from helpers.commands.task_ops import set_post_mutate_hook
 
 def _load_profile():
     """Load the workbook and sync the domain Profile hierarchy."""
+    from helpers.profile.profile import scaffold_profile
     wb_path = workbook_path()
+    if not wb_path.exists():
+        scaffold_profile(USER_COMPANY, WORKBOOK_FILENAME)
     wb = load_workbook(wb_path)
     profile = sync_profile(
         wb,

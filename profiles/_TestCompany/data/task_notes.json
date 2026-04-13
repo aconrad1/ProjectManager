@@ -1,0 +1,14 @@
+{
+  "T-001": [
+    {"timestamp": "2026-04-13T09:15:00", "text": "Started walkthrough of control room checkpoints."},
+    {"timestamp": "2026-04-13T14:30:00", "text": "Sections 1-3 complete. Firewall inspection pending."}
+  ],
+  "T-004": [
+    {"timestamp": "2026-04-07T10:00:00", "text": "Unit 1 VFD powered up — parameter set loaded from template."},
+    {"timestamp": "2026-04-10T16:45:00", "text": "Unit 1 commissioned and running. Vibration within spec."}
+  ],
+  "T-007": [
+    {"timestamp": "2026-03-20T11:00:00", "text": "First 4 overview screens built and reviewed with ops team."},
+    {"timestamp": "2026-04-02T09:00:00", "text": "Screens 5-8 complete. Starting alarm summary page next."}
+  ]
+}

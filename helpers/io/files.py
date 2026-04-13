@@ -29,20 +29,25 @@ def copy_files(sources: list[str | Path], dest_dir: Path) -> list[str]:
     return copied
 
 
-def open_path(target: str | Path) -> None:
+def open_path(target: str | Path) -> bool:
     """Open *target* using the platform's default handler.
 
     Works on Windows (``os.startfile``), macOS (``open``),
-    and Linux (``xdg-open``).
+    and Linux (``xdg-open``).  Returns ``True`` on success,
+    ``False`` if no handler is available (e.g. headless server).
     """
     target = str(target)
     system = platform.system()
-    if system == "Windows":
-        os.startfile(target)  # type: ignore[attr-defined]
-    elif system == "Darwin":
-        subprocess.Popen(["open", target])
-    else:
-        subprocess.Popen(["xdg-open", target])
+    try:
+        if system == "Windows":
+            os.startfile(target)  # type: ignore[attr-defined]
+        elif system == "Darwin":
+            subprocess.Popen(["open", target])
+        else:
+            subprocess.Popen(["xdg-open", target])
+        return True
+    except (OSError, FileNotFoundError):
+        return False
 
 
 def find_latest(folder: Path, pattern: str) -> Path | None:
