@@ -74,6 +74,8 @@ Built for managing tasks across multiple sites, supervisors, and priority levels
    ```
 4. Run the CLI immediately, or open the noVNC Desktop (port 6080) for the GUI.
 
+If Codespaces opens in recovery mode, use **Codespaces: View Creation Log** to inspect failures, then rebuild after confirming `.devcontainer/devcontainer.json` and `.devcontainer/postCreate.sh` completed. You can always open the GUI desktop manually from the **Ports** panel by opening port `6080` in browser.
+
 ### Option B: Local install (Windows)
 
 1. **Clone or download** the project to a local folder.

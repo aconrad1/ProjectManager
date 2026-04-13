@@ -1,6 +1,8 @@
 {
   "name": "ProjectManager",
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
 
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {
@@ -10,12 +12,14 @@
     }
   },
 
-  "forwardPorts": [6080],
+  "forwardPorts": [6080, 5901],
   "portsAttributes": {
-    "6080": { "label": "Desktop (noVNC)", "onAutoForward": "openBrowser" }
+    "6080": { "label": "Desktop (noVNC)", "onAutoForward": "openBrowser" },
+    "5901": { "label": "Desktop (VNC)", "onAutoForward": "silent" }
   },
 
-  "postCreateCommand": "pip install --no-cache-dir -r requirements.txt pytest && sudo apt-get update -qq && sudo apt-get install -y -qq python3-tk chromium --no-install-recommends && sudo apt-get clean",
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "postStartCommand": "echo 'If the GUI is needed, open forwarded port 6080 (Desktop noVNC) and run: python scripts/gui.py'",
 
   "customizations": {
     "vscode": {

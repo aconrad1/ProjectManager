@@ -57,10 +57,80 @@ The file `.devcontainer/devcontainer.json` tells GitHub exactly how to set up th
 | `image: python:3.12` | Starts with a machine that has Python 3.12 |
 | `desktop-lite` feature | Installs a virtual screen (so the Tkinter GUI can run in the cloud) |
 | `postCreateCommand` | Auto-runs `pip install -r requirements.txt` + installs `python3-tk` |
-| `forwardPorts: [6080]` | Makes the virtual desktop accessible in your browser |
+| `forwardPorts: [6080, 5901]` | Makes the virtual desktop accessible in your browser (see **Ports & the GUI** below) |
 | VS Code extensions | Auto-installs the Python extension for linting and debugging |
 
 **You don't need to memorize this.** It just means: when you (or anyone) opens the Codespace, everything is ready automatically.
+
+---
+
+## Ports & the GUI — How It Works
+
+### Why ports matter
+
+On your local PC, running `python scripts/gui.py` opens a window directly on your screen. In a Codespace there is no physical screen — it's a headless Linux server in the cloud. **Ports** are the bridge that lets you see and interact with a virtual desktop running on that server.
+
+Think of a port like a numbered door on the Codespace. When a service starts listening on a port, GitHub can "forward" that door to your browser so you can access it.
+
+### The two desktop ports
+
+| Port | Protocol | What it does |
+|------|----------|--------------|
+| **6080** | **noVNC (web)** | Opens the virtual desktop **directly in a browser tab** — no extra software needed. This is the one you'll use most of the time. |
+| **5901** | **VNC** | The raw VNC protocol port. Only useful if you prefer a dedicated VNC client app (like RealVNC Viewer or TigerVNC) instead of the browser. Most people can ignore this. |
+
+Both ports connect to the same virtual desktop — they're just two different ways to reach it.
+
+### How the pieces fit together
+
+```
+Your browser
+    │
+    ├── VS Code tab ──── terminal, file editor, extensions
+    │
+    └── Desktop tab ──── port 6080 (noVNC) ──→ virtual Fluxbox desktop
+                                                     │
+                                                     └── Tkinter GUI window
+                                                          (python scripts/gui.py)
+```
+
+1. The `desktop-lite` devcontainer feature installs a lightweight **Fluxbox** window manager and a **VNC server** inside the Codespace.
+2. When the Codespace starts, the VNC server creates a virtual screen (display `:1`).
+3. Port **5901** exposes that screen over the VNC protocol.
+4. Port **6080** runs **noVNC**, a web-based VNC client, so you can view that same screen in a normal browser tab with no extra software.
+5. When you run `python scripts/gui.py`, Tkinter draws its window on that virtual screen — and you see it through the noVNC browser tab.
+
+### Step-by-step: opening the GUI
+
+1. In VS Code, click the **Ports** tab in the bottom panel (next to Terminal).
+2. Find port **6080** ("Desktop (noVNC)") and click the globe icon (or the forwarded address link) to open it in a new browser tab.
+3. You'll see a minimal Linux desktop (grey background, right-click menu). This is the Fluxbox desktop — it's intentionally simple.
+4. Go back to the VS Code terminal and run:
+   ```bash
+   python scripts/gui.py
+   ```
+5. Switch to the Desktop browser tab — the ProjectManager GUI window will appear there.
+
+### Troubleshooting
+
+| Problem | Likely cause | Fix |
+|---------|-------------|-----|
+| No ports in the Ports panel | Container is in recovery mode (build failed) | Rebuild the Codespace — check the creation log for errors |
+| Port 6080 shows a blank/black screen | VNC server hasn't started yet | Wait a few seconds and refresh; or run `vncserver :1` in the terminal |
+| GUI window doesn't appear on the desktop | `DISPLAY` not set | Run `export DISPLAY=:1` before launching `python scripts/gui.py` |
+| "No module named tkinter" | `python3-tk` not installed | Run `sudo apt-get install -y python3-tk` |
+
+### CLI alternative (no ports needed)
+
+The CLI works entirely in the terminal — no display, no ports, no desktop required:
+
+```bash
+python scripts/cli.py --help
+python scripts/cli.py list
+python scripts/cli.py task list --project P-001
+```
+
+If you only need to view and manage tasks (no visual GUI), the CLI is the simplest option.
 
 ---
 
