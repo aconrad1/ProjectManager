@@ -25,6 +25,7 @@ class DeliverableDialog(ctk.CTkToplevel):
         self.resizable(True, True)
         self.minsize(400, 440)
         self.transient(parent)
+        self.wait_visibility()
         self.grab_set()
 
         self._on_save = on_save

@@ -1,7 +1,7 @@
 """Batch Operations dialog — apply status, priority, or date changes to multiple tasks."""
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from tkinter import messagebox
 
 import customtkinter as ctk
@@ -31,6 +31,7 @@ class BatchOperationDialog(ctk.CTkToplevel):
         self.resizable(True, True)
         self.minsize(400, 360)
         self.transient(parent)
+        self.wait_visibility()
         self.grab_set()
 
         self._task_ids = task_ids

@@ -13,7 +13,7 @@ import customtkinter as ctk
 
 from gui.base_page import BasePage
 from gui.ui_theme import (
-    AG_DARK, AG_MID, AG_WASH,
+    AG_DARK, AG_MID,
     PRIORITY_LABELS, STATUS_OPTIONS, CATEGORIES,
     TREEVIEW_TAG_COLORS,
 )
@@ -658,11 +658,12 @@ class TasksPage(BasePage):
 
     # ── Task Notes ─────────────────────────────────────────────────────────
     def _open_task_notes(self):
+        task_id = self._selected_task_id()
         title = self._selected_task_title()
-        if not title:
+        if not task_id:
             messagebox.showinfo("No Selection", "Select a task first.")
             return
-        TaskNotesDialog(self.winfo_toplevel(), task_title=title)
+        TaskNotesDialog(self.winfo_toplevel(), task_id=task_id, task_title=title or "")
 
     # ── Drag-and-Drop ──────────────────────────────────────────────────────
     def _setup_drag_drop(self):
