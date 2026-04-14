@@ -68,7 +68,8 @@ class TestValidateTask:
         assert any("status" in e.lower() for e in errors)
 
     def test_valid_statuses(self):
-        for s in ("Not Started", "In Progress", "Completed", "On Hold", "Cancelled"):
+        for s in ("Not Started", "In Progress", "On Track", "Ongoing",
+                  "Recurring", "On Hold", "Completed"):
             assert validate_task({"title": "X", "status": s}) == []
 
     def test_priority_boundary(self):

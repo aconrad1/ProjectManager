@@ -325,7 +325,7 @@ scripts/
 - **All mutations route through `contract.save()`** — which dual-writes JSON then workbook.
 - **Timelines and Gantt auto-sync** — every save rebuilds these sheets. Never edit them directly.
 - **Notes and links are keyed by task ID** — legacy title-based keys are auto-migrated on profile load via `helpers.migration`.
-- **Status = "Completed" triggers auto-move** — during report generation, tasks are reclassified and `date_completed` is auto-stamped on both tasks and projects.
+- **Status = "Completed" triggers auto-complete** — setting a task to Completed immediately stamps `date_completed` and auto-completes the parent project if all sibling tasks are done. Reopening a task under a Completed project automatically reverts the project to Ongoing. This works across GUI (`DomainService`), CLI (`task_ops`), and the report pipeline reconciliation pass.
 - **Profile constants use module attribute access** — after `reload_profile()`, access fresh values via `_profile_mod.USER_COMPANY`.
 - **Hash-based sync** — SHA-256 of workbook content for detecting external edits (immune to OneDrive mtime false positives).
 - **Personal data is gitignored** — `profiles/*/` is excluded from Git. Only `_TestCompany` (fake data) is committed.

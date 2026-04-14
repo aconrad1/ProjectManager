@@ -175,8 +175,7 @@ def build_markdown(
     prev_monday = last_monday - timedelta(days=recent_days)
     extended_cutoff = today - timedelta(days=extended_days)
 
-    pending = [t for t in ongoing if t.status.lower().strip() == "complete/pending"]
-    active_ongoing = [t for t in ongoing if t.status.lower().strip() != "complete/pending"]
+    active_ongoing = ongoing
     critical = [t for t in active_ongoing if t.priority in URGENT_PRIORITIES]
     high = [t for t in active_ongoing if t.priority in HIGH_PRIORITIES]
     medium = [t for t in active_ongoing if t.priority in MEDIUM_PRIORITIES]
@@ -215,8 +214,6 @@ def build_markdown(
                 " No projects were closed this reporting period — current deliverables are multi-week"
                 " efforts progressing through their respective milestones."
             )
-    if pending:
-        summary += f" **{len(pending)}** item(s) are in a Complete/Pending state awaiting further direction."
     md.append(f"> {summary}\n")
 
     # Site Support Distribution
@@ -279,14 +276,6 @@ def build_markdown(
         md.append("## Background & Lower Priority Work\n")
         rows = [[t.title, t.supervisor, t.site, t.status, _priority_badge(t.priority)] for t in sorted(low, key=lambda x: x.priority)]
         md.append(_table(["Title", "Supervisor", "Site", "Status", "Priority"], rows))
-        md.append("")
-
-    # Pending
-    if pending:
-        md.append("## Complete / Pending — Awaiting Further Direction\n")
-        md.append("*These items have reached a deliverable milestone but remain open pending follow-up scope or re-activation.*\n")
-        rows = [[t.title, t.supervisor, t.site, t.commentary[:200], _priority_badge(t.priority)] for t in pending]
-        md.append(_table(["Title", "Supervisor", "Site", "Commentary", "Priority"], rows))
         md.append("")
 
     # Recently Completed

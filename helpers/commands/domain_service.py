@@ -44,7 +44,12 @@ class DomainService:
     Timelines and Gantt sheets are rebuilt automatically during that save.
     """
 
-    def __init__(self, profile: Profile, wb: Workbook, on_persist: Callable[[], None] | None = None):
+    def __init__(
+        self,
+        profile: Profile,
+        wb: Workbook,
+        on_persist: Callable[[], None] | None = None,
+    ):
         self._profile = profile
         self._wb = wb
         self._on_persist = on_persist  # optional callback (e.g. app.mark_dirty)
@@ -53,6 +58,7 @@ class DomainService:
 
     @property
     def profile(self) -> Profile:
+        """The active profile."""
         return self._profile
 
     @profile.setter
@@ -61,6 +67,7 @@ class DomainService:
 
     @property
     def wb(self) -> Workbook:
+        """The active workbook."""
         return self._wb
 
     @wb.setter
@@ -191,6 +198,11 @@ class DomainService:
 
         self._validate_or_raise(validate_task, data, partial=True)
         _apply_attrs(task, data)
+        # Stamp date_completed when status changed to Completed via edit
+        if data.get("status") == "Completed" and not task.date_completed:
+            task.date_completed = date.today()
+        # Auto-complete parent project if all sibling tasks are now done
+        self._check_project_completion(task)
         self._persist()
         return task
 
@@ -296,6 +308,9 @@ class DomainService:
         # Stamp date_completed when completing a task or project
         if status == "Completed" and not getattr(node, "date_completed", True):
             node.date_completed = date.today()
+        # Auto-complete parent project if all sibling tasks are now done
+        if isinstance(node, Task):
+            self._check_project_completion(node)
         self._persist()
         return True
 
@@ -313,6 +328,30 @@ class DomainService:
     # ═══════════════════════════════════════════════════════════════════════
     #  INTERNAL HELPERS
     # ═══════════════════════════════════════════════════════════════════════
+
+    def _check_project_completion(self, task: Task) -> None:
+        """Auto-complete or reopen the parent project based on task statuses.
+
+        - If all sibling tasks are Completed → auto-complete the project.
+        - If the project was Completed but a task is no longer Completed
+          → reopen the project back to Ongoing.
+        """
+        parent = task.parent
+        if not isinstance(parent, Project):
+            return
+        if not parent.tasks:
+            return
+        all_done = all(t.status.strip().lower() == "completed" for t in parent.tasks)
+        if all_done:
+            if not parent.date_completed:
+                parent.status = "Completed"
+                parent.category = "Completed"
+                parent.date_completed = date.today()
+        elif parent.category == "Completed":
+            # A task was reopened — revert the project
+            parent.status = "In Progress"
+            parent.category = "Ongoing"
+            parent.date_completed = None
 
     def _find_any(self, item_id: str):
         """Resolve any P-/T-/D- ID to the corresponding domain object."""
@@ -338,6 +377,7 @@ class DomainService:
         """Remove notes, links, and attachments associated with a task ID."""
         delete_notes(task_id)
         delete_link(task_id)
+        delete_attachments(task_id)
 
     @staticmethod
     def _validate_or_raise(validator, data: dict, *, partial: bool = False) -> None:

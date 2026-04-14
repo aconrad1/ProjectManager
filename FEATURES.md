@@ -113,7 +113,6 @@ The system uses a strict four-level hierarchy. Every entity inherits from `Node`
 | On Track | Yes | No |
 | Ongoing | Yes | No |
 | Recurring | Yes | No |
-| Complete/Pending | No | **No** — stays in Ongoing, gets its own report section |
 | On Hold | No | No |
 | Completed | No | **Yes** — auto-stamps `date_completed`, moves to Completed category |
 
@@ -316,7 +315,6 @@ After any CLI mutation (add/edit/delete), the workbook is saved and `domain.json
 | Priority Spotlight | Top 3 highest-priority items with full details |
 | Weekly Recurring Tasks | Table of recurring work items |
 | Background Work | P4–P5 items in a compact table |
-| Complete / Pending | Phase-done items still in Ongoing |
 | Recently Completed | Tasks completed within `recent_completed_days` window (configurable, default 7) |
 | Extended Completed | Completion history within `extended_completed_days` window (configurable, default 30) |
 | Site Support Distribution | Task counts by site |
@@ -389,21 +387,39 @@ Schedule = dict[date, dict[int, list[ScheduleEntry]]]
 
 ## 7. Completion Detection
 
-`process_completions(wb, today)` runs during report generation:
+### Immediate Detection (GUI & CLI)
+
+Completion detection fires **immediately** whenever a task's status changes
+to "Completed" — via the GUI (`DomainService.set_status()`, `edit_task()`,
+batch edit) or the CLI (`task_ops.set_status()`).
+
+1. The task's `date_completed` is stamped with today's date (if not already set)
+2. **Project auto-complete:** If every task under the parent project now has
+   Status = "Completed", the project itself is marked:
+   - `status = "Completed"`
+   - `category = "Completed"`
+   - `date_completed = today`
+3. **Project auto-reopen:** If a task under a Completed project is changed to
+   any non-Completed status, the parent project is automatically reopened:
+   - `status = "In Progress"`
+   - `category = "Ongoing"`
+   - `date_completed = None`
+
+### Report Pipeline Reconciliation
+
+`process_completions(wb, today)` still runs during report generation as a
+safety net to catch any edge cases (e.g. workbook edits outside the app):
 
 1. Scans the Tasks sheet for rows where Status = "Completed" (case-insensitive, whitespace-trimmed)
 2. For each newly completed task (no `Date Completed` yet): stamps `today` into the Date Completed cell
 3. Returns a list of task titles that were moved
-4. **Project auto-complete:** If every task under a project now has Status = "Completed", the project itself is marked:
-   - `status = "Completed"`
-   - `category = "Completed"`
-   - `date_completed = today`
+4. Checks and auto-completes parent projects as above
 
 ### Logic Details
 
-- `Complete/Pending` is **not** treated as Completed — tasks with this status remain active in Ongoing
-- Completion detection only runs during `generate_reports()` — it does not fire on every save
-- The `DomainService.set_status()` method also stamps `date_completed` when setting status to "Completed" via the GUI, but does not auto-complete parent projects
+- `DomainService.set_status()` and `edit_task()` both trigger immediate project auto-completion and auto-reopen
+- `task_ops.set_status()` (CLI path) performs the same checks at the workbook level
+- `process_completions()` in the report pipeline acts as a reconciliation pass
 
 ---
 
@@ -759,9 +775,7 @@ updating other fields.
 
 | Limitation | Details |
 |------------|---------|
-| **Only fires during report generation** | Completion detection runs in the `generate_reports()` pipeline. Tasks marked Completed in the GUI get `date_completed` immediately via `DomainService.set_status()`, but parent project auto-completion only triggers during report generation. |
-| **Complete/Pending is not terminal** | Tasks with `Complete/Pending` status remain in Ongoing and are not moved to Completed. This is by design. |
-| **No undo** | Once a project is auto-completed, there is no one-click undo. The user must manually change the status and category back. |
+| **No undo for manual project completion** | If a project is manually set to Completed (not via auto-completion), reopening a child task will revert it. This is intentional — the project tracks its tasks. |
 
 ### Gantt & Timelines
 
