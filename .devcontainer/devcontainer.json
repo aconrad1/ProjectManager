@@ -1,0 +1,35 @@
+{
+  "name": "ProjectManager",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "vscode",
+      "webPort": "6080",
+      "vncPort": "5901"
+    }
+  },
+
+  "forwardPorts": [6080, 5901],
+  "portsAttributes": {
+    "6080": { "label": "Desktop (noVNC)", "onAutoForward": "openBrowser" },
+    "5901": { "label": "Desktop (VNC)", "onAutoForward": "silent" }
+  },
+
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "postStartCommand": "echo 'If the GUI is needed, open forwarded port 6080 (Desktop noVNC) and run: python scripts/gui.py'",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pylint"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  }
+}

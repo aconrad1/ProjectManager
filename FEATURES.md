@@ -545,17 +545,31 @@ IDs are never reused within a profile's lifetime. Foreign keys link Tasks → Pr
 ```yaml
 active_profile: 0
 profiles:
-  - name: "Ashwin Conrad"
-    company: "AltaGas Ltd"
-    role: "Engineering Co-op Student"
-    email: "ashwin.conrad@altagas.ca"
-    phone: ""
-    recipient_name: "Kurt MacKay"
-    recipient_email: "kurt.mackay@altagas.ca"
-    workbook_filename: "Catelogue of Projects Report - Ashwin Conrad.xlsx"
+  - name: "Your Name"
+    company: "Your Company"
+    workbook_filename: "Your Workbook.xlsx"
     daily_hours_budget: 8.0
     weekly_hours_budget: 40.0
+    # ...
+
+  # Dev / Test profile (committed with sample data)
+  - name: "Dev Tester"
+    company: "_TestCompany"
+    workbook_filename: "TestProjects.xlsx"
+    daily_hours_budget: 8.0
 ```
+
+### Test Profile (`_TestCompany`)
+
+A committed test profile at profile index 1 provides sample data for development and CI:
+
+- **4 projects** across all categories (Weekly, Ongoing, Completed)
+- **10 tasks** with varied priorities (P1–P4), statuses, supervisors, and sites
+- **10 deliverables** with time allocations and progress percentages
+- Sample `task_notes.json` and `task_links.json` for realism
+- Protected from `reset_for_distribution.py` via `_KEEP_DIRS`
+
+Switch to it: `python scripts/cli.py profile --switch 1`
 
 ### Capabilities
 
@@ -769,8 +783,9 @@ updating other fields.
 | Limitation | Details |
 |------------|---------|
 | **Drag-and-drop requires tkinterdnd2** | If the package is missing, drag-and-drop is disabled and the status bar displays a warning: "⚠ Drag-and-drop unavailable (install tkinterdnd2)" |
-| **PDF generation requires Chrome or Edge** | The headless PDF converter looks for Chrome, then Edge. If neither is installed, PDF generation fails. |
+| **PDF generation requires Chrome or Chromium** | The headless PDF converter searches OS-appropriate paths (Windows: Chrome/Edge, Linux: `google-chrome`/`chromium`/`chromium-browser`, macOS: `Applications/` bundles) and falls back to `$PATH` lookup via `shutil.which()`. If no browser is found, PDF generation is skipped and only Markdown is produced. |
 | **Outlook integration is Windows-only** | Email drafting uses `pywin32` COM automation with Microsoft Outlook. Not available on macOS/Linux. |
+| **`open_path()` requires a desktop** | File/folder opening uses `os.startfile` (Windows), `open` (macOS), or `xdg-open` (Linux). Returns `False` gracefully on headless systems. |
 | **No concurrent editing** | The application assumes a single user. Multiple instances editing the same workbook will cause data loss. |
 | **Gantt dark mode is manual** | The Gantt canvas has its own "Dark Mode" checkbox (Tk Canvas doesn't inherit CTk themes). Colors are configured in `theme.json` under `gantt_colors_dark`. |
 
@@ -781,6 +796,17 @@ updating other fields.
 | **Last-profile deletion creates fallback** | Deleting the only profile auto-generates a "Default" fallback — the app always has at least one entry |
 | **Company folder name must be unique** | Two profiles with the same `company` will share data directories |
 | **Profile bundles are ZIP-based** | `.pmprofile` is a standard ZIP archive containing the profile directory + a `_profile.yaml` manifest |
+
+### Platform Compatibility
+
+| Feature | Windows | Linux / Codespace | macOS |
+|---------|---------|-------------------|-------|
+| GUI (customtkinter) | Full | Full (needs X11/Xvfb) | Full |
+| Drag-and-drop (`tkinterdnd2`) | Yes | No (package is Windows-only) | No |
+| PDF generation | Chrome / Edge | Chromium / google-chrome | Chrome |
+| Email draft (Outlook COM) | Yes | No | No |
+| `open_path()` | `os.startfile` | `xdg-open` | `open` |
+| Excel workbook I/O | Full | Full | Full |
 
 ### Report Generation
 

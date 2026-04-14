@@ -2,7 +2,7 @@
 
 ## System Overview
 
-This is a desktop Python application for managing projects, tasks, and deliverables across multiple user profiles. The data layer is JSON-first: `domain.json` is the **sole source of truth**, and the Excel workbook is a rendered downstream artifact.
+This is a desktop Python application for managing projects, tasks, and deliverables across multiple user profiles. The data layer is JSON-first: `domain.json` is the **sole source of truth**, and the Excel workbook is a rendered downstream artifact. Runs on Windows locally or in a GitHub Codespace.
 
 ```
 Profile → Projects → Tasks → Deliverables
@@ -46,6 +46,12 @@ profiles:
     daily_hours_budget: 8.0
     weekly_hours_budget: 40.0
     # ...
+
+  # Dev / Test profile (committed with sample data)
+  - name: "Dev Tester"
+    company: "_TestCompany"
+    workbook_filename: "TestProjects.xlsx"
+    daily_hours_budget: 8.0
 ```
 
 ### Switching Profiles
@@ -251,9 +257,22 @@ Current pages (8): Tasks, Add Task, Generate, Project Timeline, Weekly Planner, 
 ## File Layout
 
 ```
+.devcontainer/
+  devcontainer.json            # Codespace setup (Python 3.12, desktop-lite, auto-install)
+
+.gitignore                     # Excludes profiles/*/ (except _TestCompany), caches, secrets
+
+docs/
+  GITHUB_GUIDE.md              # plain-language GitHub/Codespace tutorial
+  REVIEW_CHECKLIST.md          # three-gate review checklist (Safety/GitHub-ready/Distribution)
+
 profiles/
   user_profile.yaml            # all profile definitions
-  <Company>/
+  _TestCompany/                # ★ committed test profile (4 projects, 10 tasks, 10 deliverables)
+    data/domain.json           # sample domain data
+    data/task_notes.json       # sample activity log
+    data/task_links.json       # sample linked folders
+  <Company>/                   # real user profiles (gitignored)
     <workbook>.xlsx            # rendered Excel workbook
     data/
       domain.json              # ★ source of truth — serialized domain hierarchy
@@ -309,6 +328,9 @@ scripts/
 - **Status = "Completed" triggers auto-move** — during report generation, tasks are reclassified and `date_completed` is auto-stamped on both tasks and projects.
 - **Profile constants use module attribute access** — after `reload_profile()`, access fresh values via `_profile_mod.USER_COMPANY`.
 - **Hash-based sync** — SHA-256 of workbook content for detecting external edits (immune to OneDrive mtime false positives).
+- **Personal data is gitignored** — `profiles/*/` is excluded from Git. Only `_TestCompany` (fake data) is committed.
+- **Cross-platform** — Windows-only packages (`pywin32`, `tkinterdnd2`) use platform markers in `requirements.txt`. Runtime imports are try/except guarded. `open_path()` and `_find_chrome()` search OS-appropriate locations.
+- **Review all changes against the three-gate checklist** — see `docs/REVIEW_CHECKLIST.md` (Safety, GitHub-ready, Distribution-ready).
 
 ---
 

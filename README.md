@@ -4,6 +4,8 @@ A desktop Python application for managing engineering deliverables, tracking pro
 
 Built for managing tasks across multiple sites, supervisors, and priority levels, then producing polished PDF and Markdown reports for management.
 
+**Runs locally on Windows or in a GitHub Codespace (browser-based).**
+
 ---
 
 ## Table of Contents
@@ -58,11 +60,23 @@ Built for managing tasks across multiple sites, supervisors, and priority levels
 
 ### Prerequisites
 
-- **Python 3.12+** (global install)
-- **Google Chrome or Microsoft Edge** (for headless PDF generation)
+- **Python 3.12+**
+- **Google Chrome, Chromium, or Microsoft Edge** (for headless PDF generation)
 - **Microsoft Outlook** (optional — for email draft integration, Windows only)
 
-### Installation
+### Option A: GitHub Codespace (recommended for development)
+
+1. Open the repo on GitHub.com → click **Code → Codespaces → Create codespace**.
+2. Wait for the container to build (installs all dependencies automatically via `.devcontainer/devcontainer.json`).
+3. A test profile (`_TestCompany`) is included with sample data — switch to it:
+   ```bash
+   python scripts/cli.py profile --switch 1
+   ```
+4. Run the CLI immediately, or open the noVNC Desktop (port 6080) for the GUI.
+
+If Codespaces opens in recovery mode, use **Codespaces: View Creation Log** to inspect failures, then rebuild after confirming `.devcontainer/devcontainer.json` and `.devcontainer/postCreate.sh` completed. You can always open the GUI desktop manually from the **Ports** panel by opening port `6080` in browser.
+
+### Option B: Local install (Windows)
 
 1. **Clone or download** the project to a local folder.
 
@@ -71,6 +85,8 @@ Built for managing tasks across multiple sites, supervisors, and priority levels
    python install.py
    ```
    This runs `pip install -r requirements.txt` and installs all required packages.
+   Windows-only packages (`pywin32`, `tkinterdnd2`) are installed automatically;
+   on Linux/macOS they are skipped via platform markers.
 
 3. **Configure your profile** — edit `profiles/user_profile.yaml`:
    ```yaml
@@ -95,7 +111,7 @@ Built for managing tasks across multiple sites, supervisors, and priority levels
 
 ## How to Run
 
-### GUI (primary)
+### GUI (primary — requires display)
 
 ```
 python scripts/gui.py
@@ -103,10 +119,13 @@ python scripts/gui.py
 
 Opens the desktop application with sidebar navigation: Tasks, Add Task, Generate, Project Timeline, Weekly Planner, Dashboard, Profile Management, and Settings.
 
-### CLI (headless)
+> **Codespace:** Open the noVNC Desktop tab (port 6080) first, then run the command in that desktop's terminal.
+
+### CLI (headless — works everywhere)
 
 ```
 python scripts/cli.py --help        # All subcommands
+python scripts/cli.py list --all     # Quick view of all tasks
 ```
 
 See [CLI Features](#cli-features) below for the full command reference.
@@ -121,24 +140,23 @@ ProjectManager/
 ├── AGENTS.md                        ← Agent guide for AI assistants
 ├── Overview.md                      ← Quick-reference card
 ├── install.py                       ← One-time dependency installer
-├── requirements.txt                 ← Python package list
+├── requirements.txt                 ← Python package list (with platform markers)
+├── reset_for_distribution.py        ← Clean repo for fresh user (preserves _TestCompany)
 ├── create_shortcut.ps1              ← Windows desktop shortcut creator
+├── .gitignore                       ← Excludes user data, caches, secrets
+├── .devcontainer/                   ← GitHub Codespace configuration
+│   └── devcontainer.json            ← Python 3.12 + desktop-lite + auto-install
+│
+├── docs/                            ← Developer documentation
+│   ├── GITHUB_GUIDE.md              ← Plain-language GitHub/Codespace tutorial
+│   └── REVIEW_CHECKLIST.md          ← Three-gate review checklist (Safety/GitHub-ready/Distribution)
 │
 ├── profiles/                        ← Multi-profile data root
 │   ├── user_profile.yaml            ← Profile config (names, roles, workbook filenames)
-│   ├── AltaGas Ltd/                 ← Per-company isolation
-│   │   ├── <workbook>.xlsx          ← Master workbook (source of truth)
-│   │   ├── attachments/             ← Per-task file attachments
-│   │   ├── data/                    ← JSON side-car files
-│   │   │   ├── domain.json          ← Serialized domain snapshot
-│   │   │   ├── task_notes.json      ← Timestamped activity logs
-│   │   │   └── task_links.json      ← Linked folder paths
-│   │   ├── reports/                 ← Dated Excel snapshots
-│   │   └── exports/
-│   │       ├── markdown/            ← Dated Markdown reports
-│   │       └── pdf/                 ← Dated PDF reports
-│   ├── Personal/                    ← Another profile
-│   └── UA FSAE/                     ← Another profile
+│   └── _TestCompany/                ← ★ Committed test profile with sample data (safe to share)
+│       ├── data/domain.json         ← 4 projects, 10 tasks, 10 deliverables
+│       ├── data/task_notes.json     ← Sample activity log entries
+│       └── data/task_links.json     ← Sample linked folder paths
 │
 ├── helpers/                         ← Core library (business logic)
 │   ├── domain/                      ← Hierarchical domain model
@@ -361,10 +379,11 @@ python scripts/cli.py deliverable add --task T-001 --title "…"
 | `markdown` | Markdown report rendering |
 | `pyyaml` | YAML profile configuration |
 | `customtkinter` | Modern Tk GUI toolkit |
-| `pywin32` | Outlook COM integration (Windows) |
-| `tkinterdnd2` | Drag-and-drop file attachments |
+| `pywin32` | Outlook COM integration (Windows only — skipped on Linux/macOS) |
+| `tkinterdnd2` | Drag-and-drop file attachments (Windows only — skipped on Linux/macOS) |
 
 Install via `python install.py` or `pip install -r requirements.txt`.
+Platform markers in `requirements.txt` ensure Windows-only packages are skipped on other platforms.
 
 ---
 
@@ -375,3 +394,5 @@ Install via `python install.py` or `pip install -r requirements.txt`.
 | [FEATURES.md](FEATURES.md) | Exhaustive technical reference — domain model, algorithms, GUI details, configs, limitations |
 | [AGENTS.md](AGENTS.md) | AI agent guide — mutation APIs, code examples, extension checklists, file layout |
 | [Overview.md](Overview.md) | Quick-reference card — data flow, key constraints |
+| [docs/GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) | Plain-language GitHub & Codespace tutorial for new developers |
+| [docs/REVIEW_CHECKLIST.md](docs/REVIEW_CHECKLIST.md) | Three-gate review checklist — Safety, GitHub-ready, Distribution-ready |
