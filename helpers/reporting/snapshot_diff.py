@@ -165,20 +165,45 @@ def diff_profiles(old: Profile, new: Profile) -> SnapshotDiff:
     return result
 
 
-def load_previous_snapshot(company: str, reports_dir: Path, lookback_days: int = 7,
-                           today: date | None = None) -> Profile | None:
-    """Load the most recent prior ``domain.json`` snapshot from reports/.
+def baseline_profile_for_diff(profile: Profile) -> Profile:
+    """Return an empty baseline profile that preserves root metadata.
 
-    Falls back to the current ``domain.json`` if no snapshot is found.
-    Actually, snapshots are .xlsx files — we need to look for domain.json
-    in the data/ directory.  Instead, we compare against the saved
-    domain.json from before the current pipeline run.
+    This is used for first-run reports when there is no prior ``domain.json``.
+    Diffing this baseline against the current profile produces an initial
+    Change History section with all entities classified as added.
+    """
+    return Profile(
+        id=profile.id,
+        title=profile.title,
+        description=profile.description,
+        deadline=profile.deadline,
+        start=profile.start,
+        end=profile.end,
+        status=profile.status,
+        company=profile.company,
+        role=profile.role,
+        email=profile.email,
+        phone=profile.phone,
+        recipient_name=profile.recipient_name,
+        recipient_email=profile.recipient_email,
+        workbook_filename=profile.workbook_filename,
+        daily_hours_budget=profile.daily_hours_budget,
+        weekly_hours_budget=profile.weekly_hours_budget,
+        projects=[],
+    )
 
-    This function looks for the *current* ``domain.json`` and returns it
-    as the "previous" state.  The caller should invoke this **before** any
-    mutations in the pipeline so it captures the pre-mutation state.
+
+def load_previous_snapshot(company: str, reports_dir: Path | None = None,
+                           lookback_days: int = 7, today: date | None = None) -> Profile | None:
+    """Load the pre-run profile from ``data/domain.json`` if present.
+
+    The report pipeline calls this before mutations so the loaded profile is
+    the baseline for change detection. ``reports_dir``/``lookback_days``/
+    ``today`` are accepted for backward compatibility and intentionally unused.
     """
     from helpers.io.paths import data_dir
+
+    _ = reports_dir, lookback_days, today
     json_path = data_dir(company) / "domain.json"
     if json_path.exists():
         try:

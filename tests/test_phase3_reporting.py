@@ -1,5 +1,6 @@
 """Tests for Phase 3 — snapshot diffs, rolling windows, timelines integrity."""
 
+import json
 import pytest
 from datetime import date, timedelta
 from unittest.mock import MagicMock, patch, PropertyMock
@@ -11,6 +12,7 @@ from helpers.reporting.snapshot_diff import (
     FieldChange,
     _str,
     _diff_fields,
+    baseline_profile_for_diff,
 )
 
 
@@ -241,6 +243,36 @@ class TestSnapshotDiffProperties:
         assert "Modified task" in c.summary
         assert "status" in c.summary
 
+    def test_baseline_profile_has_no_entities(self):
+        t = _make_task("T-001", "Task")
+        p = _make_project("P-001", "Project", tasks=[t])
+        profile = _make_profile([p])
+        profile.id = "profile-1"
+        profile.title = "User"
+        profile.description = "desc"
+        profile.deadline = None
+        profile.start = None
+        profile.end = None
+        profile.status = "Active"
+        profile.company = "Co"
+        profile.role = "Role"
+        profile.email = "a@b.com"
+        profile.phone = "123"
+        profile.recipient_name = "Recipient"
+        profile.recipient_email = "r@b.com"
+        profile.workbook_filename = "w.xlsx"
+        profile.daily_hours_budget = 8.0
+        profile.weekly_hours_budget = 40.0
+
+        baseline = baseline_profile_for_diff(profile)
+        diff = diff_profiles(baseline, profile)
+
+        assert baseline.projects == []
+        assert diff.has_changes
+        assert len(diff.added) == 2
+        assert len(diff.removed) == 0
+        assert len(diff.modified) == 0
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  Rolling Windows Tests
@@ -273,7 +305,7 @@ class TestRollingWindows:
         profile.tasks_for_category = tasks_for_cat
         return profile
 
-    @patch("helpers.reporting.markdown.load_config")
+    @patch("helpers.reporting.markdown.load_deadline_windows")
     def test_recent_window_default(self, mock_cfg):
         """With default config, uses 7-day window."""
         mock_cfg.return_value = {
@@ -287,7 +319,7 @@ class TestRollingWindows:
         md = build_markdown(profile, [], today, author="Test", role="R", company="C")
         assert "Past 7 Days" in md
 
-    @patch("helpers.reporting.markdown.load_config")
+    @patch("helpers.reporting.markdown.load_deadline_windows")
     def test_extended_window_custom(self, mock_cfg):
         """Custom extended_completed_days = 14 should appear in heading."""
         mock_cfg.return_value = {
@@ -301,10 +333,15 @@ class TestRollingWindows:
         md = build_markdown(profile, [], today, author="Test", role="R", company="C")
         assert "Last 14 Days" in md
 
-    @patch("helpers.reporting.markdown.load_config")
+    @patch("helpers.reporting.markdown.load_deadline_windows")
     def test_config_missing_fallback(self, mock_cfg):
         """If deadlines.json is missing, uses defaults."""
-        mock_cfg.side_effect = FileNotFoundError("not found")
+        mock_cfg.return_value = {
+            "recent_completed_days": 7,
+            "extended_completed_days": 30,
+            "upcoming_deadline_days": 14,
+            "snapshot_lookback_days": 7,
+        }
         from helpers.reporting.markdown import build_markdown
 
         today = date(2026, 3, 25)
@@ -315,6 +352,42 @@ class TestRollingWindows:
         assert "Last 30 Days" in md
 
 
+class TestDeadlineConfigRepair:
+    def test_missing_deadlines_json_is_recreated(self, tmp_path, monkeypatch):
+        from helpers.config import loader
+
+        monkeypatch.setattr(loader, "_CONFIG_DIR", tmp_path)
+        loader.load.cache_clear()
+
+        logs: list[str] = []
+        windows = loader.load_deadline_windows(log=logs.append)
+
+        assert windows["recent_completed_days"] == 7
+        assert (tmp_path / "deadlines.json").exists()
+        assert any("missing" in msg.lower() for msg in logs)
+
+    def test_invalid_deadlines_values_are_repaired(self, tmp_path, monkeypatch):
+        from helpers.config import loader
+
+        monkeypatch.setattr(loader, "_CONFIG_DIR", tmp_path)
+        (tmp_path / "deadlines.json").write_text(json.dumps({
+            "recent_completed_days": -3,
+            "extended_completed_days": "abc",
+            "upcoming_deadline_days": 10,
+        }), encoding="utf-8")
+        loader.load.cache_clear()
+
+        logs: list[str] = []
+        windows = loader.load_deadline_windows(log=logs.append)
+
+        assert windows["recent_completed_days"] == 7
+        assert windows["extended_completed_days"] == 30
+        assert windows["upcoming_deadline_days"] == 10
+        repaired = json.loads((tmp_path / "deadlines.json").read_text(encoding="utf-8"))
+        assert repaired["snapshot_lookback_days"] == 7
+        assert any("invalid" in msg.lower() for msg in logs)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 #  Change History in Markdown Tests
 # ══════════════════════════════════════════════════════════════════════════════
@@ -322,7 +395,7 @@ class TestRollingWindows:
 class TestChangeHistoryMarkdown:
     """Test that change history section appears in markdown output."""
 
-    @patch("helpers.reporting.markdown.load_config")
+    @patch("helpers.reporting.markdown.load_deadline_windows")
     def test_change_history_included(self, mock_cfg):
         mock_cfg.return_value = {
             "recent_completed_days": 7,
@@ -345,7 +418,7 @@ class TestChangeHistoryMarkdown:
         assert "Brand New Task" in md
         assert "status" in md
 
-    @patch("helpers.reporting.markdown.load_config")
+    @patch("helpers.reporting.markdown.load_deadline_windows")
     def test_no_change_history_when_empty(self, mock_cfg):
         mock_cfg.return_value = {
             "recent_completed_days": 7,
@@ -362,7 +435,7 @@ class TestChangeHistoryMarkdown:
                             company="C", snapshot_diff=diff)
         assert "## Change History" not in md
 
-    @patch("helpers.reporting.markdown.load_config")
+    @patch("helpers.reporting.markdown.load_deadline_windows")
     def test_no_change_history_when_none(self, mock_cfg):
         mock_cfg.return_value = {
             "recent_completed_days": 7,

@@ -12,17 +12,17 @@ from __future__ import annotations
 
 import shutil
 from datetime import date
-from pathlib import Path
 from typing import Callable
 
 from helpers.commands.registry import register
 from helpers.data.completions import process_completions
-from helpers.data.workbook import load_workbook, save_workbook, save_snapshot
+from helpers.data.workbook import load_workbook
 from helpers.data.overview import write_overview
+from helpers.config.loader import load_deadline_windows
 from helpers.reporting.markdown import build_markdown, save_markdown
 from helpers.reporting.pdf import generate_pdf
 from helpers.reporting.snapshot_diff import (
-    diff_profiles, load_previous_snapshot, SnapshotDiff,
+    diff_profiles, load_previous_snapshot, SnapshotDiff, baseline_profile_for_diff,
 )
 from helpers.profile.profile import (
     USER_NAME, USER_ROLE, USER_COMPANY, USER_EMAIL, USER_PHONE,
@@ -65,7 +65,9 @@ def generate_reports(
     if previous_profile:
         log("   Previous snapshot loaded.")
     else:
-        log("   No previous snapshot found — change history will be skipped.")
+        log("   No previous snapshot found — a first-run baseline diff will be generated.")
+
+    windows = load_deadline_windows(log=log)
 
     log("[2/9] Processing completed tasks…")
     wb = load_workbook(wb_path)
@@ -102,6 +104,12 @@ def generate_reports(
                 f"{len(snapshot_diff.modified)} modified")
         else:
             log("   No changes detected since previous snapshot.")
+    else:
+        snapshot_diff = diff_profiles(baseline_profile_for_diff(profile), profile)
+        if snapshot_diff.has_changes:
+            log(f"   Initial change history: {len(snapshot_diff.added)} added (baseline report).")
+        else:
+            log("   Initial change history: no entities to report.")
 
     log("[4/9] Running daily scheduler…")
     schedule = compute_schedule(profile, today)
@@ -113,7 +121,7 @@ def generate_reports(
     log("[5/9] Writing Overview tab…")
     write_overview(wb, profile, moved, today,
                    author=USER_NAME, role=USER_ROLE, company=USER_COMPANY,
-                   snapshot_diff=snapshot_diff)
+                   snapshot_diff=snapshot_diff, deadline_windows=windows)
 
     log("[6/9] Checking Timelines integrity & syncing derived sheets…")
     integrity = check_and_repair(wb, log=log)
@@ -138,7 +146,7 @@ def generate_reports(
     md_text = build_markdown(
         profile, moved, today,
         author=USER_NAME, role=USER_ROLE, company=USER_COMPANY,
-        snapshot_diff=snapshot_diff,
+        snapshot_diff=snapshot_diff, deadline_windows=windows,
     )
     m_dir = markdown_dir()
     md_path = m_dir / report_filename(f"{prefix}_Weekly_Deliverables_Report", "md")

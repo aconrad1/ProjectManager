@@ -789,8 +789,8 @@ updating other fields.
 
 | Limitation | Details |
 |------------|---------|
-| **Snapshot diff requires previous domain.json** | Change History is only available if `domain.json` existed before the current pipeline run. First-time runs produce no diff. |
-| **Rolling windows need deadlines.json** | If `deadlines.json` is missing, the report falls back to defaults (7 / 30 / 14 days). No error is raised. |
+| **First-run snapshot baseline** | If no prior `domain.json` exists, the pipeline now computes Change History against an empty baseline so first-run reports still show added projects/tasks/deliverables. |
+| **Deadline window config self-healing** | If `deadlines.json` is missing or invalid, default windows are applied, the file is automatically repaired, and a warning is logged during report generation. |
 
 ### GUI
 

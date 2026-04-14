@@ -11,7 +11,7 @@ from collections import Counter
 from datetime import date, timedelta
 from pathlib import Path
 
-from helpers.config.loader import load as load_config
+from helpers.config.loader import load_deadline_windows
 from helpers.domain.profile import Profile
 from helpers.domain.task import Task
 from helpers.reporting.snapshot_diff import SnapshotDiff
@@ -143,6 +143,7 @@ def build_markdown(
     role: str = "",
     company: str = "",
     snapshot_diff: SnapshotDiff | None = None,
+    deadline_windows: dict[str, int] | None = None,
 ) -> str:
     """Build the full Markdown text for the weekly report.
 
@@ -159,10 +160,7 @@ def build_markdown(
         today = date.today()
 
     # Load configurable rolling windows
-    try:
-        dl_cfg = load_config("deadlines")
-    except FileNotFoundError:
-        dl_cfg = {}
+    dl_cfg = deadline_windows or load_deadline_windows()
     recent_days = dl_cfg.get("recent_completed_days", 7)
     extended_days = dl_cfg.get("extended_completed_days", 30)
 
