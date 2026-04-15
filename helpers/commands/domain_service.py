@@ -34,6 +34,7 @@ from helpers.validation import (
     validate_deliverable,
     ValidationError,
 )
+from helpers.domain.rules import should_auto_complete_project, should_reopen_project
 
 
 class DomainService:
@@ -341,13 +342,13 @@ class DomainService:
             return
         if not parent.tasks:
             return
-        all_done = all(t.status.strip().lower() == "completed" for t in parent.tasks)
-        if all_done:
+        statuses = [t.status for t in parent.tasks]
+        if should_auto_complete_project(statuses):
             if not parent.date_completed:
                 parent.status = "Completed"
                 parent.category = "Completed"
                 parent.date_completed = date.today()
-        elif parent.category == "Completed":
+        elif should_reopen_project(parent.category):
             # A task was reopened — revert the project
             parent.status = "In Progress"
             parent.category = "Ongoing"

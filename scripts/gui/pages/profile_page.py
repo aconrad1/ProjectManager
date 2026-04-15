@@ -215,7 +215,7 @@ class ProfilePage(BasePage):
             switch_profile(idx)
             reload_profile()
             ensure_profile_dirs()
-            self.app._build_sidebar()
+            self.app.rebuild_sidebar()
             self.app.reload_data()
             self._rebuild_list()
             self._select_profile(idx)
@@ -261,7 +261,7 @@ class ProfilePage(BasePage):
             delete_profile(self._selected_idx, remove_files=remove_files)
             reload_profile()
             ensure_profile_dirs()
-            self.app._build_sidebar()
+            self.app.rebuild_sidebar()
             self.app.reload_data()
             self._selected_idx = None
             self.refresh()
@@ -307,7 +307,7 @@ class ProfilePage(BasePage):
             scaffold_profile(data["company"], data.get("workbook_filename", ""))
 
             # Rebuild sidebar to reflect name/company changes
-            self.app._build_sidebar()
+            self.app.rebuild_sidebar()
 
             # If the edited profile is the active one, reload app data
             if self._selected_idx == get_active_index():
@@ -339,7 +339,7 @@ class ProfilePage(BasePage):
             switch_profile(self._selected_idx)
             reload_profile()
             ensure_profile_dirs()
-            self.app._build_sidebar()
+            self.app.rebuild_sidebar()
             self.app.reload_data()
             self.refresh()
             self._set_status("Switched to profile.", ok=True)
@@ -435,7 +435,7 @@ class ProfilePage(BasePage):
             idx = import_profile(Path(src))
             reload_profile()
             ensure_profile_dirs()
-            self.app._build_sidebar()
+            self.app.rebuild_sidebar()
             self.app.reload_data()
             self._rebuild_list()
             self._select_profile(idx)

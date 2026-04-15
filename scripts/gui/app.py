@@ -173,6 +173,10 @@ class App(ctk.CTk):
         ctk.CTkLabel(sb, text=_prof.USER_ROLE, font=("Segoe UI", 10),
                      text_color=AG_LIGHT).pack(side="bottom")
 
+    def rebuild_sidebar(self) -> None:
+        """Rebuild the sidebar navigation (public API for pages)."""
+        self._build_sidebar()
+
     # ── Profile switching ──────────────────────────────────────────────────
     def _on_profile_switch(self, selected_label: str):
         profiles = get_profiles()
