@@ -829,3 +829,64 @@ updating other fields.
 | **Weekly lookback is Monday-anchored** | "Recently Completed" always looks back to the previous Monday, not a rolling 7-day window |
 | **Deliverable history is 30 days** | The "Last 30 Days" section has a fixed window, not configurable |
 | **Overview formulas assume current schema** | If the workbook is hand-modified such that sheet names or column positions change, the Overview formulas will break |
+
+---
+
+## 16. Future Scope
+
+Three planned initiatives will shape all future development. None are in progress yet, but new code must be designed with these in mind. See [Future Scope.md](Future%20Scope.md) for full detail.
+
+### Distribution & Packaging
+
+The app will be distributed as a standalone `.exe` (via PyInstaller) to non-technical AltaGas users.
+
+**Design implications for existing features:**
+- All file paths must be runtime-resolved via `helpers/profile/config.py` — no hardcoded dev paths.
+- Entry points (`scripts/gui.py`, `scripts/cli.py`) must stay lightweight shims for PyInstaller bundling.
+- Optional features must degrade gracefully: Outlook COM → `mailto:` fallback, tkinterdnd2 → status bar warning, Chrome → Markdown-only.
+- No imports of packages outside `requirements.txt`.
+
+### Demand Planning Integration
+
+Management wants to merge this tool with a team-level demand planning initiative. Employees forecast monthly hours across centralized team projects, enabling management to see overall team priorities and project budgeting.
+
+**New concepts that will affect the domain model:**
+
+| Concept | Impact |
+|---------|--------|
+| **Team membership** | Profile gains a `team` field linking the user to an organizational team |
+| **Centralized project list** | Projects may originate from a shared team list, not just user creation. A `source` field (`"personal"` vs `"demand_plan"`) will distinguish them. |
+| **DemandPlanEntry entity** | New data structure: monthly hours forecast per project/category. Stored alongside `domain.json`, not inside it. Needs clean `to_dict()` / `from_dict()` round-trips. |
+| **Demand plan categories** | Projects in the demand plan have structured metadata: Facility, Priority, Project, and Group (work category — e.g., MOC, Maintenance Capital, Asset Support, OMS) |
+| **Approval workflow** | Adding new projects to the centralized demand plan list requires approval — users cannot unilaterally expand it |
+
+**Weekly planner redesign:**
+
+The current scheduling engine (`helpers/scheduling/engine.py`) assigns tasks to a 7-day × 5-priority grid based on a daily hours budget. This will likely be supplemented (not replaced) by a demand-plan-based system:
+
+| Layer | Current | Future |
+|-------|---------|--------|
+| **Input** | Task list + daily_hours_budget | Monthly demand plan entry (% allocation per project) |
+| **Output** | Rigid daily task schedule | Recommended weekly hours distribution per project |
+| **View** | Prescribed task/day/priority grid | Decision-support tool: recommendations + deadline flags |
+| **Granularity** | Daily | Monthly forecast → weekly guidance → daily deadlines |
+
+New scheduling code should be added as a **separate module** under `helpers/scheduling/`, not patched into `engine.py`.
+
+**Data centralization:**
+
+Demand plan data must eventually be exportable to a central location (SharePoint, Power Automate, or a lightweight API) for team-level rollup. The local app should produce clean, standardized exports so centralization becomes a plumbing concern, not a redesign.
+
+### Architectural Discipline (Active Priority)
+
+The immediate development focus before any feature expansion. A comprehensive audit identified 40 issues across the codebase — see [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the full inventory and prioritized fix plan.
+
+**Key principles for all new code:**
+
+| Principle | Rationale |
+|-----------|-----------|
+| Modular and self-contained | New pages/tools/helpers should have minimal cross-module dependencies |
+| Never bypass the mutation layer | All writes go through `DomainService` (GUI) or `task_ops` → registry (CLI) |
+| Business logic out of GUI pages | Pages handle widgets and events only; computation belongs in `helpers/` |
+| Specific exception handling | No bare `except Exception: pass` |
+| Independently testable | If a function requires the full app to test, it has too many dependencies |

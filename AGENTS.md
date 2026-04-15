@@ -334,6 +334,40 @@ scripts/
 
 ---
 
+## Future Scope — Awareness for Development
+
+Three planned initiatives will shape this codebase. While none are in progress yet, **all new code must be written with these in mind**. See [Future Scope.md](Future%20Scope.md) for full detail and [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the current technical debt inventory.
+
+### 1. Distribution & Packaging
+
+The app will eventually be distributed as a standalone `.exe` (via PyInstaller) to non-technical users at AltaGas. This means:
+- **No hardcoded dev paths.** All file paths must be relative or resolved at runtime via `helpers/profile/config.py`.
+- **No assumptions about the Python environment.** Avoid importing packages not in `requirements.txt`.
+- **Fail gracefully.** Optional features (Outlook COM, tkinterdnd2, Chrome for PDF) must degrade without crashing.
+- **Keep the entry point thin.** `scripts/gui.py` and `scripts/cli.py` are shims — they must stay lightweight so PyInstaller can bundle them easily.
+
+### 2. Demand Planning Integration
+
+Management wants to merge this tool with a team-level demand planning initiative. Key architectural impacts:
+- **The Profile model will grow.** Expect new fields: `team`, and a link to a shared/centralized project list. Design new Profile fields to be optional and backward-compatible.
+- **Projects may have a `source` flag** (e.g., `"personal"` vs `"demand_plan"`) to distinguish user-created projects from centralized team projects. Do not assume all projects are user-owned.
+- **A new entity may appear** — `DemandPlanEntry` (monthly hours forecast per project). This will live alongside `domain.json`, not inside it. Keep the serializer extensible.
+- **The weekly planner / scheduling engine will likely be redesigned** to shift from rigid daily hour allocation to monthly forecast → weekly guidance. New scheduling code should be in a separate module, not patched into `engine.py`.
+- **Data export matters.** The demand plan data must eventually be exportable (to Excel/SharePoint) for centralized rollup. Design any new data structures with clean `to_dict()` / `from_dict()` round-trips.
+
+### 3. Architectural Discipline (Active Priority)
+
+The immediate development focus before any feature expansion. All new code must:
+- **Be modular and self-contained.** New pages, tools, and helpers should have minimal cross-module dependencies.
+- **Never bypass the mutation layer.** All writes go through `DomainService` (GUI) or `task_ops` → registry (CLI).
+- **Keep business logic out of GUI pages.** Pages should only handle widget creation and event binding. Data computation, filtering, and statistics belong in `helpers/`.
+- **Use specific exception handling.** No bare `except Exception: pass`.
+- **Be independently testable.** If a function can't be tested without standing up the full app, it has too many dependencies.
+
+See `docs/ARCHITECTURE_AUDIT.md` for the full list of current issues and the prioritized fix plan.
+
+---
+
 ## Module Reference
 
 ### `helpers/domain/` — Hierarchical Domain Model
@@ -368,3 +402,5 @@ scripts/
 | Module | Role |
 |--------|------|
 | `engine.py` | Capacity-aware daily scheduler — respects daily_hours_budget, prevents overbooking, daily_hours() and over_capacity_days() helpers |
+
+> **Note:** The scheduling engine will likely be supplemented (not replaced) by a demand-plan-based forecasting module in the future. New scheduling code should be added as a separate module under `helpers/scheduling/`, not patched into `engine.py`. See [Future Scope.md](Future%20Scope.md) §2.

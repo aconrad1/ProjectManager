@@ -31,6 +31,7 @@ Built for managing tasks across multiple sites, supervisors, and priority levels
 - **Organized project files** — per-task attachments, linked folder locations, and timestamped activity logs
 - **Multi-profile support** — switch between work contexts (e.g. AltaGas, Personal, UA FSAE) without separate installs
 - **Capacity-aware scheduling** — daily hours budget prevents overbooking, with over-capacity warnings
+- **Future-ready architecture** — designed with distribution packaging, demand planning integration, and team-level data rollup in mind (see [Future Scope](#future-scope))
 
 ---
 
@@ -387,6 +388,21 @@ Platform markers in `requirements.txt` ensure Windows-only packages are skipped 
 
 ---
 
+## Future Scope
+
+Three strategic initiatives will shape the evolution of this tool. None are in active development yet, but all new code is written with them in mind. See [Future Scope.md](Future%20Scope.md) for the full analysis.
+
+### Distribution & Packaging
+The end goal is to package ProjectManager as a standalone `.exe` that non-technical AltaGas employees can install and run without Python, Git, or a terminal. PyInstaller is the current leading approach. All file paths are already runtime-resolved, and optional features (Outlook, drag-and-drop, PDF) degrade gracefully when unavailable.
+
+### Demand Planning Integration
+Management wants to merge this tool with a team-level demand planning initiative. Employees would forecast their monthly hours across centralized team projects, enabling management to see priorities and budgets at scale. This will introduce new domain concepts (team membership, centralized project lists, monthly forecast entries) and likely redesign the weekly planner from a rigid daily scheduler to a monthly forecast → weekly guidance model.
+
+### Architectural Discipline
+The immediate priority. A comprehensive [architecture audit](docs/ARCHITECTURE_AUDIT.md) identified 40 issues across the codebase. The next series of commits will focus on modular design, strict separation of concerns, and eliminating legacy coupling — before any feature expansion.
+
+---
+
 ## Further Reading
 
 | Document | Purpose |
@@ -394,5 +410,7 @@ Platform markers in `requirements.txt` ensure Windows-only packages are skipped 
 | [FEATURES.md](FEATURES.md) | Exhaustive technical reference — domain model, algorithms, GUI details, configs, limitations |
 | [AGENTS.md](AGENTS.md) | AI agent guide — mutation APIs, code examples, extension checklists, file layout |
 | [Overview.md](Overview.md) | Quick-reference card — data flow, key constraints |
+| [Future Scope.md](Future%20Scope.md) | Strategic roadmap — distribution, demand planning, architectural discipline |
+| [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) | Technical debt inventory — 40 findings with prioritized fix plan |
 | [docs/GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) | Plain-language GitHub & Codespace tutorial for new developers |
 | [docs/REVIEW_CHECKLIST.md](docs/REVIEW_CHECKLIST.md) | Three-gate review checklist — Safety, GitHub-ready, Distribution-ready |
