@@ -5,7 +5,7 @@ Desktop Python app for managing projects, tasks, and deliverables across multipl
 ## Quick Start
 
 ```bash
-python install.py                  # install dependencies (Codespace does this automatically)
+python setup/install.py                  # install dependencies (Codespace does this automatically)
 python scripts/gui.py              # launch GUI (needs display — use noVNC desktop in Codespace)
 python scripts/cli.py list --all   # list all tasks (works everywhere)
 python scripts/cli.py generate     # generate reports (headless)
@@ -51,14 +51,14 @@ contract.save()  ←── dual-write ──────────────
 | PDF generation | ✅ | ✅ (with Chromium) | Searches OS-appropriate paths |
 | Outlook email | ✅ | ❌ (falls back to mailto:) | Windows COM only |
 | Drag-and-drop | ✅ | ❌ (warning shown) | Requires tkinterdnd2 |
-| Desktop shortcut | ✅ | N/A | `create_shortcut.ps1` |
+| Desktop shortcut | ✅ | N/A | `setup/create_shortcut.ps1` |
 
 ## Documentation
 
 | Document | Purpose |
 |----------|---------|
-| [README.md](README.md) | Getting started, features overview, project structure, dependencies |
-| [AGENTS.md](AGENTS.md) | AI agent guide — APIs, mutation examples, extension checklists |
+| [README.md](../README.md) | Getting started, features overview, project structure, dependencies |
+| [AGENTS.md](../AGENTS.md) | AI agent guide — APIs, mutation examples, extension checklists |
 | [FEATURES.md](FEATURES.md) | Exhaustive technical reference — domain model, algorithms, configs, limitations |
 | [Future Scope.md](Future%20Scope.md) | Strategic roadmap — distribution, demand planning, architectural discipline |
 | [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) | Technical debt inventory — 40 findings with prioritized fix plan |

@@ -199,7 +199,7 @@ The `.gitignore` file (in the project root) tells Git to ignore files that shoul
 | `.env` | Could contain secrets |
 | `*.xlsx` under profiles | Workbooks are generated from `domain.json` — not source code |
 
-**Rule of thumb:** If running `reset_for_distribution.py` would delete it, it shouldn't be in Git.
+**Rule of thumb:** If running `setup/reset_for_distribution.py` would delete it, it shouldn’t be in Git.
 
 ---
 
@@ -252,4 +252,4 @@ The `.gitignore` file (in the project root) tells Git to ignore files that shoul
 | "Get the latest version" | `git pull` |
 | "Start working on something new" | `git checkout -b branch-name` |
 | "I'm done, review this" | Open a Pull Request |
-| "Start fresh" | `python reset_for_distribution.py` (code-level), or delete the Codespace (environment-level) |
+| "Start fresh" | `python setup/reset_for_distribution.py` (code-level), or delete the Codespace (environment-level) |

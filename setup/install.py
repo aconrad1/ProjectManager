@@ -12,8 +12,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-REQUIREMENTS = Path(__file__).resolve().parent / "requirements.txt"
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+REQUIREMENTS = PROJECT_DIR / "requirements.txt"
 
 
 def install_packages() -> bool:
@@ -51,7 +51,7 @@ def create_shortcut() -> bool:
     if not pythonw.exists():
         pythonw = Path(sys.executable)
 
-    icon_path = PROJECT_DIR / "icon.ico"
+    icon_path = PROJECT_DIR / "assets" / "icon.ico"
     icon_arg = f"$Shortcut.IconLocation = '{icon_path},0'" if icon_path.exists() else ""
 
     ps_script = f"""

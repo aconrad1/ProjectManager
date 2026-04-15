@@ -26,7 +26,7 @@ Every change — whether made by a human or an AI agent — must pass these thre
 
 | # | Check | How to verify |
 |---|---|---|
-| B1 | **Runs after `reset_for_distribution.py`** | The app must launch from a blank state. If your change requires pre-existing data to avoid a crash, fix the code to handle the empty case. |
+| B1 | **Runs after `setup/reset_for_distribution.py`** | The app must launch from a blank state. If your change requires pre-existing data to avoid a crash, fix the code to handle the empty case. |
 | B2 | **Runs in a fresh Codespace** | `postCreateCommand` in `devcontainer.json` installs everything. If you add a dependency, add it to `requirements.txt` with proper platform markers. |
 | B3 | **Tests pass** | Run `python -m pytest tests/` — all existing tests must still pass. New features should include tests. |
 | B4 | **No hardcoded paths** | Never use `C:\Users\...` or `/home/username/...`. Use the path helpers in `helpers/profile/config.py` and `helpers/io/paths.py`. |
@@ -48,9 +48,9 @@ Every change — whether made by a human or an AI agent — must pass these thre
 |---|---|---|
 | C1 | **No development shortcuts left in** | Remove `print()` debugging, hardcoded test data, `TODO` hacks, and commented-out experiments before committing. |
 | C2 | **Error messages are user-friendly** | If something fails, the user should see a plain-English message — not a raw Python traceback. Critical paths (load, save, generate) should have try/except with clear feedback. |
-| C3 | **The GUI handles blank/first-run state** | After `reset_for_distribution.py`, the GUI should open to the Profile page or show a clear "Set up your profile" prompt — not crash. |
+| C3 | **The GUI handles blank/first-run state** | After `setup/reset_for_distribution.py`, the GUI should open to the Profile page or show a clear "Set up your profile" prompt — not crash. |
 | C4 | **Features degrade gracefully on different platforms** | Outlook email → skip on Linux/macOS. Drag-and-drop → warning if unavailable. PDF generation → skip if no Chrome/Edge. Never crash due to a missing optional feature. |
-| C5 | **The install path is simple** | A non-technical user should be able to: clone → `python install.py` → `python scripts/gui.py`. No manual pip commands, no environment variable setup, no config file editing before first launch. |
+| C5 | **The install path is simple** | A non-technical user should be able to: clone → `python setup/install.py` → `python scripts/gui.py`. No manual pip commands, no environment variable setup, no config file editing before first launch. |
 | C6 | **Profile data stays isolated** | Each profile's data lives under `profiles/<Company>/`. Switching profiles never leaks data between companies. The YAML template never contains real data. |
 | C7 | **The workbook is always regenerable** | Since `domain.json` is the source of truth, deleting the `.xlsx` and running `generate` should recreate it perfectly. Never store data only in Excel. |
 
@@ -79,5 +79,5 @@ Before accepting AI-generated changes, run through Gate A (safety) and Gate B (w
 - Any change to `.gitignore` that removes exclusions
 - Code that reads/writes outside the `profiles/` directory tree
 - Changes to `contract.py` or `serializer.py` (data integrity core)
-- Anything that touches `reset_for_distribution.py` (affects what ships)
+- Anything that touches `setup/reset_for_distribution.py` (affects what ships)
 - Force-pushing, rebasing published branches, or deleting branches others use

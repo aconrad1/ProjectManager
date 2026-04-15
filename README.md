@@ -83,7 +83,7 @@ If Codespaces opens in recovery mode, use **Codespaces: View Creation Log** to i
 
 2. **Install dependencies:**
    ```
-   python install.py
+   python setup/install.py
    ```
    This runs `pip install -r requirements.txt` and installs all required packages.
    Windows-only packages (`pywin32`, `tkinterdnd2`) are installed automatically;
@@ -139,16 +139,26 @@ See [CLI Features](#cli-features) below for the full command reference.
 ProjectManager/
 ├── README.md                        ← This file
 ├── AGENTS.md                        ← Agent guide for AI assistants
-├── Overview.md                      ← Quick-reference card
-├── install.py                       ← One-time dependency installer
 ├── requirements.txt                 ← Python package list (with platform markers)
-├── reset_for_distribution.py        ← Clean repo for fresh user (preserves _TestCompany)
-├── create_shortcut.ps1              ← Windows desktop shortcut creator
 ├── .gitignore                       ← Excludes user data, caches, secrets
 ├── .devcontainer/                   ← GitHub Codespace configuration
 │   └── devcontainer.json            ← Python 3.12 + desktop-lite + auto-install
 │
-├── docs/                            ← Developer documentation
+├── assets/                          ← Application icons
+│   ├── icon.ico                     ← App icon (Windows)
+│   ├── icon_proper.ico              ← Alternative icon
+│   └── icon_original.png            ← Original source image
+│
+├── setup/                           ← Installation & distribution scripts
+│   ├── install.py                   ← One-time dependency installer
+│   ├── create_shortcut.ps1          ← Windows desktop shortcut creator
+│   └── reset_for_distribution.py    ← Clean repo for fresh user (preserves _TestCompany)
+│
+├── docs/                            ← Documentation
+│   ├── Overview.md                  ← Quick-reference card
+│   ├── FEATURES.md                  ← Exhaustive technical reference
+│   ├── Future Scope.md              ← Strategic roadmap (distribution, demand planning)
+│   ├── ARCHITECTURE_AUDIT.md        ← Technical debt inventory & fix plan
 │   ├── GITHUB_GUIDE.md              ← Plain-language GitHub/Codespace tutorial
 │   └── REVIEW_CHECKLIST.md          ← Three-gate review checklist (Safety/GitHub-ready/Distribution)
 │
@@ -383,14 +393,14 @@ python scripts/cli.py deliverable add --task T-001 --title "…"
 | `pywin32` | Outlook COM integration (Windows only — skipped on Linux/macOS) |
 | `tkinterdnd2` | Drag-and-drop file attachments (Windows only — skipped on Linux/macOS) |
 
-Install via `python install.py` or `pip install -r requirements.txt`.
+Install via `python setup/install.py` or `pip install -r requirements.txt`.
 Platform markers in `requirements.txt` ensure Windows-only packages are skipped on other platforms.
 
 ---
 
 ## Future Scope
 
-Three strategic initiatives will shape the evolution of this tool. None are in active development yet, but all new code is written with them in mind. See [Future Scope.md](Future%20Scope.md) for the full analysis.
+Three strategic initiatives will shape the evolution of this tool. None are in active development yet, but all new code is written with them in mind. See [Future Scope.md](docs/Future%20Scope.md) for the full analysis.
 
 ### Distribution & Packaging
 The end goal is to package ProjectManager as a standalone `.exe` that non-technical AltaGas employees can install and run without Python, Git, or a terminal. PyInstaller is the current leading approach. All file paths are already runtime-resolved, and optional features (Outlook, drag-and-drop, PDF) degrade gracefully when unavailable.
@@ -407,10 +417,10 @@ The immediate priority. A comprehensive [architecture audit](docs/ARCHITECTURE_A
 
 | Document | Purpose |
 |---|---|
-| [FEATURES.md](FEATURES.md) | Exhaustive technical reference — domain model, algorithms, GUI details, configs, limitations |
+| [FEATURES.md](docs/FEATURES.md) | Exhaustive technical reference — domain model, algorithms, GUI details, configs, limitations |
 | [AGENTS.md](AGENTS.md) | AI agent guide — mutation APIs, code examples, extension checklists, file layout |
-| [Overview.md](Overview.md) | Quick-reference card — data flow, key constraints |
-| [Future Scope.md](Future%20Scope.md) | Strategic roadmap — distribution, demand planning, architectural discipline |
+| [Overview.md](docs/Overview.md) | Quick-reference card — data flow, key constraints |
+| [Future Scope.md](docs/Future%20Scope.md) | Strategic roadmap — distribution, demand planning, architectural discipline |
 | [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) | Technical debt inventory — 40 findings with prioritized fix plan |
 | [docs/GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) | Plain-language GitHub & Codespace tutorial for new developers |
 | [docs/REVIEW_CHECKLIST.md](docs/REVIEW_CHECKLIST.md) | Three-gate review checklist — Safety, GitHub-ready, Distribution-ready |
