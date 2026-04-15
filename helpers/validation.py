@@ -56,7 +56,10 @@ def validate_project(data: dict[str, Any]) -> list[str]:
 
 # ── Task ───────────────────────────────────────────────────────────────────────
 
-_VALID_STATUSES = {"Not Started", "In Progress", "Completed", "On Hold", "Cancelled"}
+_VALID_STATUSES = {
+    "Not Started", "In Progress", "On Track", "Ongoing",
+    "Recurring", "On Hold", "Completed",
+}
 
 def validate_task(data: dict[str, Any]) -> list[str]:
     """Validate task creation/edit data. Returns list of error strings."""

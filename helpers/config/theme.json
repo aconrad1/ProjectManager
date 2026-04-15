@@ -58,7 +58,6 @@
     "On Track":        "#2ecc71",
     "Ongoing":         "#16a085",
     "Recurring":       "#8e44ad",
-    "Complete/Pending": "#f39c12",
     "On Hold":         "#e74c3c",
     "Not Started":     "#95a5a6"
   }

@@ -26,6 +26,7 @@ class ProjectDialog(ctk.CTkToplevel):
         self.resizable(True, True)
         self.minsize(420, 560)
         self.transient(parent)
+        self.wait_visibility()
         self.grab_set()
 
         self._on_save = on_save

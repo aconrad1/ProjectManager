@@ -325,12 +325,46 @@ scripts/
 - **All mutations route through `contract.save()`** — which dual-writes JSON then workbook.
 - **Timelines and Gantt auto-sync** — every save rebuilds these sheets. Never edit them directly.
 - **Notes and links are keyed by task ID** — legacy title-based keys are auto-migrated on profile load via `helpers.migration`.
-- **Status = "Completed" triggers auto-move** — during report generation, tasks are reclassified and `date_completed` is auto-stamped on both tasks and projects.
+- **Status = "Completed" triggers auto-complete** — setting a task to Completed immediately stamps `date_completed` and auto-completes the parent project if all sibling tasks are done. Reopening a task under a Completed project automatically reverts the project to Ongoing. This works across GUI (`DomainService`), CLI (`task_ops`), and the report pipeline reconciliation pass.
 - **Profile constants use module attribute access** — after `reload_profile()`, access fresh values via `_profile_mod.USER_COMPANY`.
 - **Hash-based sync** — SHA-256 of workbook content for detecting external edits (immune to OneDrive mtime false positives).
 - **Personal data is gitignored** — `profiles/*/` is excluded from Git. Only `_TestCompany` (fake data) is committed.
 - **Cross-platform** — Windows-only packages (`pywin32`, `tkinterdnd2`) use platform markers in `requirements.txt`. Runtime imports are try/except guarded. `open_path()` and `_find_chrome()` search OS-appropriate locations.
 - **Review all changes against the three-gate checklist** — see `docs/REVIEW_CHECKLIST.md` (Safety, GitHub-ready, Distribution-ready).
+
+---
+
+## Future Scope — Awareness for Development
+
+Three planned initiatives will shape this codebase. While none are in progress yet, **all new code must be written with these in mind**. See [Future Scope.md](Future%20Scope.md) for full detail and [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the current technical debt inventory.
+
+### 1. Distribution & Packaging
+
+The app will eventually be distributed as a standalone `.exe` (via PyInstaller) to non-technical users at AltaGas. This means:
+- **No hardcoded dev paths.** All file paths must be relative or resolved at runtime via `helpers/profile/config.py`.
+- **No assumptions about the Python environment.** Avoid importing packages not in `requirements.txt`.
+- **Fail gracefully.** Optional features (Outlook COM, tkinterdnd2, Chrome for PDF) must degrade without crashing.
+- **Keep the entry point thin.** `scripts/gui.py` and `scripts/cli.py` are shims — they must stay lightweight so PyInstaller can bundle them easily.
+
+### 2. Demand Planning Integration
+
+Management wants to merge this tool with a team-level demand planning initiative. Key architectural impacts:
+- **The Profile model will grow.** Expect new fields: `team`, and a link to a shared/centralized project list. Design new Profile fields to be optional and backward-compatible.
+- **Projects may have a `source` flag** (e.g., `"personal"` vs `"demand_plan"`) to distinguish user-created projects from centralized team projects. Do not assume all projects are user-owned.
+- **A new entity may appear** — `DemandPlanEntry` (monthly hours forecast per project). This will live alongside `domain.json`, not inside it. Keep the serializer extensible.
+- **The weekly planner / scheduling engine will likely be redesigned** to shift from rigid daily hour allocation to monthly forecast → weekly guidance. New scheduling code should be in a separate module, not patched into `engine.py`.
+- **Data export matters.** The demand plan data must eventually be exportable (to Excel/SharePoint) for centralized rollup. Design any new data structures with clean `to_dict()` / `from_dict()` round-trips.
+
+### 3. Architectural Discipline (Active Priority)
+
+The immediate development focus before any feature expansion. All new code must:
+- **Be modular and self-contained.** New pages, tools, and helpers should have minimal cross-module dependencies.
+- **Never bypass the mutation layer.** All writes go through `DomainService` (GUI) or `task_ops` → registry (CLI).
+- **Keep business logic out of GUI pages.** Pages should only handle widget creation and event binding. Data computation, filtering, and statistics belong in `helpers/`.
+- **Use specific exception handling.** No bare `except Exception: pass`.
+- **Be independently testable.** If a function can't be tested without standing up the full app, it has too many dependencies.
+
+See `docs/ARCHITECTURE_AUDIT.md` for the full list of current issues and the prioritized fix plan.
 
 ---
 
@@ -368,3 +402,5 @@ scripts/
 | Module | Role |
 |--------|------|
 | `engine.py` | Capacity-aware daily scheduler — respects daily_hours_budget, prevents overbooking, daily_hours() and over_capacity_days() helpers |
+
+> **Note:** The scheduling engine will likely be supplemented (not replaced) by a demand-plan-based forecasting module in the future. New scheduling code should be added as a separate module under `helpers/scheduling/`, not patched into `engine.py`. See [Future Scope.md](Future%20Scope.md) §2.

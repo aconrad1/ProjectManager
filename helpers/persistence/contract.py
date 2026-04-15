@@ -155,7 +155,6 @@ def load_profile(
     elif wb is not None:
         # Bootstrap: no JSON yet — build from workbook and save
         profile = load_profile_from_workbook(wb, **meta)
-        wb_hash = hash_file(workbook_filename and Path(workbook_filename) or Path()) if False else ""
         save_profile_json(profile, json_path)
 
     if profile is None:
@@ -341,6 +340,9 @@ def sync(
         profile_name, company, role, email, phone,
         recipient_name, recipient_email, workbook_filename, daily_hours_budget,
     )
+    # import_from_workbook / load_profile receive company as a positional arg,
+    # so strip it from the keyword dict to avoid "got multiple values" errors.
+    meta_no_company = {k: v for k, v in meta.items() if k != "company"}
 
     json_exists = json_path.exists()
     wb_exists = wb_path.exists()
@@ -355,17 +357,17 @@ def sync(
             current_hash = hash_file(wb_path)
             if stored_hash and current_hash != stored_hash:
                 # Workbook content genuinely changed — import it
-                profile = import_from_workbook(wb, company, wb_path, **meta)
+                profile = import_from_workbook(wb, company, wb_path, **meta_no_company)
             else:
                 # JSON is canonical — render it into the workbook
                 push_to_workbook(profile, wb)
         # If no workbook, just return the JSON profile as-is
     elif wb_exists:
         # Bootstrap: first time running, no JSON yet
-        profile = import_from_workbook(wb, company, wb_path, **meta)
+        profile = import_from_workbook(wb, company, wb_path, **meta_no_company)
     else:
         # Neither exists — return empty stub
-        profile = load_profile(company, None, **meta)
+        profile = load_profile(company, None, **meta_no_company)
 
     return profile
 

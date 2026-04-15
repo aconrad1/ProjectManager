@@ -15,8 +15,11 @@ either.
 
 from __future__ import annotations
 
+from datetime import date
+
 from helpers.commands.registry import register
-from helpers.data.tasks import clean, parse_priority
+from helpers.data.tasks import clean
+from helpers.data.completions import _is_completed
 from helpers.attachments.notes import delete_notes
 from helpers.attachments.links import delete_link
 from helpers.attachments.service import delete_attachments
@@ -310,6 +313,7 @@ def delete_project(wb, project_id: str) -> None:
 
 @register("delete_deliverable")
 def delete_deliverable(wb, deliverable_id: str) -> None:
+    """Delete a deliverable by ID."""
     delete_row_by_id(wb, SHEET_DELIVERABLES, deliverable_id)
     _sync_derived_sheets(wb)
     _notify(wb)
@@ -319,6 +323,18 @@ def delete_deliverable(wb, deliverable_id: str) -> None:
 def set_status(wb, item_id: str, new_status: str) -> None:
     """Set the Status field on a project, task, or deliverable by ID."""
     _set_field_by_id(wb, item_id, "Status", new_status)
+    if item_id.startswith("T-"):
+        # Stamp Date Completed when completing a task
+        if _is_completed(new_status):
+            ws = wb[SHEET_TASKS]
+            date_col = column_index(SHEET_TASKS, "Date Completed") + 1
+            for r in range(2, ws.max_row + 1):
+                if clean(ws.cell(row=r, column=1).value) == item_id:
+                    if ws.cell(row=r, column=date_col).value is None:
+                        ws.cell(row=r, column=date_col, value=date.today())
+                    break
+        # Auto-complete or reopen parent project
+        _check_project_completion_wb(wb, item_id)
     _notify(wb)
 
 
@@ -341,6 +357,66 @@ def _set_field_by_id(wb, item_id: str, field_name: str, value) -> None:
     for r in range(2, ws.max_row + 1):
         if clean(ws.cell(row=r, column=1).value) == item_id:
             ws.cell(row=r, column=col, value=value)
+            return
+
+
+def _check_project_completion_wb(wb, task_id: str) -> None:
+    """Auto-complete or reopen the parent project based on task statuses.
+
+    - If all tasks are completed and the project has no Date Completed,
+      stamps it as Completed.
+    - If not all tasks are completed but the project is in the Completed
+      category, reopens it back to Ongoing / In Progress.
+    """
+    if SHEET_TASKS not in wb.sheetnames or SHEET_PROJECTS not in wb.sheetnames:
+        return
+
+    task_ws = wb[SHEET_TASKS]
+    task_proj_col = column_index(SHEET_TASKS, "Project ID") + 1
+    task_status_col = column_index(SHEET_TASKS, "Status") + 1
+
+    # Find the project ID for this task
+    project_id = None
+    for r in range(2, task_ws.max_row + 1):
+        if clean(task_ws.cell(row=r, column=1).value) == task_id:
+            project_id = clean(task_ws.cell(row=r, column=task_proj_col).value)
+            break
+    if not project_id:
+        return
+
+    # Check if all tasks under this project are completed
+    all_completed = True
+    has_tasks = False
+    for r in range(2, task_ws.max_row + 1):
+        pid = clean(task_ws.cell(row=r, column=task_proj_col).value)
+        if pid == project_id:
+            has_tasks = True
+            st = clean(task_ws.cell(row=r, column=task_status_col).value)
+            if not _is_completed(st):
+                all_completed = False
+                break
+
+    if not has_tasks:
+        return
+
+    proj_ws = wb[SHEET_PROJECTS]
+    proj_status_col = column_index(SHEET_PROJECTS, "Status") + 1
+    proj_cat_col = column_index(SHEET_PROJECTS, "Category") + 1
+    proj_date_col = column_index(SHEET_PROJECTS, "Date Completed") + 1
+
+    for r in range(2, proj_ws.max_row + 1):
+        if clean(proj_ws.cell(row=r, column=1).value) == project_id:
+            if all_completed:
+                if proj_ws.cell(row=r, column=proj_date_col).value is None:
+                    proj_ws.cell(row=r, column=proj_status_col, value="Completed")
+                    proj_ws.cell(row=r, column=proj_cat_col, value="Completed")
+                    proj_ws.cell(row=r, column=proj_date_col, value=date.today())
+            else:
+                cat = clean(proj_ws.cell(row=r, column=proj_cat_col).value)
+                if cat and cat.lower() == "completed":
+                    proj_ws.cell(row=r, column=proj_status_col, value="In Progress")
+                    proj_ws.cell(row=r, column=proj_cat_col, value="Ongoing")
+                    proj_ws.cell(row=r, column=proj_date_col, value=None)
             return
 
 

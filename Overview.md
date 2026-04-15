@@ -60,5 +60,17 @@ contract.save()  ←── dual-write ──────────────
 | [README.md](README.md) | Getting started, features overview, project structure, dependencies |
 | [AGENTS.md](AGENTS.md) | AI agent guide — APIs, mutation examples, extension checklists |
 | [FEATURES.md](FEATURES.md) | Exhaustive technical reference — domain model, algorithms, configs, limitations |
+| [Future Scope.md](Future%20Scope.md) | Strategic roadmap — distribution, demand planning, architectural discipline |
+| [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) | Technical debt inventory — 40 findings with prioritized fix plan |
 | [docs/GITHUB_GUIDE.md](docs/GITHUB_GUIDE.md) | Plain-language GitHub & Codespace tutorial |
 | [docs/REVIEW_CHECKLIST.md](docs/REVIEW_CHECKLIST.md) | Three-gate review checklist (Safety / GitHub-ready / Distribution-ready) |
+
+## Future Direction
+
+Three planned initiatives shape all current development. None are in progress yet, but all new code must account for them. See [Future Scope.md](Future%20Scope.md) for details.
+
+1. **Distribution & Packaging** — The app will be packaged as a standalone `.exe` via PyInstaller for non-technical AltaGas users. All file paths must be runtime-resolved, entry points must stay thin, and optional features (Outlook, DnD, PDF) must degrade gracefully.
+
+2. **Demand Planning Integration** — Management wants to merge this tool with a team-level demand planning initiative where employees forecast monthly hours across centralized projects. This will add new entities (`DemandPlanEntry`), a `team` field on profiles, a `source` flag on projects (`personal` vs `demand_plan`), and likely a redesign of the weekly planner from rigid daily scheduling to monthly forecast → weekly guidance.
+
+3. **Architectural Discipline** — The immediate priority before any feature work. Enforcing strict modularity, minimal coupling, and separation of concerns. Business logic must stay out of GUI pages. See [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the full issue inventory.

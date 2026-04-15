@@ -22,6 +22,7 @@ class TaskNotesDialog(ctk.CTkToplevel):
         self.resizable(True, True)
         self.minsize(400, 350)
         self.transient(parent)
+        self.wait_visibility()
         self.grab_set()
 
         self._task_id = task_id

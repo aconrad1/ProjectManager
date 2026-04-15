@@ -17,7 +17,7 @@ from openpyxl.workbook import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-from helpers.config.loader import load as load_config
+from helpers.config.loader import load_deadline_windows
 from helpers.domain.profile import Profile
 from helpers.domain.task import Task
 from helpers.reporting.snapshot_diff import SnapshotDiff
@@ -109,6 +109,7 @@ def write_overview(
     role: str = "",
     company: str = "",
     snapshot_diff: SnapshotDiff | None = None,
+    deadline_windows: dict[str, int] | None = None,
 ) -> None:
     """Populate the Overview tab with a compact dashboard."""
     if today is None:
@@ -265,10 +266,7 @@ def write_overview(
     # ══════════════════════════════════════════════════════════════════════
     #  SECTION 4 — Upcoming Deadlines (configurable window)
     # ══════════════════════════════════════════════════════════════════════
-    try:
-        dl_cfg = load_config("deadlines")
-    except FileNotFoundError:
-        dl_cfg = {}
+    dl_cfg = deadline_windows or load_deadline_windows()
     deadline_days = dl_cfg.get("upcoming_deadline_days", 14)
 
     ws.merge_cells(start_row=row, start_column=2, end_row=row, end_column=9)
