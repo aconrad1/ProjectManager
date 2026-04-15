@@ -583,7 +583,7 @@ A committed test profile at profile index 1 provides sample data for development
 - **10 tasks** with varied priorities (P1–P4), statuses, supervisors, and sites
 - **10 deliverables** with time allocations and progress percentages
 - Sample `task_notes.json` and `task_links.json` for realism
-- Protected from `reset_for_distribution.py` via `_KEEP_DIRS`
+- Protected from `setup/reset_for_distribution.py` via `_KEEP_DIRS`
 
 Switch to it: `python scripts/cli.py profile --switch 1`
 
@@ -879,7 +879,7 @@ Demand plan data must eventually be exportable to a central location (SharePoint
 
 ### Architectural Discipline (Active Priority)
 
-The immediate development focus before any feature expansion. A comprehensive audit identified 40 issues across the codebase — see [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the full inventory and prioritized fix plan.
+The immediate development focus before any feature expansion. A comprehensive audit identified 40 issues across the codebase — see [ARCHITECTURE_AUDIT.md](ARCHITECTURE_AUDIT.md) for the full inventory and prioritized fix plan.
 
 **Key principles for all new code:**
 

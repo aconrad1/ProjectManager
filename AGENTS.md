@@ -262,9 +262,23 @@ Current pages (8): Tasks, Add Task, Generate, Project Timeline, Weekly Planner, 
 
 .gitignore                     # Excludes profiles/*/ (except _TestCompany), caches, secrets
 
+assets/
+  icon.ico                     # App icon (Windows shortcut)
+  icon_proper.ico              # Alternative icon
+  icon_original.png            # Original source image
+
 docs/
+  Overview.md                  # quick-reference card
+  FEATURES.md                  # exhaustive technical reference
+  Future Scope.md              # strategic roadmap (distribution, demand planning)
+  ARCHITECTURE_AUDIT.md        # technical debt inventory & fix plan
   GITHUB_GUIDE.md              # plain-language GitHub/Codespace tutorial
   REVIEW_CHECKLIST.md          # three-gate review checklist (Safety/GitHub-ready/Distribution)
+
+setup/
+  install.py                   # one-time dependency installer
+  create_shortcut.ps1          # Windows desktop shortcut creator
+  reset_for_distribution.py    # clean repo for fresh user (preserves _TestCompany)
 
 profiles/
   user_profile.yaml            # all profile definitions
@@ -336,7 +350,7 @@ scripts/
 
 ## Future Scope — Awareness for Development
 
-Three planned initiatives will shape this codebase. While none are in progress yet, **all new code must be written with these in mind**. See [Future Scope.md](Future%20Scope.md) for full detail and [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the current technical debt inventory.
+Three planned initiatives will shape this codebase. While none are in progress yet, **all new code must be written with these in mind**. See [Future Scope.md](docs/Future%20Scope.md) for full detail and [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md) for the current technical debt inventory.
 
 ### 1. Distribution & Packaging
 
@@ -403,4 +417,4 @@ See `docs/ARCHITECTURE_AUDIT.md` for the full list of current issues and the pri
 |--------|------|
 | `engine.py` | Capacity-aware daily scheduler — respects daily_hours_budget, prevents overbooking, daily_hours() and over_capacity_days() helpers |
 
-> **Note:** The scheduling engine will likely be supplemented (not replaced) by a demand-plan-based forecasting module in the future. New scheduling code should be added as a separate module under `helpers/scheduling/`, not patched into `engine.py`. See [Future Scope.md](Future%20Scope.md) §2.
+> **Note:** The scheduling engine will likely be supplemented (not replaced) by a demand-plan-based forecasting module in the future. New scheduling code should be added as a separate module under `helpers/scheduling/`, not patched into `engine.py`. See [Future Scope.md](docs/Future%20Scope.md) §2.

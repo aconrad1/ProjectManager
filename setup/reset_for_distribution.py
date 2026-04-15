@@ -4,8 +4,8 @@ This script removes ALL user profiles, personal data, and generated files,
 leaving the application shell ready for a new user to populate.
 
 Usage:
-    python reset_for_distribution.py          # interactive confirmation
-    python reset_for_distribution.py --force  # skip confirmation (CI / scripted use)
+    python setup/reset_for_distribution.py          # interactive confirmation
+    python setup/reset_for_distribution.py --force  # skip confirmation (CI / scripted use)
 
 What it does:
   1. Deletes every company folder under ``profiles/`` (attachments, data, exports, reports)
@@ -15,8 +15,8 @@ What it does:
 
 What it does NOT touch:
   - Source code (helpers/, scripts/)
-  - Documentation (README.md, Overview.md, AGENTS.md)
-  - requirements.txt, install.py
+  - Documentation (README.md, AGENTS.md, docs/)
+  - requirements.txt, setup/install.py
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ from pathlib import Path
 
 # ── Resolve project root ──────────────────────────────────────────────────────
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = SCRIPT_DIR  # script lives at project root level
+PROJECT_ROOT = SCRIPT_DIR.parent  # script lives in setup/ subfolder
 
 
 PROFILES_DIR = PROJECT_ROOT / "profiles"
