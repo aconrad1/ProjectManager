@@ -496,7 +496,7 @@ class TestGanttPageRightClick:
         task.id = "T-001"
         task.start = date(2026, 4, 10)
         task.end = date(2026, 4, 20)
-        mock_app.profile.find_task_global.return_value = task
+        mock_app.profile.find_by_id.return_value = task
         mock_app.service = MagicMock()
 
         page = object.__new__(GanttPage)
@@ -522,10 +522,7 @@ class TestGanttPageRightClick:
         deliv.start = date(2026, 5, 1)
         deliv.end = date(2026, 5, 10)
 
-        # Construct a profile with the deliverable
-        task = MagicMock()
-        task.find_deliverable.return_value = deliv
-        mock_app.profile.all_tasks = [task]
+        mock_app.profile.find_by_id.return_value = deliv
         mock_app.service = MagicMock()
 
         page = object.__new__(GanttPage)
@@ -549,7 +546,7 @@ class TestGanttPageRightClick:
         task = MagicMock()
         task.id = "T-001"
         task.start = None
-        mock_app.profile.find_task_global.return_value = task
+        mock_app.profile.find_by_id.return_value = task
         mock_app.service = MagicMock()
 
         page = object.__new__(GanttPage)
@@ -563,18 +560,19 @@ class TestGanttPageRightClick:
         mock_app.service.edit_task.assert_not_called()
 
     def test_hit_row_returns_correct_row(self):
-        """_hit_row returns the row dict at the given y-coordinate."""
+        """_hit_row returns the row at the given y-coordinate."""
         from scripts.gui.pages.gantt_page import GanttPage
+        from helpers.reporting.gantt import GanttRow
 
         page = object.__new__(GanttPage)
         page._rows = [
-            {"type": "project", "label": "Proj"},
-            {"type": "task", "label": "Task 1", "item_id": "T-001"},
+            GanttRow(type="project", label="Proj"),
+            GanttRow(type="task", label="Task 1", item_id="T-001"),
         ]
         page._row_y_ranges = [(44, 70), (70, 96)]
 
-        assert page._hit_row(50)["type"] == "project"
-        assert page._hit_row(75)["item_id"] == "T-001"
+        assert page._hit_row(50).type == "project"
+        assert page._hit_row(75).item_id == "T-001"
         assert page._hit_row(100) is None
 
 

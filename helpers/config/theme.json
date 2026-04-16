@@ -28,6 +28,25 @@
     "project": "#dce6f5",
     "deliverable_fg": "#555555"
   },
+  "site_palette": [
+    "#003DA5",
+    "#336BBF",
+    "#2980b9",
+    "#16a085",
+    "#27ae60",
+    "#8e44ad",
+    "#d35400",
+    "#c0392b"
+  ],
+  "status_bg_colors": {
+    "in progress": "#D6EAF8",
+    "on track": "#D5F5E3",
+    "not started": "#F2F3F4",
+    "ongoing": "#D6EAF8",
+    "recurring": "#D6EAF8",
+    "on hold": "#FADBD8",
+    "completed": "#ABEBC6"
+  },
   "gantt_colors": {
     "in_progress": "#336BBF",
     "completed":   "#2E8B57",

@@ -18,7 +18,6 @@ from __future__ import annotations
 from datetime import date
 
 from helpers.commands.registry import register
-from helpers.data.tasks import clean
 from helpers.data.completions import _is_completed
 from helpers.attachments.notes import delete_notes
 from helpers.attachments.links import delete_link
@@ -30,8 +29,9 @@ from helpers.domain.project import Project
 from helpers.domain.deliverable import Deliverable
 from helpers.schema.sheets import SHEET_PROJECTS, SHEET_TASKS, SHEET_DELIVERABLES
 from helpers.schema.columns import (
-    column_index, PROJECTS_COLUMNS, TASKS_COLUMNS, DELIVERABLES_COLUMNS,
+    PROJECTS_COLUMNS, TASKS_COLUMNS, DELIVERABLES_COLUMNS,
 )
+from helpers.persistence.row_reader import SheetAccessor
 from helpers.persistence.workbook_writer import (
     add_project_row,
     add_task_row,
@@ -266,12 +266,11 @@ def delete_task(wb, task_id: str) -> None:
     """Delete a task by ID (T-NNN), cascading to child deliverables."""
     # Find and delete child deliverables first
     if SHEET_DELIVERABLES in wb.sheetnames:
-        del_ws = wb[SHEET_DELIVERABLES]
-        fk_col = column_index(SHEET_DELIVERABLES, "Task ID") + 1
+        deliverables = SheetAccessor(wb[SHEET_DELIVERABLES], SHEET_DELIVERABLES)
         to_delete = []
-        for r in range(2, del_ws.max_row + 1):
-            if clean(del_ws.cell(row=r, column=fk_col).value) == task_id:
-                did = clean(del_ws.cell(row=r, column=1).value)
+        for row in deliverables.iter_rows():
+            if deliverables.get(row, "Task ID") == task_id:
+                did = deliverables.get_id(row)
                 if did:
                     to_delete.append(did)
         for did in to_delete:
@@ -279,13 +278,11 @@ def delete_task(wb, task_id: str) -> None:
 
     # Find task title for attachment cleanup
     if SHEET_TASKS in wb.sheetnames:
-        ws = wb[SHEET_TASKS]
-        for r in range(2, ws.max_row + 1):
-            if clean(ws.cell(row=r, column=1).value) == task_id:
-                delete_notes(task_id)
-                delete_link(task_id)
-                delete_attachments(task_id)
-                break
+        tasks = SheetAccessor(wb[SHEET_TASKS], SHEET_TASKS)
+        if tasks.find_row(task_id):
+            delete_notes(task_id)
+            delete_link(task_id)
+            delete_attachments(task_id)
 
     delete_row_by_id(wb, SHEET_TASKS, task_id)
     _sync_derived_sheets(wb)
@@ -296,12 +293,11 @@ def delete_task(wb, task_id: str) -> None:
 def delete_project(wb, project_id: str) -> None:
     """Delete a project and cascade-delete all its tasks + deliverables."""
     if SHEET_TASKS in wb.sheetnames:
-        task_ws = wb[SHEET_TASKS]
-        fk_col = column_index(SHEET_TASKS, "Project ID") + 1
+        tasks = SheetAccessor(wb[SHEET_TASKS], SHEET_TASKS)
         task_ids = []
-        for r in range(2, task_ws.max_row + 1):
-            if clean(task_ws.cell(row=r, column=fk_col).value) == project_id:
-                tid = clean(task_ws.cell(row=r, column=1).value)
+        for row in tasks.iter_rows():
+            if tasks.get(row, "Project ID") == project_id:
+                tid = tasks.get_id(row)
                 if tid:
                     task_ids.append(tid)
         for tid in task_ids:
@@ -327,13 +323,10 @@ def set_status(wb, item_id: str, new_status: str) -> None:
     if item_id.startswith("T-"):
         # Stamp Date Completed when completing a task
         if _is_completed(new_status):
-            ws = wb[SHEET_TASKS]
-            date_col = column_index(SHEET_TASKS, "Date Completed") + 1
-            for r in range(2, ws.max_row + 1):
-                if clean(ws.cell(row=r, column=1).value) == item_id:
-                    if ws.cell(row=r, column=date_col).value is None:
-                        ws.cell(row=r, column=date_col, value=date.today())
-                    break
+            tasks = SheetAccessor(wb[SHEET_TASKS], SHEET_TASKS)
+            row = tasks.find_row(item_id)
+            if row and tasks.get_raw(row, "Date Completed") is None:
+                tasks.set(row, "Date Completed", date.today())
         # Auto-complete or reopen parent project
         _check_project_completion_wb(wb, item_id)
     _notify(wb)
@@ -353,12 +346,10 @@ def _set_field_by_id(wb, item_id: str, field_name: str, value) -> None:
     sheet_name = sheet_map.get(prefix)
     if not sheet_name or sheet_name not in wb.sheetnames:
         return
-    ws = wb[sheet_name]
-    col = column_index(sheet_name, field_name) + 1
-    for r in range(2, ws.max_row + 1):
-        if clean(ws.cell(row=r, column=1).value) == item_id:
-            ws.cell(row=r, column=col, value=value)
-            return
+    accessor = SheetAccessor(wb[sheet_name], sheet_name)
+    row = accessor.find_row(item_id)
+    if row:
+        accessor.set(row, field_name, value)
 
 
 def _check_project_completion_wb(wb, task_id: str) -> None:
@@ -372,48 +363,42 @@ def _check_project_completion_wb(wb, task_id: str) -> None:
     if SHEET_TASKS not in wb.sheetnames or SHEET_PROJECTS not in wb.sheetnames:
         return
 
-    task_ws = wb[SHEET_TASKS]
-    task_proj_col = column_index(SHEET_TASKS, "Project ID") + 1
-    task_status_col = column_index(SHEET_TASKS, "Status") + 1
+    tasks = SheetAccessor(wb[SHEET_TASKS], SHEET_TASKS)
 
     # Find the project ID for this task
-    project_id = None
-    for r in range(2, task_ws.max_row + 1):
-        if clean(task_ws.cell(row=r, column=1).value) == task_id:
-            project_id = clean(task_ws.cell(row=r, column=task_proj_col).value)
-            break
+    project_id = ""
+    task_row = tasks.find_row(task_id)
+    if task_row:
+        project_id = tasks.get(task_row, "Project ID")
     if not project_id:
         return
 
     # Collect all task statuses for this project
     statuses: list[str] = []
-    for r in range(2, task_ws.max_row + 1):
-        pid = clean(task_ws.cell(row=r, column=task_proj_col).value)
+    for row in tasks.iter_rows():
+        pid = tasks.get(row, "Project ID")
         if pid == project_id:
-            st = clean(task_ws.cell(row=r, column=task_status_col).value)
+            st = tasks.get(row, "Status")
             statuses.append(st)
 
     if not statuses:
         return
 
-    proj_ws = wb[SHEET_PROJECTS]
-    proj_status_col = column_index(SHEET_PROJECTS, "Status") + 1
-    proj_cat_col = column_index(SHEET_PROJECTS, "Category") + 1
-    proj_date_col = column_index(SHEET_PROJECTS, "Date Completed") + 1
+    projects = SheetAccessor(wb[SHEET_PROJECTS], SHEET_PROJECTS)
 
-    for r in range(2, proj_ws.max_row + 1):
-        if clean(proj_ws.cell(row=r, column=1).value) == project_id:
+    for row in projects.iter_rows():
+        if projects.get_id(row) == project_id:
             if should_auto_complete_project(statuses):
-                if proj_ws.cell(row=r, column=proj_date_col).value is None:
-                    proj_ws.cell(row=r, column=proj_status_col, value="Completed")
-                    proj_ws.cell(row=r, column=proj_cat_col, value="Completed")
-                    proj_ws.cell(row=r, column=proj_date_col, value=date.today())
+                if projects.get_raw(row, "Date Completed") is None:
+                    projects.set(row, "Status", "Completed")
+                    projects.set(row, "Category", "Completed")
+                    projects.set(row, "Date Completed", date.today())
             else:
-                cat = clean(proj_ws.cell(row=r, column=proj_cat_col).value)
+                cat = projects.get(row, "Category")
                 if cat and should_reopen_project(cat):
-                    proj_ws.cell(row=r, column=proj_status_col, value="In Progress")
-                    proj_ws.cell(row=r, column=proj_cat_col, value="Ongoing")
-                    proj_ws.cell(row=r, column=proj_date_col, value=None)
+                    projects.set(row, "Status", "In Progress")
+                    projects.set(row, "Category", "Ongoing")
+                    projects.set(row, "Date Completed", None)
             return
 
 
@@ -421,11 +406,10 @@ def _read_field(wb, sheet_name: str, item_id: str, field_name: str) -> str | Non
     """Read a single field value from a row identified by *item_id*."""
     if sheet_name not in wb.sheetnames:
         return None
-    ws = wb[sheet_name]
-    col = column_index(sheet_name, field_name) + 1
-    for r in range(2, ws.max_row + 1):
-        if clean(ws.cell(row=r, column=1).value) == item_id:
-            return clean(ws.cell(row=r, column=col).value)
+    accessor = SheetAccessor(wb[sheet_name], sheet_name)
+    row = accessor.find_row(item_id)
+    if row:
+        return accessor.get(row, field_name)
     return None
 
 
@@ -433,21 +417,15 @@ def _update_fields_by_id(wb, sheet_name: str, columns, item_id: str, data: dict)
     """Update multiple fields on a row identified by *item_id*."""
     if sheet_name not in wb.sheetnames:
         return
-    ws = wb[sheet_name]
-    # Find the row
-    row = None
-    for r in range(2, ws.max_row + 1):
-        if clean(ws.cell(row=r, column=1).value) == item_id:
-            row = r
-            break
+    accessor = SheetAccessor(wb[sheet_name], sheet_name)
+    row = accessor.find_row(item_id)
     if row is None:
         return
     # Map data keys to column indices and update
     col_names = {col.name for col in columns}
     for key, value in data.items():
         if key in col_names:
-            col_idx = column_index(sheet_name, key) + 1
-            ws.cell(row=row, column=col_idx, value=value)
+            accessor.set(row, key, value)
 
 
 @register("move_task_to_project")
@@ -455,14 +433,13 @@ def move_task_to_project(wb, task_id: str, new_project_id: str) -> bool:
     """Update a task's Project ID foreign key."""
     if SHEET_TASKS not in wb.sheetnames:
         return False
-    ws = wb[SHEET_TASKS]
-    fk_col = column_index(SHEET_TASKS, "Project ID") + 1
-    for r in range(2, ws.max_row + 1):
-        if clean(ws.cell(row=r, column=1).value) == task_id:
-            ws.cell(row=r, column=fk_col, value=new_project_id)
-            _sync_derived_sheets(wb)
-            _notify(wb)
-            return True
+    accessor = SheetAccessor(wb[SHEET_TASKS], SHEET_TASKS)
+    row = accessor.find_row(task_id)
+    if row:
+        accessor.set(row, "Project ID", new_project_id)
+        _sync_derived_sheets(wb)
+        _notify(wb)
+        return True
     return False
 
 

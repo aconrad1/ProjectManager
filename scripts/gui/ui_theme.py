@@ -45,3 +45,12 @@ STATUS_COLORS: dict[str, str] = _theme.get("status_colors", {})
 CATEGORIES: list[str] = _cat_cfg["values"]
 
 TREEVIEW_TAG_COLORS: dict[str, str] = _theme.get("treeview_tag_colors", {})
+
+SITE_PALETTE: list[str] = _theme.get("site_palette", [
+    "#003DA5", "#336BBF", "#2980b9", "#16a085",
+    "#27ae60", "#8e44ad", "#d35400", "#c0392b",
+])
+
+STATUS_BG_COLORS: dict[str, str] = _theme.get("status_bg_colors", {})
+
+GANTT_COLORS_DARK: dict[str, str] = _theme.get("gantt_colors_dark", {})

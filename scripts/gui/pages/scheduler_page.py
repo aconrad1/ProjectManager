@@ -18,7 +18,7 @@ import customtkinter as ctk
 from gui.base_page import BasePage
 from gui.ui_theme import (
     AG_DARK, AG_MID, AG_LIGHT, AG_WASH,
-    PRIORITY_LABELS, PRIORITY_COLORS,
+    PRIORITY_LABELS, PRIORITY_COLORS, STATUS_BG_COLORS,
 )
 from helpers.scheduling.engine import compute_schedule, daily_hours, week_start_date
 
@@ -30,17 +30,6 @@ MULTI_CELL_H = 42       # per-task height inside a multi-task slot
 HEADER_H = 48
 LABEL_W = 110
 BUDGET_BAR_H = 22
-_STATUS_BG = {
-    "in progress":  "#D6EAF8",
-    "on track":     "#D5F5E3",
-    "not started":  "#F2F3F4",
-    "ongoing":      "#D6EAF8",
-    "recurring":    "#D6EAF8",
-    "on hold":      "#FADBD8",
-    "completed":    "#ABEBC6",
-}
-
-
 class SchedulerPage(BasePage):
     KEY = "scheduler"
     TITLE = "Weekly Planner"
@@ -246,7 +235,7 @@ class SchedulerPage(BasePage):
             outer.grid_propagate(False)
             for task, hrs in slot:
                 status_key = task.status.strip().lower()
-                bg = _STATUS_BG.get(status_key, "#f5f5f5")
+                bg = STATUS_BG_COLORS.get(status_key, "#f5f5f5")
                 mini = ctk.CTkFrame(outer, fg_color=bg, corner_radius=3,
                                     height=MULTI_CELL_H)
                 mini.pack(fill="x", padx=2, pady=1)
@@ -268,7 +257,7 @@ class SchedulerPage(BasePage):
                                  task, hrs: float) -> None:
         """Render a cell with a single task entry."""
         status_key = task.status.strip().lower()
-        bg = _STATUS_BG.get(status_key, "#f5f5f5")
+        bg = STATUS_BG_COLORS.get(status_key, "#f5f5f5")
 
         cell = ctk.CTkFrame(container, fg_color=bg, corner_radius=4,
                             height=CELL_H)
