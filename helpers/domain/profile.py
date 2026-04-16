@@ -76,6 +76,14 @@ class Profile(Node):
             result.extend(p.tasks)
         return result
 
+    @property
+    def all_deliverables(self) -> list[Deliverable]:
+        """Flat list of every deliverable across all projects and tasks."""
+        result: list[Deliverable] = []
+        for task in self.all_tasks:
+            result.extend(task.deliverables)
+        return result
+
     def find_task_global(self, task_id: str) -> Task | None:
         """Search all projects for a task by ID."""
         for p in self.projects:

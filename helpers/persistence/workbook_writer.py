@@ -179,9 +179,9 @@ def save_profile_to_workbook(profile: Profile, wb: Workbook) -> None:
         (SHEET_PROJECTS, PROJECTS_COLUMNS, _write_project_row,
          profile.projects),
         (SHEET_TASKS, TASKS_COLUMNS, _write_task_row,
-         [t for p in profile.projects for t in p.tasks]),
+         profile.all_tasks),
         (SHEET_DELIVERABLES, DELIVERABLES_COLUMNS, _write_deliverable_row,
-         [d for p in profile.projects for t in p.tasks for d in t.deliverables]),
+         profile.all_deliverables),
     ]:
         if sheet_name not in wb.sheetnames:
             continue
