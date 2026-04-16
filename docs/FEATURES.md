@@ -697,13 +697,18 @@ Statuses, categories, and priorities are **not hardcoded** in Python source. The
 ```python
 from helpers.config.loader import (
     valid_statuses,       # → {"Not Started", "In Progress", ...}
+    default_status,       # → "Not Started"
     terminal_statuses,    # → {"Completed"}
     active_statuses,      # → {"In Progress", "On Track", "Ongoing", "Recurring"}
+    excluded_statuses,    # → frozenset — terminal + inactive (used by scheduler)
+    reopen_status,        # → "In Progress" (first active-tier status)
     completion_aliases,   # → {"completed", "complete"}
     status_color,         # status_color("Completed") → "#27ae60"
     status_bg_color,      # status_bg_color("Completed") → "#ABEBC6"
+    status_gantt_color,   # status_gantt_color("Completed") → "#2E8B57"
     valid_categories,     # → ("Weekly", "Ongoing", "Completed")
     terminal_categories,  # → {"Completed"}
+    active_categories,    # → {"Weekly", "Ongoing"}
     default_category,     # → "Ongoing"
     priority_range,       # → (1, 5)
     default_priority,     # → 3
@@ -719,7 +724,7 @@ To add a new status, category, or priority value, edit only the relevant JSON fi
 - `load(name)` — Parse a JSON file by name, LRU-cached (32 entries)
 - `load_field_map(entity)` — Returns `{gui_label: domain_attr}` for an entity type
 - `load_reverse_field_map(entity)` — Returns `{domain_attr: gui_label}`
-- 15 dimension-table accessor functions (see above) — thin wrappers over `load()`
+- 20 dimension-table accessor functions (see above) — thin wrappers over `load()`
 
 ### Brand Colors
 

@@ -618,7 +618,7 @@ Each page independently maps priorities to colors or statuses to colors. Some us
 
 **Fix**: Centralize all color mappings in `ui_theme.py`. Pages should only read from there.
 
-**Partial resolution**: Backend color consolidation is complete — `status.json`, `categories.json`, and the new `priorities.json` dimension tables now define all status colors, bg colors, gantt colors, and priority colors/labels. `ui_theme.py` reads from these dimension tables via `loader.py` accessor functions. The remaining work is replacing hardcoded hex values in the three GUI page files listed above with imports from `ui_theme.py`.
+**Resolved**: All three pages now consume config-driven values. `gantt_page.py` uses `status_gantt_color()` for bar colors instead of hardcoded status string matching. `dashboard_page.py` uses `priority_labels()` and `priority_range()` for its breakdown chart. `scheduler_page.py` uses `priority_range()` for its row loop. All GUI dialog defaults (status, category, priority) also read from `default_status()`, `default_category()`, `default_priority()` via `loader.py`. The `ui_theme.py` module sources all exported color/label constants from dimension table accessors.
 
 ---
 

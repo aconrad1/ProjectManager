@@ -8,15 +8,24 @@
 
 ## Status
 
-**Backend complete.** The dimension table refactoring (done separately) has already:
+**Complete.** Two passes of refactoring have been applied:
+
+### Pass 1 — Backend dimension tables (done)
 - Enriched `status.json` with per-status `color`, `bg_color`, and `gantt_color` fields
 - Enriched `categories.json` with `is_terminal` and `default_for_new` metadata
 - Created `priorities.json` with per-priority `value`, `label`, `tier`, `color`, `tree_bg`, `badge_class`
-- Added 15 accessor functions to `loader.py` (e.g., `status_color()`, `status_bg_color()`, `priority_labels()`)
+- Added 20 accessor functions to `loader.py` (e.g., `status_color()`, `status_bg_color()`, `default_status()`, `reopen_status()`, `excluded_statuses()`, `active_categories()`)
 - Updated `ui_theme.py` to source `PRIORITY_LABELS`, `PRIORITY_COLORS`, `STATUS_COLORS`, `STATUS_BG_COLORS` from dimension table accessors instead of raw `theme.json` keys
 - Removed redundant `priority_labels`, `priority_colors`, `status_colors`, `status_bg_colors` sections from `theme.json`
 
-**Remaining work**: Replace hardcoded hex color values in `dashboard_page.py`, `scheduler_page.py`, and `gantt_page.py` with imports from `ui_theme.py`. The centralized constants are already available — the pages just need to consume them.
+### Pass 2 — Full operational audit (done)
+- `gantt_page.py` — `_bar_color()` now delegates to `status_gantt_color()` instead of hardcoded status→color string matching
+- `dashboard_page.py` — Priority breakdown uses `priority_labels()` and `priority_range()` instead of hardcoded dict and `range(1, 6)`; category counts use `active_categories()` / `terminal_categories()`
+- `scheduler_page.py` — Priority row loop uses `priority_range()` instead of `range(1, 6)`
+- `tasks_page.py` — Status bar dynamically iterates `valid_categories()` instead of hardcoding "Weekly", "Ongoing", "Completed"
+- All GUI dialogs (`project_dialog.py`, `task_dialog.py`, `deliverable_dialog.py`) — Default selections for status, category, and priority use `default_status()`, `default_category()`, `default_priority()` via config accessors
+- `add_task_page.py` — Default status/priority from config; terminal category checks use `terminal_categories()`
+- All `helpers/` modules (`domain_service.py`, `task_ops.py`, `engine.py`, `overview.py`, `completions.py`, `dashboard.py`, `tasks.py`, domain models) — every hardcoded enum string replaced with config accessor calls
 
 ---
 
@@ -112,7 +121,7 @@ Colors are now in dimension tables (`status.json`, `priorities.json`) and `theme
 
 `ui_theme.py` now sources all color/label constants from dimension table accessor functions in `loader.py`.
 
-### Step 3: Update pages to use centralized constants
+### Step 3: ~~Update pages to use centralized constants~~ ✅ DONE
 
 **dashboard_page.py:**
 ```python

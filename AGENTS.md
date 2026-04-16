@@ -272,13 +272,18 @@ Each status is a record with behavioral metadata:
 ```python
 from helpers.config.loader import (
     valid_statuses,        # → {"Not Started", "In Progress", ...}
+    default_status,        # → "Not Started"
     terminal_statuses,     # → {"Completed"}
     active_statuses,       # → {"In Progress", "On Track", "Ongoing", "Recurring"}
+    excluded_statuses,     # → frozenset — terminal + inactive (used by scheduler)
+    reopen_status,         # → "In Progress" (first active-tier status)
     completion_aliases,    # → {"completed", "complete"}
     status_color,          # status_color("Completed") → "#27ae60"
     status_bg_color,       # status_bg_color("Completed") → "#ABEBC6"
+    status_gantt_color,    # status_gantt_color("Completed") → "#2E8B57"
     valid_categories,      # → ("Weekly", "Ongoing", "Completed")
     terminal_categories,   # → {"Completed"}
+    active_categories,     # → {"Weekly", "Ongoing"}
     default_category,      # → "Ongoing"
     priority_range,        # → (1, 5)
     default_priority,      # → 3
@@ -385,7 +390,7 @@ helpers/
     defaults.json              # scheduler defaults (hours budget, slot limits)
     deadlines.json             # report window config (rolling day counts)
     theme.json                 # brand colors, treeview tags, site palette, gantt palettes
-    loader.py                  # load() with LRU cache + dimension-table accessor functions
+    loader.py                  # load() with LRU cache + 20 dimension-table accessor functions
   domain/                      # dataclasses: Profile, Project, Task, Deliverable
     rules.py                   # pure business rules (auto-complete, reopen) — reads from dimension tables
   persistence/
@@ -428,7 +433,7 @@ scripts/
 - **Timelines and Gantt auto-sync** — every save rebuilds these sheets. Never edit them directly.
 - **Notes and links are keyed by task ID** — legacy title-based keys are auto-migrated on profile load via `helpers.migration`.
 - **Status = "Completed" triggers auto-complete** — setting a task to Completed immediately stamps `date_completed` and auto-completes the parent project if all sibling tasks are done. Reopening a task under a Completed project automatically reverts the project to the default category ("Ongoing"). This works across GUI (`DomainService`), CLI (`task_ops`), and the report pipeline reconciliation pass. Terminal statuses and completion aliases are defined in `helpers/config/status.json`.
-- **Business-logic enums are config-driven** — statuses, categories, priorities, and their colors/tiers/labels are defined as JSON dimension tables in `helpers/config/`. Python modules read these via cached accessor functions in `loader.py` — never hardcode enum values in source.
+- **Business-logic enums are fully config-driven** — statuses, categories, priorities, and their colors/tiers/labels are defined as JSON dimension tables in `helpers/config/`. Every operational path — creation defaults, auto-complete/reopen logic, scheduling exclusions, GUI dialog defaults, Gantt bar colors, dashboard breakdowns, status bar counts — reads from cached accessor functions in `loader.py`. No Python module hardcodes enum string values. Adding a new status, category, or priority requires editing only the JSON file.
 - **Profile constants use module attribute access** — after `reload_profile()`, access fresh values via `_profile_mod.USER_COMPANY`.
 - **Hash-based sync** — SHA-256 of workbook content for detecting external edits (immune to OneDrive mtime false positives).
 - **Personal data is gitignored** — `profiles/*/` is excluded from Git. Only `_TestCompany` (fake data) is committed.
