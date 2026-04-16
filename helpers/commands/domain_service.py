@@ -34,7 +34,8 @@ from helpers.validation import (
     validate_deliverable,
     ValidationError,
 )
-from helpers.domain.rules import should_auto_complete_project, should_reopen_project
+from helpers.domain.rules import should_auto_complete_project, should_reopen_project, reopen_category
+from helpers.config.loader import default_category, default_priority
 
 
 class DomainService:
@@ -107,12 +108,12 @@ class DomainService:
             id=pid,
             project_id=pid,
             title=data.get("title", ""),
-            category=data.get("category", "Ongoing"),
+            category=data.get("category", default_category()),
             description=data.get("description", ""),
             status=data.get("status", "Not Started"),
             supervisor=data.get("supervisor", ""),
             site=data.get("site", ""),
-            priority=data.get("priority", 3),
+            priority=data.get("priority", default_priority()),
             notes=data.get("notes", ""),
             start=data.get("start"),
             end=data.get("end"),
@@ -178,7 +179,7 @@ class DomainService:
             description=data.get("description", ""),
             commentary=data.get("commentary", ""),
             status=data.get("status", "Not Started"),
-            priority=data.get("priority", 3),
+            priority=data.get("priority", default_priority()),
             start=data.get("start"),
             end=data.get("end"),
             deadline=data.get("deadline"),
@@ -351,7 +352,7 @@ class DomainService:
         elif should_reopen_project(parent.category):
             # A task was reopened — revert the project
             parent.status = "In Progress"
-            parent.category = "Ongoing"
+            parent.category = reopen_category()
             parent.date_completed = None
 
     def _find_any(self, item_id: str):

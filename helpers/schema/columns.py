@@ -9,6 +9,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum, auto
 
+from helpers.config.loader import valid_categories, valid_statuses
+
 
 # ── Column type enum ───────────────────────────────────────────────────────────
 
@@ -40,7 +42,7 @@ class Column:
 PROJECTS_COLUMNS: tuple[Column, ...] = (
     Column("Project ID",      ColumnType.STRING,  width=12),
     Column("Title",           ColumnType.STRING,  width=30),
-    Column("Category",        ColumnType.STRING,  width=14, choices=("Weekly", "Ongoing", "Completed")),
+    Column("Category",        ColumnType.STRING,  width=14, choices=valid_categories()),
     Column("Supervisor",      ColumnType.STRING,  width=20),
     Column("Site",            ColumnType.STRING,  width=18),
     Column("Description",     ColumnType.STRING,  width=40),

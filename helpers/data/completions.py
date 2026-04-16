@@ -13,13 +13,11 @@ from openpyxl.workbook import Workbook
 from helpers.data.tasks import clean
 from helpers.schema.sheets import SHEET_PROJECTS, SHEET_TASKS
 from helpers.schema.columns import column_index
-
-# Status values that trigger completion.
-COMPLETION_KEYWORDS = {"completed", "complete"}
+from helpers.config.loader import completion_aliases
 
 
 def _is_completed(status: str) -> bool:
-    return status.lower().strip() in COMPLETION_KEYWORDS
+    return status.lower().strip() in completion_aliases()
 
 
 # ── New-schema completion (in-place update) ────────────────────────────────────

@@ -11,17 +11,23 @@ from collections import Counter
 from datetime import date, timedelta
 from pathlib import Path
 
-from helpers.config.loader import load_deadline_windows
+from helpers.config.loader import (
+    load_deadline_windows,
+    priority_tiers as _load_priority_tiers,
+    priority_badge_class,
+    priority_badge_label,
+)
 from helpers.domain.profile import Profile
 from helpers.domain.task import Task
 from helpers.reporting.snapshot_diff import SnapshotDiff
 from helpers.util.dates import previous_monday
 
-# ── Priority tiers (mirrored from config, kept local to avoid circular deps) ──
-URGENT_PRIORITIES = {1}
-HIGH_PRIORITIES = {2}
-MEDIUM_PRIORITIES = {3}
-LOW_PRIORITIES = {4, 5}
+# ── Priority tiers (loaded from priorities.json) ──────────────────────────────
+_TIERS = _load_priority_tiers()
+URGENT_PRIORITIES = _TIERS.get("urgent", set())
+HIGH_PRIORITIES = _TIERS.get("high", set())
+MEDIUM_PRIORITIES = _TIERS.get("medium", set())
+LOW_PRIORITIES = _TIERS.get("low", set())
 
 # ── CSS ────────────────────────────────────────────────────────────────────────
 CSS = """\
@@ -103,8 +109,8 @@ PAGE_BREAK = '\n<div class="page-break"></div>\n'
 
 
 def _priority_badge(p: int) -> str:
-    cls = {1: "critical", 2: "high", 3: "medium", 4: "low", 5: "bg"}.get(p, "bg")
-    label = {1: "P1 Urgent", 2: "P2 High", 3: "P3 Medium", 4: "P4 Low", 5: "P5 Background"}.get(p, f"P{p}")
+    cls = priority_badge_class(p)
+    label = priority_badge_label(p)
     return f'<span class="badge-{cls}">{label}</span>'
 
 

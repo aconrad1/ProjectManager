@@ -5,20 +5,6 @@
     "light": "#B3CDE3",
     "wash":  "#E6EFF8"
   },
-  "priority_labels": {
-    "1": "P1 - Urgent",
-    "2": "P2 - High",
-    "3": "P3 - Medium",
-    "4": "P4 - Low",
-    "5": "P5 - Background"
-  },
-  "priority_colors": {
-    "1": "#c0392b",
-    "2": "#e67e22",
-    "3": "#f39c12",
-    "4": "#7f8c8d",
-    "5": "#bdc3c7"
-  },
   "treeview_tag_colors": {
     "p1": "#fce4e4",
     "p2": "#fef3e0",
@@ -38,15 +24,6 @@
     "#d35400",
     "#c0392b"
   ],
-  "status_bg_colors": {
-    "in progress": "#D6EAF8",
-    "on track": "#D5F5E3",
-    "not started": "#F2F3F4",
-    "ongoing": "#D6EAF8",
-    "recurring": "#D6EAF8",
-    "on hold": "#FADBD8",
-    "completed": "#ABEBC6"
-  },
   "gantt_colors": {
     "in_progress": "#336BBF",
     "completed":   "#2E8B57",
@@ -70,14 +47,5 @@
     "text_dim":    "#A0A0B0",
     "divider":     "#333355",
     "today_line":  "#FF6B6B"
-  },
-  "status_colors": {
-    "Completed":       "#27ae60",
-    "In Progress":     "#336BBF",
-    "On Track":        "#2ecc71",
-    "Ongoing":         "#16a085",
-    "Recurring":       "#8e44ad",
-    "On Hold":         "#e74c3c",
-    "Not Started":     "#95a5a6"
   }
 }

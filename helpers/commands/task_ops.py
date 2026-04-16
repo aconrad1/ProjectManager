@@ -22,7 +22,8 @@ from helpers.data.completions import _is_completed
 from helpers.attachments.notes import delete_notes
 from helpers.attachments.links import delete_link
 from helpers.attachments.service import delete_attachments
-from helpers.domain.rules import should_auto_complete_project, should_reopen_project
+from helpers.domain.rules import should_auto_complete_project, should_reopen_project, reopen_category
+from helpers.config.loader import default_category, default_priority
 
 from helpers.domain.task import Task
 from helpers.domain.project import Project
@@ -118,12 +119,12 @@ def add_project(wb, data: dict) -> Project:
     project = Project(
         id="",
         title=d.get("Title", ""),
-        category=d.get("Category", "Ongoing"),
+        category=d.get("Category", default_category()),
         description=d.get("Description", ""),
         status=d.get("Status", "Not Started"),
         supervisor=d.get("Supervisor", ""),
         site=d.get("Site", ""),
-        priority=d.get("Priority", 3),
+        priority=d.get("Priority", default_priority()),
         notes=d.get("Notes", ""),
         start=d.get("Start Date"),
         end=d.get("End Date"),
@@ -149,7 +150,7 @@ def add_task(wb, project_id: str, data: dict, *, date_completed=None) -> Task:
         description=d.get("Description", d.get("Project Description", "")),
         commentary=d.get("Status Commentary", ""),
         status=d.get("Status", "Not Started"),
-        priority=d.get("Priority", 3),
+        priority=d.get("Priority", default_priority()),
         date_completed=date_completed,
     )
     add_task_row(wb, task)
@@ -397,7 +398,7 @@ def _check_project_completion_wb(wb, task_id: str) -> None:
                 cat = projects.get(row, "Category")
                 if cat and should_reopen_project(cat):
                     projects.set(row, "Status", "In Progress")
-                    projects.set(row, "Category", "Ongoing")
+                    projects.set(row, "Category", reopen_category())
                     projects.set(row, "Date Completed", None)
             return
 

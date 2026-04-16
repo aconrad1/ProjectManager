@@ -1,3 +1,7 @@
 {
-  "values": ["Weekly", "Ongoing", "Completed"]
+  "values": [
+    { "name": "Weekly",    "is_terminal": false, "default_for_new": false },
+    { "name": "Ongoing",   "is_terminal": false, "default_for_new": true  },
+    { "name": "Completed", "is_terminal": true,  "default_for_new": false }
+  ]
 }

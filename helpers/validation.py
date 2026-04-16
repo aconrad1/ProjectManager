@@ -17,6 +17,12 @@ from __future__ import annotations
 from datetime import date
 from typing import Any
 
+from helpers.config.loader import (
+    valid_categories,
+    valid_statuses,
+    priority_range,
+)
+
 
 class ValidationError(Exception):
     """Raised when domain validation fails."""
@@ -35,8 +41,6 @@ def format_errors(errors: list[str]) -> str:
 
 # ── Project ────────────────────────────────────────────────────────────────────
 
-_VALID_CATEGORIES = {"Weekly", "Ongoing", "Completed"}
-
 def validate_project(data: dict[str, Any]) -> list[str]:
     """Validate project creation/edit data. Returns list of error strings."""
     errors: list[str] = []
@@ -44,22 +48,19 @@ def validate_project(data: dict[str, Any]) -> list[str]:
     if not title or not str(title).strip():
         errors.append("Project title is required.")
     category = data.get("category")
-    if category and category not in _VALID_CATEGORIES:
-        errors.append(f"Invalid category '{category}'. Must be one of: {', '.join(sorted(_VALID_CATEGORIES))}.")
+    _cats = valid_categories()
+    if category and category not in _cats:
+        errors.append(f"Invalid category '{category}'. Must be one of: {', '.join(sorted(_cats))}.")
     priority = data.get("priority")
+    _lo, _hi = priority_range()
     if priority is not None:
-        if not isinstance(priority, int) or not (1 <= priority <= 5):
-            errors.append("Priority must be an integer between 1 and 5.")
+        if not isinstance(priority, int) or not (_lo <= priority <= _hi):
+            errors.append(f"Priority must be an integer between {_lo} and {_hi}.")
     _check_date_range(data, errors)
     return errors
 
 
 # ── Task ───────────────────────────────────────────────────────────────────────
-
-_VALID_STATUSES = {
-    "Not Started", "In Progress", "On Track", "Ongoing",
-    "Recurring", "On Hold", "Completed",
-}
 
 def validate_task(data: dict[str, Any]) -> list[str]:
     """Validate task creation/edit data. Returns list of error strings."""
@@ -68,12 +69,14 @@ def validate_task(data: dict[str, Any]) -> list[str]:
     if not title or not str(title).strip():
         errors.append("Task title is required.")
     status = data.get("status")
-    if status and status not in _VALID_STATUSES:
-        errors.append(f"Invalid status '{status}'. Must be one of: {', '.join(sorted(_VALID_STATUSES))}.")
+    _sts = valid_statuses()
+    if status and status not in _sts:
+        errors.append(f"Invalid status '{status}'. Must be one of: {', '.join(sorted(_sts))}.")
     priority = data.get("priority")
+    _lo, _hi = priority_range()
     if priority is not None:
-        if not isinstance(priority, int) or not (1 <= priority <= 5):
-            errors.append("Priority must be an integer between 1 and 5.")
+        if not isinstance(priority, int) or not (_lo <= priority <= _hi):
+            errors.append(f"Priority must be an integer between {_lo} and {_hi}.")
     _check_date_range(data, errors)
     return errors
 
