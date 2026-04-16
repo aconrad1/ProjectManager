@@ -618,6 +618,8 @@ Each page independently maps priorities to colors or statuses to colors. Some us
 
 **Fix**: Centralize all color mappings in `ui_theme.py`. Pages should only read from there.
 
+**Partial resolution**: Backend color consolidation is complete — `status.json`, `categories.json`, and the new `priorities.json` dimension tables now define all status colors, bg colors, gantt colors, and priority colors/labels. `ui_theme.py` reads from these dimension tables via `loader.py` accessor functions. The remaining work is replacing hardcoded hex values in the three GUI page files listed above with imports from `ui_theme.py`.
+
 ---
 
 ### N-08: Category Filtering Logic Duplicated Across 3 Pages

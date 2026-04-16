@@ -682,19 +682,44 @@ via `helpers.migration.migrate_to_id_keying()`.
 
 | File | Purpose |
 |------|---------|
-| `categories.json` | `["Weekly", "Ongoing", "Completed"]` |
-| `status.json` | All 8 status values + `completed_statuses` and `active_statuses` lists |
+| `status.json` | **Dimension table** — one record per status with `name`, `tier`, `is_terminal`, `color`, `bg_color`, `gantt_color`, `completion_aliases` |
+| `categories.json` | **Dimension table** — one record per category with `name`, `is_terminal`, `default_for_new` |
+| `priorities.json` | **Dimension table** — `range` (1–5), `default` (3), one record per priority with `value`, `label`, `tier`, `color`, `tree_bg`, `badge_class` |
 | `fields.json` | GUI label ↔ domain attribute mappings for project, task, deliverable |
-| `deadlines.json` | Deadline window config (default 14 days for Overview section) |
-| `theme.json` | Brand colors, priority labels/colors, gantt colors (light + dark palettes), status colors, treeview tag colors |
 | `deadlines.json` | Rolling window config: `recent_completed_days`, `extended_completed_days`, `upcoming_deadline_days`, `snapshot_lookback_days` |
+| `theme.json` | Brand colors, treeview tag colors, site palette, gantt colors (light + dark palettes) |
 | `defaults.json` | Scheduler defaults: `default_time_allocated_hours`, `max_tasks_per_priority_slot`, `week_start_day`, `enforce_weekly_budget` |
+
+### Dimension Table Architecture
+
+Statuses, categories, and priorities are **not hardcoded** in Python source. They are defined as JSON dimension tables and accessed via cached accessor functions in `helpers/config/loader.py`:
+
+```python
+from helpers.config.loader import (
+    valid_statuses,       # → {"Not Started", "In Progress", ...}
+    terminal_statuses,    # → {"Completed"}
+    active_statuses,      # → {"In Progress", "On Track", "Ongoing", "Recurring"}
+    completion_aliases,   # → {"completed", "complete"}
+    status_color,         # status_color("Completed") → "#27ae60"
+    status_bg_color,      # status_bg_color("Completed") → "#ABEBC6"
+    valid_categories,     # → ("Weekly", "Ongoing", "Completed")
+    terminal_categories,  # → {"Completed"}
+    default_category,     # → "Ongoing"
+    priority_range,       # → (1, 5)
+    default_priority,     # → 3
+    priority_labels,      # → {1: "P1 - Urgent", ...}
+    priority_tiers,       # → {"urgent": {1}, "high": {2}, ...}
+)
+```
+
+To add a new status, category, or priority value, edit only the relevant JSON file — no Python changes required. Clear the LRU cache if running interactively: `loader.load.cache_clear()`.
 
 ### Config Loader
 
 - `load(name)` — Parse a JSON file by name, LRU-cached (32 entries)
 - `load_field_map(entity)` — Returns `{gui_label: domain_attr}` for an entity type
 - `load_reverse_field_map(entity)` — Returns `{domain_attr: gui_label}`
+- 15 dimension-table accessor functions (see above) — thin wrappers over `load()`
 
 ### Brand Colors
 
@@ -705,15 +730,15 @@ via `helpers.migration.migrate_to_id_keying()`.
 | AG_LIGHT | `#B3CDE3` | Accents, borders |
 | AG_WASH | `#E6EFF8` | Backgrounds, alternating rows |
 
-### Priority Colors
+### Priority Colors (from `priorities.json`)
 
 | Priority | Color |
 |----------|-------|
 | P1 – Urgent | `#c0392b` (red) |
 | P2 – High | `#e67e22` (orange) |
-| P3 – Medium | `#f1c40f` (yellow) |
-| P4 – Low | `#3498db` (blue) |
-| P5 – Background | `#95a5a6` (gray) |
+| P3 – Medium | `#f39c12` (yellow) |
+| P4 – Low | `#7f8c8d` (gray) |
+| P5 – Background | `#bdc3c7` (light gray) |
 
 ---
 
@@ -721,11 +746,12 @@ via `helpers.migration.migrate_to_id_keying()`.
 
 All mutations through `DomainService` are validated before persisting. Invalid
 data raises `ValidationError` with a list of human-readable error strings.
+Allowed values are loaded from dimension tables at runtime — not hardcoded.
 
 | Validator | Checks |
 |-----------|--------|
-| `validate_project(data)` | Title required, category in {Weekly, Ongoing, Completed}, priority 1–5, date range consistency |
-| `validate_task(data)` | Title required, status in valid set, priority 1–5, date range consistency |
+| `validate_project(data)` | Title required, category in `valid_categories()`, priority in `priority_range()`, date range consistency |
+| `validate_task(data)` | Title required, status in `valid_statuses()`, priority in `priority_range()`, date range consistency |
 | `validate_deliverable(data)` | Title required, percent_complete 0–100, time_allocated/time_spent non-negative, date range |
 | `validate_schedule_config(config)` | `default_time_allocated_hours` > 0, `max_tasks_per_priority_slot` positive int, `week_start_day` valid day name |
 | `validate_budget(daily, weekly)` | Both > 0, daily ≤ weekly |

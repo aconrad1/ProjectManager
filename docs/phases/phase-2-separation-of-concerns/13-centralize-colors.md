@@ -6,6 +6,20 @@
 
 ---
 
+## Status
+
+**Backend complete.** The dimension table refactoring (done separately) has already:
+- Enriched `status.json` with per-status `color`, `bg_color`, and `gantt_color` fields
+- Enriched `categories.json` with `is_terminal` and `default_for_new` metadata
+- Created `priorities.json` with per-priority `value`, `label`, `tier`, `color`, `tree_bg`, `badge_class`
+- Added 15 accessor functions to `loader.py` (e.g., `status_color()`, `status_bg_color()`, `priority_labels()`)
+- Updated `ui_theme.py` to source `PRIORITY_LABELS`, `PRIORITY_COLORS`, `STATUS_COLORS`, `STATUS_BG_COLORS` from dimension table accessors instead of raw `theme.json` keys
+- Removed redundant `priority_labels`, `priority_colors`, `status_colors`, `status_bg_colors` sections from `theme.json`
+
+**Remaining work**: Replace hardcoded hex color values in `dashboard_page.py`, `scheduler_page.py`, and `gantt_page.py` with imports from `ui_theme.py`. The centralized constants are already available — the pages just need to consume them.
+
+---
+
 ## Objective
 
 Move all hardcoded color mappings (priority colors, status colors, site palette, button colors) from individual pages into centralized constants in `ui_theme.py` (backed by `theme.json`). Pages should reference exported constants — no inline color hex values.
@@ -34,11 +48,18 @@ Move all hardcoded color mappings (priority colors, status colors, site palette,
 
 ## Current State
 
-### Already centralized in ui_theme.py (good):
+### Already centralized in ui_theme.py (done):
 ```python
-PRIORITY_COLORS: dict[int, str] = {int(k): v for k, v in _theme["priority_colors"].items()}
-STATUS_COLORS: dict[str, str] = _theme.get("status_colors", {})
-TREEVIEW_TAG_COLORS: dict[str, str] = _theme.get("treeview_tag_colors", {})
+# Sourced from dimension tables via loader.py accessors
+PRIORITY_LABELS: dict[int, str]    # from priorities.json
+PRIORITY_COLORS: dict[int, str]    # from priorities.json
+STATUS_OPTIONS: list[str]          # from status.json
+STATUS_COLORS: dict[str, str]      # from status.json (color field)
+STATUS_BG_COLORS: dict[str, str]   # from status.json (bg_color field)
+TREEVIEW_TAG_COLORS: dict[str, str] # from theme.json
+SITE_PALETTE: list[str]            # from theme.json
+GANTT_COLORS_DARK: dict[str, str]  # from theme.json
+CATEGORIES: list[str]              # from categories.json
 ```
 
 ### Hardcoded in dashboard_page.py:
@@ -83,44 +104,13 @@ fill="#c0392b", outline="#c0392b"
 
 ## Required Changes
 
-### Step 1: Add new color constants to `helpers/config/theme.json`
+### Step 1: ~~Add new color constants to config~~ ✅ DONE
 
-Add these sections to the existing theme.json:
+Colors are now in dimension tables (`status.json`, `priorities.json`) and `theme.json` retains only layout-specific colors (brand, treeview tags, site palette, gantt palettes).
 
-```json
-{
-    "site_palette": ["#003DA5", "#336BBF", "#2980b9", "#16a085", "#27ae60",
-                     "#8e44ad", "#d35400", "#c0392b"],
-    "status_bg_colors": {
-        "in progress": "#D6EAF8",
-        "on track": "#D5F5E3",
-        "not started": "#F2F3F4",
-        "ongoing": "#D6EAF8",
-        "recurring": "#D6EAF8",
-        "on hold": "#FADBD8",
-        "completed": "#ABEBC6"
-    },
-    "gantt_colors_dark": {
-        "text_dim": "#A0A0B0",
-        "grid_line": "#333355",
-        "today_line": "#FF6B6B",
-        "project_bg": "#2A2A4A",
-        "section_bg": "#3A3020",
-        "row_even": "#252538"
-    }
-}
-```
+### Step 2: ~~Export new constants from `scripts/gui/ui_theme.py`~~ ✅ DONE
 
-### Step 2: Export new constants from `scripts/gui/ui_theme.py`
-
-```python
-SITE_PALETTE: list[str] = _theme.get("site_palette", [
-    "#003DA5", "#336BBF", "#2980b9", "#16a085", "#27ae60",
-    "#8e44ad", "#d35400", "#c0392b"
-])
-STATUS_BG_COLORS: dict[str, str] = _theme.get("status_bg_colors", {})
-GANTT_COLORS_DARK: dict[str, str] = _theme.get("gantt_colors_dark", {})
-```
+`ui_theme.py` now sources all color/label constants from dimension table accessor functions in `loader.py`.
 
 ### Step 3: Update pages to use centralized constants
 

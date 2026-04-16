@@ -218,6 +218,84 @@ Pipeline (`generate_reports()`) executes 9 sequential steps:
 
 ---
 
+## Dimension Tables (Business Logic in JSON)
+
+All business-logic enums (statuses, categories, priorities) are defined as **JSON dimension tables** in `helpers/config/`. Python modules never hardcode these values — they call thin accessor functions from `helpers/config/loader.py` which are LRU-cached after first load.
+
+### `helpers/config/status.json`
+
+Each status is a record with behavioral metadata:
+
+```json
+{
+  "values": [
+    {
+      "name": "Completed",
+      "tier": "terminal",
+      "is_terminal": true,
+      "color": "#27ae60",
+      "bg_color": "#ABEBC6",
+      "gantt_color": "#2E8B57",
+      "completion_aliases": ["completed", "complete"]
+    }
+  ]
+}
+```
+
+### `helpers/config/categories.json`
+
+```json
+{
+  "values": [
+    { "name": "Weekly",    "is_terminal": false, "default_for_new": false },
+    { "name": "Ongoing",   "is_terminal": false, "default_for_new": true  },
+    { "name": "Completed", "is_terminal": true,  "default_for_new": false }
+  ]
+}
+```
+
+### `helpers/config/priorities.json`
+
+```json
+{
+  "range": [1, 5],
+  "default": 3,
+  "values": [
+    { "value": 1, "label": "P1 - Urgent", "tier": "urgent", "color": "#c0392b", ... },
+    { "value": 5, "label": "P5 - Background", "tier": "low", "color": "#bdc3c7", ... }
+  ]
+}
+```
+
+### Accessor Functions (`helpers/config/loader.py`)
+
+```python
+from helpers.config.loader import (
+    valid_statuses,        # → {"Not Started", "In Progress", ...}
+    terminal_statuses,     # → {"Completed"}
+    active_statuses,       # → {"In Progress", "On Track", "Ongoing", "Recurring"}
+    completion_aliases,    # → {"completed", "complete"}
+    status_color,          # status_color("Completed") → "#27ae60"
+    status_bg_color,       # status_bg_color("Completed") → "#ABEBC6"
+    valid_categories,      # → ("Weekly", "Ongoing", "Completed")
+    terminal_categories,   # → {"Completed"}
+    default_category,      # → "Ongoing"
+    priority_range,        # → (1, 5)
+    default_priority,      # → 3
+    priority_labels,       # → {1: "P1 - Urgent", 2: "P2 - High", ...}
+    priority_tiers,        # → {"urgent": {1}, "high": {2}, "medium": {3}, "low": {4,5}}
+)
+```
+
+### Adding a New Enum Value
+
+To add a new status, category, or priority:
+1. Edit the relevant JSON dimension table in `helpers/config/`
+2. Clear loader cache if running interactively: `loader.load.cache_clear()`
+3. No Python code changes required — all modules read from the dimension table
+
+---
+
 ## Adding a New Field (Schema Extension Checklist)
 
 When adding a new field to a domain entity, update these files in order:
@@ -299,7 +377,17 @@ profiles/
     reports/                   # dated workbook snapshots
 
 helpers/
+  config/                      # ★ JSON dimension tables + config loader
+    categories.json            # category enum (name, is_terminal, default_for_new)
+    status.json                # status enum (name, tier, is_terminal, colors, aliases)
+    priorities.json            # priority enum (value, label, tier, color, badge_class)
+    fields.json                # GUI label ↔ domain attribute mapping
+    defaults.json              # scheduler defaults (hours budget, slot limits)
+    deadlines.json             # report window config (rolling day counts)
+    theme.json                 # brand colors, treeview tags, site palette, gantt palettes
+    loader.py                  # load() with LRU cache + dimension-table accessor functions
   domain/                      # dataclasses: Profile, Project, Task, Deliverable
+    rules.py                   # pure business rules (auto-complete, reopen) — reads from dimension tables
   persistence/
     contract.py                # load/save orchestration (JSON-first, hash-based sync)
     serializer.py              # JSON ↔ domain round-trip (schema v2.0 + content hash)
@@ -339,7 +427,8 @@ scripts/
 - **All mutations route through `contract.save()`** — which dual-writes JSON then workbook.
 - **Timelines and Gantt auto-sync** — every save rebuilds these sheets. Never edit them directly.
 - **Notes and links are keyed by task ID** — legacy title-based keys are auto-migrated on profile load via `helpers.migration`.
-- **Status = "Completed" triggers auto-complete** — setting a task to Completed immediately stamps `date_completed` and auto-completes the parent project if all sibling tasks are done. Reopening a task under a Completed project automatically reverts the project to Ongoing. This works across GUI (`DomainService`), CLI (`task_ops`), and the report pipeline reconciliation pass.
+- **Status = "Completed" triggers auto-complete** — setting a task to Completed immediately stamps `date_completed` and auto-completes the parent project if all sibling tasks are done. Reopening a task under a Completed project automatically reverts the project to the default category ("Ongoing"). This works across GUI (`DomainService`), CLI (`task_ops`), and the report pipeline reconciliation pass. Terminal statuses and completion aliases are defined in `helpers/config/status.json`.
+- **Business-logic enums are config-driven** — statuses, categories, priorities, and their colors/tiers/labels are defined as JSON dimension tables in `helpers/config/`. Python modules read these via cached accessor functions in `loader.py` — never hardcode enum values in source.
 - **Profile constants use module attribute access** — after `reload_profile()`, access fresh values via `_profile_mod.USER_COMPANY`.
 - **Hash-based sync** — SHA-256 of workbook content for detecting external edits (immune to OneDrive mtime false positives).
 - **Personal data is gitignored** — `profiles/*/` is excluded from Git. Only `_TestCompany` (fake data) is committed.
