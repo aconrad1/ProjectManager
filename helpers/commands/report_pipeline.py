@@ -24,10 +24,7 @@ from helpers.reporting.pdf import generate_pdf
 from helpers.reporting.snapshot_diff import (
     diff_profiles, load_previous_snapshot, SnapshotDiff, baseline_profile_for_diff,
 )
-from helpers.profile.profile import (
-    USER_NAME, USER_ROLE, USER_COMPANY, USER_EMAIL, USER_PHONE,
-    RECIPIENT_NAME, RECIPIENT_EMAIL, WORKBOOK_FILENAME, DAILY_HOURS_BUDGET, file_prefix,
-)
+from helpers.profile.profile import get_active_config, file_prefix
 from helpers.profile.config import (
     workbook_path, reports_dir, markdown_dir, pdf_dir,
 )
@@ -61,7 +58,8 @@ def generate_reports(
 
     # Capture pre-mutation snapshot for change history
     log("[1/9] Capturing previous snapshot for change history…")
-    previous_profile = load_previous_snapshot(USER_COMPANY, reports_dir())
+    cfg = get_active_config()
+    previous_profile = load_previous_snapshot(cfg.company, reports_dir())
     if previous_profile:
         log("   Previous snapshot loaded.")
     else:
@@ -81,16 +79,16 @@ def generate_reports(
     log("[3/9] Syncing domain hierarchy…")
     profile = sync_profile(
         wb,
-        USER_COMPANY,
+        cfg.company,
         wb_path,
-        profile_name=USER_NAME,
-        role=USER_ROLE,
-        email=USER_EMAIL,
-        phone=USER_PHONE,
-        recipient_name=RECIPIENT_NAME,
-        recipient_email=RECIPIENT_EMAIL,
-        workbook_filename=WORKBOOK_FILENAME,
-        daily_hours_budget=DAILY_HOURS_BUDGET,
+        profile_name=cfg.name,
+        role=cfg.role,
+        email=cfg.email,
+        phone=cfg.phone,
+        recipient_name=cfg.recipient_name,
+        recipient_email=cfg.recipient_email,
+        workbook_filename=cfg.workbook_filename,
+        daily_hours_budget=cfg.daily_hours_budget,
     )
     log(f"   Profile: {profile.title}  |  Projects: {len(profile.projects)}  |  Tasks: {len(profile.all_tasks)}")
 
@@ -120,7 +118,7 @@ def generate_reports(
 
     log("[5/9] Writing Overview tab…")
     write_overview(wb, profile, moved, today,
-                   author=USER_NAME, role=USER_ROLE, company=USER_COMPANY,
+                   author=cfg.name, role=cfg.role, company=cfg.company,
                    snapshot_diff=snapshot_diff, deadline_windows=windows)
 
     log("[6/9] Checking Timelines integrity & syncing derived sheets…")
@@ -145,7 +143,7 @@ def generate_reports(
     log("[8/9] Generating Markdown & PDF reports…")
     md_text = build_markdown(
         profile, moved, today,
-        author=USER_NAME, role=USER_ROLE, company=USER_COMPANY,
+        author=cfg.name, role=cfg.role, company=cfg.company,
         snapshot_diff=snapshot_diff, deadline_windows=windows,
     )
     m_dir = markdown_dir()

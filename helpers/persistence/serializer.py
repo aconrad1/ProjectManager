@@ -33,6 +33,10 @@ from helpers.domain.profile import Profile
 # Increment when the JSON schema changes in a breaking way
 SCHEMA_VERSION = 1
 
+# Increment when new migrations are added.
+# Version 0 = no flag (legacy files), version 2 = ID-keyed notes/links/attachments.
+MIGRATION_VERSION = 2
+
 
 # ── Hash helper ────────────────────────────────────────────────────────────────
 
@@ -56,6 +60,7 @@ def serialize_profile(profile: Profile, workbook_hash: str = "") -> str:
     envelope = {
         "_meta": {
             "schema_version": SCHEMA_VERSION,
+            "migration_version": MIGRATION_VERSION,
             "workbook_hash": workbook_hash,
             "last_modified": datetime.now(tz=timezone.utc).isoformat(),
         },
@@ -98,3 +103,12 @@ def load_profile_json(path: Path) -> tuple[Profile, dict]:
         profile, _ = load_profile_json(path)
     """
     return deserialize_profile(path.read_text(encoding="utf-8-sig"))
+
+
+def read_migration_version(json_path: Path) -> int:
+    """Read the migration_version from a domain.json file. Returns 0 if absent."""
+    try:
+        data = json.loads(json_path.read_text(encoding="utf-8-sig"))
+        return int(data.get("_meta", {}).get("migration_version", 0))
+    except (OSError, json.JSONDecodeError, ValueError, TypeError):
+        return 0

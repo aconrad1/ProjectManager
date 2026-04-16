@@ -263,11 +263,12 @@ class TasksPage(BasePage):
         for cat in valid_categories():
             count = len(profile.tasks_for_category(cat))
             parts.append(f"{cat}: {count}")
-        from helpers.profile.profile import WORKBOOK_FILENAME
+        from helpers.profile.profile import get_active_config
+        _cfg = get_active_config()
         dnd_tag = "" if self._dnd_available else "  |  ⚠ Drag-and-drop unavailable (install tkinterdnd2)"
         text = (
             "  |  ".join(parts)
-            + f"  |  Workbook: {WORKBOOK_FILENAME}"
+            + f"  |  Workbook: {_cfg.workbook_filename}"
             f"{dnd_tag}"
         )
         self._status_label.configure(text=text)

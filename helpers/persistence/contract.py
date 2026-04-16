@@ -42,11 +42,14 @@ JSON is rolled back to the previous version.
 
 from __future__ import annotations
 
+import logging
 import os
 import shutil
 from pathlib import Path
 
 from openpyxl.workbook import Workbook
+
+log = logging.getLogger(__name__)
 
 from helpers.domain.profile import Profile
 from helpers.persistence.serializer import (
@@ -168,8 +171,15 @@ def load_profile(
     _patch_metadata(profile, **meta)
 
     # Auto-migrate legacy title-keyed notes/links/attachments to ID-based keys
-    from helpers.migration import migrate_to_id_keying
-    migrate_to_id_keying(profile)
+    # (skip if domain.json already records a current migration_version)
+    from helpers.persistence.serializer import read_migration_version, MIGRATION_VERSION
+    current_ver = read_migration_version(json_path) if json_path.exists() else 0
+    if current_ver < MIGRATION_VERSION:
+        from helpers.migration import migrate_to_id_keying
+        migrate_to_id_keying(profile)
+        log.info("Migration complete (version %d → %d)", current_ver, MIGRATION_VERSION)
+        # Re-save to stamp the new migration_version in _meta
+        save_profile_json(profile, json_path)
 
     return profile
 
@@ -350,6 +360,15 @@ def sync(
     if json_exists:
         profile, stored_meta = load_profile_json(json_path)
         _patch_metadata(profile, **meta)
+
+        # Run migration if needed (skip if already at current version)
+        from helpers.persistence.serializer import read_migration_version, MIGRATION_VERSION
+        current_ver = int(stored_meta.get("migration_version", 0))
+        if current_ver < MIGRATION_VERSION:
+            from helpers.migration import migrate_to_id_keying
+            migrate_to_id_keying(profile)
+            log.info("Migration complete (version %d → %d)", current_ver, MIGRATION_VERSION)
+            save_profile_json(profile, json_path)
 
         # Check if the workbook was edited externally by comparing content hash
         if wb_exists:

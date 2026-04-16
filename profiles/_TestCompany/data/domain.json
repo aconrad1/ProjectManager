@@ -1,8 +1,9 @@
 {
   "_meta": {
     "schema_version": 1,
+    "migration_version": 2,
     "workbook_hash": "",
-    "last_modified": "2026-04-13T20:00:09.257417+00:00"
+    "last_modified": "2026-04-16T17:44:26.671509+00:00"
   },
   "id": "profile:_TestCompany",
   "title": "Dev Tester",
