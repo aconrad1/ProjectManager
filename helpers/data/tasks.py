@@ -11,6 +11,7 @@ from datetime import date, datetime
 from typing import TYPE_CHECKING
 
 from helpers.data.queries import filter_projects_by_category
+from helpers.config.loader import priority_range
 
 if TYPE_CHECKING:
     from helpers.domain.profile import Profile
@@ -26,11 +27,11 @@ def clean(value: object) -> str:
 
 
 def parse_priority(value: object) -> int:
-    """Safely parse a priority value to int (default 5)."""
+    """Safely parse a priority value to int (default max priority)."""
     try:
         return int(value)  # type: ignore[arg-type]
     except (TypeError, ValueError):
-        return 5
+        return priority_range()[1]
 
 
 def parse_date(value: object) -> date | None:

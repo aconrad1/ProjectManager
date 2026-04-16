@@ -20,6 +20,7 @@ from gui.ui_theme import (
     AG_DARK, AG_MID, AG_LIGHT, AG_WASH,
     PRIORITY_LABELS, PRIORITY_COLORS, STATUS_BG_COLORS,
 )
+from helpers.config.loader import priority_range
 from helpers.scheduling.engine import compute_schedule, daily_hours, week_start_date
 
 
@@ -199,7 +200,8 @@ class SchedulerPage(BasePage):
             ).place(relx=0.5, rely=0.5, anchor="center")
 
         # ── Priority rows ──────────────────────────────────────────────────
-        for pri in range(1, 6):
+        lo, hi = priority_range()
+        for pri in range(lo, hi + 1):
             row_idx = pri + 1  # offset for header + budget rows
             label = PRIORITY_LABELS.get(pri, f"P{pri}")
             color = PRIORITY_COLORS.get(pri, AG_DARK)

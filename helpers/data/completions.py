@@ -13,7 +13,7 @@ from openpyxl.workbook import Workbook
 from helpers.data.tasks import clean
 from helpers.schema.sheets import SHEET_PROJECTS, SHEET_TASKS
 from helpers.schema.columns import column_index
-from helpers.config.loader import completion_aliases
+from helpers.config.loader import completion_aliases, terminal_statuses, terminal_categories
 
 
 def _is_completed(status: str) -> bool:
@@ -79,8 +79,10 @@ def process_completions(wb: Workbook, today: date | None = None) -> list[str]:
             if task_statuses and all(_is_completed(s) for s in task_statuses):
                 existing_date = proj_ws.cell(row=row_idx, column=proj_date_col).value
                 if existing_date is None:
-                    proj_ws.cell(row=row_idx, column=proj_status_col, value="Completed")
-                    proj_ws.cell(row=row_idx, column=proj_cat_col, value="Completed")
+                    _completed_status = next(iter(terminal_statuses()))
+                    _completed_cat = next(iter(terminal_categories()))
+                    proj_ws.cell(row=row_idx, column=proj_status_col, value=_completed_status)
+                    proj_ws.cell(row=row_idx, column=proj_cat_col, value=_completed_cat)
                     proj_ws.cell(row=row_idx, column=proj_date_col, value=today)
 
     return moved

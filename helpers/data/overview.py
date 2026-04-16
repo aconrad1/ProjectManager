@@ -17,7 +17,13 @@ from openpyxl.workbook import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-from helpers.config.loader import load_deadline_windows, priority_labels as _load_priority_labels, status_bg_color
+from helpers.config.loader import (
+    load_deadline_windows,
+    priority_labels as _load_priority_labels,
+    status_bg_color,
+    active_categories as _load_active_categories,
+    terminal_statuses as _load_terminal_statuses,
+)
 from helpers.domain.profile import Profile
 from helpers.domain.task import Task
 from helpers.reporting.snapshot_diff import SnapshotDiff
@@ -120,9 +126,10 @@ def write_overview(
     # Derive data from domain hierarchy
     weekly_tasks = profile.tasks_for_category("Weekly")
     ongoing_tasks = profile.tasks_for_category("Ongoing")
+    _active_cats = {c.lower() for c in _load_active_categories()}
     active_projects = [
         p for p in profile.projects
-        if p.category.strip().lower() in ("weekly", "ongoing")
+        if p.category.strip().lower() in _active_cats
     ]
 
     ws = wb[SHEET_OVERVIEW]
@@ -152,14 +159,15 @@ def write_overview(
     row += 1
 
     for idx, proj in enumerate(sorted(active_projects, key=lambda p: min((t.priority for t in p.tasks), default=5))):
+        _terminal_sts = {s.lower() for s in _load_terminal_statuses()} | {"on hold"}
         active_count = sum(
             1 for t in proj.tasks
-            if t.status.strip().lower() not in ("completed", "on hold")
+            if t.status.strip().lower() not in _terminal_sts
         )
         total_deliverables = sum(len(t.deliverables) for t in proj.tasks)
         done_deliverables = sum(
             1 for t in proj.tasks for d in t.deliverables
-            if d.status.strip().lower() == "completed"
+            if d.status.strip().lower() in {s.lower() for s in _load_terminal_statuses()}
         )
         pct = f"{done_deliverables}/{total_deliverables}" if total_deliverables else "—"
         alloc = proj.time_allocated_total
@@ -182,8 +190,9 @@ def write_overview(
 
     # Build a lookup: (day_offset, priority) → [task, ...]
     schedule_lookup: dict[tuple[int, int], list[Task]] = {}
+    _excluded = {s.lower() for s in _load_terminal_statuses()} | {"on hold"}
     all_active = [t for t in weekly_tasks + ongoing_tasks
-                  if t.status.strip().lower() not in ("completed", "on hold")]
+                  if t.status.strip().lower() not in _excluded]
     for t in all_active:
         if t.scheduled_date is not None:
             offset = (t.scheduled_date - today).days

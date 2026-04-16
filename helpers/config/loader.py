@@ -68,6 +68,14 @@ def valid_statuses() -> set[str]:
     return {s["name"] for s in _status_records()}
 
 
+def default_status() -> str:
+    """The default status for newly created items (first non-terminal status)."""
+    for s in _status_records():
+        if not s.get("is_terminal"):
+            return s["name"]
+    return _status_records()[0]["name"]
+
+
 def terminal_statuses() -> set[str]:
     """Statuses that mark an item as finished (e.g. 'Completed')."""
     return {s["name"] for s in _status_records() if s.get("is_terminal")}
@@ -76,6 +84,22 @@ def terminal_statuses() -> set[str]:
 def active_statuses() -> set[str]:
     """Statuses that indicate ongoing work."""
     return {s["name"] for s in _status_records() if s.get("tier") == "active"}
+
+
+def reopen_status() -> str:
+    """The status to assign when reopening a completed item (first active status)."""
+    for s in _status_records():
+        if s.get("tier") == "active":
+            return s["name"]
+    return default_status()
+
+
+def excluded_statuses() -> frozenset[str]:
+    """Case-folded statuses excluded from scheduling (terminal + inactive non-default)."""
+    return frozenset(
+        s["name"].lower() for s in _status_records()
+        if s.get("is_terminal") or s.get("tier") == "inactive" and s["name"] != default_status()
+    )
 
 
 def completion_aliases() -> set[str]:
@@ -129,6 +153,11 @@ def valid_categories() -> tuple[str, ...]:
 def terminal_categories() -> set[str]:
     """Categories that mark an item as finished."""
     return {c["name"] for c in _category_records() if c.get("is_terminal")}
+
+
+def active_categories() -> set[str]:
+    """Non-terminal categories (e.g. Weekly, Ongoing)."""
+    return {c["name"] for c in _category_records() if not c.get("is_terminal")}
 
 
 def default_category() -> str:

@@ -135,7 +135,8 @@ def cmd_list(args: argparse.Namespace) -> None:
 
     categories = ["Weekly", "Ongoing"]
     if args.all:
-        categories.append("Completed")
+        from helpers.config.loader import valid_categories
+        categories = list(valid_categories())
 
     for cat in categories:
         tasks = profile.tasks_for_category(cat)
@@ -235,7 +236,8 @@ def cmd_task(args: argparse.Namespace) -> None:
             sys.exit(1)
 
         from helpers.commands.task_ops import add_task
-        data = {"Title": title, "Status": "Not Started", "Priority": 3}
+        from helpers.config.loader import default_status, default_priority
+        data = {"Title": title, "Status": default_status(), "Priority": default_priority()}
         add_task(wb, proj.id, data)
         print(f"Task '{title}' added to {proj.title}.")
 
@@ -290,7 +292,8 @@ def cmd_deliverable(args: argparse.Namespace) -> None:
 
         wb, _ = _load_profile()
         from helpers.commands.task_ops import add_deliverable
-        data = {"Title": title, "Status": "Not Started", "% Complete": 0}
+        from helpers.config.loader import default_status
+        data = {"Title": title, "Status": default_status(), "% Complete": 0}
         d = add_deliverable(wb, task_id, data)
         print(f"Deliverable '{title}' (ID: {d.deliverable_id}) added to task '{target_task.title}'.")
 

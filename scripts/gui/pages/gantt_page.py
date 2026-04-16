@@ -20,6 +20,7 @@ from gui.ui_theme import (
     AG_DARK, CATEGORIES, GANTT_COLORS_DARK,
 )
 from helpers.config import load as load_config
+from helpers.config.loader import status_gantt_color
 from helpers.reporting.gantt import GanttRow, prepare_gantt_data
 
 # ── Layout constants ───────────────────────────────────────────────────────────
@@ -400,12 +401,4 @@ class GanttPage(BasePage):
         self._render()
 
     def _bar_color(self, status: str) -> str:
-        palette = self._gantt_colors_dark if self._dark_mode else self._gantt_colors
-        s = status.lower().strip()
-        if s == "completed":
-            return palette.get("completed", "#2E8B57")
-        if s in ("in progress", "on track", "ongoing", "recurring"):
-            return palette.get("in_progress", "#336BBF")
-        if s in ("on hold",):
-            return palette.get("overdue", "#C0392B")
-        return palette.get("not_started", "#B0B0B0")
+        return status_gantt_color(status)

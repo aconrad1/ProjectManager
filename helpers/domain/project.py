@@ -7,6 +7,7 @@ from datetime import date
 
 from helpers.domain.base import Node
 from helpers.domain.task import Task
+from helpers.config.loader import default_priority, default_status
 
 
 @dataclass
@@ -92,12 +93,12 @@ class Project(Node):
             deadline=date.fromisoformat(data["deadline"]) if data.get("deadline") else None,
             start=date.fromisoformat(data["start"]) if data.get("start") else None,
             end=date.fromisoformat(data["end"]) if data.get("end") else None,
-            status=data.get("status", "Not Started"),
+            status=data.get("status", default_status()),
             project_id=data.get("project_id", ""),
             category=data.get("category", ""),
             supervisor=data.get("supervisor", ""),
             site=data.get("site", ""),
-            priority=data.get("priority", 3),
+            priority=data.get("priority", default_priority()),
             notes=data.get("notes", ""),
             date_completed=(
                 date.fromisoformat(data["date_completed"])

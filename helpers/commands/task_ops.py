@@ -23,7 +23,7 @@ from helpers.attachments.notes import delete_notes
 from helpers.attachments.links import delete_link
 from helpers.attachments.service import delete_attachments
 from helpers.domain.rules import should_auto_complete_project, should_reopen_project, reopen_category
-from helpers.config.loader import default_category, default_priority
+from helpers.config.loader import default_category, default_priority, default_status, terminal_statuses, terminal_categories, reopen_status
 
 from helpers.domain.task import Task
 from helpers.domain.project import Project
@@ -121,7 +121,7 @@ def add_project(wb, data: dict) -> Project:
         title=d.get("Title", ""),
         category=d.get("Category", default_category()),
         description=d.get("Description", ""),
-        status=d.get("Status", "Not Started"),
+        status=d.get("Status", default_status()),
         supervisor=d.get("Supervisor", ""),
         site=d.get("Site", ""),
         priority=d.get("Priority", default_priority()),
@@ -149,7 +149,7 @@ def add_task(wb, project_id: str, data: dict, *, date_completed=None) -> Task:
         site=d.get("Site", ""),
         description=d.get("Description", d.get("Project Description", "")),
         commentary=d.get("Status Commentary", ""),
-        status=d.get("Status", "Not Started"),
+        status=d.get("Status", default_status()),
         priority=d.get("Priority", default_priority()),
         date_completed=date_completed,
     )
@@ -168,7 +168,7 @@ def add_deliverable(wb, task_id: str, data: dict) -> Deliverable:
         title=d.get("Title", ""),
         task_id=task_id,
         description=d.get("Description", ""),
-        status=d.get("Status", "Not Started"),
+        status=d.get("Status", default_status()),
         start=d.get("Start Date"),
         end=d.get("End Date"),
         deadline=d.get("Deadline"),
@@ -391,13 +391,15 @@ def _check_project_completion_wb(wb, task_id: str) -> None:
         if projects.get_id(row) == project_id:
             if should_auto_complete_project(statuses):
                 if projects.get_raw(row, "Date Completed") is None:
-                    projects.set(row, "Status", "Completed")
-                    projects.set(row, "Category", "Completed")
+                    _completed_status = next(iter(terminal_statuses()))
+                    _completed_cat = next(iter(terminal_categories()))
+                    projects.set(row, "Status", _completed_status)
+                    projects.set(row, "Category", _completed_cat)
                     projects.set(row, "Date Completed", date.today())
             else:
                 cat = projects.get(row, "Category")
                 if cat and should_reopen_project(cat):
-                    projects.set(row, "Status", "In Progress")
+                    projects.set(row, "Status", reopen_status())
                     projects.set(row, "Category", reopen_category())
                     projects.set(row, "Date Completed", None)
             return

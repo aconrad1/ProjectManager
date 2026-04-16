@@ -13,6 +13,7 @@ import customtkinter as ctk
 from gui.ui_theme import STATUS_OPTIONS, CATEGORIES, PRIORITY_LABELS
 from gui.dialogs.base_dialog import BaseDialog
 from helpers.domain.project import Project
+from helpers.config.loader import default_category, default_status
 
 
 class ProjectDialog(BaseDialog):
@@ -48,7 +49,7 @@ class ProjectDialog(BaseDialog):
 
         # Category
         ctk.CTkLabel(scroll, text="Category", font=("Segoe UI", 12, "bold")).pack(anchor="w", **pad)
-        var_cat = ctk.StringVar(value="Ongoing")
+        var_cat = ctk.StringVar(value=default_category())
         w_cat = ctk.CTkOptionMenu(scroll, variable=var_cat, values=CATEGORIES, width=260)
         w_cat._variable = var_cat
         w_cat.pack(anchor="w", padx=14, pady=(2, 4))
@@ -62,7 +63,7 @@ class ProjectDialog(BaseDialog):
 
         # Status
         ctk.CTkLabel(scroll, text="Status", font=("Segoe UI", 12, "bold")).pack(anchor="w", **pad)
-        var_status = ctk.StringVar(value="Not Started")
+        var_status = ctk.StringVar(value=default_status())
         w_status = ctk.CTkOptionMenu(scroll, variable=var_status, values=STATUS_OPTIONS, width=260)
         w_status._variable = var_status
         w_status.pack(anchor="w", padx=14, pady=(2, 4))

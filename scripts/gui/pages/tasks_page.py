@@ -17,6 +17,7 @@ from gui.ui_theme import (
     PRIORITY_LABELS, STATUS_OPTIONS, CATEGORIES,
     TREEVIEW_TAG_COLORS,
 )
+from helpers.config.loader import valid_categories
 from gui.dialogs.task_dialog import TaskDialog
 from gui.dialogs.task_notes_dialog import TaskNotesDialog
 from gui.dialogs.deliverable_dialog import DeliverableDialog
@@ -258,16 +259,15 @@ class TasksPage(BasePage):
         if not profile:
             self._status_label.configure(text="No profile loaded")
             return
-        weekly = len(profile.tasks_for_category("Weekly"))
-        ongoing = len(profile.tasks_for_category("Ongoing"))
-        completed = len(profile.tasks_for_category("Completed"))
+        parts = []
+        for cat in valid_categories():
+            count = len(profile.tasks_for_category(cat))
+            parts.append(f"{cat}: {count}")
         from helpers.profile.profile import WORKBOOK_FILENAME
         dnd_tag = "" if self._dnd_available else "  |  ⚠ Drag-and-drop unavailable (install tkinterdnd2)"
         text = (
-            f"Weekly: {weekly}  |  "
-            f"Ongoing: {ongoing}  |  "
-            f"Completed: {completed}  |  "
-            f"Workbook: {WORKBOOK_FILENAME}"
+            "  |  ".join(parts)
+            + f"  |  Workbook: {WORKBOOK_FILENAME}"
             f"{dnd_tag}"
         )
         self._status_label.configure(text=text)

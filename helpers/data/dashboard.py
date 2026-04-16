@@ -6,6 +6,8 @@ from collections import Counter
 from datetime import date, timedelta
 from typing import TYPE_CHECKING
 
+from helpers.config.loader import active_categories, terminal_categories, valid_categories
+
 if TYPE_CHECKING:
     from helpers.domain.profile import Profile
     from helpers.domain.task import Task
@@ -13,16 +15,20 @@ if TYPE_CHECKING:
 
 def compute_stat_cards(profile: Profile) -> list[tuple[str, int]]:
     """Return (label, count) entries for dashboard stat cards."""
-    weekly = profile.tasks_for_category("Weekly")
-    ongoing = profile.tasks_for_category("Ongoing")
-    completed = profile.tasks_for_category("Completed")
-    active = weekly + ongoing
-    return [
-        ("Weekly Tasks", len(weekly)),
-        ("Ongoing Projects", len(ongoing)),
-        ("Completed", len(completed)),
-        ("Total Active", len(active)),
-    ]
+    _active = active_categories()
+    _terminal = terminal_categories()
+    active_tasks: list = []
+    terminal_tasks: list = []
+    cards: list[tuple[str, int]] = []
+    for cat in valid_categories():
+        tasks = profile.tasks_for_category(cat)
+        cards.append((f"{cat} Tasks" if cat not in _terminal else cat, len(tasks)))
+        if cat in _active:
+            active_tasks.extend(tasks)
+        elif cat in _terminal:
+            terminal_tasks.extend(tasks)
+    cards.append(("Total Active", len(active_tasks)))
+    return cards
 
 
 def compute_priority_breakdown(tasks: list[Task]) -> dict[int, int]:

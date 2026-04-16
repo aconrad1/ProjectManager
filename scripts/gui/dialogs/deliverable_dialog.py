@@ -11,6 +11,7 @@ import customtkinter as ctk
 from gui.ui_theme import STATUS_OPTIONS
 from gui.dialogs.base_dialog import BaseDialog
 from helpers.domain.deliverable import Deliverable
+from helpers.config.loader import default_status
 
 
 class DeliverableDialog(BaseDialog):
@@ -55,7 +56,7 @@ class DeliverableDialog(BaseDialog):
         self.entries["Description"] = w_desc
 
         ctk.CTkLabel(scroll, text="Status", font=("Segoe UI", 12, "bold")).pack(anchor="w", **pad)
-        var_status = ctk.StringVar(value="Not Started")
+        var_status = ctk.StringVar(value=default_status())
         w_status = ctk.CTkOptionMenu(scroll, variable=var_status, values=STATUS_OPTIONS, width=260)
         w_status._variable = var_status
         w_status.pack(anchor="w", padx=14, pady=(2, 4))

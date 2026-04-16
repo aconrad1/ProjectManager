@@ -10,6 +10,7 @@ import customtkinter as ctk
 
 from gui.base_page import BasePage
 from gui.ui_theme import AG_DARK, AG_MID, AG_WASH, PRIORITY_COLORS, SITE_PALETTE
+from helpers.config.loader import active_categories, terminal_categories, priority_labels as _load_priority_labels, priority_range
 from helpers.data.dashboard import (
     compute_priority_breakdown,
     compute_recently_completed,
@@ -71,8 +72,14 @@ class DashboardPage(BasePage):
             return
 
         stat_cards = compute_stat_cards(profile)
-        all_active = profile.tasks_for_category("Weekly") + profile.tasks_for_category("Ongoing")
-        completed = profile.tasks_for_category("Completed")
+        _active_cats = active_categories()
+        _terminal_cats = terminal_categories()
+        all_active: list = []
+        completed: list = []
+        for cat in _active_cats:
+            all_active.extend(profile.tasks_for_category(cat))
+        for cat in _terminal_cats:
+            completed.extend(profile.tasks_for_category(cat))
         priority_breakdown = compute_priority_breakdown(all_active)
         recent_completed = compute_recently_completed(completed)
         site_distribution = compute_site_distribution(all_active)
@@ -115,9 +122,10 @@ class DashboardPage(BasePage):
                      font=("Segoe UI", 14, "bold"), text_color=AG_DARK).pack(anchor="w", pady=(4, 6))
 
         total_active = active_count or 1
-        prio_names = {1: "P1 Urgent", 2: "P2 High", 3: "P3 Medium", 4: "P4 Low", 5: "P5 Background"}
+        prio_names = _load_priority_labels()
+        lo, hi = priority_range()
 
-        for p in range(1, 6):
+        for p in range(lo, hi + 1):
             count = prio_counts.get(p, 0)
             pct = count / total_active
             row = ctk.CTkFrame(self._dash_priority_frame, fg_color="transparent")

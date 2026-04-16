@@ -35,7 +35,7 @@ from helpers.validation import (
     ValidationError,
 )
 from helpers.domain.rules import should_auto_complete_project, should_reopen_project, reopen_category
-from helpers.config.loader import default_category, default_priority
+from helpers.config.loader import default_category, default_priority, default_status, terminal_statuses, terminal_categories, reopen_status
 
 
 class DomainService:
@@ -110,7 +110,7 @@ class DomainService:
             title=data.get("title", ""),
             category=data.get("category", default_category()),
             description=data.get("description", ""),
-            status=data.get("status", "Not Started"),
+            status=data.get("status", default_status()),
             supervisor=data.get("supervisor", ""),
             site=data.get("site", ""),
             priority=data.get("priority", default_priority()),
@@ -178,7 +178,7 @@ class DomainService:
             site=data.get("site", ""),
             description=data.get("description", ""),
             commentary=data.get("commentary", ""),
-            status=data.get("status", "Not Started"),
+            status=data.get("status", default_status()),
             priority=data.get("priority", default_priority()),
             start=data.get("start"),
             end=data.get("end"),
@@ -200,8 +200,8 @@ class DomainService:
 
         self._validate_or_raise(validate_task, data, partial=True)
         _apply_attrs(task, data)
-        # Stamp date_completed when status changed to Completed via edit
-        if data.get("status") == "Completed" and not task.date_completed:
+        # Stamp date_completed when status changed to terminal via edit
+        if data.get("status") in terminal_statuses() and not task.date_completed:
             task.date_completed = date.today()
         # Auto-complete parent project if all sibling tasks are now done
         self._check_project_completion(task)
@@ -261,7 +261,7 @@ class DomainService:
             task_id=task_id,
             title=data.get("title", ""),
             description=data.get("description", ""),
-            status=data.get("status", "Not Started"),
+            status=data.get("status", default_status()),
             start=data.get("start"),
             end=data.get("end"),
             deadline=data.get("deadline"),
@@ -308,7 +308,7 @@ class DomainService:
             return False
         node.status = status
         # Stamp date_completed when completing a task or project
-        if status == "Completed" and not getattr(node, "date_completed", True):
+        if status in terminal_statuses() and not getattr(node, "date_completed", True):
             node.date_completed = date.today()
         # Auto-complete parent project if all sibling tasks are now done
         if isinstance(node, Task):
@@ -346,12 +346,12 @@ class DomainService:
         statuses = [t.status for t in parent.tasks]
         if should_auto_complete_project(statuses):
             if not parent.date_completed:
-                parent.status = "Completed"
-                parent.category = "Completed"
+                parent.status = next(iter(terminal_statuses()))
+                parent.category = next(iter(terminal_categories()))
                 parent.date_completed = date.today()
         elif should_reopen_project(parent.category):
             # A task was reopened — revert the project
-            parent.status = "In Progress"
+            parent.status = reopen_status()
             parent.category = reopen_category()
             parent.date_completed = None
 
