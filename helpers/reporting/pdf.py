@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import os
 import subprocess
 import tempfile
@@ -10,6 +11,8 @@ from pathlib import Path
 import markdown as md_lib
 
 from helpers.reporting.markdown import CSS
+
+_log = logging.getLogger(__name__)
 
 
 def _find_chrome() -> str:
@@ -80,6 +83,15 @@ def generate_pdf(md_text: str, dest: Path) -> Path:
             capture_output=True,
             timeout=30,
         )
+    except subprocess.CalledProcessError as e:
+        stderr = e.stderr.decode(errors="replace") if e.stderr else "(no output)"
+        _log.error("PDF generation failed (exit code %d): %s", e.returncode, stderr)
+        raise RuntimeError(
+            f"PDF generation failed (Chrome exit code {e.returncode}).\n{stderr}"
+        ) from e
+    except subprocess.TimeoutExpired:
+        _log.error("PDF generation timed out after 30 seconds")
+        raise RuntimeError("PDF generation timed out after 30 seconds.")
     finally:
         Path(tmp_html).unlink(missing_ok=True)
 

@@ -47,6 +47,7 @@ class GanttPage(BasePage):
         # Row-data index used by the right-click handler
         self._rows: list[GanttRow] = []
         self._row_y_ranges: list[tuple[int, int]] = []  # (y_top, y_bottom) per row
+        self._render_after_id: str | None = None  # debounce handle
 
         # ── Header bar ─────────────────────────────────────────────────────
         top = ctk.CTkFrame(self, fg_color="transparent")
@@ -94,10 +95,16 @@ class GanttPage(BasePage):
         vsb.grid(row=0, column=1, sticky="ns")
         hsb.grid(row=1, column=0, sticky="ew")
 
-        self._canvas.bind("<Configure>", lambda _: self._render())
+        self._canvas.bind("<Configure>", self._on_configure)
         self._canvas.bind("<Button-3>", self._on_right_click)
 
     # ── public ─────────────────────────────────────────────────────────────
+    def _on_configure(self, event=None) -> None:
+        """Debounced handler for canvas resize — delays render by 100ms."""
+        if self._render_after_id is not None:
+            self.after_cancel(self._render_after_id)
+        self._render_after_id = self.after(100, self._render)
+
     def refresh(self) -> None:
         self._render()
 

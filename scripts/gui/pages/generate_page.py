@@ -23,7 +23,7 @@ class GeneratePage(BasePage):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(2, weight=1)
 
-        self._generating = False
+        self._gen_event = threading.Event()  # set = generation in progress
 
         ctk.CTkLabel(self, text="Report Generation", font=("Segoe UI", 18, "bold"),
                      text_color=AG_DARK).grid(row=0, column=0, sticky="w", padx=20, pady=(16, 10))
@@ -80,9 +80,9 @@ class GeneratePage(BasePage):
 
     # ── Generate ───────────────────────────────────────────────────────────
     def _generate_reports(self):
-        if self._generating:
+        if self._gen_event.is_set():
             return
-        self._generating = True
+        self._gen_event.set()
         self._log_clear()
         self.log_write("Starting report generation…\n")
 
@@ -90,20 +90,29 @@ class GeneratePage(BasePage):
             try:
                 from helpers.commands.report_pipeline import generate_reports
                 result = generate_reports(log=self._log_after, today=date.today())
-                self.app.wb = result["wb"]
-                if "profile" in result:
-                    self.app.profile = result["profile"]
-                tasks_page = self.app.pages.get("tasks")
-                if tasks_page:
-                    self.after(0, tasks_page.refresh)
-                self.after(0, lambda: messagebox.showinfo("Complete", "Reports generated successfully!"))
+                # Marshal ALL state updates to the main thread
+                self.after(0, lambda: self._apply_generation_result(result))
             except Exception as e:
                 self._log_after(f"\nERROR: {e}")
-                self.after(0, lambda: messagebox.showerror("Generation Failed", str(e)))
-            finally:
-                self._generating = False
+                self.after(0, lambda: self._on_generation_failed(str(e)))
 
         threading.Thread(target=run, daemon=True).start()
+
+    def _apply_generation_result(self, result: dict) -> None:
+        """Apply generation results on the main thread."""
+        self.app.wb = result["wb"]
+        if "profile" in result:
+            self.app.profile = result["profile"]
+        tasks_page = self.app.pages.get("tasks")
+        if tasks_page:
+            tasks_page.refresh()
+        self._gen_event.clear()
+        messagebox.showinfo("Complete", "Reports generated successfully!")
+
+    def _on_generation_failed(self, error_msg: str) -> None:
+        """Handle generation failure on the main thread."""
+        self._gen_event.clear()
+        messagebox.showerror("Generation Failed", error_msg)
 
     # ── Save & Close ───────────────────────────────────────────────────────
     def _save_and_close(self):

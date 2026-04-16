@@ -9,6 +9,7 @@ Pages call ``app.service.<method>(...)`` — never touch the workbook directly.
 
 from __future__ import annotations
 
+import logging
 from datetime import date
 from typing import Callable
 
@@ -36,6 +37,9 @@ from helpers.validation import (
 )
 from helpers.domain.rules import should_auto_complete_project, should_reopen_project, reopen_category
 from helpers.config.loader import default_category, default_priority, default_status, terminal_statuses, terminal_categories, reopen_status
+
+
+_log = logging.getLogger(__name__)
 
 
 class DomainService:
@@ -377,9 +381,15 @@ class DomainService:
     @staticmethod
     def _cleanup_task_files(task_id: str) -> None:
         """Remove notes, links, and attachments associated with a task ID."""
-        delete_notes(task_id)
-        delete_link(task_id)
-        delete_attachments(task_id)
+        for label, fn in [
+            ("notes", delete_notes),
+            ("link", delete_link),
+            ("attachments", delete_attachments),
+        ]:
+            try:
+                fn(task_id)
+            except OSError as e:
+                _log.warning("Failed to clean up %s for %s: %s", label, task_id, e)
 
     @staticmethod
     def _validate_or_raise(validator, data: dict, *, partial: bool = False) -> None:

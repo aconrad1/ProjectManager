@@ -12,12 +12,16 @@ Usage:
 """
 from __future__ import annotations
 
+import logging
 import sys
+import time
 from pathlib import Path
 from tkinter import messagebox
 from typing import Type
 
 import customtkinter as ctk
+
+_log = logging.getLogger(__name__)
 
 # ── Ensure local imports work regardless of launch directory ───────────────────
 _SCRIPT_DIR = Path(__file__).resolve().parent.parent   # scripts/
@@ -84,6 +88,8 @@ class App(ctk.CTk):
         self._active_page_key: str = "tasks"
         self._autosave_pending: bool = False
         self._autosave_id: str | None = None
+        self._autosave_fail_count: int = 0
+        self._last_edit_check: float = 0.0
 
         # ── Layout: sidebar + content container ────────────────────────────
         self.grid_columnconfigure(1, weight=1)
@@ -330,15 +336,44 @@ class App(ctk.CTk):
         # Schedule autosave after 2 seconds of inactivity
         self._autosave_id = self.after(2000, self._autosave)
 
+    _MAX_AUTOSAVE_FAILURES: int = 3
+
     def _autosave(self) -> None:
         """Debounced autosave — writes .xlsx to disk."""
         self._autosave_id = None
-        if self.wb:
-            try:
-                self.wb.save(str(workbook_path()))
-                self._update_save_indicator("Autosaved")
-            except Exception:
-                self._update_save_indicator("Autosave failed")
+        if not self.wb:
+            return
+        try:
+            self.wb.save(str(workbook_path()))
+            self._autosave_fail_count = 0
+            self._update_save_indicator("Autosaved")
+        except PermissionError:
+            self._autosave_fail_count += 1
+            _log.warning("Autosave failed (attempt %d): file may be locked by another program",
+                         self._autosave_fail_count)
+            self._update_save_indicator("Autosave failed — file locked")
+            self._check_autosave_failures()
+        except OSError as e:
+            self._autosave_fail_count += 1
+            _log.warning("Autosave failed (attempt %d): %s", self._autosave_fail_count, e)
+            self._update_save_indicator("Autosave failed")
+            self._check_autosave_failures()
+
+    def _check_autosave_failures(self) -> None:
+        """Show a persistent warning if autosave has failed too many times."""
+        if self._autosave_fail_count >= self._MAX_AUTOSAVE_FAILURES:
+            messagebox.showwarning(
+                "Autosave Problem",
+                f"Autosave has failed {self._autosave_fail_count} times in a row.\n\n"
+                "Possible causes:\n"
+                "• The workbook is open in Excel\n"
+                "• The file is locked by OneDrive sync\n"
+                "• Disk is full or read-only\n\n"
+                "Your changes are preserved in memory. Try saving manually\n"
+                "(Ctrl+S) or close other programs using the file.",
+                parent=self,
+            )
+            self._autosave_fail_count = 0  # Reset to avoid repeated popups
 
     def _update_save_indicator(self, text: str) -> None:
         """Update the status bar save indicator text."""
@@ -393,11 +428,17 @@ class App(ctk.CTk):
     # ═══════════════════════════════════════════════════════════════════════
     #  MID-SESSION EXTERNAL EDIT DETECTION
     # ═══════════════════════════════════════════════════════════════════════
+    _EDIT_CHECK_INTERVAL: float = 5.0  # seconds between external edit checks
+
     def _on_focus_in(self, event=None) -> None:
         """Called when the window regains focus — check for external edits."""
         # Only fire for the root window, not every child widget
         if event and event.widget is not self:
             return
+        now = time.monotonic()
+        if now - self._last_edit_check < self._EDIT_CHECK_INTERVAL:
+            return  # Skip — checked recently
+        self._last_edit_check = now
         self._check_external_edits()
 
     def _check_external_edits(self) -> None:
