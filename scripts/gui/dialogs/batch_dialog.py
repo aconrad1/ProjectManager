@@ -125,6 +125,7 @@ class BatchOperationDialog(ctk.CTkToplevel):
 
     def _apply(self) -> None:
         changes = 0
+        errors: list[str] = []
 
         # Status
         status = self._status_var.get()
@@ -133,8 +134,8 @@ class BatchOperationDialog(ctk.CTkToplevel):
                 try:
                     self._service.set_status(tid, status)
                     changes += 1
-                except Exception:
-                    pass
+                except (ValueError, KeyError, AttributeError) as e:
+                    errors.append(f"{tid}: {e}")
 
         # Priority
         prio_label = self._prio_var.get()
@@ -149,8 +150,8 @@ class BatchOperationDialog(ctk.CTkToplevel):
                     try:
                         self._service.set_priority(tid, prio_int)
                         changes += 1
-                    except Exception:
-                        pass
+                    except (ValueError, KeyError, AttributeError) as e:
+                        errors.append(f"{tid}: {e}")
 
         # Date shifting
         shift_days_str = self._shift_days_entry.get().strip()
@@ -168,11 +169,12 @@ class BatchOperationDialog(ctk.CTkToplevel):
                 shift_deadline = self._shift_deadline_var.get()
 
                 if shift_start or shift_end or shift_deadline:
+                    profile = self._service.profile
                     for tid in self._task_ids:
                         try:
-                            profile = self._service._profile
                             task = profile.find_task_global(tid)
                             if not task:
+                                errors.append(f"{tid}: not found")
                                 continue
                             edits: dict = {}
                             if shift_start and isinstance(task.start, date):
@@ -184,8 +186,18 @@ class BatchOperationDialog(ctk.CTkToplevel):
                             if edits:
                                 self._service.edit_task(tid, edits)
                                 changes += 1
-                        except Exception:
-                            pass
+                        except (ValueError, KeyError, AttributeError) as e:
+                            errors.append(f"{tid}: {e}")
+
+        if errors:
+            error_summary = "\n".join(errors[:10])
+            if len(errors) > 10:
+                error_summary += f"\n... and {len(errors) - 10} more"
+            messagebox.showwarning(
+                "Batch Edit Warnings",
+                f"Updated {changes}/{len(self._task_ids)} items.\n\nFailed:\n{error_summary}",
+                parent=self,
+            )
 
         if changes:
             if self._on_complete:

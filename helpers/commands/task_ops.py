@@ -23,6 +23,7 @@ from helpers.data.completions import _is_completed
 from helpers.attachments.notes import delete_notes
 from helpers.attachments.links import delete_link
 from helpers.attachments.service import delete_attachments
+from helpers.domain.rules import should_auto_complete_project, should_reopen_project
 
 from helpers.domain.task import Task
 from helpers.domain.project import Project
@@ -384,19 +385,15 @@ def _check_project_completion_wb(wb, task_id: str) -> None:
     if not project_id:
         return
 
-    # Check if all tasks under this project are completed
-    all_completed = True
-    has_tasks = False
+    # Collect all task statuses for this project
+    statuses: list[str] = []
     for r in range(2, task_ws.max_row + 1):
         pid = clean(task_ws.cell(row=r, column=task_proj_col).value)
         if pid == project_id:
-            has_tasks = True
             st = clean(task_ws.cell(row=r, column=task_status_col).value)
-            if not _is_completed(st):
-                all_completed = False
-                break
+            statuses.append(st)
 
-    if not has_tasks:
+    if not statuses:
         return
 
     proj_ws = wb[SHEET_PROJECTS]
@@ -406,14 +403,14 @@ def _check_project_completion_wb(wb, task_id: str) -> None:
 
     for r in range(2, proj_ws.max_row + 1):
         if clean(proj_ws.cell(row=r, column=1).value) == project_id:
-            if all_completed:
+            if should_auto_complete_project(statuses):
                 if proj_ws.cell(row=r, column=proj_date_col).value is None:
                     proj_ws.cell(row=r, column=proj_status_col, value="Completed")
                     proj_ws.cell(row=r, column=proj_cat_col, value="Completed")
                     proj_ws.cell(row=r, column=proj_date_col, value=date.today())
             else:
                 cat = clean(proj_ws.cell(row=r, column=proj_cat_col).value)
-                if cat and cat.lower() == "completed":
+                if cat and should_reopen_project(cat):
                     proj_ws.cell(row=r, column=proj_status_col, value="In Progress")
                     proj_ws.cell(row=r, column=proj_cat_col, value="Ongoing")
                     proj_ws.cell(row=r, column=proj_date_col, value=None)

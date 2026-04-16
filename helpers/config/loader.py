@@ -71,7 +71,7 @@ def load_deadline_windows(
     raw: Any
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
+    except (json.JSONDecodeError, OSError):
         if log:
             log("   ⚠ Config 'deadlines.json' is invalid JSON. Using defaults and repairing the file.")
         if auto_repair:
