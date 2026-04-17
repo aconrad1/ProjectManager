@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import shutil
 import sys
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -19,8 +20,29 @@ from helpers.io.paths import (
 )
 
 
+@dataclass(frozen=True)
+class ProfileConfig:
+    """Immutable snapshot of the active profile configuration."""
+    name: str = ""
+    role: str = ""
+    company: str = ""
+    email: str = ""
+    phone: str = ""
+    recipient_name: str = ""
+    recipient_email: str = ""
+    workbook_filename: str = ""
+    daily_hours_budget: float = 8.0
+    weekly_hours_budget: float = 40.0
+
+
+class ProfileNotFoundError(Exception):
+    """Raised when user_profile.yaml is missing or invalid."""
+
+
 _profiles: list[dict] = []
 _active_index: int = 0
+_active_config: ProfileConfig = ProfileConfig()
+_initialized: bool = False
 
 
 # ── Internal loaders ──────────────────────────────────────────────────────────
@@ -35,12 +57,10 @@ def _load_profiles() -> tuple[list[dict], int]:
             PROFILES_DIR.mkdir(parents=True, exist_ok=True)
             shutil.move(str(legacy), str(PROFILE_PATH))
         else:
-            print(
-                f"ERROR: user_profile.yaml not found at {PROFILE_PATH}\n"
-                "       Copy the template and fill in your details before running.",
-                file=sys.stderr,
+            raise ProfileNotFoundError(
+                f"user_profile.yaml not found at {PROFILE_PATH}. "
+                "Copy the template and fill in your details before running."
             )
-            sys.exit(1)
 
     with open(PROFILE_PATH, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
@@ -52,13 +72,15 @@ def _load_profiles() -> tuple[list[dict], int]:
         profiles = [data]
         active = 0
     else:
-        print("ERROR: user_profile.yaml is missing required fields.", file=sys.stderr)
-        sys.exit(1)
+        raise ProfileNotFoundError(
+            "user_profile.yaml is missing required fields."
+        )
 
     active = max(0, min(active, len(profiles) - 1))
     if not profiles:
-        print("ERROR: No profiles defined in user_profile.yaml.", file=sys.stderr)
-        sys.exit(1)
+        raise ProfileNotFoundError(
+            "No profiles defined in user_profile.yaml."
+        )
 
     if not profiles[active].get("name"):
         print(
@@ -71,6 +93,8 @@ def _load_profiles() -> tuple[list[dict], int]:
 
 
 # ── Module-level profile data (set by _apply_profile) ─────────────────────────
+# DEPRECATED: Use get_active_config() instead.
+# These are kept for backward compatibility and synced from _active_config.
 
 USER_NAME: str = ""
 USER_ROLE: str = ""
@@ -84,42 +108,86 @@ DAILY_HOURS_BUDGET: float = 8.0
 WEEKLY_HOURS_BUDGET: float = 40.0
 
 
-def _apply_profile(index: int) -> None:
+def _sync_legacy_globals() -> None:
+    """Keep legacy globals in sync for backward compatibility.
+    
+    DEPRECATED: Consumers should use get_active_config() instead.
+    """
     global USER_NAME, USER_ROLE, USER_COMPANY, USER_EMAIL, USER_PHONE
     global RECIPIENT_NAME, RECIPIENT_EMAIL, WORKBOOK_FILENAME
     global DAILY_HOURS_BUDGET, WEEKLY_HOURS_BUDGET
-    global _active_index
+    
+    cfg = _active_config
+    USER_NAME = cfg.name
+    USER_ROLE = cfg.role
+    USER_COMPANY = cfg.company
+    USER_EMAIL = cfg.email
+    USER_PHONE = cfg.phone
+    RECIPIENT_NAME = cfg.recipient_name
+    RECIPIENT_EMAIL = cfg.recipient_email
+    WORKBOOK_FILENAME = cfg.workbook_filename
+    DAILY_HOURS_BUDGET = cfg.daily_hours_budget
+    WEEKLY_HOURS_BUDGET = cfg.weekly_hours_budget
 
+
+def _apply_profile(index: int) -> None:
+    global _active_index, _active_config
+    
     _active_index = index
     p = _profiles[index]
-    USER_NAME = p.get("name", "")
-    USER_ROLE = p.get("role", "")
-    USER_COMPANY = p.get("company", "")
-    USER_EMAIL = p.get("email", "")
-    USER_PHONE = str(p.get("phone", ""))
-    RECIPIENT_NAME = p.get("recipient_name", "")
-    RECIPIENT_EMAIL = p.get("recipient_email", "")
-    WORKBOOK_FILENAME = p.get("workbook_filename", "")
-    DAILY_HOURS_BUDGET = float(p.get("daily_hours_budget", 8.0))
-    WEEKLY_HOURS_BUDGET = float(p.get("weekly_hours_budget", 40.0))
-
-
-# ── Initialise on import ──────────────────────────────────────────────────────
-_profiles, _active_index = _load_profiles()
-_apply_profile(_active_index)
+    _active_config = ProfileConfig(
+        name=p.get("name", ""),
+        role=p.get("role", ""),
+        company=p.get("company", ""),
+        email=p.get("email", ""),
+        phone=str(p.get("phone", "")),
+        recipient_name=p.get("recipient_name", ""),
+        recipient_email=p.get("recipient_email", ""),
+        workbook_filename=p.get("workbook_filename", ""),
+        daily_hours_budget=float(p.get("daily_hours_budget", 8.0)),
+        weekly_hours_budget=float(p.get("weekly_hours_budget", 40.0)),
+    )
+    # Backward compatibility: update legacy globals
+    _sync_legacy_globals()
 
 
 # ── Public API ─────────────────────────────────────────────────────────────────
 
+def ensure_initialized() -> None:
+    """Load profiles from YAML if not already done.
+
+    Call this once from the app entry point (cli.py or gui.py).
+    Safe to call multiple times — subsequent calls are no-ops.
+    """
+    global _profiles, _active_index, _initialized
+    if _initialized:
+        return
+    _profiles, _active_index = _load_profiles()
+    _apply_profile(_active_index)
+    _initialized = True
+
+
+def get_active_config() -> ProfileConfig:
+    """Return the current profile configuration snapshot.
+
+    Returns a default (empty) ProfileConfig if called before initialization.
+    Prefer this over importing module-level constants (USER_NAME, USER_COMPANY, etc.).
+    """
+    return _active_config
+
+
 def get_profiles() -> list[dict]:
+    ensure_initialized()
     return list(_profiles)
 
 
 def get_active_index() -> int:
+    ensure_initialized()
     return _active_index
 
 
 def get_active_profile() -> dict:
+    ensure_initialized()
     return dict(_profiles[_active_index])
 
 
@@ -133,6 +201,7 @@ def _save_profiles() -> None:
 
 
 def switch_profile(index: int) -> None:
+    ensure_initialized()
     if index < 0 or index >= len(_profiles):
         raise IndexError(f"Profile index {index} out of range (0–{len(_profiles) - 1})")
     _apply_profile(index)
@@ -150,8 +219,10 @@ def save_profile(index: int, data: dict) -> None:
 
 def file_prefix(name: str | None = None) -> str:
     """Return a filesystem-safe version of the user's name for file naming."""
-    n = name or USER_NAME
-    return n.replace(" ", "_")
+    if name is None:
+        cfg = get_active_config()
+        name = cfg.name
+    return name.replace(" ", "_")
 
 
 # ── Profile initialisation ────────────────────────────────────────────────────
@@ -281,11 +352,13 @@ def reload() -> None:
     every module referencing the module-level constants (``USER_NAME``,
     ``USER_COMPANY``, etc.) sees the updated values without restarting.
     """
-    global _profiles, _active_index
+    global _profiles, _active_index, _initialized
     _profiles, _active_index = _load_profiles()
     _apply_profile(_active_index)
+    _initialized = True
 
 
 def ensure_profile_dirs() -> None:
     """Ensure the active profile's folder tree exists (idempotent)."""
-    scaffold_profile(USER_COMPANY, WORKBOOK_FILENAME)
+    cfg = get_active_config()
+    scaffold_profile(cfg.company, cfg.workbook_filename)

@@ -17,9 +17,11 @@ import customtkinter as ctk
 
 from gui.base_page import BasePage
 from gui.ui_theme import (
-    AG_DARK, AG_MID, AG_WASH, CATEGORIES, PRIORITY_LABELS,
+    AG_DARK, CATEGORIES, GANTT_COLORS_DARK,
 )
 from helpers.config import load as load_config
+from helpers.config.loader import status_gantt_color
+from helpers.reporting.gantt import GanttRow, prepare_gantt_data
 
 # ── Layout constants ───────────────────────────────────────────────────────────
 ROW_HEIGHT = 26
@@ -43,8 +45,9 @@ class GanttPage(BasePage):
         self._dark_mode = False
 
         # Row-data index used by the right-click handler
-        self._rows: list[dict] = []
+        self._rows: list[GanttRow] = []
         self._row_y_ranges: list[tuple[int, int]] = []  # (y_top, y_bottom) per row
+        self._render_after_id: str | None = None  # debounce handle
 
         # ── Header bar ─────────────────────────────────────────────────────
         top = ctk.CTkFrame(self, fg_color="transparent")
@@ -92,10 +95,16 @@ class GanttPage(BasePage):
         vsb.grid(row=0, column=1, sticky="ns")
         hsb.grid(row=1, column=0, sticky="ew")
 
-        self._canvas.bind("<Configure>", lambda _: self._render())
+        self._canvas.bind("<Configure>", self._on_configure)
         self._canvas.bind("<Button-3>", self._on_right_click)
 
     # ── public ─────────────────────────────────────────────────────────────
+    def _on_configure(self, event=None) -> None:
+        """Debounced handler for canvas resize — delays render by 100ms."""
+        if self._render_after_id is not None:
+            self.after_cancel(self._render_after_id)
+        self._render_after_id = self.after(100, self._render)
+
     def refresh(self) -> None:
         self._render()
 
@@ -112,105 +121,31 @@ class GanttPage(BasePage):
         if not profile:
             c.create_text(200, 60, text="No profile loaded", anchor="w",
                           font=("Segoe UI", 12),
-                          fill=self._dk("text_dim", "#A0A0B0") if dark else "gray")
+                          fill=self._dk("text_dim", GANTT_COLORS_DARK.get("text_dim", "#A0A0B0")) if dark else "gray")
             return
 
         cat_filter = self._filter_var.get()
         day_w = max(4, self._day_width_var.get())
 
-        # Build row list: project headers + task rows + deliverable sub-rows
-        rows: list[dict] = []
-        unscheduled_rows: list[dict] = []
+        data = prepare_gantt_data(profile.projects, cat_filter)
+        rows = data.rows
 
-        for project in profile.projects:
-            if cat_filter != "All" and project.category != cat_filter:
-                continue
-
-            dated_tasks = [t for t in project.tasks if t.start]
-            undated_tasks = [t for t in project.tasks if not t.start]
-
-            if dated_tasks:
-                rows.append({
-                    "type": "project",
-                    "label": project.title,
-                    "category": project.category,
-                })
-                for task in dated_tasks:
-                    rows.append({
-                        "type": "task",
-                        "label": task.title,
-                        "item_id": task.id,
-                        "start": task.start,
-                        "end": task.end or task.start,
-                        "deadline": task.deadline,
-                        "status": task.status,
-                        "priority": task.priority,
-                    })
-                    for deliv in task.deliverables:
-                        if deliv.start:
-                            rows.append({
-                                "type": "deliverable",
-                                "label": deliv.title,
-                                "item_id": deliv.id,
-                                "start": deliv.start,
-                                "end": deliv.end or deliv.start,
-                                "status": deliv.status,
-                                "pct": deliv.percent_complete,
-                            })
-
-            # Collect undated tasks for the bottom section
-            for task in undated_tasks:
-                unscheduled_rows.append({
-                    "type": "task",
-                    "label": task.title,
-                    "item_id": task.id,
-                    "status": task.status,
-                    "priority": task.priority,
-                })
-                for deliv in task.deliverables:
-                    unscheduled_rows.append({
-                        "type": "deliverable",
-                        "label": deliv.title,
-                        "item_id": deliv.id,
-                        "status": deliv.status,
-                        "pct": getattr(deliv, "percent_complete", 0),
-                    })
-
-        if not rows and not unscheduled_rows:
+        if not rows:
             c.create_text(200, 60, text="No tasks found.",
                           anchor="w", font=("Segoe UI", 12),
-                          fill=self._dk("text_dim", "#A0A0B0") if dark else "gray")
+                          fill=self._dk("text_dim", GANTT_COLORS_DARK.get("text_dim", "#A0A0B0")) if dark else "gray")
             return
 
-        # Compute date range from dated items
-        all_dates: list[date] = []
-        for r in rows:
-            if "start" in r:
-                all_dates.append(r["start"])
-                all_dates.append(r["end"])
-                if r.get("deadline"):
-                    all_dates.append(r["deadline"])
-
-        if all_dates:
-            range_start = min(all_dates) - timedelta(days=3)
-            range_end = max(all_dates) + timedelta(days=10)
-        else:
-            range_start = date.today() - timedelta(days=3)
-            range_end = date.today() + timedelta(days=30)
-
-        total_days = (range_end - range_start).days + 1
-
-        # Add section header + unscheduled rows
-        if unscheduled_rows:
-            rows.append({"type": "section", "label": "No Scheduled Start"})
-            rows.extend(unscheduled_rows)
+        range_start = data.range_start
+        range_end = data.range_end
+        total_days = data.total_days
 
         self._rows = rows
 
         # Compute total height
         total_h = HEADER_HEIGHT
         for r in rows:
-            total_h += SUBROW_HEIGHT if r["type"] == "deliverable" else ROW_HEIGHT
+            total_h += SUBROW_HEIGHT if r.type == "deliverable" else ROW_HEIGHT
 
         content_w = LABEL_WIDTH + total_days * day_w + 20
         c.configure(scrollregion=(0, 0, content_w, total_h + 20))
@@ -245,7 +180,7 @@ class GanttPage(BasePage):
                                   text=dt.strftime("%d"), anchor="nw",
                                   font=("Segoe UI", 7), fill="white")
                     # Vertical grid line
-                    grid_color = self._dk("grid_line", "#333355") if dark else "#e8e8e8"
+                    grid_color = self._dk("grid_line", GANTT_COLORS_DARK.get("grid_line", "#333355")) if dark else "#e8e8e8"
                     c.create_line(x, HEADER_HEIGHT, x, total_h,
                                   fill=grid_color, width=1)
 
@@ -253,14 +188,14 @@ class GanttPage(BasePage):
         today = date.today()
         if range_start <= today <= range_end:
             tx = LABEL_WIDTH + (today - range_start).days * day_w
-            today_color = self._dk("today_line", "#FF6B6B") if dark else "#e74c3c"
+            today_color = self._dk("today_line", GANTT_COLORS_DARK.get("today_line", "#FF6B6B")) if dark else "#e74c3c"
             c.create_line(tx, HEADER_HEIGHT, tx, total_h,
                           fill=today_color, width=2, dash=(4, 2))
 
         # ── Rows ───────────────────────────────────────────────────────────
         y = HEADER_HEIGHT
         for i, row in enumerate(rows):
-            rtype = row["type"]
+            rtype = row.type
             rh = SUBROW_HEIGHT if rtype == "deliverable" else ROW_HEIGHT
             y_top = y
             y_mid = y + rh // 2
@@ -280,7 +215,7 @@ class GanttPage(BasePage):
                 c.create_rectangle(0, y, content_w, y + rh, fill=bg, outline="")
 
             # Label
-            label = row["label"]
+            label = row.label
             if rtype in ("project", "section"):
                 font = ("Segoe UI", 9, "bold")
                 indent = 6
@@ -301,22 +236,22 @@ class GanttPage(BasePage):
             c.create_text(indent, y_mid, text=disp, anchor="w", font=font, fill=fill_color)
 
             # Bar (for tasks and deliverables with dates)
-            if rtype in ("task", "deliverable") and "start" in row:
-                bar_start = (row["start"] - range_start).days
-                bar_end = (row["end"] - range_start).days
+            if rtype in ("task", "deliverable") and row.start and row.end:
+                bar_start = (row.start - range_start).days
+                bar_end = (row.end - range_start).days
                 bar_end = max(bar_end, bar_start + 1)
 
                 x1 = LABEL_WIDTH + bar_start * day_w
                 x2 = LABEL_WIDTH + bar_end * day_w
                 bar_h = rh - 8 if rtype == "task" else rh - 6
 
-                fill = self._bar_color(row["status"])
+                fill = self._bar_color(row.status)
                 c.create_rectangle(x1, y + 4, x2, y + 4 + bar_h,
                                    fill=fill, outline="#ffffff", width=1)
 
                 # Progress overlay for deliverables
-                if rtype == "deliverable" and row.get("pct", 0) > 0:
-                    pct = min(row["pct"], 100) / 100.0
+                if rtype == "deliverable" and row.pct > 0:
+                    pct = min(row.pct, 100) / 100.0
                     px2 = x1 + (x2 - x1) * pct
                     palette = self._gantt_colors_dark if dark else self._gantt_colors
                     c.create_rectangle(x1, y + 4, px2, y + 4 + bar_h,
@@ -324,8 +259,8 @@ class GanttPage(BasePage):
                                        outline="", width=0)
 
                 # Deadline marker
-                if row.get("deadline"):
-                    dl_x = LABEL_WIDTH + (row["deadline"] - range_start).days * day_w
+                if row.deadline:
+                    dl_x = LABEL_WIDTH + (row.deadline - range_start).days * day_w
                     sz = 4
                     c.create_polygon(
                         dl_x, y_mid - sz,
@@ -343,8 +278,8 @@ class GanttPage(BasePage):
 
     # ── right-click context menu ───────────────────────────────────────────
 
-    def _hit_row(self, canvas_y: int) -> dict | None:
-        """Return the row dict at *canvas_y*, or None."""
+    def _hit_row(self, canvas_y: int) -> GanttRow | None:
+        """Return the row at *canvas_y*, or None."""
         for idx, (y_top, y_bot) in enumerate(self._row_y_ranges):
             if y_top <= canvas_y < y_bot:
                 return self._rows[idx] if idx < len(self._rows) else None
@@ -353,17 +288,16 @@ class GanttPage(BasePage):
     def _on_right_click(self, event: tk.Event) -> None:
         """Show context menu when right-clicking a task or deliverable bar."""
         # Convert widget coords to canvas coords (accounts for scroll)
-        cx = self._canvas.canvasx(event.x)
         cy = self._canvas.canvasy(event.y)
         row = self._hit_row(cy)
-        if not row or row["type"] not in ("task", "deliverable"):
+        if not row or row.type not in ("task", "deliverable"):
             return
-        if not row.get("item_id"):
+        if not row.item_id:
             return
 
         menu = tk.Menu(self._canvas, tearoff=0)
-        item_id = row["item_id"]
-        has_dates = "start" in row
+        item_id = row.item_id
+        has_dates = bool(row.start)
 
         menu.add_command(label=f"Edit {item_id}…",
                          command=lambda: self._open_edit_dialog(item_id))
@@ -387,18 +321,16 @@ class GanttPage(BasePage):
     def _shift_date(self, item_id: str, field: str, days: int) -> None:
         """Shift the start or end date of an item by *days* and persist."""
         service = self.app.service
-        if not service:
+        profile = self.app.profile
+        if not service or not profile:
             return
 
-        prefix = item_id.split("-")[0] if "-" in item_id else ""
-        if prefix == "T":
-            node = self.app.profile.find_task_global(item_id)
-        elif prefix == "D":
-            node = self._find_deliverable(item_id)
-        else:
-            return
-
+        node = profile.find_by_id(item_id)
         if not node:
+            return
+
+        prefix = item_id.split("-")[0].upper() if "-" in item_id else ""
+        if prefix not in ("T", "D"):
             return
 
         current = getattr(node, field, None)
@@ -416,35 +348,51 @@ class GanttPage(BasePage):
 
     def _open_edit_dialog(self, item_id: str) -> None:
         """Open the appropriate edit dialog for *item_id*."""
-        prefix = item_id.split("-")[0] if "-" in item_id else ""
-        if prefix == "T":
+        profile = self.app.profile
+        if not profile:
+            return
+
+        node = profile.find_by_id(item_id)
+        if not node:
+            return
+
+        from helpers.domain.task import Task
+        from helpers.domain.deliverable import Deliverable
+
+        if isinstance(node, Task):
             try:
                 from gui.dialogs.task_dialog import TaskDialog
-                node = self.app.profile.find_task_global(item_id)
-                if node:
-                    TaskDialog(self, task=node, service=self.app.service,
-                               on_save=lambda: self._render())
+
+                def on_save(data: dict) -> None:
+                    self.app.service.edit_task(item_id, data)
+                    self._render()
+
+                TaskDialog(
+                    self.winfo_toplevel(),
+                    title="Edit Task",
+                    task=node,
+                    project_id=node.project_id,
+                    on_save=on_save,
+                )
             except ImportError:
                 pass
-        elif prefix == "D":
+        elif isinstance(node, Deliverable):
             try:
                 from gui.dialogs.deliverable_dialog import DeliverableDialog
-                node = self._find_deliverable(item_id)
-                if node:
-                    DeliverableDialog(self, deliverable=node, service=self.app.service,
-                                      on_save=lambda: self._render())
+
+                def on_save(data: dict) -> None:
+                    self.app.service.edit_deliverable(item_id, data)
+                    self._render()
+
+                DeliverableDialog(
+                    self.winfo_toplevel(),
+                    title="Edit Deliverable",
+                    deliverable=node,
+                    task_id=node.task_id,
+                    on_save=on_save,
+                )
             except ImportError:
                 pass
-
-    def _find_deliverable(self, deliverable_id: str):
-        """Search all tasks for a deliverable by ID."""
-        if not self.app.profile:
-            return None
-        for task in self.app.profile.all_tasks:
-            d = task.find_deliverable(deliverable_id)
-            if d:
-                return d
-        return None
 
     # ── dark-mode helpers ───────────────────────────────────────────────
 
@@ -460,12 +408,4 @@ class GanttPage(BasePage):
         self._render()
 
     def _bar_color(self, status: str) -> str:
-        palette = self._gantt_colors_dark if self._dark_mode else self._gantt_colors
-        s = status.lower().strip()
-        if s == "completed":
-            return palette.get("completed", "#2E8B57")
-        if s in ("in progress", "on track", "ongoing", "recurring"):
-            return palette.get("in_progress", "#336BBF")
-        if s in ("on hold",):
-            return palette.get("overdue", "#C0392B")
-        return palette.get("not_started", "#B0B0B0")
+        return status_gantt_color(status)

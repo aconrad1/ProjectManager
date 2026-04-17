@@ -39,6 +39,7 @@ contract.save()  ←── dual-write ──────────────
 - **IDs are auto-generated** — `P-001`, `T-001`, `D-001`; never assign manually
 - **All mutations dual-write** — `contract.save()` writes JSON then renders the workbook
 - **Timelines and Gantt auto-sync** — rebuilt on every save; never edit them directly
+- **Enums are config-driven** — statuses, categories, priorities, their colors/labels/tiers are defined in JSON dimension tables (`helpers/config/`). All operational paths (creation defaults, auto-complete, scheduling, GUI dialogs, Gantt colors, dashboard) read from `loader.py` accessor functions — no hardcoded enum values in Python source
 - **Hash-based sync** — SHA-256 detects external workbook edits (immune to OneDrive mtime issues)
 - **Personal data is gitignored** — `profiles/*/` is excluded except the `_TestCompany` test profile
 

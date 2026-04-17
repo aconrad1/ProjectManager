@@ -10,6 +10,7 @@ import customtkinter as ctk
 
 from gui.base_page import BasePage
 from gui.ui_theme import AG_DARK, AG_MID, PRIORITY_LABELS, STATUS_OPTIONS
+from helpers.config.loader import default_status, default_priority, priority_labels as _load_priority_labels, terminal_categories
 
 
 class AddTaskPage(BasePage):
@@ -72,12 +73,12 @@ class AddTaskPage(BasePage):
                 w = ctk.CTkTextbox(scroll, width=500, height=65)
                 w.pack(anchor="w", pady=(2, 4))
             elif kind == "option":
-                var = ctk.StringVar(value="In Progress")
+                var = ctk.StringVar(value=default_status())
                 w = ctk.CTkOptionMenu(scroll, variable=var, values=STATUS_OPTIONS, width=280)
                 w._variable = var
                 w.pack(anchor="w", pady=(2, 4))
             elif kind == "priority":
-                var = ctk.StringVar(value="P3 - Medium")
+                var = ctk.StringVar(value=_load_priority_labels()[default_priority()])
                 w = ctk.CTkOptionMenu(scroll, variable=var, values=list(PRIORITY_LABELS.values()), width=280)
                 w._variable = var
                 w.pack(anchor="w", pady=(2, 4))
@@ -100,7 +101,7 @@ class AddTaskPage(BasePage):
         show = False
         if project_id and profile:
             project = profile.find_project(project_id)
-            if project and project.category == "Completed":
+            if project and project.category in terminal_categories():
                 show = True
         if show:
             # Re-pack just after the project menu
@@ -171,7 +172,7 @@ class AddTaskPage(BasePage):
 
         # Parse priority
         prio_str = self._get_field("Priority")
-        prio_int = 3
+        prio_int = default_priority()
         for k, v in PRIORITY_LABELS.items():
             if v == prio_str:
                 prio_int = k
@@ -193,7 +194,7 @@ class AddTaskPage(BasePage):
         # If the target project is Completed, stamp the Date Completed
         date_completed = None
         project = self.app.profile.find_project(project_id) if self.app.profile else None
-        if project and project.category == "Completed":
+        if project and project.category in terminal_categories():
             date_str = self._date_completed_entry.get().strip()
             if date_str:
                 try:

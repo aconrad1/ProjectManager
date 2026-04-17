@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import date
 
 from helpers.domain.base import Node
+from helpers.config.loader import default_status
 
 
 @dataclass
@@ -40,7 +41,7 @@ class Deliverable(Node):
             deadline=date.fromisoformat(data["deadline"]) if data.get("deadline") else None,
             start=date.fromisoformat(data["start"]) if data.get("start") else None,
             end=date.fromisoformat(data["end"]) if data.get("end") else None,
-            status=data.get("status", "Not Started"),
+            status=data.get("status", default_status()),
             deliverable_id=data.get("deliverable_id", ""),
             task_id=data.get("task_id", ""),
             percent_complete=data.get("percent_complete", 0),

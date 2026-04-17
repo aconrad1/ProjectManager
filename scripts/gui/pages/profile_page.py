@@ -38,6 +38,32 @@ _PROFILE_FIELDS: list[tuple[str, str, str]] = [
 ]
 
 
+_HOURS_FIELDS: dict[str, float] = {
+    "daily_hours_budget": 8.0,
+    "weekly_hours_budget": 40.0,
+}
+
+
+def _parse_hours_field(key: str, val: str, parent=None) -> float:
+    """Parse a hours-budget value, warn on invalid input, return float."""
+    default = _HOURS_FIELDS.get(key, 8.0)
+    if not val:
+        return default
+    try:
+        parsed = float(val)
+        if parsed <= 0:
+            raise ValueError("must be positive")
+        return parsed
+    except ValueError:
+        messagebox.showwarning(
+            "Invalid Input",
+            f"'{val}' is not a valid number for {key.replace('_', ' ')}.\n"
+            f"Using default: {default}",
+            parent=parent,
+        )
+        return default
+
+
 class ProfilePage(BasePage):
     KEY = "profiles"
     TITLE = "Profile Management"
@@ -278,11 +304,8 @@ class ProfilePage(BasePage):
         data: dict = {}
         for key, entry in self._entries.items():
             val = entry.get().strip()
-            if key == "daily_hours_budget":
-                try:
-                    data[key] = float(val) if val else 8.0
-                except ValueError:
-                    data[key] = 8.0
+            if key in _HOURS_FIELDS:
+                data[key] = _parse_hours_field(key, val, parent=self)
             else:
                 data[key] = val
 
@@ -464,6 +487,7 @@ class _NewProfileDialog(ctk.CTkToplevel):
         self.resizable(True, True)
         self.minsize(360, 360)
         self.transient(parent)
+        self.wait_visibility()
         self.grab_set()
 
         self._on_create = on_create
@@ -495,11 +519,8 @@ class _NewProfileDialog(ctk.CTkToplevel):
         data: dict = {}
         for key, entry in self._entries.items():
             val = entry.get().strip()
-            if key == "daily_hours_budget":
-                try:
-                    data[key] = float(val) if val else 8.0
-                except ValueError:
-                    data[key] = 8.0
+            if key in _HOURS_FIELDS:
+                data[key] = _parse_hours_field(key, val, parent=self)
             else:
                 data[key] = val
 

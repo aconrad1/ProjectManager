@@ -7,6 +7,7 @@ from datetime import date
 
 from helpers.domain.base import Node
 from helpers.domain.deliverable import Deliverable
+from helpers.config.loader import default_priority, default_status, priority_labels as _load_priority_labels
 
 
 @dataclass
@@ -51,7 +52,7 @@ class Task(Node):
 
     @property
     def priority_label(self) -> str:
-        labels = {1: "Urgent", 2: "High", 3: "Medium", 4: "Low", 5: "Background"}
+        labels = _load_priority_labels()
         return labels.get(self.priority, "Unknown")
 
     # ── Time aggregation ───────────────────────────────────────────────────
@@ -94,10 +95,10 @@ class Task(Node):
             deadline=date.fromisoformat(data["deadline"]) if data.get("deadline") else None,
             start=date.fromisoformat(data["start"]) if data.get("start") else None,
             end=date.fromisoformat(data["end"]) if data.get("end") else None,
-            status=data.get("status", "Not Started"),
+            status=data.get("status", default_status()),
             task_id=data.get("task_id", ""),
             project_id=data.get("project_id", ""),
-            priority=data.get("priority", 3),
+            priority=data.get("priority", default_priority()),
             supervisor=data.get("supervisor", ""),
             site=data.get("site", ""),
             commentary=data.get("commentary", ""),

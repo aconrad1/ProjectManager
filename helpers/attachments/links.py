@@ -6,14 +6,11 @@ task title is migrated automatically via :func:`migrate_links`.
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 from helpers.io.json_store import load_json, save_json
 from helpers.profile.config import links_file
 from helpers.io.files import open_path
-
-_ID_RE = re.compile(r"^[A-Z]-\d{3,}$")
 
 
 def load_links() -> dict[str, str]:
@@ -56,17 +53,5 @@ def migrate_links(title_to_id: dict[str, str]) -> int:
 
     Returns the number of entries migrated.
     """
-    links = load_links()
-    migrated = 0
-    new_links: dict[str, str] = {}
-    for key, path in links.items():
-        if _ID_RE.match(key):
-            new_links[key] = path
-        elif key in title_to_id:
-            new_links[title_to_id[key]] = path
-            migrated += 1
-        else:
-            new_links[key] = path
-    if migrated:
-        save_links(new_links)
-    return migrated
+    from helpers.attachments.migration import migrate_dict_store
+    return migrate_dict_store(load_links, save_links, title_to_id)

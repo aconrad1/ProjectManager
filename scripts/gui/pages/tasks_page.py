@@ -17,6 +17,7 @@ from gui.ui_theme import (
     PRIORITY_LABELS, STATUS_OPTIONS, CATEGORIES,
     TREEVIEW_TAG_COLORS,
 )
+from helpers.config.loader import valid_categories
 from gui.dialogs.task_dialog import TaskDialog
 from gui.dialogs.task_notes_dialog import TaskNotesDialog
 from gui.dialogs.deliverable_dialog import DeliverableDialog
@@ -25,6 +26,7 @@ from gui.dialogs.batch_dialog import BatchOperationDialog
 
 from helpers.attachments.service import attach_files, open_attachments_folder
 from helpers.attachments.links import set_link, open_linked_folder as _open_linked
+from helpers.data.tasks import build_tree_data
 from helpers.ui.state import load_ui_state, save_ui_state
 
 
@@ -36,20 +38,26 @@ class TasksPage(BasePage):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
-        # Maps treeview iid → domain node info dict
         self._node_index: dict[str, dict] = {}
-        # Track whether DnD is available (for status bar message)
         self._dnd_available: bool = False
 
-        # ── Restore persisted UI state ─────────────────────────────────────
+        saved_filter, saved_search = self._restore_ui_state()
+
+        self._build_filter_bar(saved_filter, saved_search)
+        self._build_treeview()
+        self._build_button_bars()
+        self._build_context_menu()
+        self._setup_drag_drop()
+        self._build_status_bar()
+
+    def _restore_ui_state(self) -> tuple[str, str]:
         try:
             ui = load_ui_state()
         except Exception:
             ui = {}
-        saved_filter = ui.get("tasks_filter", "All")
-        saved_search = ui.get("tasks_search", "")
+        return ui.get("tasks_filter", "All"), ui.get("tasks_search", "")
 
-        # ── Header / filter bar ────────────────────────────────────────────
+    def _build_filter_bar(self, saved_filter: str, saved_search: str) -> None:
         top = ctk.CTkFrame(self, fg_color="transparent")
         top.grid(row=0, column=0, sticky="ew", padx=16, pady=(14, 6))
 
@@ -74,7 +82,7 @@ class TasksPage(BasePage):
         )
         self._search_entry.pack(side="right", padx=(8, 16))
 
-        # ── Treeview ───────────────────────────────────────────────────────
+    def _build_treeview(self) -> None:
         tree_frame = ctk.CTkFrame(self, fg_color="transparent")
         tree_frame.grid(row=1, column=0, sticky="nsew", padx=16, pady=0)
         tree_frame.grid_columnconfigure(0, weight=1)
@@ -125,7 +133,8 @@ class TasksPage(BasePage):
 
         self.tree.bind("<Double-1>", lambda _: self._edit_selected_task())
 
-        # ── Button bar ─────────────────────────────────────────────────────
+    def _build_button_bars(self) -> None:
+        # Main button bar
         btn_bar = ctk.CTkFrame(self, fg_color="transparent")
         btn_bar.grid(row=2, column=0, sticky="ew", padx=16, pady=(8, 2))
 
@@ -143,7 +152,7 @@ class TasksPage(BasePage):
                       fg_color="gray", hover_color="darkgray",
                       command=self.app.reload_data).pack(side="right")
 
-        # ── Second button row (attachments & links) ────────────────────────
+        # Attachments and links row
         btn_bar2 = ctk.CTkFrame(self, fg_color="transparent")
         btn_bar2.grid(row=3, column=0, sticky="ew", padx=16, pady=(2, 4))
 
@@ -158,23 +167,19 @@ class TasksPage(BasePage):
         ctk.CTkButton(btn_bar2, text="Task Notes", width=120, fg_color="#2c3e50",
                       hover_color="#34495e", command=self._open_task_notes).pack(side="left", padx=(0, 6))
 
-        # ── Right-click context menu ───────────────────────────────────────
+    def _build_context_menu(self) -> None:
         self._ctx_menu = tk.Menu(self.tree, tearoff=0)
-        # Project operations
         self._ctx_menu.add_command(label="Add Project", command=self._add_project)
         self._ctx_menu.add_command(label="Edit Project", command=self._edit_selected_project)
         self._ctx_menu.add_command(label="Delete Project", command=self._delete_selected_project)
         self._ctx_menu.add_separator()
-        # Task operations
         self._ctx_menu.add_command(label="Edit Task", command=self._edit_selected_task)
         self._ctx_menu.add_command(label="Duplicate Task", command=self._duplicate_selected_task)
         self._ctx_menu.add_separator()
-        # Status sub-menu
         status_menu = tk.Menu(self._ctx_menu, tearoff=0)
         for st in STATUS_OPTIONS:
             status_menu.add_command(label=st, command=lambda s=st: self._quick_set_status(s))
         self._ctx_menu.add_cascade(label="Set Status", menu=status_menu)
-        # Priority sub-menu
         prio_menu = tk.Menu(self._ctx_menu, tearoff=0)
         for pk, pv in PRIORITY_LABELS.items():
             prio_menu.add_command(label=pv, command=lambda p=pk: self._quick_set_priority(p))
@@ -194,10 +199,7 @@ class TasksPage(BasePage):
 
         self.tree.bind("<Button-3>", self._show_context_menu)
 
-        # ── Drag-and-drop support ──────────────────────────────────────────
-        self._setup_drag_drop()
-
-        # ── Status bar ─────────────────────────────────────────────────────
+    def _build_status_bar(self) -> None:
         self._status_label = ctk.CTkLabel(
             self, text="", font=("Segoe UI", 10), text_color="gray",
         )
@@ -257,16 +259,16 @@ class TasksPage(BasePage):
         if not profile:
             self._status_label.configure(text="No profile loaded")
             return
-        weekly = len(profile.tasks_for_category("Weekly"))
-        ongoing = len(profile.tasks_for_category("Ongoing"))
-        completed = len(profile.tasks_for_category("Completed"))
-        from helpers.profile.profile import WORKBOOK_FILENAME
+        parts = []
+        for cat in valid_categories():
+            count = len(profile.tasks_for_category(cat))
+            parts.append(f"{cat}: {count}")
+        from helpers.profile.profile import get_active_config
+        _cfg = get_active_config()
         dnd_tag = "" if self._dnd_available else "  |  ⚠ Drag-and-drop unavailable (install tkinterdnd2)"
         text = (
-            f"Weekly: {weekly}  |  "
-            f"Ongoing: {ongoing}  |  "
-            f"Completed: {completed}  |  "
-            f"Workbook: {WORKBOOK_FILENAME}"
+            "  |  ".join(parts)
+            + f"  |  Workbook: {_cfg.workbook_filename}"
             f"{dnd_tag}"
         )
         self._status_label.configure(text=text)
@@ -356,32 +358,18 @@ class TasksPage(BasePage):
         if not profile:
             return
 
-        cat_filter = self._filter_var.get()
-        search = self._search_var.get().lower()
+        tree_data = build_tree_data(
+            profile,
+            category=self._filter_var.get(),
+            search=self._search_var.get(),
+        )
 
-        for project in profile.projects:
-            if cat_filter != "All" and project.category != cat_filter:
-                continue
-
-            matching_tasks = []
-            for task in project.tasks:
-                if search:
-                    haystack = f"{task.title} {task.supervisor} {task.site} {task.status}".lower()
-                    if search not in haystack:
-                        continue
-                matching_tasks.append(task)
-
-            if not matching_tasks and search:
-                continue
-
+        for project in tree_data:
             proj_iid = f"proj_{project.id}"
-            alloc = project.time_allocated_total
-            spent = project.time_spent_total
-            time_str = f"{alloc:.1f}/{spent:.1f}" if alloc or spent else ""
             self.tree.insert(
                 "", "end", iid=proj_iid,
                 values=(project.title, "", "", project.status, "",
-                        "", time_str, project.category),
+                        "", project.time_str, project.category),
                 open=True,
                 tags=("project",),
             )
@@ -389,18 +377,14 @@ class TasksPage(BasePage):
                 "type": "project", "id": project.id, "title": project.title,
             }
 
-            for task in matching_tasks:
+            for task in project.tasks:
                 prio_label = PRIORITY_LABELS.get(task.priority, f"P{task.priority}")
                 task_iid = f"task_{task.id}"
-                sched = task.scheduled_date.strftime("%m/%d") if task.scheduled_date else ""
-                t_alloc = task.time_allocated_total
-                t_spent = task.time_spent_total
-                t_time = f"{t_alloc:.1f}/{t_spent:.1f}" if t_alloc or t_spent else ""
                 self.tree.insert(
                     proj_iid, "end", iid=task_iid,
                     values=(
                         task.title, task.supervisor, task.site,
-                        task.status, prio_label, sched, t_time, project.category,
+                        task.status, prio_label, task.scheduled, task.time_str, task.category,
                     ),
                     tags=(f"p{task.priority}",),
                 )
@@ -411,13 +395,9 @@ class TasksPage(BasePage):
 
                 for deliv in task.deliverables:
                     d_iid = f"deliv_{deliv.id}"
-                    pct = f"{deliv.percent_complete}%"
-                    d_alloc = f"{deliv.time_allocated:.1f}" if deliv.time_allocated else ""
-                    d_spent = f"{deliv.time_spent:.1f}" if deliv.time_spent else ""
-                    d_time = f"{d_alloc}/{d_spent}" if d_alloc or d_spent else ""
                     self.tree.insert(
                         task_iid, "end", iid=d_iid,
-                        values=(deliv.title, "", "", deliv.status, pct, "", d_time, ""),
+                        values=(deliv.title, "", "", deliv.status, deliv.pct_str, "", deliv.time_str, ""),
                         tags=("deliverable",),
                     )
                     self._node_index[d_iid] = {

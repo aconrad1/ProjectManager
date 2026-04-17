@@ -17,7 +17,13 @@ from openpyxl.workbook import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-from helpers.config.loader import load_deadline_windows
+from helpers.config.loader import (
+    load_deadline_windows,
+    priority_labels as _load_priority_labels,
+    status_bg_color,
+    active_categories as _load_active_categories,
+    terminal_statuses as _load_terminal_statuses,
+)
 from helpers.domain.profile import Profile
 from helpers.domain.task import Task
 from helpers.reporting.snapshot_diff import SnapshotDiff
@@ -48,16 +54,18 @@ CENTRE = Alignment(horizontal="center", vertical="center", wrap_text=True)
 TITLE_FONT = Font(name="Calibri", bold=True, size=20, color=BRAND_BLUE_DARK)
 SUBTITLE_FONT = Font(name="Calibri", size=12, color=BRAND_BLUE_MID)
 
-# Schedule-grid status colours
-_STATUS_FILLS = {
-    "in progress":      PatternFill(start_color="D6EAF8", end_color="D6EAF8", fill_type="solid"),
-    "on track":         PatternFill(start_color="D5F5E3", end_color="D5F5E3", fill_type="solid"),
-    "not started":      PatternFill(start_color="F2F3F4", end_color="F2F3F4", fill_type="solid"),
-    "completed":        PatternFill(start_color="ABEBC6", end_color="ABEBC6", fill_type="solid"),
-    "on hold":          PatternFill(start_color="FADBD8", end_color="FADBD8", fill_type="solid"),
-}
+# Schedule-grid status colours — built from dimension table at import time
+def _build_status_fills():
+    from helpers.config.loader import load
+    fills = {}
+    for s in load("status")["values"]:
+        bg = s["bg_color"].lstrip("#")
+        fills[s["name"].lower()] = PatternFill(start_color=bg, end_color=bg, fill_type="solid")
+    return fills
 
-PRIORITY_LABELS = {1: "P1 – Urgent", 2: "P2 – High", 3: "P3 – Medium", 4: "P4 – Low", 5: "P5 – Background"}
+_STATUS_FILLS = _build_status_fills()
+
+PRIORITY_LABELS = _load_priority_labels()
 
 
 def _clear_sheet(ws):
@@ -118,9 +126,10 @@ def write_overview(
     # Derive data from domain hierarchy
     weekly_tasks = profile.tasks_for_category("Weekly")
     ongoing_tasks = profile.tasks_for_category("Ongoing")
+    _active_cats = {c.lower() for c in _load_active_categories()}
     active_projects = [
         p for p in profile.projects
-        if p.category.strip().lower() in ("weekly", "ongoing")
+        if p.category.strip().lower() in _active_cats
     ]
 
     ws = wb[SHEET_OVERVIEW]
@@ -150,14 +159,15 @@ def write_overview(
     row += 1
 
     for idx, proj in enumerate(sorted(active_projects, key=lambda p: min((t.priority for t in p.tasks), default=5))):
+        _terminal_sts = {s.lower() for s in _load_terminal_statuses()} | {"on hold"}
         active_count = sum(
             1 for t in proj.tasks
-            if t.status.strip().lower() not in ("completed", "on hold")
+            if t.status.strip().lower() not in _terminal_sts
         )
         total_deliverables = sum(len(t.deliverables) for t in proj.tasks)
         done_deliverables = sum(
             1 for t in proj.tasks for d in t.deliverables
-            if d.status.strip().lower() == "completed"
+            if d.status.strip().lower() in {s.lower() for s in _load_terminal_statuses()}
         )
         pct = f"{done_deliverables}/{total_deliverables}" if total_deliverables else "—"
         alloc = proj.time_allocated_total
@@ -180,8 +190,9 @@ def write_overview(
 
     # Build a lookup: (day_offset, priority) → [task, ...]
     schedule_lookup: dict[tuple[int, int], list[Task]] = {}
+    _excluded = {s.lower() for s in _load_terminal_statuses()} | {"on hold"}
     all_active = [t for t in weekly_tasks + ongoing_tasks
-                  if t.status.strip().lower() not in ("completed", "on hold")]
+                  if t.status.strip().lower() not in _excluded]
     for t in all_active:
         if t.scheduled_date is not None:
             offset = (t.scheduled_date - today).days

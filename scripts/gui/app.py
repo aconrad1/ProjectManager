@@ -12,12 +12,16 @@ Usage:
 """
 from __future__ import annotations
 
+import logging
 import sys
+import time
 from pathlib import Path
 from tkinter import messagebox
 from typing import Type
 
 import customtkinter as ctk
+
+_log = logging.getLogger(__name__)
 
 # ── Ensure local imports work regardless of launch directory ───────────────────
 _SCRIPT_DIR = Path(__file__).resolve().parent.parent   # scripts/
@@ -28,9 +32,8 @@ sys.path.insert(0, str(_PROJECT_DIR))
 # ── Helpers ────────────────────────────────────────────────────────────────────
 from helpers.profile.profile import (
     get_profiles, get_active_index, switch_profile, ensure_profile_dirs,
-    reload as reload_profile,
+    reload as reload_profile, get_active_config, ensure_initialized,
 )
-import helpers.profile.profile as _prof
 from helpers.profile.config import (
     workbook_path, markdown_dir, pdf_dir, profile_dir,
 )
@@ -51,8 +54,10 @@ from gui.base_page import BasePage
 # ── Page registry (config-driven — add new pages in page_registry.py) ─────────
 from gui.page_registry import load_pages
 
-# ── Ensure profile directories exist (only if profile is configured) ──────────
-if _prof.USER_COMPANY and _prof.WORKBOOK_FILENAME:
+# ── Ensure profile is loaded (deferred init) and directories exist ────────────
+ensure_initialized()
+_cfg = get_active_config()
+if _cfg.company and _cfg.workbook_filename:
     ensure_profile_dirs()
 
 
@@ -72,7 +77,8 @@ class App(ctk.CTk):
 
     def __init__(self):
         super().__init__()
-        self.title(f"{_prof.USER_COMPANY or 'Setup'} — Weekly Report Generator")
+        _cfg = get_active_config()
+        self.title(f"{_cfg.company or 'Setup'} — Weekly Report Generator")
         self.geometry("1150x740")
         self.minsize(950, 620)
         ctk.set_appearance_mode("light")
@@ -84,6 +90,8 @@ class App(ctk.CTk):
         self._active_page_key: str = "tasks"
         self._autosave_pending: bool = False
         self._autosave_id: str | None = None
+        self._autosave_fail_count: int = 0
+        self._last_edit_check: float = 0.0
 
         # ── Layout: sidebar + content container ────────────────────────────
         self.grid_columnconfigure(1, weight=1)
@@ -132,7 +140,8 @@ class App(ctk.CTk):
         sb.grid_propagate(False)
         self._sidebar_frame = sb
 
-        _sidebar_title = _prof.USER_COMPANY.split()[0] if _prof.USER_COMPANY else "Report"
+        _cfg = get_active_config()
+        _sidebar_title = _cfg.company.split()[0] if _cfg.company else "Report"
         ctk.CTkLabel(sb, text=_sidebar_title, font=("Segoe UI", 24, "bold"),
                      text_color="white").pack(pady=(22, 0))
         ctk.CTkLabel(sb, text="Report Generator", font=("Segoe UI", 12),
@@ -168,9 +177,9 @@ class App(ctk.CTk):
             self._nav_btns[key] = btn
 
         ctk.CTkFrame(sb, fg_color="transparent").pack(expand=True)
-        ctk.CTkLabel(sb, text=_prof.USER_NAME, font=("Segoe UI", 11, "bold"),
+        ctk.CTkLabel(sb, text=_cfg.name, font=("Segoe UI", 11, "bold"),
                      text_color="white").pack(side="bottom", pady=(0, 8))
-        ctk.CTkLabel(sb, text=_prof.USER_ROLE, font=("Segoe UI", 10),
+        ctk.CTkLabel(sb, text=_cfg.role, font=("Segoe UI", 10),
                      text_color=AG_LIGHT).pack(side="bottom")
 
     def rebuild_sidebar(self) -> None:
@@ -207,7 +216,8 @@ class App(ctk.CTk):
 
     def _refresh_after_profile_change(self) -> None:
         """Reload data, rebuild sidebar, and update the title bar after a profile change."""
-        self.title(f"{_prof.USER_COMPANY} — Weekly Report Generator")
+        _cfg = get_active_config()
+        self.title(f"{_cfg.company} — Weekly Report Generator")
         self._build_sidebar()
         self.reload_data()
 
@@ -236,7 +246,8 @@ class App(ctk.CTk):
     # ═══════════════════════════════════════════════════════════════════════
     def _profile_is_configured(self) -> bool:
         """Return True if the active profile has the minimum fields set."""
-        return bool(_prof.USER_COMPANY and _prof.WORKBOOK_FILENAME)
+        _cfg = get_active_config()
+        return bool(_cfg.company and _cfg.workbook_filename)
 
     def _load_or_prompt(self) -> None:
         """Load data if the profile is configured, otherwise show the profile page."""
@@ -270,18 +281,19 @@ class App(ctk.CTk):
 
         try:
             self.wb = load_workbook(wb_path)
+            _cfg = get_active_config()
             self.profile = sync_profile(
                 self.wb,
-                _prof.USER_COMPANY,
+                _cfg.company,
                 wb_path,
-                profile_name=_prof.USER_NAME,
-                role=_prof.USER_ROLE,
-                email=_prof.USER_EMAIL,
-                phone=_prof.USER_PHONE,
-                recipient_name=_prof.RECIPIENT_NAME,
-                recipient_email=_prof.RECIPIENT_EMAIL,
-                workbook_filename=_prof.WORKBOOK_FILENAME,
-                daily_hours_budget=_prof.DAILY_HOURS_BUDGET,
+                profile_name=_cfg.name,
+                role=_cfg.role,
+                email=_cfg.email,
+                phone=_cfg.phone,
+                recipient_name=_cfg.recipient_name,
+                recipient_email=_cfg.recipient_email,
+                workbook_filename=_cfg.workbook_filename,
+                daily_hours_budget=_cfg.daily_hours_budget,
             )
             self.service = DomainService(self.profile, self.wb, on_persist=self.mark_dirty)
             # Refresh active page after load
@@ -330,15 +342,44 @@ class App(ctk.CTk):
         # Schedule autosave after 2 seconds of inactivity
         self._autosave_id = self.after(2000, self._autosave)
 
+    _MAX_AUTOSAVE_FAILURES: int = 3
+
     def _autosave(self) -> None:
         """Debounced autosave — writes .xlsx to disk."""
         self._autosave_id = None
-        if self.wb:
-            try:
-                self.wb.save(str(workbook_path()))
-                self._update_save_indicator("Autosaved")
-            except Exception:
-                self._update_save_indicator("Autosave failed")
+        if not self.wb:
+            return
+        try:
+            self.wb.save(str(workbook_path()))
+            self._autosave_fail_count = 0
+            self._update_save_indicator("Autosaved")
+        except PermissionError:
+            self._autosave_fail_count += 1
+            _log.warning("Autosave failed (attempt %d): file may be locked by another program",
+                         self._autosave_fail_count)
+            self._update_save_indicator("Autosave failed — file locked")
+            self._check_autosave_failures()
+        except OSError as e:
+            self._autosave_fail_count += 1
+            _log.warning("Autosave failed (attempt %d): %s", self._autosave_fail_count, e)
+            self._update_save_indicator("Autosave failed")
+            self._check_autosave_failures()
+
+    def _check_autosave_failures(self) -> None:
+        """Show a persistent warning if autosave has failed too many times."""
+        if self._autosave_fail_count >= self._MAX_AUTOSAVE_FAILURES:
+            messagebox.showwarning(
+                "Autosave Problem",
+                f"Autosave has failed {self._autosave_fail_count} times in a row.\n\n"
+                "Possible causes:\n"
+                "• The workbook is open in Excel\n"
+                "• The file is locked by OneDrive sync\n"
+                "• Disk is full or read-only\n\n"
+                "Your changes are preserved in memory. Try saving manually\n"
+                "(Ctrl+S) or close other programs using the file.",
+                parent=self,
+            )
+            self._autosave_fail_count = 0  # Reset to avoid repeated popups
 
     def _update_save_indicator(self, text: str) -> None:
         """Update the status bar save indicator text."""
@@ -393,11 +434,17 @@ class App(ctk.CTk):
     # ═══════════════════════════════════════════════════════════════════════
     #  MID-SESSION EXTERNAL EDIT DETECTION
     # ═══════════════════════════════════════════════════════════════════════
+    _EDIT_CHECK_INTERVAL: float = 5.0  # seconds between external edit checks
+
     def _on_focus_in(self, event=None) -> None:
         """Called when the window regains focus — check for external edits."""
         # Only fire for the root window, not every child widget
         if event and event.widget is not self:
             return
+        now = time.monotonic()
+        if now - self._last_edit_check < self._EDIT_CHECK_INTERVAL:
+            return  # Skip — checked recently
+        self._last_edit_check = now
         self._check_external_edits()
 
     def _check_external_edits(self) -> None:
@@ -414,7 +461,7 @@ class App(ctk.CTk):
             return
 
         try:
-            changed = detect_external_edits(_prof.USER_COMPANY, wb_path)
+            changed = detect_external_edits(get_active_config().company, wb_path)
         except Exception:
             return  # Silently ignore hash errors
 

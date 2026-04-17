@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 from datetime import date
 
 from helpers.domain.base import Node
+from helpers.domain.deliverable import Deliverable
 from helpers.domain.project import Project
 from helpers.domain.task import Task
 
@@ -75,12 +76,37 @@ class Profile(Node):
             result.extend(p.tasks)
         return result
 
+    @property
+    def all_deliverables(self) -> list[Deliverable]:
+        """Flat list of every deliverable across all projects and tasks."""
+        result: list[Deliverable] = []
+        for task in self.all_tasks:
+            result.extend(task.deliverables)
+        return result
+
     def find_task_global(self, task_id: str) -> Task | None:
         """Search all projects for a task by ID."""
         for p in self.projects:
             t = p.find_task(task_id)
             if t:
                 return t
+        return None
+
+    def find_by_id(self, item_id: str) -> Project | Task | Deliverable | None:
+        """Resolve any prefixed ID (P-/T-/D-) to its domain object."""
+        if not item_id or "-" not in item_id:
+            return None
+
+        prefix = item_id.split("-")[0].upper()
+        if prefix == "P":
+            return self.find_project(item_id)
+        if prefix == "T":
+            return self.find_task_global(item_id)
+        if prefix == "D":
+            for task in self.all_tasks:
+                deliverable = task.find_deliverable(item_id)
+                if deliverable:
+                    return deliverable
         return None
 
     def tasks_for_category(self, category: str) -> list[Task]:

@@ -24,18 +24,21 @@ def app_instance(tk_root, pump):
          patch("gui.app.detect_external_edits", return_value=False), \
          patch("gui.app.workbook_path") as m_wb_path, \
          patch("gui.app.ensure_profile_dirs"), \
-         patch("gui.app._prof") as m_prof:
+         patch("gui.app.get_active_config") as m_cfg:
 
-        # Configure profile module mock
-        m_prof.USER_COMPANY = "TestCo"
-        m_prof.USER_NAME = "Test User"
-        m_prof.USER_ROLE = "Engineer"
-        m_prof.USER_EMAIL = "test@test.com"
-        m_prof.USER_PHONE = "555-0000"
-        m_prof.RECIPIENT_NAME = "Boss"
-        m_prof.RECIPIENT_EMAIL = "boss@test.com"
-        m_prof.WORKBOOK_FILENAME = "test.xlsx"
-        m_prof.DAILY_HOURS_BUDGET = 8.0
+        # Configure profile config mock
+        from helpers.profile.profile import ProfileConfig
+        m_cfg.return_value = ProfileConfig(
+            name="Test User",
+            role="Engineer",
+            company="TestCo",
+            email="test@test.com",
+            phone="555-0000",
+            recipient_name="Boss",
+            recipient_email="boss@test.com",
+            workbook_filename="test.xlsx",
+            daily_hours_budget=8.0,
+        )
 
         # Mock workbook path
         mock_path = MagicMock()

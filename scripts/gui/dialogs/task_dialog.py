@@ -13,6 +13,7 @@ from gui.ui_theme import (
 )
 from gui.dialogs.base_dialog import BaseDialog
 from helpers.domain.task import Task
+from helpers.config.loader import default_status, default_priority, priority_labels as _load_priority_labels
 
 
 class TaskDialog(BaseDialog):
@@ -67,12 +68,12 @@ class TaskDialog(BaseDialog):
                 w = ctk.CTkTextbox(scroll, width=500, height=80)
                 w.pack(anchor="w", padx=14, pady=(2, 4), fill="x")
             elif kind == "option":
-                var = ctk.StringVar(value="In Progress")
+                var = ctk.StringVar(value=default_status())
                 w = ctk.CTkOptionMenu(scroll, variable=var, values=STATUS_OPTIONS, width=260)
                 w._variable = var
                 w.pack(anchor="w", padx=14, pady=(2, 4))
             elif kind == "priority":
-                var = ctk.StringVar(value="P3 - Medium")
+                var = ctk.StringVar(value=_load_priority_labels()[default_priority()])
                 w = ctk.CTkOptionMenu(
                     scroll, variable=var,
                     values=list(PRIORITY_LABELS.values()), width=260,
@@ -103,7 +104,7 @@ class TaskDialog(BaseDialog):
             status_w = self.entries["Status"]
             status_w._variable.set(task.status if task.status in STATUS_OPTIONS else STATUS_OPTIONS[0])
             prio_w = self.entries["Priority"]
-            prio_w._variable.set(PRIORITY_LABELS.get(task.priority, "P3 - Medium"))
+            prio_w._variable.set(PRIORITY_LABELS.get(task.priority, _load_priority_labels()[default_priority()]))
 
             # Pre-fill date fields
             date_fields = {
@@ -125,7 +126,7 @@ class TaskDialog(BaseDialog):
             return
         # Extract priority int from label
         prio_str = self._get("Priority")
-        prio_int = 3
+        prio_int = default_priority()
         for k, v in PRIORITY_LABELS.items():
             if v == prio_str:
                 prio_int = k

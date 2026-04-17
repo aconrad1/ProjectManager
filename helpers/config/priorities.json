@@ -1,0 +1,11 @@
+{
+  "range": [1, 5],
+  "default": 3,
+  "values": [
+    { "value": 1, "label": "P1 - Urgent",     "tier": "urgent", "color": "#c0392b", "tree_bg": "#fce4e4", "badge_class": "critical" },
+    { "value": 2, "label": "P2 - High",       "tier": "high",   "color": "#e67e22", "tree_bg": "#fef3e0", "badge_class": "high"     },
+    { "value": 3, "label": "P3 - Medium",     "tier": "medium", "color": "#f39c12", "tree_bg": "#fff9e6", "badge_class": "medium"   },
+    { "value": 4, "label": "P4 - Low",        "tier": "low",    "color": "#7f8c8d", "tree_bg": "#f0f0f0", "badge_class": "low"      },
+    { "value": 5, "label": "P5 - Background", "tier": "low",    "color": "#bdc3c7", "tree_bg": "#f7f7f7", "badge_class": "bg"       }
+  ]
+}

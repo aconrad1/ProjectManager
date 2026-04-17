@@ -33,9 +33,7 @@ sys.path.insert(0, str(_SCRIPT_DIR))
 sys.path.insert(0, str(_PROJECT_DIR))
 
 from helpers.profile.profile import (
-    USER_NAME, USER_ROLE, USER_COMPANY,
-    USER_EMAIL, USER_PHONE, RECIPIENT_NAME, RECIPIENT_EMAIL, WORKBOOK_FILENAME,
-    DAILY_HOURS_BUDGET,
+    get_active_config, ensure_initialized,
     get_profiles, get_active_index, switch_profile,
 )
 from helpers.profile.config import workbook_path
@@ -47,29 +45,30 @@ from helpers.commands.task_ops import set_post_mutate_hook
 def _load_profile():
     """Load the workbook and sync the domain Profile hierarchy."""
     from helpers.profile.profile import scaffold_profile
+    cfg = get_active_config()
     wb_path = workbook_path()
     if not wb_path.exists():
-        scaffold_profile(USER_COMPANY, WORKBOOK_FILENAME)
+        scaffold_profile(cfg.company, cfg.workbook_filename)
     wb = load_workbook(wb_path)
     profile = sync_profile(
         wb,
-        USER_COMPANY,
+        cfg.company,
         wb_path,
-        profile_name=USER_NAME,
-        role=USER_ROLE,
-        email=USER_EMAIL,
-        phone=USER_PHONE,
-        recipient_name=RECIPIENT_NAME,
-        recipient_email=RECIPIENT_EMAIL,
-        workbook_filename=WORKBOOK_FILENAME,
-        daily_hours_budget=DAILY_HOURS_BUDGET,
+        profile_name=cfg.name,
+        role=cfg.role,
+        email=cfg.email,
+        phone=cfg.phone,
+        recipient_name=cfg.recipient_name,
+        recipient_email=cfg.recipient_email,
+        workbook_filename=cfg.workbook_filename,
+        daily_hours_budget=cfg.daily_hours_budget,
     )
 
     # Auto-save .xlsx and resync JSON after every task_ops mutation
     def _auto_persist(mutated_wb):
         p = workbook_path()
         mutated_wb.save(str(p))
-        resync_json(mutated_wb, USER_COMPANY, p, **_meta_kwargs())
+        resync_json(mutated_wb, get_active_config().company, p, **_meta_kwargs())
 
     set_post_mutate_hook(_auto_persist)
 
@@ -78,15 +77,16 @@ def _load_profile():
 
 def _meta_kwargs() -> dict:
     """Return the profile metadata kwargs used in contract calls."""
+    cfg = get_active_config()
     return dict(
-        profile_name=USER_NAME,
-        role=USER_ROLE,
-        email=USER_EMAIL,
-        phone=USER_PHONE,
-        recipient_name=RECIPIENT_NAME,
-        recipient_email=RECIPIENT_EMAIL,
-        workbook_filename=WORKBOOK_FILENAME,
-        daily_hours_budget=DAILY_HOURS_BUDGET,
+        profile_name=cfg.name,
+        role=cfg.role,
+        email=cfg.email,
+        phone=cfg.phone,
+        recipient_name=cfg.recipient_name,
+        recipient_email=cfg.recipient_email,
+        workbook_filename=cfg.workbook_filename,
+        daily_hours_budget=cfg.daily_hours_budget,
     )
 
 
@@ -94,9 +94,10 @@ def _meta_kwargs() -> dict:
 
 def cmd_generate(args: argparse.Namespace) -> None:
     from helpers.commands.report_pipeline import generate_reports
+    cfg = get_active_config()
     print(f"\n{'='*60}")
-    print(f"  {USER_COMPANY} Weekly Report Generator  (CLI)")
-    print(f"  User: {USER_NAME}")
+    print(f"  {cfg.company} Weekly Report Generator  (CLI)")
+    print(f"  User: {cfg.name}")
     print(f"{'='*60}\n")
     generate_reports(log=print)
     print()
@@ -128,14 +129,16 @@ def cmd_email(args: argparse.Namespace) -> None:
 
 def cmd_list(args: argparse.Namespace) -> None:
     _, profile = _load_profile()
+    cfg = get_active_config()
 
     print(f"\n{'='*60}")
-    print(f"  Active Tasks — {USER_NAME}")
+    print(f"  Active Tasks — {cfg.name}")
     print(f"{'='*60}\n")
 
     categories = ["Weekly", "Ongoing"]
     if args.all:
-        categories.append("Completed")
+        from helpers.config.loader import valid_categories
+        categories = list(valid_categories())
 
     for cat in categories:
         tasks = profile.tasks_for_category(cat)
@@ -235,7 +238,8 @@ def cmd_task(args: argparse.Namespace) -> None:
             sys.exit(1)
 
         from helpers.commands.task_ops import add_task
-        data = {"Title": title, "Status": "Not Started", "Priority": 3}
+        from helpers.config.loader import default_status, default_priority
+        data = {"Title": title, "Status": default_status(), "Priority": default_priority()}
         add_task(wb, proj.id, data)
         print(f"Task '{title}' added to {proj.title}.")
 
@@ -290,7 +294,8 @@ def cmd_deliverable(args: argparse.Namespace) -> None:
 
         wb, _ = _load_profile()
         from helpers.commands.task_ops import add_deliverable
-        data = {"Title": title, "Status": "Not Started", "% Complete": 0}
+        from helpers.config.loader import default_status
+        data = {"Title": title, "Status": default_status(), "% Complete": 0}
         d = add_deliverable(wb, task_id, data)
         print(f"Deliverable '{title}' (ID: {d.deliverable_id}) added to task '{target_task.title}'.")
 
@@ -344,6 +349,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
+    ensure_initialized()
     parser = build_parser()
     args = parser.parse_args()
 

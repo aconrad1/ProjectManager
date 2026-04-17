@@ -21,6 +21,72 @@ from helpers.schema.columns import (
 )
 
 
+# ── Timeline section configuration ────────────────────────────────────────────
+# Each section maps source sheet fields to Timelines columns 3–14.
+# A string entry means "VLOOKUP this field"; None means "leave blank".
+# The special key "duration_formula" inserts an end−start formula.
+
+_TIMELINE_SECTIONS = [
+    {
+        "label": "Project",
+        "sheet": SHEET_PROJECTS,
+        # Timelines cols: 3=Title, 4=Parent ID, 5=Start, 6=Duration,
+        #   7=End, 8=Deadline, 9=Status, 10=%Complete, 11=TimeAlloc,
+        #   12=TimeSpent, 13=SchedDate, 14=Milestones
+        "columns": [
+            ("Title",),             # col 3
+            (None,),                # col 4 — projects have no parent
+            ("Start Date",),        # col 5
+            ("duration_formula",),  # col 6
+            ("End Date",),          # col 7
+            ("Deadline",),          # col 8
+            ("Status",),            # col 9
+            (None,),                # col 10
+            (None,),                # col 11
+            (None,),                # col 12
+            (None,),                # col 13
+            (None,),                # col 14
+        ],
+    },
+    {
+        "label": "Task",
+        "sheet": SHEET_TASKS,
+        "columns": [
+            ("Title",),
+            ("Project ID",),        # col 4 — parent
+            ("Start Date",),
+            ("duration_formula",),
+            ("End Date",),
+            ("Deadline",),
+            ("Status",),
+            (None,),
+            (None,),
+            (None,),
+            ("Scheduled Date",),
+            (None,),
+        ],
+    },
+    {
+        "label": "Deliverable",
+        "sheet": SHEET_DELIVERABLES,
+        "columns": [
+            ("Title",),
+            ("Task ID",),           # col 4 — parent
+            ("Start Date",),
+            ("duration_formula",),
+            ("End Date",),
+            ("Deadline",),
+            ("Status",),
+            ("% Complete",),
+            ("Time Allocated",),
+            ("Time Spent",),
+            (None,),
+            (None,),
+        ],
+    },
+]
+
+
 def _ensure_sheet(wb: Workbook, name: str):
     if name not in wb.sheetnames:
         wb.create_sheet(name)
@@ -40,6 +106,63 @@ def _clear_data(ws):
 def _vlookup(lookup_val_cell: str, table_range: str, col_idx: int) -> str:
     """Build a VLOOKUP formula string."""
     return f'=IFERROR(VLOOKUP({lookup_val_cell},{table_range},{col_idx},FALSE),"")'
+
+
+def _table_range(wb: Workbook, sheet_name: str) -> str:
+    """Return the VLOOKUP table range string for a sheet."""
+    if sheet_name not in wb.sheetnames:
+        return ""
+    s = wb[sheet_name]
+    max_col = get_column_letter(s.max_column)
+    return f"'{sheet_name}'!$A:${max_col}"
+
+
+def _write_section(ws, wb: Workbook, start_row: int, section: dict) -> int:
+    """Write VLOOKUP rows for one entity type. Returns the next available row."""
+    sheet_name = section["sheet"]
+    if sheet_name not in wb.sheetnames:
+        return start_row
+
+    source_ws = wb[sheet_name]
+    data_range = _table_range(wb, sheet_name)
+    col_specs = section["columns"]
+
+    # Pre-compute 1-based VLOOKUP column indices for each field
+    field_indices: dict[str, int] = {}
+    for spec in col_specs:
+        field = spec[0]
+        if field and field != "duration_formula" and field not in field_indices:
+            field_indices[field] = ci(sheet_name, field) + 1
+
+    row = start_row
+    for r in range(2, source_ws.max_row + 1):
+        item_id = clean(source_ws.cell(row=r, column=1).value)
+        if not item_id:
+            continue
+
+        a_ref = f"$A{row}"
+        ws.cell(row=row, column=1, value=item_id)
+        ws.cell(row=row, column=2, value=section["label"])
+
+        for col_offset, spec in enumerate(col_specs):
+            col = col_offset + 3
+            field = spec[0]
+            if field is None:
+                ws.cell(row=row, column=col, value="")
+            elif field == "duration_formula":
+                # Duration = End Date − Start Date (cols 7 and 5 in the timeline)
+                ws.cell(row=row, column=col).value = (
+                    f'=IFERROR(IF(F{row}="","",G{row}-F{row}),"")'
+                )
+            else:
+                ws.cell(row=row, column=col).value = (
+                    f'=IFERROR(VLOOKUP({a_ref},{data_range},'
+                    f'{field_indices[field]},FALSE),"")'
+                )
+
+        row += 1
+
+    return row
 
 
 def sync_timelines(wb: Workbook) -> int:
@@ -63,115 +186,8 @@ def sync_timelines(wb: Workbook) -> int:
         if meta.tab_color:
             ws.sheet_properties.tabColor = meta.tab_color
 
-    row = 2  # data starts on row 2
-
-    # Helper: determine VLOOKUP table range string for a sheet
-    def table_range(sheet_name: str) -> str:
-        s = wb[sheet_name] if sheet_name in wb.sheetnames else None
-        if s is None:
-            return ""
-        max_col = get_column_letter(s.max_column)
-        return f"'{sheet_name}'!$A:${max_col}"
-
-    # ── Projects ───────────────────────────────────────────────────────────
-    if SHEET_PROJECTS in wb.sheetnames:
-        proj_ws = wb[SHEET_PROJECTS]
-        proj_range = table_range(SHEET_PROJECTS)
-        # Column indices in Projects sheet (1-based for VLOOKUP)
-        p_title_col  = ci(SHEET_PROJECTS, "Title") + 1
-        p_start_col  = ci(SHEET_PROJECTS, "Start Date") + 1
-        p_end_col    = ci(SHEET_PROJECTS, "End Date") + 1
-        p_dead_col   = ci(SHEET_PROJECTS, "Deadline") + 1
-        p_status_col = ci(SHEET_PROJECTS, "Status") + 1
-
-        for r in range(2, proj_ws.max_row + 1):
-            pid = clean(proj_ws.cell(row=r, column=1).value)
-            if not pid:
-                continue
-            a_ref = f"$A{row}"
-            ws.cell(row=row, column=1, value=pid)           # Item ID
-            ws.cell(row=row, column=2, value="Project")      # Item Type
-            ws.cell(row=row, column=3).value = f'=IFERROR(VLOOKUP({a_ref},{proj_range},{p_title_col},FALSE),"")'
-            ws.cell(row=row, column=4, value="")             # Parent ID (projects have none)
-            ws.cell(row=row, column=5).value = f'=IFERROR(VLOOKUP({a_ref},{proj_range},{p_start_col},FALSE),"")'
-            ws.cell(row=row, column=6).value = f'=IFERROR(IF(F{row}="","",G{row}-F{row}),"")'  # Duration
-            ws.cell(row=row, column=7).value = f'=IFERROR(VLOOKUP({a_ref},{proj_range},{p_end_col},FALSE),"")'
-            ws.cell(row=row, column=8).value = f'=IFERROR(VLOOKUP({a_ref},{proj_range},{p_dead_col},FALSE),"")'
-            ws.cell(row=row, column=9).value = f'=IFERROR(VLOOKUP({a_ref},{proj_range},{p_status_col},FALSE),"")'
-            ws.cell(row=row, column=10, value="")            # % Complete
-            ws.cell(row=row, column=11, value="")            # Time Allocated (aggregated externally)
-            ws.cell(row=row, column=12, value="")            # Time Spent (aggregated externally)
-            ws.cell(row=row, column=13, value="")            # Scheduled Date (N/A for projects)
-            ws.cell(row=row, column=14, value="")            # Milestones
-            row += 1
-
-    # ── Tasks ──────────────────────────────────────────────────────────────
-    if SHEET_TASKS in wb.sheetnames:
-        task_ws = wb[SHEET_TASKS]
-        task_range = table_range(SHEET_TASKS)
-        t_title_col  = ci(SHEET_TASKS, "Title") + 1
-        t_start_col  = ci(SHEET_TASKS, "Start Date") + 1
-        t_end_col    = ci(SHEET_TASKS, "End Date") + 1
-        t_dead_col   = ci(SHEET_TASKS, "Deadline") + 1
-        t_status_col = ci(SHEET_TASKS, "Status") + 1
-        t_proj_col   = ci(SHEET_TASKS, "Project ID") + 1
-        t_sched_col  = ci(SHEET_TASKS, "Scheduled Date") + 1
-
-        for r in range(2, task_ws.max_row + 1):
-            tid = clean(task_ws.cell(row=r, column=1).value)
-            if not tid:
-                continue
-            a_ref = f"$A{row}"
-            ws.cell(row=row, column=1, value=tid)
-            ws.cell(row=row, column=2, value="Task")
-            ws.cell(row=row, column=3).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_title_col},FALSE),"")'
-            # Parent ID = Project ID
-            ws.cell(row=row, column=4).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_proj_col},FALSE),"")'
-            ws.cell(row=row, column=5).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_start_col},FALSE),"")'
-            ws.cell(row=row, column=6).value = f'=IFERROR(IF(F{row}="","",G{row}-F{row}),"")'
-            ws.cell(row=row, column=7).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_end_col},FALSE),"")'
-            ws.cell(row=row, column=8).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_dead_col},FALSE),"")'
-            ws.cell(row=row, column=9).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_status_col},FALSE),"")'
-            ws.cell(row=row, column=10, value="")
-            ws.cell(row=row, column=11, value="")            # Time Allocated (sum of deliverables — computed in domain)
-            ws.cell(row=row, column=12, value="")            # Time Spent
-            ws.cell(row=row, column=13).value = f'=IFERROR(VLOOKUP({a_ref},{task_range},{t_sched_col},FALSE),"")'
-            ws.cell(row=row, column=14, value="")            # Milestones
-            row += 1
-
-    # ── Deliverables ───────────────────────────────────────────────────────
-    if SHEET_DELIVERABLES in wb.sheetnames:
-        del_ws = wb[SHEET_DELIVERABLES]
-        del_range = table_range(SHEET_DELIVERABLES)
-        d_title_col  = ci(SHEET_DELIVERABLES, "Title") + 1
-        d_start_col  = ci(SHEET_DELIVERABLES, "Start Date") + 1
-        d_end_col    = ci(SHEET_DELIVERABLES, "End Date") + 1
-        d_dead_col   = ci(SHEET_DELIVERABLES, "Deadline") + 1
-        d_status_col = ci(SHEET_DELIVERABLES, "Status") + 1
-        d_task_col   = ci(SHEET_DELIVERABLES, "Task ID") + 1
-        d_pct_col    = ci(SHEET_DELIVERABLES, "% Complete") + 1
-        d_alloc_col  = ci(SHEET_DELIVERABLES, "Time Allocated") + 1
-        d_spent_col  = ci(SHEET_DELIVERABLES, "Time Spent") + 1
-
-        for r in range(2, del_ws.max_row + 1):
-            did = clean(del_ws.cell(row=r, column=1).value)
-            if not did:
-                continue
-            a_ref = f"$A{row}"
-            ws.cell(row=row, column=1, value=did)
-            ws.cell(row=row, column=2, value="Deliverable")
-            ws.cell(row=row, column=3).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_title_col},FALSE),"")'
-            ws.cell(row=row, column=4).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_task_col},FALSE),"")'
-            ws.cell(row=row, column=5).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_start_col},FALSE),"")'
-            ws.cell(row=row, column=6).value = f'=IFERROR(IF(F{row}="","",G{row}-F{row}),"")'
-            ws.cell(row=row, column=7).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_end_col},FALSE),"")'
-            ws.cell(row=row, column=8).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_dead_col},FALSE),"")'
-            ws.cell(row=row, column=9).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_status_col},FALSE),"")'
-            ws.cell(row=row, column=10).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_pct_col},FALSE),"")'
-            ws.cell(row=row, column=11).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_alloc_col},FALSE),"")'
-            ws.cell(row=row, column=12).value = f'=IFERROR(VLOOKUP({a_ref},{del_range},{d_spent_col},FALSE),"")'
-            ws.cell(row=row, column=13, value="")            # Scheduled Date (N/A for deliverables)
-            ws.cell(row=row, column=14, value="")            # Milestones
-            row += 1
+    row = 2
+    for section in _TIMELINE_SECTIONS:
+        row = _write_section(ws, wb, row, section)
 
     return row - 2  # rows written

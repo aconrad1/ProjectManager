@@ -8,11 +8,17 @@ Brand colours and fonts are defined here.  Data-driven constants
 from __future__ import annotations
 
 from helpers.config import load as _load_cfg
+from helpers.config.loader import (
+    priority_labels as _load_priority_labels,
+    valid_statuses as _load_valid_statuses,
+    valid_categories as _load_valid_categories,
+    status_color as _status_color,
+    status_bg_color as _status_bg_color,
+)
 
 # ── Load config-driven constants ───────────────────────────────────────────────
 _theme       = _load_cfg("theme")
-_status_cfg  = _load_cfg("status")
-_cat_cfg     = _load_cfg("categories")
+_prio_cfg    = _load_cfg("priorities")
 
 # ── AltaGas Brand Colors ──────────────────────────────────────────────────────
 AG_DARK  = _theme["brand"]["dark"]
@@ -29,19 +35,30 @@ FONT_NAV  = ("Segoe UI", 13)
 FONT_BTN  = ("Segoe UI", 13, "bold")
 FONT_LOG  = ("Consolas", 11)
 
-# ── Priority / Status / Category constants (config-driven) ────────────────────
-PRIORITY_LABELS: dict[int, str] = {
-    int(k): v for k, v in _theme["priority_labels"].items()
-}
+# ── Priority / Status / Category constants (dimension-table driven) ───────────
+PRIORITY_LABELS: dict[int, str] = _load_priority_labels()
 
 PRIORITY_COLORS: dict[int, str] = {
-    int(k): v for k, v in _theme["priority_colors"].items()
+    p["value"]: p["color"] for p in _prio_cfg["values"]
 }
 
-STATUS_OPTIONS: list[str] = _status_cfg["values"]
+STATUS_OPTIONS: list[str] = list(_load_valid_statuses())
 
-STATUS_COLORS: dict[str, str] = _theme.get("status_colors", {})
+STATUS_COLORS: dict[str, str] = {
+    name: _status_color(name) for name in _load_valid_statuses()
+}
 
-CATEGORIES: list[str] = _cat_cfg["values"]
+CATEGORIES: list[str] = list(_load_valid_categories())
 
 TREEVIEW_TAG_COLORS: dict[str, str] = _theme.get("treeview_tag_colors", {})
+
+SITE_PALETTE: list[str] = _theme.get("site_palette", [
+    "#003DA5", "#336BBF", "#2980b9", "#16a085",
+    "#27ae60", "#8e44ad", "#d35400", "#c0392b",
+])
+
+STATUS_BG_COLORS: dict[str, str] = {
+    name.lower(): _status_bg_color(name) for name in _load_valid_statuses()
+}
+
+GANTT_COLORS_DARK: dict[str, str] = _theme.get("gantt_colors_dark", {})

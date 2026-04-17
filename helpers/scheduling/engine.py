@@ -48,14 +48,14 @@ from typing import TypeAlias
 
 from helpers.domain.profile import Profile
 from helpers.domain.task import Task
-from helpers.config.loader import load as load_config
+from helpers.config.loader import load as load_config, excluded_statuses, active_categories
 
 # ── Public type aliases ────────────────────────────────────────────────────────
 ScheduleEntry: TypeAlias = tuple[Task, float]            # (task, hours_assigned)
 Schedule: TypeAlias = dict[date, dict[int, list[ScheduleEntry]]]
 
 # ── Internal constants ─────────────────────────────────────────────────────────
-_EXCLUDED_STATUSES = frozenset({"completed", "on hold"})
+_EXCLUDED_STATUSES = excluded_statuses()
 _MAX_SCHEDULE_DAYS = 365  # safety limit to prevent infinite loops
 
 _WEEK_START_MAP: dict[str, int] = {
@@ -152,11 +152,12 @@ def compute_schedule(
         cfg.get("week_start_day", "monday").strip().lower(), 0
     )
 
-    # 1. Gather active tasks from Weekly + Ongoing projects
+    # 1. Gather active tasks from non-terminal project categories
+    _active_cats = {c.lower() for c in active_categories()}
     active_tasks: list[Task] = []
     for project in profile.projects:
         cat = project.category.strip().lower()
-        if cat in ("weekly", "ongoing"):
+        if cat in _active_cats:
             for task in project.tasks:
                 if _is_active(task):
                     active_tasks.append(task)

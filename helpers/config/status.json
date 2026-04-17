@@ -1,20 +1,61 @@
 {
   "values": [
-    "Not Started",
-    "In Progress",
-    "On Track",
-    "Ongoing",
-    "Recurring",
-    "On Hold",
-    "Completed"
-  ],
-  "completed_statuses": [
-    "Completed"
-  ],
-  "active_statuses": [
-    "In Progress",
-    "On Track",
-    "Ongoing",
-    "Recurring"
+    {
+      "name": "Not Started",
+      "tier": "inactive",
+      "is_terminal": false,
+      "color": "#95a5a6",
+      "bg_color": "#F2F3F4",
+      "gantt_color": "#B0B0B0"
+    },
+    {
+      "name": "In Progress",
+      "tier": "active",
+      "is_terminal": false,
+      "color": "#336BBF",
+      "bg_color": "#D6EAF8",
+      "gantt_color": "#336BBF"
+    },
+    {
+      "name": "On Track",
+      "tier": "active",
+      "is_terminal": false,
+      "color": "#2ecc71",
+      "bg_color": "#D5F5E3",
+      "gantt_color": "#336BBF"
+    },
+    {
+      "name": "Ongoing",
+      "tier": "active",
+      "is_terminal": false,
+      "color": "#16a085",
+      "bg_color": "#D6EAF8",
+      "gantt_color": "#336BBF"
+    },
+    {
+      "name": "Recurring",
+      "tier": "active",
+      "is_terminal": false,
+      "color": "#8e44ad",
+      "bg_color": "#D6EAF8",
+      "gantt_color": "#336BBF"
+    },
+    {
+      "name": "On Hold",
+      "tier": "inactive",
+      "is_terminal": false,
+      "color": "#e74c3c",
+      "bg_color": "#FADBD8",
+      "gantt_color": "#B0B0B0"
+    },
+    {
+      "name": "Completed",
+      "tier": "terminal",
+      "is_terminal": true,
+      "color": "#27ae60",
+      "bg_color": "#ABEBC6",
+      "gantt_color": "#2E8B57",
+      "completion_aliases": ["completed", "complete"]
+    }
   ]
 }

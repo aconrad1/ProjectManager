@@ -10,6 +10,7 @@ import customtkinter as ctk
 from gui.base_page import BasePage
 from gui.ui_theme import AG_DARK, AG_MID
 import helpers.profile.profile as _prof
+from helpers.profile.profile import get_active_config
 from helpers.profile.config import (
     workbook_path, reports_dir, exports_dir, data_dir, attachments_dir, profile_dir,
 )
@@ -80,8 +81,9 @@ class SettingsPage(BasePage):
 
     def refresh(self) -> None:
         """Update displayed paths and profile summary from live state."""
+        _cfg = get_active_config()
         self._profile_summary.configure(
-            text=f"{_prof.USER_NAME}  ·  {_prof.USER_COMPANY}  ·  {_prof.USER_ROLE}"
+            text=f"{_cfg.name}  ·  {_cfg.company}  ·  {_cfg.role}"
         )
         _path_values = {
             "Profile Dir":  str(profile_dir()),

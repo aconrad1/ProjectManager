@@ -56,14 +56,14 @@ SHEET_META: dict[str, SheetMeta] = {
 }
 
 
-# ── Project category values ────────────────────────────────────────────────────
+# ── Project category values (loaded from categories.json) ──────────────────────
 
-CATEGORY_WEEKLY    = "Weekly"
-CATEGORY_ONGOING   = "Ongoing"
-CATEGORY_COMPLETED = "Completed"
+from helpers.config.loader import valid_categories as _load_categories
 
-ALL_CATEGORIES: tuple[str, ...] = (
-    CATEGORY_WEEKLY,
-    CATEGORY_ONGOING,
-    CATEGORY_COMPLETED,
-)
+ALL_CATEGORIES: tuple[str, ...] = _load_categories()
+
+# Convenience constants — first/second/third by convention.
+# Still safe to use as long as categories.json preserves these names.
+CATEGORY_WEEKLY    = ALL_CATEGORIES[0]  # "Weekly"
+CATEGORY_ONGOING   = ALL_CATEGORIES[1]  # "Ongoing"
+CATEGORY_COMPLETED = ALL_CATEGORIES[2]  # "Completed"

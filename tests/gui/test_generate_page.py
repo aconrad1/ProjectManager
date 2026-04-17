@@ -79,7 +79,7 @@ class TestGeneratePageCallbacks:
             mock_thread = MagicMock()
             MockThread.return_value = mock_thread
             generate_page._generate_reports()
-            assert generate_page._generating is True
+            assert generate_page._gen_event.is_set() is True
             MockThread.assert_called_once()
             mock_thread.start.assert_called_once()
 
