@@ -1,0 +1,41 @@
+facility_id,facility_name,region,business_unit,active_flag
+FAC_AFS,AFS,,,true
+FAC_CLAIR,Clair,,,true
+FAC_CRUDE_TERMINALS,Crude & Terminals,,,true
+FAC_FERNDALE,Ferndale,,,true
+FAC_GRIFFITH,Griffith,,,true
+FAC_RIPET,RIPET,,,true
+FAC_ROSEDALE,Rosedale,,,true
+FAC_SLAVE_LAKE,Slave Lake,,,true
+FAC_SUNDRE,Sundre,,,true
+FAC_YELLOWKNIFE,Yellowknife,,,true
+FAC_PIPESTONE,Pipestone,,,true
+FAC_DIMSDALE,Dimsdale,,,true
+FAC_NEBC,NEBC,,,true
+FAC_TOWNSEND,Townsend,,,true
+FAC_BLAIR,Blair,,,true
+FAC_EEEP,EEEP,,,true
+FAC_JEEP,JEEP,,,true
+FAC_AITKEN,Aitken,,,true
+FAC_NORTH_PINE,North Pine,,,true
+FAC_HARMATTAN,Harmattan,,,true
+FAC_REEF,REEF,,,true
+FAC_MIDSTREAM,Midstream,,,true
+FAC_YOUNGER,Younger,,,true
+FAC_GORDONDALE,Gordondale,,,true
+FAC_EMPRESS,Empress,,,true
+FAC_TERMINAL,Terminal,,,true
+FAC_INFORMATION_TECHNOLOGY,Information Technology,,,true
+FAC_ALL,All,,,true
+FAC_EAGLE_HILL,Eagle Hill,,,true
+FAC_FERNDALE_FACILITY,Ferndale Facility,,,true
+FAC_BLAIR_CREEK_1,Blair Creek 1,,,true
+FAC_TOWNSEND_TANK_TERMINAL,Townsend Tank Terminal,,,true
+FAC_IDLE_ASSETS,Idle Assets,,,true
+FAC_OTHER,Other,,,true
+FAC_FERNDALE_PIER,Ferndale Pier,,,true
+FAC_BLAIR_CREEK_2,Blair Creek 2,,,true
+FAC_GRIFFTH,Griffth,,,true
+FAC_ENERCHEM,Enerchem,,,true
+FAC_POUCE_COUPE,Pouce Coupe,,,true
+FAC_C41F,C41F,,,true

@@ -1,0 +1,802 @@
+project_id,project_code,project_name,project_type,facility_id,priority,status,active_flag
+a6cf5f87-ed0a-4eb6-8850-5d8919a8ea5c,RAIL_RACK_LOADING_ARM_MODIFICATIONS,Rail Rack Loading Arm Modifications,Pre-FID Project Work (DevEx),FAC_AFS,,Active,true
+b0275094-6639-4f68-a61b-82284830e758,TANK_FARM_LINER_REPLACEMENT,Tank Farm Liner Replacement,Pre-FID Project Work (DevEx),FAC_AFS,,Active,true
+ae3e0dd6-4c1a-4fb4-aa05-189fe00b2447,TANK_LEVEL_TRANSMITTER_AND_LEVEL_SWITCH,Tank Level Transmitter and Level Switch Relocation,Pre-FID Project Work (DevEx),FAC_CLAIR,,Active,true
+e8d01216-2a4e-461a-98b2-bee1af9ca78d,VOC_EMISSION_CAPTURE_FROM_TRUCK_TANKS,VOC Emission Capture from Truck & Tanks,Pre-FID Project Work (DevEx),FAC_CRUDE_TERMINALS,,Active,true
+e2149f05-5a78-4e5a-a2a9-4d23b14e9383,START_AIR_COMPRESSOR,Start Air Compressor,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+da1ccc30-0ba2-4d64-854d-7d6945da997d,T1_PHASE_2,T1 - Phase 2,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+10595e90-b5cf-4752-9bc6-4b85ac69b3c9,PIER_PROGRAM_10_YEAR_PLAN,Pier Program - 10 year plan,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+e151efb2-ffa2-408c-844b-a36181fb66aa,1_MCC_END_OF_LIFE_REPLACEMENT,#1 MCC End of Life Replacement,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+aa55ab4a-f5b6-4167-97fa-d937c6507561,BUCKEYE_C4_BATCHING_PROJECT,Buckeye C4 Batching Project,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+eda2bbdd-08da-4e9a-9937-5335481780ca,BUCKEYE_PIPELINE_OVERPRESSURE_OF_FACILIT,Buckeye Pipeline Overpressure of Facility Piping,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+afc7097e-3647-4301-95d0-3c1c834ab27e,CONTROL_SYSTEM_END_OF_LIFE,Control System End of Life,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+bedfe31c-df0c-43de-beb8-55231ed7daf3,E_I_AS_FOUND_DRAWING_UPDATE,E&I As-Found Drawing Update,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+d1e95e70-fc07-4ebf-b71d-8ea75174d5d7,PROPANE_CAVERN_PUMP_P_01_REPLACEMENT,"Propane Cavern Pump, P-01, Replacement",Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+dffe773e-bddc-4416-b233-26ca88623ae2,V_44_INSTRUMENTATION_RELIABILITY,V-44 Instrumentation Reliability,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+5b1569fa-30e4-4af8-8dea-3493ea435db3,WATER_TANK_INSPECTION,Water Tank Inspection,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+86ea7846-fc37-4401-ab43-797629898394,SITE_REGRADING,Site Regrading,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+5f71e58e-a000-4c3a-9da8-e843fbd0ae27,RIPET_OFFLOADING_REDESIGN,RIPET Offloading Redesign,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+f268dd7c-b0ce-48f9-8a78-267e5b80181d,PERMANENT_CHILLING,Permanent Chilling,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+ebe915ee-6a18-4763-a3b3-0448a2e164cc,OFFLOAD_OPTIMIZATION,Offload Optimization,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+f51e6b2b-5d29-49eb-a0ac-931bbcd338ea,RIPET_12_SWITCHES_STUDY,RIPET 12 Switches Study,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+317998d7-6abe-4161-88f4-a670888ddce5,RAILVUE_UPGRADE,Railvue Upgrade,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+523e5afe-aed2-44ba-aff6-85064592468e,RAILRACK_HOSE_ESV_INSTALLATION,Railrack Hose ESV Installation,Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+8476bce8-ef20-4140-bbed-34a44ce38948,CONDY_PUMP_UPGRADES,Condy Pump Upgrades,Pre-FID Project Work (DevEx),FAC_ROSEDALE,,Active,true
+7f5e2502-3837-4cce-a132-57de368f8aea,BURNER_MANAGEMENT_SYSTEM_UPGRADES,Burner Management System Upgrades,Pre-FID Project Work (DevEx),FAC_SLAVE_LAKE,,Active,true
+32f64be8-5bf1-4328-beb9-74d87dd79987,DRILLSOL_TANK_AND_BLEND_TANK_MIXERS,Drillsol Tank and Blend Tank Mixers,Pre-FID Project Work (DevEx),FAC_SLAVE_LAKE,,Active,true
+1a9043b4-d65b-4fa0-bafe-bf7688615123,RISK_REDUCTION_PROJECT,Risk Reduction Project,Pre-FID Project Work (DevEx),FAC_SLAVE_LAKE,,Active,true
+ab176e5e-90fc-4e00-8654-cc7cb84742da,TRAIN_1_EXCHANGER_REPLACEMENT_E_130,Train 1 Exchanger Replacement (E-130),Pre-FID Project Work (DevEx),FAC_SUNDRE,,Active,true
+cde7d336-55fe-45a8-b09b-3436a61bbcc2,TRAIN_1_EXCHANGER_REPLACEMENT_E_510,Train 1 Exchanger Replacement (E-510),Pre-FID Project Work (DevEx),FAC_SUNDRE,,Active,true
+5ac8e0da-de20-4f1f-904d-0fe05587956b,RTU_PLC_SYSTEM_UPGRADE_WITH_SAFETY_SHUTD,RTU/PLC System Upgrade with Safety Shutdowns,Pre-FID Project Work (DevEx),FAC_YELLOWKNIFE,,Active,true
+3fb2d129-ed93-472f-8f4c-47f07907675b,OFFLOAD_COMPRESSOR_VIBRATION,Offload Compressor Vibration,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+eb3c7d26-06a3-47a2-9488-917f44c44157,C4_OUTAGES_SCOPES,C4 Outages Scopes,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+356ba837-7de1-421e-8641-2b96cb5acbb1,INTALCO_PIER_EQUIPMENT_REMOVAL,Intalco Pier Equipment Removal,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+0b560434-4064-4180-98ca-0780800e5ac5,P_85_VFD,P-85 VFD,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+ad1e3051-7916-456d-99f5-717ca1a50cc8,FIREWATER_GAP_ASSESSMENT,Firewater Gap Assessment,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+eafc16c8-e34c-4c87-95ed-64840cefa1da,CONTROL_ADMIN_BUILDING,Control/Admin Building,Pre-FID Project Work (DevEx),FAC_FERNDALE,,Active,true
+0b3cd3bf-2b22-433a-87fe-db9c480d7fbb,T1_MOLE_SIEVE_LEAN_REGEN_GAS_SOURCE,T1 - Mole Sieve Lean Regen Gas Source,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+d9ea1a0a-d2ce-45da-8276-45156e3d4b5f,T1_RSV_REGEN_GAS_COALESCER,T1 - RSV/Regen Gas Coalescer,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+b361c97b-670d-4d9c-bafa-dfefde406fcd,T1_MERICAT_IMPROVEMENTS,T1 - Mericat Improvements,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+3c25f206-47af-4ce0-857a-4d2bca0204ca,T1_WATER_INJECTION,T1 - Water Injection,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+c97548e8-664c-44c1-942c-a9b5c03a9e72,T1_RICH_AMINE_FILTER_REPLACEMENT,T1 - Rich Amine Filter Replacement,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+33d5581d-cef8-4aa6-9c1b-5373d97417f9,T2_WO_1607,T2 - WO 1607,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+a0088004-3ffc-41c4-ada6-f697d2a9689c,K_201_VIBRATION,K-201 Vibration,Pre-FID Project Work (DevEx),FAC_DIMSDALE,,Active,true
+86c0946a-6cdb-4a8c-82e6-170769e00958,TOWNSEND_LOAD_SHEDDING_OPTIMIZATION,Townsend Load Shedding Optimization,Pre-FID Project Work (DevEx),FAC_NEBC,,Active,true
+35184c71-c8ef-4fcc-90d4-c291f79b41b7,NORTH_PINE_E_GEN,North Pine E-Gen,Pre-FID Project Work (DevEx),FAC_NEBC,,Active,true
+bba20978-5c78-4e28-87ad-19fefb990414,C41F_CYCLONE_SEPARATOR,C41F - Cyclone Separator,Pre-FID Project Work (DevEx),FAC_NEBC,,Active,true
+6f28fbfe-4693-4d8e-ad3a-6973fbe31896,TOWNSEND_2027_TA_PRESPEND,Townsend 2027 TA - Prespend,Pre-FID Project Work (DevEx),FAC_NEBC,,Active,true
+5a95ab38-3103-4fe9-b4b1-2977fbb4f675,16_24_RTU,16-24 RTU,Pre-FID Project Work (DevEx),FAC_DIMSDALE,,Active,true
+02c6118f-f62d-410f-b79a-66014e53dcbf,WATER_DEWPOINT_ANALYZER,Water Dewpoint Analyzer,Pre-FID Project Work (DevEx),FAC_DIMSDALE,,Active,true
+0b70ed61-63fa-49c7-b176-5ca17910bdd0,WARM_STORAGE,Warm Storage,Pre-FID Project Work (DevEx),FAC_DIMSDALE,,Active,true
+a2b51233-cb8a-45d6-9f61-00a911645d6c,53_F,53-F,Pre-FID Project Work (DevEx),FAC_NEBC,,Active,true
+ade6552c-0449-4ee8-a3e9-368806259374,BLAIR_CREEK_58_F_TIE_IN,Blair Creek 58-F tie in,Pre-FID Project Work (DevEx),FAC_NEBC,,Active,true
+ae81d713-aff4-484f-9a67-855ec6992e69,GRIFFITH_1_MCC_END_OF_LIFE_REPLACEMENT,Griffith - #1 MCC End of Life Replacement,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+e0da924a-5969-43f5-9582-28006e569e3a,GRIFFITH_BUCKEYE_C4_BATCHING_PROJECT_OVE,Griffith - Buckeye C4 Batching Project (+ Over Pressure Protection),Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+a349195f-6c12-4c95-a1da-7e08e7920733,GRIFFITH_CONTROL_SYSTEM_END_OF_LIFE_DCS,Griffith - Control System End of Life (DCS Replacement),Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+769255f3-56a7-4aa0-9a0f-2d6f191c0ca1,GRIFFITH_PROPANE_CAVERN_PUMP_P_01_REPLAC,"Griffith - Propane Cavern Pump, P-01, Replacement",Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+24408420-06fc-4561-af9d-e041522a652b,SLAVE_LAKE_RISK_REDUCTION_PROJECT,Slave Lake - Risk Reduction Project,Pre-FID Project Work (DevEx),FAC_SLAVE_LAKE,,Active,true
+925952d6-57a6-4dc0-9ae5-6d8ba0ddd0c8,SUNDRE_RISK_REDUCTION_PROJECT,Sundre - Risk Reduction Project,Pre-FID Project Work (DevEx),FAC_SUNDRE,,Active,true
+5f57b034-52a1-4919-bc7d-fda433b4e194,LOAD_SHEDDING_OPTIMIZATION,Load Shedding Optimization,Pre-FID Project Work (DevEx),FAC_TOWNSEND,,Active,true
+cc772dd3-687d-471c-8220-c2f7fa87429e,58_F_TIE_IN,58-F tie in,Pre-FID Project Work (DevEx),FAC_BLAIR,,Active,true
+001fe018-f780-49aa-8660-3982ca71e63f,EEEP_ETHANE_PUMP_REDUNDANCY,EEEP Ethane Pump Redundancy,Pre-FID Project Work (DevEx),FAC_EEEP,,Active,true
+1788fa74-eb49-41b2-b382-51441a5d7669,AFS_RAIL_RACK_LOADING_ARM_MODIFICATIONS,AFS - Rail Rack Loading Arm Modifications,Pre-FID Project Work (DevEx),FAC_AFS,,Active,true
+a85b7cb3-c68c-4fb2-bbcc-b1b2951d80b2,AFS_TANK_FARM_LINER_REPLACEMENT,AFS - Tank Farm Liner Replacement,Pre-FID Project Work (DevEx),FAC_AFS,,Active,true
+6726fa91-c8c0-42d5-bfd6-f3a44055fd5c,CRUDE_AND_TERMINALS_VOC_EMISSION_CAPTURE,Crude and Terminals - VOC Emission Capture from Truck & Tanks,Pre-FID Project Work (DevEx),FAC_CRUDE_TERMINALS,,Active,true
+0a197585-14d7-4384-9215-8ec7ae3ab70d,EEEP_FIREWATER_SYSTEM_RISK,EEEP Firewater System Risk,Pre-FID Project Work (DevEx),FAC_EEEP,,Active,true
+edecc248-2fdb-4b90-a6eb-a567f161989f,EEEP_COMPRESSION_MODERNIZATION,EEEP Compression Modernization,Pre-FID Project Work (DevEx),FAC_EEEP,,Active,true
+d488e7a5-346c-441d-9da1-c1a622e78f31,GRIFFITH_CAVERN_ESDV_ISOLATION,Griffith - Cavern ESDV Isolation,Pre-FID Project Work (DevEx),FAC_GRIFFITH,,Active,true
+f78f712a-6dc6-4c6d-b196-9c273695fb44,JEEP_EMERGENCY_GENERATOR_OBSOLETE,JEEP Emergency Generator Obsolete,Pre-FID Project Work (DevEx),FAC_JEEP,,Active,true
+29890261-f485-42e0-b6a2-18719b62cf61,T1_MOLE_SIEVE_LEAN_REGEN_GAS_SOURCE,T1- Mole Sieve Lean Regen Gas Source,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+37576e75-5936-478e-9ed3-4010b73b9830,RAILRACK_REDESIGN_ARM_REMOVAL,Railrack Redesign (Arm removal),Pre-FID Project Work (DevEx),FAC_RIPET,,Active,true
+e6102f81-c755-4cc9-8079-e5c8d234b67e,SLAVE_LAKE_DRILLSOL_TANK_AND_BLEND_TANK,Slave Lake - Drillsol Tank and Blend Tank Mixers,Pre-FID Project Work (DevEx),FAC_SLAVE_LAKE,,Active,true
+33e7f2eb-a09c-4d06-8dc4-e41a8143bfea,SUNDRE_TRAIN_1_EXCHANGER_REPLACEMENT_E_1,Sundre - Train 1 Exchanger Replacement (E-130),Pre-FID Project Work (DevEx),FAC_SUNDRE,,Active,true
+2fd7a362-2c35-4a7e-8d16-fa87d4860188,SUNDRE_TRAIN_1_EXCHANGER_REPLACEMENT_E_5,Sundre - Train 1 Exchanger Replacement (E-510),Pre-FID Project Work (DevEx),FAC_SUNDRE,,Active,true
+5ec270c5-3b9e-4939-8eea-f0f61e28eae9,T1_T2A_CONNECTION_TO_TC_SALES_HIGHER_PRE,T1/T2A connection to TC sales (higher pressure sales gas system),Pre-FID Project Work (DevEx),FAC_TOWNSEND,,Active,true
+13201b69-5f3d-4fbf-8b1c-e9e9b15d4f80,PIPESTONE_FEED_GAS_COMPRESSOR_VALVES_VVC,Pipestone Feed Gas Compressor - Valves/ VVCP - Inlet Separation Upgrades,Pre-FID Project Work (DevEx),FAC_PIPESTONE,,Active,true
+108302de-bbbf-4887-a2bb-cf5048ba8647,200702101_STORM_LACT,200702101 - Storm LACT,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+1e23ae85-3c83-49a3-bc5f-d0af4f2929a1,200702102_STORM_PL_LATERAL,200702102 - Storm PL Lateral,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+a66ead18-7f92-4c2f-aa37-412344a8caee,200702103_STORM_LACT_PL_COMMISSIONING,200702103 - Storm LACT/PL Commissioning,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+54b9c3e6-a2b5-4df9-b8df-93fff08523a3,200704201_NIG_CREEK_GP2B_PHASE_1,200704201 - NIG Creek - GP2B Phase 1,Growth & Opti Project,FAC_AITKEN,,Active,true
+f50116b9-5072-404e-8c05-208cec25d473,200704202_NIG_CREEK_GP2B_PHASE_2,200704202 - NIG Creek - GP2B Phase 2,Growth & Opti Project,FAC_AITKEN,,Active,true
+c291fa4a-66c5-48bf-acbe-2c5d11610a62,201900100_2020_RIPET_OPTIMIZATION,201900100 - 2020 RIPET Optimization,Growth & Opti Project,FAC_RIPET,,Active,true
+cd180588-b34f-48c1-a194-5963dfde30a8,201900200_2020_RIPET_OPTIMIZATION,201900200 - 2020 RIPET Optimization,Growth & Opti Project,FAC_RIPET,,Active,true
+f482bb27-5b48-4236-8c73-09c763307af1,201900500_MARINE_LOADING_PUMP,201900500 - Marine Loading Pump,Growth & Opti Project,FAC_FERNDALE,,Active,true
+96640b1e-0d8b-4e5c-b59c-3618e75f2e73,210703900_NORTH_PINE_SULPHUR_ANALYZER,210703900 - North Pine Sulphur Analyzer,Growth & Opti Project,FAC_NORTH_PINE,,Active,true
+ca339cc8-b50a-4748-b49b-90b9822f2739,210705500_NPINE_PERM_SPEC_C3_C4_TRUCK_IN,210705500 - NPine Perm Spec C3 C4 Truck-In,Growth & Opti Project,FAC_NORTH_PINE,,Active,true
+f8f0e1c0-7997-49a8-b7b7-6556de87ea2d,210706300_NGL_SALES_SULPHUR_ANALYZER,210706300 - NGL Sales Sulphur Analyzer,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+3d74bf46-5de8-4d0d-8cac-191253cf895b,211900300_INTALCO_LAND_PURCHASE,211900300 - Intalco Land Purchase,Growth & Opti Project,FAC_FERNDALE,,Active,true
+859c7e02-abcc-4dd4-b862-577a1b8fe329,211901700_SLAVE_LAKE_TANK_FARM_ADDITION,211901700 - Slave Lake Tank Farm Addition,Growth & Opti Project,FAC_SLAVE_LAKE,,Active,true
+8613dd7a-d8df-4c71-84a8-67dc2c59c5e9,211901800_FERNDALE_MLA_REPLACEMENT,211901800 - Ferndale MLA Replacement,Growth & Opti Project,FAC_FERNDALE,,Active,true
+f5c6ab36-a54b-45db-9e7d-141a3c37bc6f,211902200_RIPET_E_GENERATOR,211902200 - RIPET E - Generator,Growth & Opti Project,FAC_RIPET,,Active,true
+7d3bc264-b672-4543-b8ae-4d7ce13a0dbc,220702000_HARMATTAN_DEMURRAGE_REDUCTION,220702000 - Harmattan Demurrage Reduction,Growth & Opti Project,FAC_HARMATTAN,,Active,true
+54596c72-67d4-4828-8b91-67c23c477294,220702400_MERC_115_DEBOTTLENECK,220702400 - MERC 115% Debottleneck,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+7132b40c-8131-42da-94fe-b32866746299,220702500_N_PINE_C3_SHIPPING_PUMPS_UPG,220702500 - N. Pine C3 Shipping Pumps UPG,Growth & Opti Project,FAC_NORTH_PINE,,Active,true
+bc3476a3-aa5b-475a-890f-2a14e8aeef7c,220702801_STINGRAY_PL_CONSTRUCTION,220702801 - Stingray - PL Construction,Growth & Opti Project,FAC_HARMATTAN,,Active,true
+ec0b0ef8-4775-4a0b-8e40-a68cb7bbe326,220702802_STINGRAY_EAGLE_HILL_PIP_MODS,220702802 - Stingray - Eagle Hill Pip Mods,Growth & Opti Project,FAC_HARMATTAN,,Active,true
+1206ff14-03e1-4dd4-968c-ec8e473f5bb1,220702803_STINGRAY_HARM_PIPING_MODS,220702803 - Stingray - HARM Piping Mods,Growth & Opti Project,FAC_HARMATTAN,,Active,true
+82131021-625b-4aa4-ad3a-f422d3f91e88,220702804_STINGRAY_PL_INTEGRITY_AUTOM,220702804 - Stingray - PL Integrity/Autom,Growth & Opti Project,FAC_HARMATTAN,,Active,true
+e3d9ca97-378b-4471-813b-0bf4286940b4,220703000_MERC_133_DEBOTTLENECK,220703000 - MERC 133% Debottleneck,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+42b985b2-9bfc-4629-ae38-7717778aecc8,221900600_PERMANENT_400T_CHILLER,221900600 - Permanent 400T Chiller,Growth & Opti Project,FAC_FERNDALE,,Active,true
+d88b80f9-59f4-4064-b616-a201e7dde2aa,221901200_YELLOWKNIFE_TANK_FARM_STORAGE,221901200 - Yellowknife Tank Farm Storage,Growth & Opti Project,FAC_YELLOWKNIFE,,Active,true
+f64be5d1-db84-4991-819a-1c6f55c7e745,221901400_GRIFFITH_TEPPCO_CONNECTION,221901400 - Griffith TEPPCO Connection,Growth & Opti Project,FAC_GRIFFITH,,Active,true
+2146f697-ddaf-4238-9e75-a70c2f9281c3,221902001_EXPANSION_PREFEED,221902001 - Expansion  - PreFEED,Growth & Opti Project,FAC_RIPET,,Active,true
+73c598b3-aa54-40be-a81b-2a70c62aad85,221902100_RIPET_3RD_LPG_FEED_PUMP,221902100 - RIPET 3rd LPG FEED Pump,Growth & Opti Project,FAC_RIPET,,Active,true
+26b8c61d-c1a5-4a7f-9f1a-d6e55dfdc387,221903000_SLAVE_LK_NATURAL_GAS_TIE_IN,221903000 - Slave LK Natural Gas Tie-In,Growth & Opti Project,FAC_SLAVE_LAKE,,Active,true
+81f45223-fde1-4b47-b054-680a320ceaed,221903201_RIEEF_PREFEED,221903201 - RIEEF - PreFEED,Growth & Opti Project,FAC_REEF,,Active,true
+87fb42e5-6b07-4569-9eb6-1ca343a3daba,230000100_UOC_REMOTE_MONITORING,230000100 - UOC Remote Monitoring,Growth & Opti Project,FAC_MIDSTREAM,,Active,true
+8b74952f-d9a3-4e3b-b6f7-3723fec83d47,230001501_RIEEF_FEED_BARGE_LANDING,230001501 - RIEEF FEED - Barge Landing,Growth & Opti Project,FAC_REEF,,Active,true
+2ce88dbe-7157-4552-8437-32efba353c01,230001502_RIEEF_FEED_COMMON,230001502 - RIEEF FEED - Common,Growth & Opti Project,FAC_REEF,,Active,true
+45f4832c-3e95-40ec-ac98-88cd3b64aa70,230001503_RIEEF_FEED_JETTY,230001503 - RIEEF FEED - Jetty,Growth & Opti Project,FAC_REEF,,Active,true
+4110d91c-49aa-4fae-a87f-ab74ee320ec0,230001504_RIEEF_FEED_RRUC_EARTHWORKS,230001504 - RIEEF FEED - RRUC Earthworks,Growth & Opti Project,FAC_REEF,,Active,true
+bdfb4fed-3385-4bb1-8033-eae041f11d0f,230001505_RIEEF_FEED_RRUC_RAIL,230001505 - RIEEF FEED - RRUC Rail,Growth & Opti Project,FAC_REEF,,Active,true
+b3c8f24c-1615-4d7c-95b0-cd102a1b54bd,230001506_RIEEF_FEED_RRUC_TERMINAL,230001506 - RIEEF FEED - RRUC Terminal,Growth & Opti Project,FAC_REEF,,Active,true
+2625f735-6db0-4ada-abc5-cc739d65b160,230001507_RIEEF_FEED_STORAGE,230001507 - RIEEF FEED - Storage,Growth & Opti Project,FAC_REEF,,Active,true
+c113a4b2-7cda-4f39-ba21-7172b176ad0d,230001508_RIEEF_FEED_UPLAND,230001508 - RIEEF FEED - Upland,Growth & Opti Project,FAC_REEF,,Active,true
+927310e4-4f25-464c-9084-653f6755952a,230002700_PIPESTONE_LL_ACQ_CAPEX,230002700 - Pipestone ll Acq - Capex,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+2278bb78-0aa3-41ac-a2c0-3e484dade5c9,230002701_PS2_FAC_HISTORICAL_SPEND,230002701 - PS2 FAC - Historical Spend,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+8e904353-f26e-4b9c-8562-de96d036169a,230002702_PS2_GGS_HISTORICAL_SPEND,230002702 - PS2 GGS- Historical Spend,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+ae444edb-539a-448f-a0f0-4429fb8880e2,230002703_PS2_AGI_HISTORICAL_SPEND,230002703 - PS2 AGI - Historical Spend,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+8a4e4757-6159-464d-99fc-10c795415c2d,230002705_PS2_FACILITY_POST_FID,230002705 - PS2 Facility - Post FID,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+7e767fb9-8d44-408e-9160-e651c24b282f,230002706_PS2_GGC_POST_FID,230002706 - PS2 GGC- Post FID,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+d9ddbb0f-c3d1-4305-ae7d-3d1125d71b69,230002707_PS2_AGI_POST_FID,230002707 - PS2 AGI - Post FID,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+660f490f-ec0b-4e34-9a18-87d11f915dd4,230002708_PS2_COMMON_POST_FID,230002708 - PS2 Common - Post FID,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+09a62121-e9e4-4e90-a9ae-3995937fbf92,230700100_T1_T2A_SALES_GAS_MOP_INCREASE,230700100 - T1_T2A Sales Gas MOP Increase,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+44a20239-7a0f-40a7-b223-27c71d6e2a67,230700200_TRUCK_STA_RACK_2_MODIFICATIONS,230700200 - Truck STA Rack#2 Modifications,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+feb6fea2-f6c2-4268-98b8-cd0f19ee0659,230700400_NP_FACILITY_DEBOTTLENECKING,230700400 - NP Facility Debottlenecking,Growth & Opti Project,FAC_NORTH_PINE,,Active,true
+b247655c-320c-484c-a8cf-e7a9dc6d7f69,230700701_NEBC_CAPACITY_EXP_FEED,230700701 - NEBC Capacity Exp - FEED,Growth & Opti Project,FAC_NEBC,,Active,true
+a2759f88-c2d2-49e9-a739-b142259c1787,230700800_NORTH_PINE_BACKUP_GENERATOR,230700800 - North Pine Backup Generator,Growth & Opti Project,FAC_NORTH_PINE,,Active,true
+bfa9c8d4-45e8-4f9f-8cea-9f88b53fd824,230701300_T2B_DSO_SOLVENT_INJECTION,230701300 - T2B DSO Solvent Injection,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+6f2b3c6f-17e0-4b70-81ff-33455972415e,230701500_TTT_WATER_IN_NGL_ANALYZER,230701500 - TTT Water-In-NGL Analyzer,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+a69671d3-ec70-4fc6-b939-fab11682842f,231900701_REGULATORY_IMPACT_STUDY_FEED,231900701 - Regulatory Impact Study - FEED,Growth & Opti Project,FAC_FERNDALE,,Active,true
+6d38231b-e6a4-4587-a8f1-3bd4d42f1d02,231901100_RIPET_LPG_ADD_L_SEASONAL_CL,231901100 - RIPET LPG Add'l Seasonal CL,Growth & Opti Project,FAC_RIPET,,Active,true
+692e67d6-4c25-413d-9a44-3ff8880f1bb2,231901301_RIEEF_FEED_BARGE_LANDING,231901301 - RIEEF FEED - Barge Landing,Growth & Opti Project,FAC_REEF,,Active,true
+ed4f9ce3-8e43-4993-96a3-8aac6b2e1bb3,231901302_RIEEF_FEED_COMMON,231901302 - RIEEF FEED - Common,Growth & Opti Project,FAC_REEF,,Active,true
+885c2383-2db9-419a-9ec8-26b4f2de6242,231901303_RIEEF_FEED_JETTY,231901303 - RIEEF FEED - Jetty,Growth & Opti Project,FAC_REEF,,Active,true
+7907da7b-2327-4f86-8c03-164321d4ba46,231901304_RIEEF_FEED_RRUC_EARTHWORKS,231901304 - RIEEF FEED - RRUC Earthworks,Growth & Opti Project,FAC_REEF,,Active,true
+3d606c2a-7488-4b8e-b445-48fe5d2650f8,231901305_RIEEF_FEED_RRUC_RAIL,231901305 - RIEEF FEED - RRUC Rail,Growth & Opti Project,FAC_REEF,,Active,true
+0c8e2f6b-d728-460c-bea9-0bd47b69e358,231901306_RIEEF_FEED_RRUC_TERMINAL,231901306 - RIEEF FEED - RRUC Terminal,Growth & Opti Project,FAC_REEF,,Active,true
+9607a493-cc3b-406b-9253-bea91c3950f7,231901307_RIEEF_FEED_STORAGE,231901307 - RIEEF FEED - Storage,Growth & Opti Project,FAC_REEF,,Active,true
+5b6ba8d9-8a1a-4e4c-8e19-347e8e38b08e,231901308_RIEEF_FEED_UPLAND,231901308 - RIEEF FEED - Upland,Growth & Opti Project,FAC_REEF,,Active,true
+b2451f76-2ed1-44d0-af91-bb25197a4ec9,240000201_RIEEF_UPLANDS_FACILITY_EXECUTE,240000201 - RIEEF Uplands Facility Execute,Growth & Opti Project,FAC_REEF,,Active,true
+23a4b04e-4454-4a48-8bd5-447f3989f70c,240000202_RIEEF_UPLANDS_STORAGE_EXECUTE,240000202 - RIEEF Uplands Storage Execute,Growth & Opti Project,FAC_REEF,,Active,true
+837a5e7d-73bd-4d87-b8a9-f680c64c2314,240000203_RIEEF_JETTY_EXECUTE,240000203 - RIEEF Jetty Execute,Growth & Opti Project,FAC_REEF,,Active,true
+3cc97f73-d703-4f51-a767-bcef7f90c278,240000204_RIEEF_HO_OWNERS_COST_EXECUTE,240000204 - RIEEF HO Owners Cost Execute,Growth & Opti Project,FAC_REEF,,Active,true
+e9e1f9c1-ce7d-438f-abf5-cfbe2894245f,240000205_RIEEF_RRUC_RAIL_YARD_EXECUTE,240000205 - RIEEF RRUC Rail Yard Execute,Growth & Opti Project,FAC_REEF,,Active,true
+0a771ba2-66ea-4c30-99a4-8279f204a8c7,240000206_RIEEF_SITE_OWNERS_COST_EXECUTE,240000206 - RIEEF Site Owners Cost Execute,Growth & Opti Project,FAC_REEF,,Active,true
+4ec51b30-5226-4402-a489-5652aafafb98,240000207_RIEEF_RRUC_OFFLOADING_EXECUTE,240000207 - RIEEF RRUC Offloading Execute,Growth & Opti Project,FAC_REEF,,Active,true
+46ed9c8d-49fb-4373-a766-3945bdd6232c,240000208_RIEEF_CSU_EXECUTE,240000208 - RIEEF CSU Execute,Growth & Opti Project,FAC_REEF,,Active,true
+cd93f55d-785b-4a82-b396-c357eb51b5a0,240002200_PIPESTONE_OH_COMPRESSOR,240002200 - Pipestone OH Compressor,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+cc8b4ccc-5e9b-475a-8741-86507df3652c,240700200_JEEP_C2_REJECTION_LINE,240700200 - JEEP C2 Rejection Line,Growth & Opti Project,FAC_JEEP,,Active,true
+81a03e09-ea31-4192-a2b4-4acb66fbbae9,240700800_NORTH_PAD_PL_MODIFICATIONS,240700800 - North Pad PL Modifications,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+c2d08b63-9db7-4657-aae2-70ff8baab1ca,240800100_DIMSDALE_11_35_INJECTION_WELL,240800100 - Dimsdale 11-35 Injection Well,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+dca31913-6d04-42b1-87fe-1ba11a80f6c4,240800200_DIMSDALE_K301_REDEPLOYMENT,240800200 - Dimsdale K301 Redeployment,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+a1b528b7-5361-43fd-ae0e-671331e2d8bc,241900601_RIPET_METHANOL_REMOVAL_FEED,241900601 - RIPET Methanol Removal - FEED,Growth & Opti Project,FAC_RIPET,,Active,true
+6ea4a3f2-488e-44c9-aba9-b50b96277b56,241900603_RIPET_METHANOL_REMOVAL_FID,241900603 - RIPET Methanol Removal  - FID,Growth & Opti Project,FAC_RIPET,,Active,true
+96552a08-7554-4816-84e7-2ed5ba39ce9c,241900800_RIEEF_CONTRACTUAL_FID_PAYMENT,241900800 - RIEEF Contractual FID Payment,Growth & Opti Project,FAC_REEF,,Active,true
+585d97d8-e3b3-40c9-b53b-351cd1ddae99,241900901_RIEEF_UPLANDS_FACILITY_EXECUTE,241900901 - RIEEF Uplands Facility Execute,Growth & Opti Project,FAC_REEF,,Active,true
+015eb702-8f23-4cfa-87be-bed9e0c02cd5,241900902_RIEEF_UPLANDS_STORAGE_EXECUTE,241900902 - RIEEF Uplands Storage Execute,Growth & Opti Project,FAC_REEF,,Active,true
+48523c35-3668-40a9-ab5e-9846a9513c6c,241900903_RIEEF_JETTY_EXECUTE,241900903 - RIEEF Jetty Execute,Growth & Opti Project,FAC_REEF,,Active,true
+2a04b1d7-f464-4879-92f3-3ad934694e55,241900904_RIEEF_HO_OWNERS_COST_EXECUTE,241900904 - RIEEF HO Owners Cost Execute,Growth & Opti Project,FAC_REEF,,Active,true
+9c18bc29-8d32-45cf-aaf4-47d56f2f0765,241900905_RIEEF_RRUC_RAIL_YARD_EXECUTE,241900905 - RIEEF RRUC Rail Yard Execute,Growth & Opti Project,FAC_REEF,,Active,true
+f3f7d550-aeb7-4baf-af01-3d6008df5618,241900906_RIEEF_SITE_OWNERS_COST_EXECUTE,241900906 - RIEEF Site Owners Cost Execute,Growth & Opti Project,FAC_REEF,,Active,true
+0dc8ea7e-cc8e-47f7-a1a6-1b704384ee6c,241900907_RIEEF_RRUC_OFFLOADING_EXECUTE,241900907 - RIEEF RRUC Offloading Execute,Growth & Opti Project,FAC_REEF,,Active,true
+3a343166-d5d1-4256-bb12-34de54fbb73b,241900908_RIEEF_CSU_EXECUTE,241900908 - RIEEF CSU Execute,Growth & Opti Project,FAC_REEF,,Active,true
+b44ebfff-7c1c-4046-8697-014f1aa0b9ea,241901600_BNSF_SELF_SWITCHING,241901600 - BNSF Self-Switching,Growth & Opti Project,FAC_FERNDALE,,Active,true
+a5b5f337-c456-45fb-8bca-79f84c2d6f48,250002501_REEF_OPTI_PHASE_1,250002501 - REEF Opti Phase 1,Growth & Opti Project,FAC_REEF,,Active,true
+bd3a50d7-33ab-4822-a787-76b31b769a9d,250002600_PS2_DEBOTTLENECK_PROGRAM,250002600 - PS2 Debottleneck Program,Growth & Opti Project,FAC_PIPESTONE,,Active,true
+8081f605-0afe-4b98-9746-2ceca0ca92dc,250700100_NEBC_KOBES_PIPELINE,250700100 - NEBC Kobes Pipeline,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+0e875c34-70e3-4fb1-bb3a-918c495b961b,250700200_HARMATTAN_K302_OPTIMIZATION,250700200 - Harmattan K302 Optimization,Growth & Opti Project,FAC_HARMATTAN,,Active,true
+acc90ff0-99ac-4348-9abb-294d04b91813,250700300_MERCAPTAN_TREATING_EXPANSION,250700300 - Mercaptan Treating Expansion,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+9b00e4ee-7d92-4337-9a5f-8be5fe77ba6b,250701100_TWN_NGL_TREATER_DEBOTTLENECK,250701100 - TWN NGL Treater Debottleneck,Growth & Opti Project,FAC_TOWNSEND,,Active,true
+366c5bf3-d92c-49eb-9cad-2b7ad15b49d4,250800101_DIMSDALE_IT_S_COMMON,250800101 - Dimsdale IT-S Common,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+39a8c2b2-56ec-4044-87bb-817fe0ee3abb,250800102_DIMSDALE_IT_S_PIPELINE_FEED,250800102 - Dimsdale IT-S Pipeline FEED,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+5be97982-4673-4592-88e1-e57e8948d560,250800103_DIMSDALE_IT_S_05_36_FAC_FEED,250800103 - Dimsdale IT-S 05-36 FAC FEED,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+22934ff6-e543-4787-9ac7-0126ffa564fb,250800104_DIMSDALE_IT_S_08_25_FAC_FEED,250800104 - Dimsdale IT-S 08-25 FAC FEED,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+e663fb98-c250-48fd-a465-f13c2ca99323,250800105_DIMSDALE_IT_S_WELLS,250800105 - Dimsdale IT-S Wells,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+eba22f82-3e27-49d3-8dd8-df7c1c28695c,250800107_DIMSDALE_IT_S_PIPELINE_EXE,250800107 - Dimsdale IT-S Pipeline Exe,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+413ed6a2-d279-4e82-98e4-1f907ad21c11,250800108_DIMSDALE_IT_S_05_36_EXECUTION,250800108 - Dimsdale IT-S 05-36 Execution,Growth & Opti Project,FAC_DIMSDALE,,Active,true
+01dc6faf-7e92-4037-bb3c-e0f0c1d52d4a,251200100_AFS_WOLF_SSLP_TIE_IN,251200100 - AFS WOLF SSLP TIE IN,Growth & Opti Project,FAC_AFS,,Active,true
+64f43ffa-568a-4752-9da9-6b51705e2da7,251901300_GRIFFITH_MARATHON_C4_PIPELINE,251901300 - Griffith Marathon C4 Pipeline,Growth & Opti Project,FAC_GRIFFITH,,Active,true
+3962eea3-4cdc-4fc9-9a4c-4626fa2862d8,251901801_REEF_OPTIMIZATAION_PHASE_1,251901801 - REEF Optimizataion Phase 1,Growth & Opti Project,FAC_REEF,,Active,true
+e6bf46b3-9a7f-45db-b1b9-d574b1ab8d0c,251901901_RIPET_METHANOL_REMOVAL_FEED,251901901 - RIPET Methanol Removal ‐ FEED,Growth & Opti Project,FAC_RIPET,,Active,true
+de400937-3d86-4d72-9e8c-576e2babf24a,251901902_RIPET_METHANOL_REMOVAL_FID,251901902 - RIPET Methanol Removal - FID,Growth & Opti Project,FAC_RIPET,,Active,true
+8c5f07b0-2c33-4044-af5d-139e6db0c8df,261900100_RIPET_OFFLOAD_OPTIMIZATION,261900100 - RIPET Offload Optimization,Growth & Opti Project,FAC_RIPET,,Active,true
+41922926-b906-42c6-80bb-50ba307b0d77,261900201_RIPET_PERM_SZN_CHILLER_FEED,261900201 - RIPET PERM SZN Chiller - FEED,Growth & Opti Project,FAC_RIPET,,Active,true
+6b93a1aa-fe90-4e84-8a41-6ec7171c15b4,200701600_2020_JEEP_SMALL_PROJECTS,200701600 - 2020 JEEP Small Projects,Maintainance Capital Project,FAC_JEEP,,Active,true
+eb5d896a-9a3d-40a3-ba85-3bf6cf8da59c,200701700_EEEP_DCS_UPGRADE_PHASE_2,200701700 - EEEP DCS Upgrade Phase 2,Maintainance Capital Project,FAC_EEEP,,Active,true
+da847ac2-9303-4060-ac15-ac7abdaeedf2,200702400_HARM_STAGE_5_GC_UPGRADE,200702400 - HARM - Stage 5 GC Upgrade,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+662a31c1-0daf-457f-ae9b-31c939a03937,200702500_HARM_2020_SMALL_PROJECTS,200702500 - HARM - 2020 Small Projects,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+f39df946-6892-44d7-9873-e0d370cb32b2,200703700_EAGLE_HILL_COMPLIANCE,200703700 - Eagle Hill - Compliance,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+bfae268a-8eca-4078-94c1-031e93bb6674,200704301_YOUNGER_GAS_PLANT_TURNAROUND,200704301 - Younger Gas Plant Turnaround,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+d97b652d-ef31-4a76-8416-fdfa10726082,200704302_YOUNGER_FLARE_SYSTEM_UPGRADE,200704302 - Younger Flare System Upgrade,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+e14d987d-f3c6-4a29-8af4-2eeeed1191d8,200704303_YOUNGER_CONTROL_SYSTEM_UPGRADE,200704303 - Younger Control System Upgrade,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+d74fbccc-a32a-456a-b5f0-5edf071ac141,200704400_HARM_C3_INJECTION_PUMP_UPGRADE,200704400 - HARM C3 Injection Pump Upgrade,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+3427122b-eae4-4d1a-81e6-8b211c80d183,201900300_DCS_UPGRADE,201900300 - DCS Upgrade,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+acba1509-1fa6-4595-8295-540ca95465fa,201900400_PIER_SUB_SURFACE_RECLAMATION,201900400 - Pier Sub-Surface Reclamation,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+3b095f58-e39e-4e56-a790-814d035820e7,201900600_DEHY_PSV_DISCHARGE,201900600 - Dehy PSV Discharge,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+e7dfada1-c287-4e81-a5d9-3db05fe963fe,201900700_DEETHANZIER_TOWER_UPGRADE,201900700 - Deethanzier Tower Upgrade,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+a8efb1b0-49dd-4211-ae58-d1536b1f5e71,201900800_STANDBY_GENERATOR_METERING,201900800 - Standby Generator & Metering,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+567d1bfa-6495-451d-9b50-59e502b42792,210703301_TOWNSEND_1_2021_TURNAROUND,210703301 - Townsend 1 2021 Turnaround,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+58806e9b-ccf9-4de7-adb5-bd7763e92191,210703302_TOWNSEND_2A_2021_TURNAROUND,210703302 - Townsend 2A 2021 Turnaround,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+a0b1beb5-e9f3-4603-af4a-dcc06fc29025,210703303_C41F_2021_TURNAROUND,210703303 - C41F 2021 Turnaround,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+1a5c704e-813e-4eef-9ed4-6ac5373fb3c5,210703304_TRUCK_TERMINAL_2021_TURNAROUND,210703304 - Truck Terminal 2021 Turnaround,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+4df7ccdc-4429-40cf-a625-ac20614233f5,210704100_EEEP_P250_VFD_ADDITION,210704100 - EEEP P250 VFD Addition,Maintainance Capital Project,FAC_EEEP,,Active,true
+8be49af3-cc75-4542-a79a-e87db4bf29d9,210705201_HARM_DETAILED_DESIGN,210705201 - HARM - Detailed Design,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+167718c9-bbc5-475b-b8bd-074dd41996a5,210705400_HARM_2_STEAM_CONTROLS_UPGRD,210705400 - HARM - 2# Steam Controls Upgrd,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+9511f957-eaef-4121-8a8d-6323942b8774,210705600_EEEP_PACKING_VENT_UPGRADES,210705600 - EEEP Packing Vent Upgrades,Maintainance Capital Project,FAC_EEEP,,Active,true
+68752d85-dd1d-464d-ae55-544760485e22,210705800_GUNDY_SPECC3_LACT_MODIFICATION,210705800 - Gundy SpecC3 LACT Modification,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+76520ab1-4452-4546-835b-9d938381070c,210705900_MERC_NGL_PRE_HEATER_TWINNING,210705900 - MERC NGL Pre-Heater Twinning,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+6c3ac6d2-65e0-41ab-8ab6-84d093571b83,210706000_N_AITKEN_NGL_LACT_EXPANSION,210706000 - N. Aitken NGL LACT Expansion,Maintainance Capital Project,FAC_AITKEN,,Active,true
+7675991c-5107-4a16-a208-c32f336ad7ed,210706100_NPINE_SPEC_C3_HEADER_UPSIZE,210706100 - NPine Spec C3 Header Upsize,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+827800e7-53b7-450e-90f4-df2dcad7f02e,211900100_PIER_TRANSFORMER_UPGRADE,211900100 - Pier Transformer Upgrade,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+f2e4e281-e9e0-4082-8b01-5fbb4c9b684a,211900200_NEW_OFFICE_CONTROL_ROOM,211900200 - New Office & Control Room,Maintainance Capital Project,FAC_SLAVE_LAKE,,Active,true
+6f3589cd-0175-4ce0-8ab8-92defa073425,211900400_2021_BRACING_MAINT_PROGRAM,211900400 - 2021 Bracing Maint. Program,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+c61f80d6-ba67-453e-a05a-85fce4c0d815,211900500_TRESTLE_CABLE_TRAY_REROUTING,211900500 - Trestle Cable Tray Rerouting,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+33952baa-b9a6-499d-8632-f21a84644148,211900600_2021_PILING_MAINT_PROGRAM,211900600 - 2021 Piling Maint. Program,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+9f9cab6d-98b5-4d59-b39f-9b22db38458f,211900700_MCC_EQUIPMENT_REPLACEMENT,211900700 - MCC Equipment Replacement,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+3dbcd4e6-e8d2-459a-8b0c-78b64815ba35,211901100_YELLOWKNIFE_TANK_ADDITION,211901100 - Yellowknife Tank Addition,Maintainance Capital Project,FAC_YELLOWKNIFE,,Active,true
+55e57cc5-861c-4d2f-ad38-e9db14fa4061,211901200_GRIFFITH_SHOP_OFFICE_UPGRADE,211901200 - Griffith Shop & Office Upgrade,Maintainance Capital Project,FAC_GRIFFITH,,Active,true
+65730253-df9d-4e7c-b9f9-16e342baac77,211901301_TRACK_REPAIRS_UPGRADES,211901301 - Track Repairs & Upgrades,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+0b81cf20-057b-4ae0-ad2f-10b7462b2fca,211901302_GROUND_STROM_WATER_UPGRADES,211901302 - Ground & Strom Water Upgrades,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+70602dff-f4de-4935-bfb9-db0f9938c0cc,211901400_SUNDRE_VRU_MODIFICATIONS,211901400 - Sundre VRU Modifications,Maintainance Capital Project,FAC_SUNDRE,,Active,true
+6fe71c34-d005-4dfb-85ca-d68d94af9813,211901500_SUNDRE_BLEND_PLANT_2021_UPGRDE,211901500 - Sundre Blend Plant 2021 Upgrde,Maintainance Capital Project,FAC_SUNDRE,,Active,true
+740e89de-0dd8-416d-aeeb-50f5db70074e,211901600_C3_DELIVERY_LINE_REPLACEMENT,211901600 - C3 Delivery Line Replacement,Maintainance Capital Project,FAC_GRIFFITH,,Active,true
+592d3c68-5bfb-4b18-ae0c-66bf975eec80,220700600_HARM_CONSTRUCTION_INSTALL,220700600 - HARM - Construction & Install,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+77218cf5-0fce-471b-95c2-b27319b2e725,220701401_COMPRESSOR_INLET_AIR_MODS,220701401 - Compressor Inlet Air Mods,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+4489355b-5d3e-4b69-8c81-34abfc3f4331,220701402_MOC_S_AND_SMALL_PROJECTS,220701402 - MOC's and Small Projects,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+138f96c9-13d8-439c-9d60-68489f12572d,220701403_PW_COMPOSITE_REPLACEMENT,220701403 - PW Composite Replacement,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+664a24d3-3404-4c98-805c-906340224c88,220701404_REGEN_GAS_REROUTE,220701404 - Regen Gas Reroute,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+fd7dae17-3248-468c-a0b7-95b342fa3116,220701405_TURNAROUND_DEEPCUT_METERING,220701405 - Turnaround & Deepcut Metering,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+86af5c0f-54cb-496d-93f0-4db25f97dfb0,220701501_2022_HARMATTAN_TURNAROUND,220701501 - 2022 Harmattan Turnaround,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+e9a41a25-8500-409d-9a69-72c6a55efa9b,220701502_2022_HARMATTAN_SMALL_PROJECTS,220701502 - 2022 Harmattan Small Projects,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+7ea148e3-e316-4f22-95fd-74460cdac07b,220701600_2021_NEBC_TA_NORTH_PINE,220701600 - 2021 NEBC TA - North Pine,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+0a3c0ea3-840c-4dc0-aa82-e0ce8c0c1c52,220701601_2021_NEBC_TA_PIPELINE,220701601 - 2021 NEBC TA - Pipeline,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+b2b9e4d5-e299-4da7-87f4-b7ad7f707046,220701800_HARM_CGGS_SEPARATOR_UPGRADE,220701800 - HARM - CGGS Separator Upgrade,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+bd7b2ee6-db14-451a-b27c-7b6daaf1c011,220701900_JEEP_KM202_VFD_UPGRADE,220701900 - JEEP KM202 VFD Upgrade,Maintainance Capital Project,FAC_JEEP,,Active,true
+c6e06676-e48f-42b3-a199-61b05b133d61,220702101_EEEP_FIRE_GAS_UPGRADE,220702101 - EEEP Fire & Gas Upgrade,Maintainance Capital Project,FAC_EEEP,,Active,true
+5563e4ac-355d-4307-b560-37cec7a5c47f,220702102_EEEP_PUMP_ISO_SUCTION_VALUES,220702102 - EEEP Pump ISO (Suction Values),Maintainance Capital Project,FAC_EEEP,,Active,true
+0e5f82ba-741c-4c08-b1c6-86bc2e3b29c3,220702103_EEEP_SMALL_SCOPES,220702103 - EEEP Small Scopes,Maintainance Capital Project,FAC_EEEP,,Active,true
+d70b45bf-f1dc-4462-b33c-b4caa8990fc5,220702200_HARM_WATER_DISPOSAL_PL_ACQ,220702200 - HARM Water Disposal PL Acq,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+b4dca35c-757b-4fa6-9791-6133891b2c75,220702600_N_PINE_CIVIL_DRAINAGE_GRADING,220702600 - N. Pine Civil Drainage Grading,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+369ba48d-6b3f-4483-91eb-ede8a3da52e6,220702900_CARSTAIRS_PL_EXTENSION_LIFE,220702900 - Carstairs PL Extension Life,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+9068e974-9a3f-4d44-b7de-429b84b9b9a5,220703100_GORDONDALE_K2200_ENGINE_REPLC,220703100 - Gordondale K2200 Engine REPLC,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+9e7fcf66-78ba-4c36-8155-c4a743bd0386,220703200_GORDONDALE_GAGI_PROJECT,220703200 - Gordondale GAGI Project,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+2ae78a4f-d4e0-4c07-b140-18cab982b878,220703300_TOWNSEND_SOLAR_SPARE_PARTS,220703300 - Townsend Solar Spare Parts,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+01cc3d38-bbbf-4d22-8ebc-79b48d2dc514,221900100_DNR_AQUATIC_LEASE_COMPLIANCE,221900100 - DNR Aquatic Lease Compliance,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+cb535623-f008-4309-b082-460ef26ec3a1,221900301_FUEL_GAS_BLEND,221900301 - Fuel Gas Blend,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+20b5c8b1-a429-48dc-bb39-224e69aaff02,221900302_DE_ETHANIZER_DEHYDRATION,221900302 - De-Ethanizer/Dehydration,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+004a61f3-9f6e-4fbe-a5d5-f5ac3f17680c,221900303_ENCLOSED_GROUND_FLARE,221900303 - Enclosed Ground Flare,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+60abcfd4-a5a0-4af1-9cce-a92a57b260c2,221900500_SLAVE_LK_REVERSE_OSMOSIS_SYS,221900500 - Slave Lk Reverse Osmosis Sys,Maintainance Capital Project,FAC_SLAVE_LAKE,,Active,true
+1a83a59a-7de6-498f-a92b-d866d4af0e38,221900700_RIPET_RAIL_RACK_ROOF,221900700 - RIPET Rail Rack Roof,Maintainance Capital Project,FAC_RIPET,,Active,true
+9421d7ac-cde0-4696-9d6a-3be234919465,221901000_FERNDALE_K210_211_OH_CRANE,221901000 - Ferndale K210 211 OH Crane,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+c6c3f18f-3c44-4280-8f2f-c8d0457ec5dc,221901100_SARNIA_TANK_100_TURNAROUND,221901100 - Sarnia Tank 100 Turnaround,Maintainance Capital Project,FAC_MIDSTREAM,,Active,true
+0f98f3dc-d456-4b73-bfec-cea05f85e416,221901300_RIPET_DCS_CONTROLLER_EXPANSION,221901300 - RIPET DCS Controller Expansion,Maintainance Capital Project,FAC_RIPET,,Active,true
+30e81ee8-74dc-4f4d-8b57-88cb968ab8de,221902400_FERNDALE_POTABLE_WATER_COMP,221902400 - Ferndale Potable Water Comp.,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+a53e2546-7765-4240-8468-50842fe13fc0,221902500_SLAVE_LAKE_SAFETY_SHOWERS,221902500 - Slave Lake Safety Showers,Maintainance Capital Project,FAC_SLAVE_LAKE,,Active,true
+bff8138b-e5e9-48d6-8235-d4b5e72e222e,221902600_SUNDRE_SAFETY_SHOWERS,221902600 - Sundre Safety Showers,Maintainance Capital Project,FAC_SUNDRE,,Active,true
+bd8e6d70-1f1e-43c0-b293-16be41a85c89,221902700_SUNDRE_BURNER_MGMT_SYS_UPGRADE,221902700 - Sundre Burner Mgmt Sys Upgrade,Maintainance Capital Project,FAC_SUNDRE,,Active,true
+1e8d64c4-d430-43e7-86cd-8316d620c655,221902800_UNICK_ROAD_OUTFALL_UPGRADE,221902800 - Unick Road Outfall Upgrade,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+d1f10973-5ad9-42bf-b5a8-9f0791f5c9d2,221902900_RIPET_INST_AIR_NITROGEN_UP,221902900 - RIPET Inst Air/Nitrogen UP,Maintainance Capital Project,FAC_RIPET,,Active,true
+68b0bed2-f2da-4ee8-9b21-08d9155f2ea5,221903100_GRIFFITH_CAVERN_ESP_EOL_REPLC,221903100 - Griffith Cavern ESP EOL REPLC,Maintainance Capital Project,FAC_GRIFFITH,,Active,true
+44412245-1488-4467-89d3-1e9bc4cb8c71,230700301_CARSTAIRS_PL_PRE_FEED,230700301 - Carstairs PL - Pre-FEED,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+d3419e48-cbc8-4a57-91cf-8a7c98ae3ef5,230700302_CARSTAIRS_PL_CONSTRUCTION,230700302 - Carstairs PL Construction,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+44239e9a-76cc-466f-972e-b4a8a32eaa87,230700501_EEEP_2023_TURNAROUND,230700501 - EEEP 2023 Turnaround,Maintainance Capital Project,FAC_EEEP,,Active,true
+a3739a47-0daf-4bd9-b1c3-db7d484d0d07,230700502_EEEP_2023_SMALL_PROJECTS,230700502 - EEEP 2023 Small Projects,Maintainance Capital Project,FAC_EEEP,,Active,true
+aa0e1b15-8422-438f-82d6-d07d4048495e,230700601_HARM_AMINE_STRIPPER_REBOILER,230700601 - HARM - Amine Stripper Reboiler,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+089b7d9e-976f-40d3-bca1-bf4027507e5b,230700602_HARM_VFD_CONTROL_UPGRADES,230700602 - HARM - VFD Control Upgrades,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+037ff5dc-c2e1-4853-97d7-6e7a78fe00bc,230700603_HARM_C_3_CONDY_TANK_REFURB,230700603 - HARM - C-3 Condy Tank Refurb,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+e7934ebb-b426-402f-9254-fe6ad3f2616a,230700604_HARM_2A_FKO_DRAIN_REROUTE,230700604 - HARM - 2A FKO Drain Reroute,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+425921fe-dbf1-4d27-91b3-1b200a25acf9,230701000_GGP_2023_SMALL_UPG_PROJECTS,230701000 - GGP 2023 Small UPG Projects,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+7c60ecfa-31b7-4985-b8df-522e36828a86,230701100_GGP_PRODUCED_WATER_COMP_UPG,230701100 - GGP Produced Water Comp UPG,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+287e99ec-7778-4c48-b388-3a0cbbb9507a,230701200_EAGLE_HILL_C5_TANK_BASE_UPG,230701200 - Eagle Hill C5 Tank Base UPG,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+ea3b31f6-6e45-4262-bbff-aaade67b5682,230701600_HARM_CONDENSATE_LOADING_RACK_4,230701600 - HARM Condensate Loading Rack 4,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+626755a5-5855-44ef-91a2-14108c5b2ff5,230701700_HARM_COGEN_LUBE_OIL_AUX_COOLER,230701700 - HARM Cogen Lube Oil Aux Cooler,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+c3f92f20-f77a-49d0-8d9e-7e2a33d3a287,230701800_TTT_C5_WATER_CUT_METERING_UPG,230701800 - TTT C5 Water Cut Metering UPG,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+0ad78f2e-4113-49df-bd60-dccd047a7592,230701900_NP_RAIL_METHANOL_INJ_PUMP_SY,230701900 - NP Rail Methanol Inj Pump Sy,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+57be246a-6f2e-4f6e-afa0-4095a9ebd974,230702000_NP_C5_WATER_CUT_METERING_UPG,230702000 - NP C5 Water Cut Metering UPG,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+a05c96ff-1cd8-49c8-80d8-c20d3f3c9ee3,230702100_NP_RAIL_CONTROL_ROOM_PURCHASE,230702100 - NP Rail Control Room Purchase,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+665ea2f6-1f8d-46ae-81bf-1081a77f6e54,230702300_GORDONDALE_K2100_ENGINE_REPLC,230702300 - Gordondale K2100 Engine REPLC,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+43ffb140-c0b0-48d4-8019-885114612db9,230702400_YOUNGER_VFD,230702400 - Younger VFD,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+4eda9b8c-4642-417f-b549-9d18f18f55c9,230702500_YOUNGER_2023_MAINTENANCE_CAP,230702500 - Younger 2023 Maintenance Cap.,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+aeeba0cd-1344-455b-ba38-c4c3995c2f53,230702600_PEEP_2023_MAINTENANCE_CAP,230702600 - PEEP 2023 Maintenance Cap.,Maintainance Capital Project,FAC_EMPRESS,,Active,true
+0039e25c-d40d-4630-9429-5600dd651b4b,230800100_DIMSDALE_GAS_STORAGE_16_24_WO,230800100 - Dimsdale Gas Storage 16-24 WO,Maintainance Capital Project,FAC_DIMSDALE,,Active,true
+076f1c5f-1ec4-4440-bab9-f6df23a48b8d,231900100_2023_DNR_AQUATIC_LEASE_COMPL,231900100 - 2023 DNR Aquatic Lease Compl.,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+4ab746ef-4388-40b5-8d45-0fc75cb54f70,231900300_FORT_SASK_DCS_UPGRADES,231900300 - Fort Sask DCS Upgrades,Maintainance Capital Project,FAC_AFS,,Active,true
+84ab0cdb-afcd-42c7-b9b2-db7d222cb8f3,231900400_FORT_SASK_TRACKMOBILE_OVERHAUL,231900400 - Fort Sask Trackmobile Overhaul,Maintainance Capital Project,FAC_AFS,,Active,true
+87bcb9a1-944c-4508-833d-7481f98bb149,231900601_FERNDALE_TERMINAL_TURNAROUND,231900601 - Ferndale Terminal Turnaround,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+789b6811-3a3c-472e-be38-a55117886c9a,231900602_2023_T1_STORAGE_TANK_INTEGRITY,231900602 - 2023 T1 Storage Tank Integrity,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+8fbe4b73-dc06-4d47-b92c-43d8aea9c1c5,231900603_2023_TERMINAL_SMALL_PROJECTS,231900603 - 2023 Terminal Small Projects,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+d4365082-791c-4996-913c-ef3b79253315,231900604_2023_PIER_SMALL_PROJECTS,231900604 - 2023 Pier Small Projects,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+38661016-2a45-46e7-8aaf-134c1db8669f,231900800_RIPET_BOG_ENGINE_VIB_REDUCTION,231900800 - RIPET BOG Engine Vib Reduction,Maintainance Capital Project,FAC_RIPET,,Active,true
+aec0f72b-bd5c-41bf-a7df-9e5b94cb1034,231900900_RIPET_ROAD_BARRIER_INSTALL,231900900 - RIPET - Road Barrier Install,Maintainance Capital Project,FAC_RIPET,,Active,true
+6cf86b93-3e9c-4db1-9402-a52a4a889bb1,231901000_RIPET_RAIL_RACK_SAMPLING,231901000 - RIPET Rail Rack Sampling,Maintainance Capital Project,FAC_RIPET,,Active,true
+57abdb16-f304-4074-8da9-0369f836d53b,231901200_FERNDALE_NORTH_MOORING_DOLPHIN,231901200 - Ferndale North Mooring Dolphin,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+2d61489e-8aa0-4a63-8286-5e3cca4e248b,231901400_2023_TRACTOR_OVERHAULS,231901400 - 2023 Tractor Overhauls,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+ac1a04f7-277d-4a7e-bf78-5b9762373133,231901500_2023_TRACTOR_OVERHAULS,231901500 - 2023 Tractor Overhauls,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+1d4ef280-3957-4322-ab67-ff9e9b1617f3,231901600_2023_TRAILER_PURCHASES,231901600 - 2023 Trailer Purchases,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+4631a7f6-64d1-4959-88b4-748dbd549aad,231901800_SARNIA_TK100_TANK_BOTTOMS_INV,231901800 - Sarnia TK100 Tank Bottoms Inv,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+36fa41f5-f605-49b7-be17-8389453391a0,231901900_SARNIA_MISC_CAPITAL_PROJECTS,231901900 - Sarnia - Misc Capital Projects,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+fa4d3aa6-5435-484b-b359-9345eebe2f9e,231902000_FT_SASK_STEAM_BOILER,231902000 - Ft. Sask  Steam Boiler,Maintainance Capital Project,FAC_AFS,,Active,true
+c4ca3548-d261-40e0-a94f-4fa23d9f5a7c,231902200_SLAVE_LAKE_SMALL_PROJECTS,231902200 - Slave Lake - Small Projects,Maintainance Capital Project,FAC_SLAVE_LAKE,,Active,true
+1a292bb5-437c-489e-8e72-3a23e5564c49,240000400_PIPESTONE_1_AMINE_TOWER_RPL,240000400 - Pipestone 1 Amine Tower RPL,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+2b3b7e76-bdf2-45d6-b724-12689b0b1fc4,240000500_40K_HR_TURBINE_OVERHAUL,240000500 - 40K Hr Turbine Overhaul,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+9da2a1c2-63f8-451c-bc26-a8564963179b,240001200_PSGP_PS1_FEED_COMP_DRIVER,240001200 - PSGP PS1 Feed COMP Driver,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+bc8ed6e3-c8f3-4d97-9696-6ec9523d577f,240001700_PIPESTONE_INLET_HEATER,240001700 - Pipestone Inlet Heater,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+4209cdc9-c196-477d-8a77-eb1892b0b6e9,240002100_PIPESTONE_I_2025_TURNAROUND,240002100 - Pipestone I 2025 Turnaround,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+09f72063-ce60-4d86-92fb-302736fff7c4,240700100_HARM_LAND_PURCHASE,240700100 - HARM Land Purchase,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+6d644f94-9539-41bc-977e-aa5e8f5bc4b3,240700700_JEEP_2024_TURNAROUND,240700700 - JEEP 2024 Turnaround,Maintainance Capital Project,FAC_JEEP,,Active,true
+efc04a10-636c-4c2a-86e9-28e5a7f5f76a,240700900_YOUNGER_2024_MAINTENANCE_CAP,240700900 - Younger 2024 Maintenance Cap.,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+1998201a-839b-4ac7-be64-e55fa24bacc6,240701100_NP_ADV_PROCESS_CONTROL_PROJECT,240701100 - NP Adv Process Control Project,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+61bae017-3e91-4562-8a92-7fd815fe63cf,240701201_NEBC_2025_TA_TOWNSEND_EAST,240701201 - NEBC 2025 TA - Townsend East,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+81a0bdd8-528b-4f9c-8143-f7ad0343df6a,240701202_NEBC_2025_TA_NIG_CREEK,240701202 - NEBC 2025 TA - NIG Creek,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+8305f844-ec4d-448b-8a22-506092469f3f,240701203_NEBC_2025_TA_AITKEN_LACT,240701203 - NEBC 2025 TA - Aitken LACT,Maintainance Capital Project,FAC_AITKEN,,Active,true
+4bb29ca2-8ecb-4e37-89dc-19b811d9ca0f,240701204_NEBC_2025_TA_GUNDY_LACT,240701204 - NEBC 2025 TA - Gundy LACT,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+b5253ea8-41e9-491e-b2b3-461284c7315b,240701205_NEBC_25_TA_TWC_NGL_TREATING,240701205 - NEBC '25 TA - TWC NGL Treating,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+59b095d2-2d10-4aa3-83ab-a5ee3459f8d7,240701206_NEBC_25_TA_NP_LIQUID_RAIL,240701206 - NEBC '25 TA - NP Liquid & Rail,Maintainance Capital Project,FAC_NORTH_PINE,,Active,true
+6b4dde13-4e82-44d0-900e-4c30155b4a05,240701207_NEBC_2025_TA_TOWNSEND_T2B,240701207 - NEBC 2025 TA - Townsend T2B,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+dfad122e-5f07-4903-b08f-bad92e0d1c2f,241900200_2024_AQUATIC_LEASE_COMPLIANCE,241900200 - 2024 Aquatic Lease Compliance,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+93b1581d-4584-4b9c-8cf7-7daaa2a349ed,241900300_2024_TRUCKING_CAPITAL_PROGRAM,241900300 - 2024 Trucking Capital Program,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+f9d8b477-7c28-4b1f-a494-601b612f7caf,241900400_2024_TRAILER_OVERHAULS,241900400 - 2024 Trailer Overhauls,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+d53cc4f4-0971-4894-889a-fa8ef7ca7f80,241900500_2024_TRAILER_OVERHAULS,241900500 - 2024 Trailer Overhauls,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+534f703a-bebf-44ec-a8fa-0e4513b4ad7d,241900700_RIPET_2024_TURNAROUND,241900700 - RIPET 2024 Turnaround,Maintainance Capital Project,FAC_RIPET,,Active,true
+783baa00-36ee-4432-9a80-55d7bf5171ff,241901000_REPLACE_H_20_FIRED_HEATER,241901000 - Replace H-20 Fired Heater,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+a93e489f-9e4e-4f36-b632-f25d31d63d14,241901100_SARNIA_2024_JET_MIXING_PROJECT,241901100 - Sarnia 2024 Jet Mixing Project,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+680daaf3-a191-42a8-ae4e-fd6c409d6c72,241901200_SARNIA_2024_MISC_MAINTENANCE,241901200 - Sarnia 2024 Misc Maintenance,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+7d5ed635-dbb8-480c-a2c6-0e2a81b5ec1a,241901301_SUNDRE_EPA_RQMTS_FEED,241901301 - Sundre - EPA Rqmts - FEED,Maintainance Capital Project,FAC_SUNDRE,,Active,true
+0648c2d0-0313-472c-a2ad-630d5acbd84e,241901401_SLAVE_LAKE_EPA_REQMTS_FEED,241901401 - Slave Lake - EPA Reqmts - FEED,Maintainance Capital Project,FAC_SLAVE_LAKE,,Active,true
+9456dc45-7535-4286-b38f-be9a65e12351,241901501_DCS_SEG_AND_MODRN_FEED,241901501 - DCS SEG and MODRN - FEED,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+e8c591b0-7d81-4586-a2d7-2de8f2c55fc2,250001300_WEBSITE_REPLACEMENT,250001300 - Website Replacement,Maintainance Capital Project,FAC_INFORMATION_TECHNOLOGY,,Active,true
+2130f627-9c63-405f-9229-b5add7f2786f,250001800_PIPESTONE_1_2025_SMALL_PROJ,250001800 - Pipestone 1 2025 Small Proj,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+3111da69-ef97-4da4-ad99-019fc9165803,250002000_PIPESTONE_1_2_FLARE_UPGRADE,250002000 - Pipestone 1 & 2 Flare Upgrade,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+54025d69-dda5-4915-ba75-b3d0b6b30a67,250002400_PIPESTONE_2_CAPITAL_SPARES,250002400 - Pipestone 2 - Capital Spares,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+6d374ee2-88b6-4bbe-92c4-8a4b2cbe3740,250003400_PS1_8_34_WATER_INJ_WELL_FRAC,250003400 - PS1 8-34 Water INJ Well Frac,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+f4599a29-adcb-45e1-ad24-b156ba858fc2,250003500_PIPESTONE_PIPELINE_UPGRADES,250003500 - PipeStone Pipeline Upgrades,Maintainance Capital Project,FAC_PIPESTONE,,Active,true
+67ef2629-7bd4-42d7-af1e-8e8c00ee89ac,250700400_HARM_2026_TURNAROUND,250700400 - HARM - 2026 Turnaround,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+54cf7e78-e34c-486f-a943-38a77d8d9068,250700500_HARMATTAN_2026_SMALL_PROJECTS,250700500 - Harmattan 2026 Small Projects,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+4ad321b0-5380-4fe0-a1b3-be538d4f87ec,250700600_HARMATTAN_PLC_DCS_UPGRADES,250700600 - Harmattan PLC/DCS Upgrades,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+6fb998b5-0e77-4934-b63e-3a2708fa695c,250700700_HARMATTAN_K100_K500_UPGRADES,250700700 - Harmattan K100 & K500 Upgrades,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+13082d98-1367-490a-9dc8-11941ad09d3c,250700800_PEEP_2025_TURNAROUND,250700800 - PEEP 2025 Turnaround,Maintainance Capital Project,FAC_MIDSTREAM,,Active,true
+8ddba70a-4636-4f5c-9567-39210ad1d78b,250700900_YOUNGER_2025_MAINTENACE_CAP,250700900 - Younger 2025 Maintenace Cap,Maintainance Capital Project,FAC_YOUNGER,,Active,true
+870c2b1a-7583-4239-af55-7fb85b592c1a,250701000_HARM_HAK410_420_ELEC,250701000 - HARM HAK410/420 ELEC,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+b44a71d1-8e13-4b42-b01a-ebc7d7cb5122,250701200_DIDSBURY_RAIL_TRACK_PURCHASE,250701200 - Didsbury Rail Track Purchase,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+f9900b27-8822-4453-b0bf-4a1c6e6c1d92,250701300_HARMATTAN_K203_MAJOR_OVERHAUL,250701300 - Harmattan K203 Major Overhaul,Maintainance Capital Project,FAC_HARMATTAN,,Active,true
+33a320d9-fdf8-4fcc-80f7-b4b29cc3287e,250701400_GORDONDALE_WATER_PIPE_UPGRADES,250701400 - Gordondale Water Pipe Upgrades,Maintainance Capital Project,FAC_GORDONDALE,,Active,true
+236375c1-cb0e-49fe-92ed-de9a6dd6f2f4,250800200_DIMSDALE_SSSV_INSTALLATION,250800200 - Dimsdale SSSV Installation,Maintainance Capital Project,FAC_DIMSDALE,,Active,true
+9f84f9a0-bd85-4882-b7a4-419a657964ff,251900100_2024_TRUCKING_CAPITAL_PROGRAM,251900100 - 2024 Trucking Capital Program,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+e0effe0e-105f-43a9-bec4-eea47e8d8bd1,251900200_SARNIA_2024_JET_MIXING_PROJECT,251900200 - Sarnia 2024 Jet Mixing Project,Maintainance Capital Project,FAC_MIDSTREAM,,Active,true
+f62a1890-6395-4236-b49d-f1850ba1fc07,251900300_SARNIA_2024_MISC_MAINTENANCE,251900300 - Sarnia 2024 Misc Maintenance,Maintainance Capital Project,FAC_MIDSTREAM,,Active,true
+127b599c-268f-4cc2-ae51-8444236f4032,251900401_ENERCHEM_SUNDRE_EPEA_COMPL,251900401 - EnerChem Sundre EPEA Compl.,Maintainance Capital Project,FAC_SUNDRE,,Active,true
+75549567-4a59-497d-a98b-a8eaccab974e,251900501_ENERCHEM_SLAVE_LAKE_EPEA_COMPL,251900501 - EnerChem Slave Lake EPEA Compl,Maintainance Capital Project,FAC_SLAVE_LAKE,,Active,true
+08e68b2d-6d88-4802-9991-ee845e0aeab5,251900600_FERNDALE_OPTI_LOSS,251900600 - Ferndale Opti Loss,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+a73361cc-e47b-447c-b2f3-28adcdaa1af2,251900700_FRND_CRITICAL_CONTROL_UPGRADE,251900700 - FRND Critical Control Upgrade,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+d3475eab-e90d-470e-9f53-65ce64c29155,251900900_2025_TRUCKING_CAPITAL_PROGRAM,251900900 - 2025 Trucking Capital Program,Maintainance Capital Project,FAC_TERMINAL,,Active,true
+2f14464d-9a4e-400d-abe4-92c4256516c2,251901400_FERNDALE_PIER_POWER_SUPPLY,251901400 - Ferndale Pier Power Supply,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+4ded885a-6d1a-4708-be00-718b04223447,251901500_RIPET_TANK_ROOF_COATING,251901500 - RIPET Tank Roof Coating,Maintainance Capital Project,FAC_RIPET,,Active,true
+a979bfe5-3dbb-4138-ae6d-cf943e1bfc24,251901600_DOUGLAS_RD_VAULT_METER_RPL,251901600 - Douglas Rd Vault & Meter RPL,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+953a1c51-b085-4cc4-9acc-21b8ddc8c040,251901700_FERNDALE_E17_EXCHANGER,251901700 - Ferndale E17 Exchanger,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+6a608ddf-ddfb-4219-8a2a-b2539ce03ea2,251902000_YELLOWKNIFE_BERM_INSTALLATION,251902000 - Yellowknife Berm Installation,Maintainance Capital Project,FAC_YELLOWKNIFE,,Active,true
+9a6071f1-d070-4d23-9720-0ffa64cd619c,251902100_GRIFFITH_PUMP_COMPLETIONS,251902100 - Griffith Pump Completions,Maintainance Capital Project,FAC_GRIFFITH,,Active,true
+2a3a4dad-91f8-47b0-ad31-6968da1b89c7,260700100_TOWNSEND_N_C41F_CYCLONIC_UPG,260700100 - Townsend N C41F Cyclonic UPG,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+f20e19eb-f57e-4038-92fa-7638772340ba,260700201_NEBC_2027_TA_TOWNSEND_N_C41F,260700201 - NEBC 2027 TA - Townsend N C41F,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+806e1e55-0a14-40bb-bc08-ab9be5cc0a67,260700202_NEBC_2027_TA_T1,260700202 - NEBC 2027 TA - T1,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+dab07b2a-bc1c-4414-b0b2-16f2b38b3680,260700203_NEBC_2027_TA_T2A,260700203 - NEBC 2027 TA - T2A,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+41703a69-404b-473e-acc5-6f960fe4d0d3,260700204_NEBC_2027_TA_TTT,260700204 - NEBC 2027 TA - TTT,Maintainance Capital Project,FAC_TOWNSEND,,Active,true
+b3ab2ccb-f310-4973-a096-67b094a2ba97,261900300_2026_FERNDALE_AQUATIC_LEASE,261900300 - 2026 Ferndale Aquatic Lease,Maintainance Capital Project,FAC_FERNDALE,,Active,true
+5f449074-5a01-4d03-a9f5-43608e3fc456,261900500_2026_CAPITAL_TRUCKING_PROGRAM,261900500 - 2026 Capital Trucking Program,Maintainance Capital Project,FAC_MIDSTREAM,,Active,true
+508bbd4e-66d9-4905-8d81-fe616bba4bdd,RIPET_CAP,RIPET CAP,M-Post Intiative,FAC_RIPET,,Active,true
+f8b84053-4bea-43e1-8733-01bd5979473c,PSM_ROADMAP,PSM Roadmap,M-Post Intiative,FAC_ALL,,Active,true
+0611dedd-fc75-4a77-b3cf-c8fcd26d2f65,OPEX_DRIVERS,Opex Drivers,M-Post Intiative,FAC_ALL,,Active,true
+79384ec8-8b2c-4fac-b329-7ef040eb92ca,RFO,RFO,M-Post Intiative,FAC_ALL,,Active,true
+1a24823d-66fb-4fdb-abdc-ff5fc6f08d9c,MOC_2026_2660_H_301_EXHAUST_STACK_TEST_P,"MOC 2026-2660, H-301 Exhaust Stack Test Ports",MOC,FAC_JEEP,,Active,true
+8b0af07c-7d44-421e-a723-fd3d9674edc9,MOC_2026_2659_TEST_EVAL,"MOC 2026-2659, TEST Eval",MOC,FAC_GORDONDALE,,Active,true
+5e34c509-3667-4a65-9446-8b9961b77ca9,MOC_2026_2658_GAUGE_BOARD_INSTALLATION,"MOC 2026-2658, Gauge Board Installation",MOC,FAC_SLAVE_LAKE,,Active,true
+d3cb36f4-0949-4797-8b7e-3bb1bfac79c1,MOC_2026_2657_INSTALL_BLEED_RINGS_ON_THE,"MOC 2026-2657, Install bleed rings on the inlet piping to propane storage bullets",MOC,FAC_HARMATTAN,,Active,true
+8e1c22cd-7b65-4f10-b772-6eedf59b9e64,MOC_2026_2656_DIMSDALE_5_36_SDK_AS_FOUND,"MOC 2026-2656, Dimsdale 5-36 SDK As-Found",MOC,FAC_DIMSDALE,,Active,true
+7a142b88-462c-489f-965e-be3423c13595,MOC_2026_2655_INSTALL_NEW_PRESSURE_TRANS,"MOC 2026-2655, Install new pressure transmitter for indication",MOC,FAC_EAGLE_HILL,,Active,true
+581b3d84-2dcc-4304-8fd8-c51a4ecfd2cb,MOC_2026_2654_C_110_BEARING_CHANGE,"MOC 2026-2654, C-110 Bearing Change",MOC,FAC_EEEP,,Active,true
+d77f418f-d7fa-4e2c-b510-82570dde64e5,MOC_2026_2653_2026_OT_CYBER_CAPABILITY_I,"MOC 2026-2653, 2026 OT Cyber Capability Improvements",MOC,FAC_HARMATTAN,,Active,true
+58109eb5-30d2-415b-90f8-d0e307b58667,MOC_2026_2651_PIPING_MODS_ON_MAKE_UP_FUE,"MOC 2026-2651, Piping mods on make-up fuel line to sour fuel gas scrubber",MOC,FAC_HARMATTAN,,Active,true
+b4af13ce-eda5-47af-ad69-8e6ee7267eac,MOC_2026_2647_REPLACE_3_4_SW_DRAIN_VALVE,"MOC 2026-2647, Replace 3/4"" SW drain valve with a flanged 3/4"" drain valve",MOC,FAC_HARMATTAN,,Active,true
+32ceac5f-f31b-4780-801d-2eba5a51475f,MOC_2026_2645_REPLACE_HP_FLARE_METER_RUN,"MOC 2026-2645, Replace HP flare meter run (FE-1044) on MDEA contactor",MOC,FAC_HARMATTAN,,Active,true
+831b2915-9594-4a91-b36c-696dd198c583,MOC_2026_2644_MECHANICAL_WORK_ASSOCIATED,"MOC 2026-2644, Mechanical Work Associated with 2026 FCCU Project",MOC,FAC_FERNDALE_FACILITY,,Active,true
+58273974-0230-476f-9d6e-510f00f86220,MOC_2026_2642_CONDENSATE_METERING_TRAILE,"MOC 2026-2642, Condensate Metering Trailers Removal",MOC,FAC_AFS,,Active,true
+da554b40-7806-4fdc-8681-b5049af5e855,MOC_2026_2641_KELT_14_2_TO_ALA_VIA_1_14,"MOC 2026-2641, Kelt 14-2 to ALA via 1-14 battery",MOC,FAC_PIPESTONE,,Active,true
+975c731e-1009-4572-bf64-65e55508b592,MOC_2026_2635_DIDSBURY_SLIDING_GANGWAY_I,"MOC 2026-2635, Didsbury Sliding Gangway Installation Station 21/13W",MOC,FAC_HARMATTAN,,Active,true
+9b08131f-7c99-4ebd-9854-a91623dcd5c9,MOC_2026_2631_2_AIT_3602_WATERCUT_SPOOL,"MOC 2026-2631, 2-AIT-3602 Watercut Spool Replacement",MOC,FAC_PIPESTONE,,Active,true
+94565d03-8c84-4d0b-99e5-c59a68414537,MOC_2026_2622_V_1310A_B_N2_PSVS_SEAL_ASS,"MOC 2026-2622, V-1310A/B N2 PSVs Seal Assembly",MOC,FAC_PIPESTONE,,Active,true
+557c903d-f17a-47eb-a0fa-0db5a63624d9,MOC_2026_2621_V_20045_AMINE_COALESCER_PR,"MOC 2026-2621, V-20045 Amine Coalescer Pressure Up Valve",MOC,FAC_PIPESTONE,,Active,true
+ff3f1c1e-e0f3-4329-a219-6ba6800fcc9e,MOC_2026_2620_TRAIN_2_LOSS_OF_AMINE_FLOW,"MOC 2026-2620, Train 2 - Loss of Amine Flow Mitigation",MOC,FAC_PIPESTONE,,Active,true
+e522e508-0a1c-4bda-a561-6968108fa27f,MOC_2026_2618_REDUCE_PSV_HAV_0405_SET_PO,"MOC 2026-2618, Reduce PSV (HAV-0405) set point",MOC,FAC_HARMATTAN,,Active,true
+17e261c6-a27f-426f-8732-18a4b63ed2f7,MOC_2026_2617_2_STEAM_CONDENSER_RETUBE_A,"MOC 2026-2617, 2# Steam Condenser Retube and Swapouts",MOC,FAC_HARMATTAN,,Active,true
+a4df68f8-7d74-4d67-80dc-a4b3144d5693,MOC_2026_2616_K201_BLOWDOWN_PIPING_FAILU,"MOC 2026-2616, K201 Blowdown Piping Failure Repair",MOC,FAC_DIMSDALE,,Active,true
+835d2439-c376-4a97-9199-002ff1e59311,MOC_2026_2615_DEMETH_TRIM_REBOILER_BUNDL,"MOC 2026-2615, Demeth Trim Reboiler Bundle Replacement HAE0135",MOC,FAC_HARMATTAN,,Active,true
+735aaa90-e20d-4402-8993-29199f863233,MOC_2026_2614_WINTER_CONTROL_MODE_2_TIC,"MOC 2026-2614, Winter Control Mode - 2-TIC-2137",MOC,FAC_PIPESTONE,,Active,true
+1b60ddfd-fec9-4634-9bfb-b654b5eb81be,MOC_2026_2602_D3_5A_DUAL_SEAL_WITH_BARRI,"MOC 2026-2602, D3.5A Dual Seal with barrier fluid",MOC,FAC_SLAVE_LAKE,,Active,true
+5af0daba-6f9e-47c9-8190-5c95eb199501,MOC_2026_2595_REPLACE_OBSOLETE_FLARE_PIL,"MOC 2026-2595, Replace Obsolete Flare Pilots",MOC,FAC_FERNDALE,,Active,true
+765c91dd-3c45-4f71-8248-372217da93e4,MOC_2026_2594_DE_AERATOR_PSV_ISOLATION,"MOC 2026-2594, De-Aerator PSV Isolation",MOC,FAC_HARMATTAN,,Active,true
+ab0ecb3f-68e5-42d7-b264-e89c75996a57,MOC_2026_2593_C5_MERCAPTAN_SCAVENGER_INJ,"MOC 2026-2593, C5+ Mercaptan Scavenger Injection Skid",MOC,FAC_PIPESTONE,,Active,true
+0b2f4b7e-4a31-4551-a31a-e4b47b0714b5,MOC_2026_2590_GAS_CHROMATOGRAPH_UPGRADE,"MOC 2026-2590, Gas Chromatograph Upgrade Project",MOC,FAC_HARMATTAN,,Active,true
+140263a4-402d-4ac5-98f7-078936db3fb1,MOC_2026_2589_CNRL_D_058_F_FUEL_GAS_TIE,"MOC 2026-2589, CNRL d-058-F Fuel Gas Tie-In",MOC,FAC_BLAIR_CREEK_1,,Active,true
+ff814e2a-8e67-4b57-a52d-7136a4450c83,MOC_2026_2588_AMINE_LEAN_RICH_EXCHANGER,"MOC 2026-2588, Amine Lean Rich Exchanger E-708A Valve and Piping Replacement/Upgrade",MOC,FAC_HARMATTAN,,Active,true
+6ea78150-fe20-44d9-a0e4-6151e8f8c8a6,MOC_2026_2585_DEAD_LEG_REMOVAL_ON_500_LI,"MOC 2026-2585, Dead leg removal on 500# Line from Old Stage 7 Process",MOC,FAC_HARMATTAN,,Active,true
+32e475e8-9d5d-4395-8d0f-85bd145c1246,MOC_2026_2584_EAST_LOADOUT_ENVIRO_BOX,"MOC 2026-2584, East Loadout Enviro-Box",MOC,FAC_SLAVE_LAKE,,Active,true
+3f782203-7b60-4149-aafc-8d902256f45f,MOC_2026_2583_STRIPPER_INSTRUMENTATION_V,"MOC 2026-2583, Stripper instrumentation valve upgrades & remove 1/2"" piping/tubing",MOC,FAC_HARMATTAN,,Active,true
+0434b49d-5f91-4e25-8697-7717a7ec398b,MOC_2026_2582_ETHANE_SALES_METERS_BLEED,"MOC 2026-2582, Ethane sales meters bleed valves Install",MOC,FAC_HARMATTAN,,Active,true
+18e9e27f-250f-4a77-bbb5-5f3dbf4d2de8,MOC_2026_2581_TWSD_T1_T2_FLARE_TIP_REPLA,"MOC 2026-2581, TWSD T1/T2 Flare Tip Replacement & Ignition Upgrade",MOC,FAC_TOWNSEND,,Active,true
+28929c43-00d6-47cc-a32d-a43d58cc40e1,MOC_2026_2580_CGGS_10_LINE_PIG_RECEIVER,"MOC 2026-2580, CGGS 10” line Pig Receiver Improvements",MOC,FAC_HARMATTAN,,Active,true
+929e8d14-f5ee-4bcf-b444-db238e48c6db,MOC_2026_2579_BUTANE_TREATERS_BACK_PRESS,"MOC 2026-2579, Butane treaters back press control upgrades",MOC,FAC_HARMATTAN,,Active,true
+a272044e-512e-438b-95a2-2f8593a7405e,MOC_2026_2578_DE_AERATOR_PUMPS_REPLACEME,"MOC 2026-2578, De-Aerator pumps replacement & min flow control upgrade",MOC,FAC_HARMATTAN,,Active,true
+ff08cb9c-2080-4976-821f-367f12f16e7b,MOC_2026_2577_TTT_NGL_TRUCK_LOADING_RACK,"MOC 2026-2577, TTT NGL Truck Loading Racks Vent Tie-In",MOC,FAC_TOWNSEND_TANK_TERMINAL,,Active,true
+46296096-a3c5-4936-a446-0bafcc7361d9,MOC_2026_2576_FV_1013_CV_REPLACEMENT,"MOC 2026-2576, FV-1013 CV Replacement",MOC,FAC_JEEP,,Active,true
+f0b6de7b-9ff2-4e65-895c-7d2d3b3f1e5b,MOC_2026_2574_REMOVE_SIGHT_GLASSES_ON_BU,"MOC 2026-2574, Remove Sight Glasses on Butane Treaters",MOC,FAC_HARMATTAN,,Active,true
+b589d78d-d5a0-4b89-9b85-1a82ddc1f80b,MOC_2026_2573_PROPANE_TREATERS_SIGHT_GLA,"MOC 2026-2573, Propane Treaters Sight glasses Removal",MOC,FAC_HARMATTAN,,Active,true
+09640f2c-62ca-4507-b721-23cd07ad13e5,MOC_2026_2572_MODIFICATION_TO_PV_67_SEAL,"MOC 2026-2572, Modification to PV-67 Seal and PIT-72 Setpoint",MOC,FAC_GRIFFITH,,Active,true
+8b98ae9a-a6a1-4499-bf17-00e01b3ce34e,MOC_2026_2569_AIR_COMPRESSOR_EXHAUST_DUC,"MOC 2026-2569, Air Compressor Exhaust Ducting",MOC,FAC_EEEP,,Active,true
+6d39874a-4b37-4cb2-a8db-79cdec61cd23,MOC_2026_2568_PROPANE_SHIPPING_PUMPS_REC,"MOC 2026-2568, Propane Shipping Pumps Recycle Control Improvements",MOC,FAC_NORTH_PINE,,Active,true
+53c04ffd-39ba-4874-97ba-264ec714a0da,MOC_2026_2567_SLFF_IT_OT_NETWORK_SEGMENT,"MOC 2026-2567, SLFF IT/OT Network Segmentation (IONS) Update",MOC,FAC_SLAVE_LAKE,,Active,true
+07b3719f-4e3d-4145-a075-e3c622dd29e7,MOC_2026_2566_SDFF_IT_OT_NETWORK_SEGMENT,"MOC 2026-2566, SDFF - IT/OT Network Segmentation (IONS) Update",MOC,FAC_SUNDRE,,Active,true
+6519788c-fff1-4d81-b256-ae11211bdccc,MOC_2026_2565_NORTH_PINE_RAIL_INSTRUMENT,"MOC 2026-2565, North Pine Rail Instrument Air Wet Receiver Replacement",MOC,FAC_NORTH_PINE,,Active,true
+d60a3d0c-2af2-4df4-ac47-a3c5e93728e2,MOC_2026_2564_PIPESTONE_SAMPLE_POINT_UPG,"MOC 2026-2564, Pipestone Sample Point Upgrades",MOC,FAC_PIPESTONE,,Active,true
+6a8bbb20-1471-4994-a79e-a5cd416e0f3a,MOC_2026_2563_RIPET_GENERATOR_DIEF_POWER,"MOC 2026-2563, RIPET Generator DIEF Power Supply",MOC,FAC_RIPET,,Active,true
+25a5e8e7-749f-4685-b24a-8af7f1561d7a,MOC_2026_2559_BLIND_GROUND_FLARE_TO_ATM,"MOC 2026-2559, Blind Ground Flare to Atm for 12"" Line",MOC,FAC_FERNDALE,,Active,true
+ea52a52c-0dcc-49a7-8acf-b7cc93797992,MOC_2026_2558_NORTH_PINE_BUTANE_SHIPPING,"MOC 2026-2558, North Pine Butane Shipping Pumps Soft Starts Upgrade",MOC,FAC_NORTH_PINE,,Active,true
+a6730d4f-177d-4d86-a041-2f09efff430c,MOC_2026_2557_REMOVE_LRKS_ON_12_8_DIB_VA,"MOC 2026-2557, Remove LRKs on 12"" & 8"" DIB valves EHD201",MOC,FAC_EAGLE_HILL,,Active,true
+94061291-8520-4429-9ae7-c9a19ac66c11,MOC_2026_2556_HIGH_PRESSURE_TRIP_ON_P66,"MOC 2026-2556, High Pressure Trip on P66 Pipeline and SDK Clean-Up",MOC,FAC_FERNDALE,,Active,true
+3ef4c81d-d0db-4339-9007-4774a2015ed4,MOC_2026_2555_ESDV5800_MAINTENANCE_BYPAS,"MOC 2026-2555, ESDV5800 Maintenance Bypass Removal",MOC,FAC_PIPESTONE,,Active,true
+e7b11b9d-edac-4ced-b8f8-763a93b5e43b,MOC_2026_2554_WATER_TANK_TK_5506_INTERFA,"MOC 2026-2554, Water Tank (TK-5506) Interface Level Shutdowns",MOC,FAC_PIPESTONE,,Active,true
+12eb5fb6-0301-4c2b-8a45-02d89a02a4d7,MOC_2026_2553_NORTH_PINE_1_INSTRUMENT_AI,"MOC 2026-2553, North Pine 1 Instrument Air Dryer Dewpoint Trans. Install",MOC,FAC_NORTH_PINE,,Active,true
+8ccf56fd-6747-4d44-af65-939499899468,MOC_2026_2552_NORTH_PINE_TEMPORARY_SHIPP,"MOC 2026-2552, North Pine Temporary Shipping Pump Generator",MOC,FAC_NORTH_PINE,,Active,true
+953742c7-cf66-4602-8f7f-5c2765ff104f,MOC_2026_2551_RIPET_SOUTH_GATE_ROAD_CULV,"MOC 2026-2551, RIPET South Gate Road Culvert",MOC,FAC_RIPET,,Active,true
+0a00e458-bdec-4bff-a4dc-2c6bd3d7c16f,MOC_2026_2550_RIPET_INSTRUMENT_AIR_SYSTE,"MOC 2026-2550, RIPET Instrument Air System Improvements",MOC,FAC_RIPET,,Active,true
+da62ec2b-7bd7-4033-9042-627df1846262,MOC_2026_2549_TEST_MOC_APP_FUNCTIONALITY,"MOC 2026-2549, Test MOC - APP Functionality Review",MOC,FAC_IDLE_ASSETS,,Active,true
+d07a7d92-3266-47dd-b9ec-f10b17ac3a06,MOC_2026_2548_YELLOWKNIFE_EQUIPMENT_REAS,"MOC 2026-2548, Yellowknife Equipment Reassembly after Spill Rec",MOC,FAC_YELLOWKNIFE,,Active,true
+e2e57ab8-d355-4a23-b4d1-e9f8a73eb049,MOC_2026_2547_PRODUCED_WATER_INJECTION_P,"MOC 2026-2547, Produced Water Injection Pump Filtration, PC",MOC,FAC_PIPESTONE,,Active,true
+79a47e46-48fc-44b3-84f5-5646fee1dff8,MOC_2026_2544_ON_GOING_DRAWING_IMPROVEME,"MOC 2026-2544, On Going Drawing Improvements",MOC,FAC_SLAVE_LAKE,,Active,true
+4eb09adf-ecd4-4b4d-aedb-08a64b16fdc2,MOC_2025_2543_CGGS_ESDV_11_POWER_SUPPLY,"MOC 2025-2543, CGGS ESDV 11 Power Supply Updates",MOC,FAC_HARMATTAN,,Active,true
+2cfc0272-4d15-47bc-8c9f-ece5bfd5a279,MOC_2025_2542_DESALTER_REPLACEMENT_SPOOL,"MOC 2025-2542, Desalter Replacement Spool",MOC,FAC_SLAVE_LAKE,,Active,true
+72ef47bb-33b3-4253-b0a3-154f259e8686,MOC_2025_2541_NP_RAIL_STINGER_TRIAL,"MOC 2025-2541, NP Rail Stinger Trial",MOC,FAC_NORTH_PINE,,Active,true
+750ec2c9-755b-4d8a-900e-eacdaaaec2de,MOC_2025_2540_EAGLE_HILL_INLET_SEP_WATER,"MOC 2025-2540, Eagle Hill Inlet Sep Water and Drain Piping Replacement",MOC,FAC_EAGLE_HILL,,Active,true
+cbabc333-397d-4641-9772-5c0e89f88d1b,MOC_2025_2539_ELECTRICAL_AREA_CLASSIFICA,"MOC 2025-2539, Electrical Area Classification Drawing Update",MOC,FAC_FERNDALE,,Active,true
+e1e9a45b-d18a-4fc0-ac92-e362297ee021,MOC_2025_2538_RAIL_STINGER_TRIAL,"MOC 2025-2538, Rail Stinger Trial",MOC,FAC_RIPET,,Active,true
+5338c255-93bc-48fd-bf6e-b910308d7905,MOC_2025_2537_TWSD_T2B_WHRU_DIVERTER_SD,"MOC 2025-2537, TWSD T2B WHRU Diverter SD Modification",MOC,FAC_TOWNSEND,,Active,true
+d7d35f84-481d-4526-b267-7d58d72e806a,MOC_2025_2536_E_I_AS_FOUND_DRAWING_UPDAT,"MOC 2025-2536, E&I As-Found Drawing Update",MOC,FAC_GRIFFITH,,Active,true
+81f96896-b282-4207-8e09-f6e53c80b24c,MOC_2025_2535_COGEN_FUEL_GAS_BACKFLOW_PR,"MOC 2025-2535, Cogen Fuel Gas Backflow Prevention",MOC,FAC_HARMATTAN,,Active,true
+cecf6047-43e7-497b-becf-471b5e62a1b0,MOC_2025_2534_GFTM_BUCKEYE_C4_BATCHING_P,"MOC 2025-2534, GFTM - Buckeye C4 Batching Project",MOC,FAC_GRIFFITH,,Active,true
+7b31109d-da82-4e9e-812d-be06eab3bd94,MOC_2025_2533_PUMP_P401C_RECONNECTION_TO,"MOC 2025-2533, Pump P401C reconnection to process",MOC,FAC_AFS,,Active,true
+578d870d-8cd4-4e45-886c-a7023b40fca0,MOC_2025_2532_NGL_LOAD_PUMP_2P_5003_DUAL,"MOC 2025-2532, NGL Load Pump 2P-5003 Dual Seal PIT-5015",MOC,FAC_PIPESTONE,,Active,true
+6a50149e-edaa-461b-961a-f3d60741c4dc,MOC_2025_2531_P_101B_LOWERING_SEAL_POT_P,"MOC 2025-2531, P-101B Lowering Seal Pot Pressure",MOC,FAC_EEEP,,Active,true
+d4ca6554-ecb2-42bc-b70e-1dee7db0d5bc,MOC_2025_2530_AS_FOUND_DOCUMENTATION_CRE,"MOC 2025-2530, As-Found Documentation Creation",MOC,FAC_YELLOWKNIFE,,Active,true
+85f28693-4c77-4aa4-ab54-7931dd857dec,MOC_2025_2529_WINTERIZATION_HEAT_TRACING,"MOC 2025-2529, Winterization Heat Tracing on E-41 Evap Pump Discharge",MOC,FAC_FERNDALE,,Active,true
+2855621f-a028-45ad-a6f3-d01758ce920b,MOC_2025_2528_NEW_ADDITIONAL_CONDY_PUMP,"MOC 2025-2528, New Additional Condy Pump",MOC,FAC_ROSEDALE,,Active,true
+745c3bdb-6d24-4419-b001-b608fa8de606,MOC_2025_2527_INSTALL_TRIM_VALVE_FOR_CGG,"MOC 2025-2527, Install Trim Valve for CGGS 10"" Pipeline Inlet CV",MOC,FAC_HARMATTAN,,Active,true
+8fce7a8b-7e96-4edf-a578-3aecc3aca3ac,MOC_2025_2526_ARIEL_COMPRESSORS_PM_OPTIM,"MOC 2025-2526, Ariel Compressors PM Optimization",MOC,FAC_OTHER,,Active,true
+94c28797-e2b6-4194-a5e2-0a5befc8d679,MOC_2025_2525_OPEN_API_DRAIN_TANK_REROUT,"MOC 2025-2525, Open API Drain Tank Reroute Project",MOC,FAC_HARMATTAN,,Active,true
+83894443-cbab-40ac-b75d-598aba0798f6,MOC_2025_2524_DIMSDALE_WATER_TANK_LITS,"MOC 2025-2524, Dimsdale Water Tank LITs",MOC,FAC_DIMSDALE,,Active,true
+1f71dd61-ca78-49d7-852e-f244af885db2,MOC_2025_2523_PIPESTONE_2_CONSTRUCTION_A,"MOC 2025-2523, Pipestone 2 Construction and Expansion",MOC,FAC_PIPESTONE,,Active,true
+278bfe55-41b4-427e-ab86-0a44160a53e4,MOC_2025_2522_REPLACE_LANDFILL_PIPING,"MOC 2025-2522, Replace Landfill Piping",MOC,FAC_HARMATTAN,,Active,true
+1dd4eb83-f992-41cd-ba1d-4ca84c558455,MOC_2025_2521_AMINE_REGEN_TOWER_GASKETS,"MOC 2025-2521, Amine Regen Tower Gaskets for LOTO",MOC,FAC_PIPESTONE,,Active,true
+1a19ac30-8143-41e0-b260-1fe96248eb63,MOC_2025_2519_K201_REMOTELY_INSTALL_PILO,"MOC 2025-2519, K201 Remotely Install Pilot for PSV",MOC,FAC_DIMSDALE,,Active,true
+e2740339-aeff-4758-b73c-ace5806f1da6,MOC_2025_2518_GGS_PIPELINE_ESD_SETPOINT,"MOC 2025-2518, GGS Pipeline ESD Setpoint 110% MOP",MOC,FAC_PIPESTONE,,Active,true
+801a7b40-db65-4b1f-a3d0-12ac6d2f8d98,MOC_2025_2517_INSTALL_HORN_ON_8A_MCC,"MOC 2025-2517, Install Horn on 8A MCC",MOC,FAC_HARMATTAN,,Active,true
+219c7f96-21fb-48bf-b627-acd5c70412c1,MOC_2025_2516_TK_3412_SPENT_CAUSTIC_MANW,"MOC 2025-2516, TK-3412 Spent Caustic Manway Gasket Material Change",MOC,FAC_TOWNSEND,,Active,true
+54833ed2-179e-4bc5-ad91-7564be1e993a,MOC_2025_2515_H_370_TRAIN_1_PROCESS_HEAT,"MOC 2025-2515, H-370 Train 1 Process Heater BMS Upgrade",MOC,FAC_SUNDRE,,Active,true
+d1fa937c-50eb-4381-a95e-7d19379232df,MOC_2025_2513_ARCHER_TIE_IN_AT_12_36,"MOC 2025-2513, Archer Tie in at 12-36",MOC,FAC_PIPESTONE,,Active,true
+9e05a8fe-5184-4540-962b-f50c98d85790,MOC_2025_2511_HAD0740_FLASHING_DRAIN_SEP,"MOC 2025-2511, HAD0740 Flashing Drain Separator Replacement",MOC,FAC_HARMATTAN,,Active,true
+63bd9766-b665-4f98-a9d3-27e68807e0fb,MOC_2025_2510_DEMETH_BOTTOMS_PUMP_JUMPER,"MOC 2025-2510, Demeth Bottoms Pump Jumper Spool",MOC,FAC_PIPESTONE,,Active,true
+9bced301-98f0-4ef0-9e41-dfdf72b95436,MOC_2025_2509_TWSD_MERC_DSO_PIPING_SCH_C,"MOC 2025-2509, TWSD MERC DSO Piping Sch Change",MOC,FAC_TOWNSEND,,Active,true
+32710c91-342b-4582-af2d-0ecb1bb54672,MOC_2025_2508_LT_1431_SPOOL_ADDITION_TO,"MOC 2025-2508, LT-1431 - Spool addition to bridle",MOC,FAC_JEEP,,Active,true
+f6899bf8-a9e3-4a27-aa3a-c0f2902f75ba,MOC_2025_2507_REPLACE_HIGH_MAST_LIGHTING,"MOC 2025-2507, Replace High Mast Lighting to LED",MOC,FAC_JEEP,,Active,true
+8c4c6a0d-85ee-47fe-b5fa-8ff771f25f2c,MOC_2025_2506_SOUTH_COMPRESSOR_BASEMENT,"MOC 2025-2506, South Compressor Basement Light Fixture Install",MOC,FAC_EEEP,,Active,true
+c30a7e41-da85-4c37-9b07-40c43361baf2,MOC_2025_2504_NUVISTA_08_05_TIE_IN_AT_09,"MOC 2025-2504, Nuvista 08-05 Tie-In at 09-05",MOC,FAC_PIPESTONE,,Active,true
+08759f2d-bda9-4e4c-9cf2-3bdf2f5deb78,MOC_2025_2503_THIEF_HATCH_CAPACITY_INCRE,"MOC 2025-2503, Thief hatch capacity increase mod",MOC,FAC_SUNDRE,,Active,true
+8d5d454f-fafb-4cba-aab0-ad718c1e7a96,MOC_2025_2502_8_25_SSSV_SUB_SURFACE_SAFE,"MOC 2025-2502, 8-25 SSSV Sub Surface Safety Valve",MOC,FAC_DIMSDALE,,Active,true
+acb7a2da-d9ce-40d9-b1bb-d3618004b12f,MOC_2025_2499_FRAC_1_DEPROP_OH_ACCUMULAT,"MOC 2025-2499, Frac 1 Deprop OH Accumulator PSV Installation HAD0313",MOC,FAC_HARMATTAN,,Active,true
+3aed84b1-d503-4180-bff4-766b66f75ca8,MOC_2025_2498_K500_AND_K100_PLC_UPGRADES,"MOC 2025-2498, K500 and K100 PLC Upgrades",MOC,FAC_HARMATTAN,,Active,true
+38c85a7e-8c05-4259-880b-f07c108b9e1b,MOC_2025_2497_C_101A_B_LUBRICATOR_UPGRAD,"MOC 2025-2497, C-101A/B Lubricator Upgrade",MOC,FAC_EEEP,,Active,true
+6cad023d-0122-4290-b8f2-8cadcd6d8e7f,MOC_2025_2496_UPGRADE_PLANT_DCS_AND_PLCS,"MOC 2025-2496, Upgrade Plant DCS and PLCs at T/A Outage 2026",MOC,FAC_HARMATTAN,,Active,true
+1ecf7b7c-3e45-4773-840c-92f3bb7117ea,MOC_2025_2495_PIPESTONE_PIPELINE_LICENSE,"MOC 2025-2495, Pipestone Pipeline License Change",MOC,FAC_PIPESTONE,,Active,true
+362b061a-14bf-4be9-b7f7-6e9748af69bc,MOC_2025_2494_PIPESTONE_2_FUEL_GAS_SYSTE,"MOC 2025-2494, Pipestone 2'' Fuel Gas System Discontinuation",MOC,FAC_PIPESTONE,,Active,true
+d0c91d95-88ae-44d1-a64b-b2260f9f3ec9,MOC_2025_2493_RETRAY_CONDENSATE_STABILIZ,"MOC 2025-2493, Retray Condensate Stabilizer HAC0401",MOC,FAC_HARMATTAN,,Active,true
+6c580814-02ae-4844-9d4c-1cdc472c10c4,MOC_2025_2491_100_16_24_RTU_INSTALL,"MOC 2025-2491, 100/16-24 RTU Install",MOC,FAC_DIMSDALE,,Active,true
+3e62b301-9363-4275-820e-a1b261ca1473,MOC_2025_2489_T1_RISK_WATCH_CONTROL_ROOM,"MOC 2025-2489, T1 Risk Watch Control Room HVAC Shutoff",MOC,FAC_PIPESTONE,,Active,true
+18398434-9402-4782-ab1c-2f1851dd7d86,MOC_2025_2488_TWSD_T1_T2_REFRIGERATION_C,"MOC 2025-2488, TWSD T1/T2 Refrigeration Condenser Optimization",MOC,FAC_TOWNSEND,,Active,true
+9f124e59-250b-423b-a171-67e59a098aa3,MOC_2025_2487_TEMPORARY_AIR_COMPRESSOR,"MOC 2025-2487, Temporary Air Compressor",MOC,FAC_JEEP,,Active,true
+c156da49-0a13-4692-a1d2-5b3a2e0bebf1,MOC_2025_2486_ALLIANCE_ISOLATION_15_30_7,"MOC 2025-2486, Alliance Isolation 15-30-71-8w6",MOC,FAC_PIPESTONE,,Active,true
+e871b455-40db-4132-a3fc-eedb636d1fa2,MOC_2025_2485_PLANT_2_TIE_INS_FLARESTACK,"MOC 2025-2485, Plant 2 Tie-ins & Flarestack",MOC,FAC_PIPESTONE,,Active,true
+18825e1e-c649-4c0c-a727-daa73b18d274,MOC_2025_2484_PROPANE_CAVERN_PUMP_P_01_R,"MOC 2025-2484, Propane Cavern Pump P-01 Replacement",MOC,FAC_GRIFFITH,,Active,true
+8a355a9e-5106-426f-8bbb-328fa1b68554,MOC_2025_2483_ARCHER_TIE_IN_AT_9_36,"MOC 2025-2483, Archer Tie-In at 9-36",MOC,FAC_PIPESTONE,,Active,true
+16c8ca75-b8e7-4a39-acc6-fafeef13a65d,MOC_2025_2482_DEMIN_PROD_WATER_TANK_PVRV,"MOC 2025-2482, Demin & Prod Water Tank PVRVs",MOC,FAC_PIPESTONE,,Active,true
+32c4c204-826d-45d9-b93d-fc9231b19253,MOC_2025_2481_ADD_CLOSED_DRAIN_ISOLATION,"MOC 2025-2481, Add Closed Drain Isolation NGL Mercaptan Skid",MOC,FAC_PIPESTONE,,Active,true
+d5962a82-eddc-48ab-9b84-df362b9f883c,MOC_2025_2479_STG_5_D3_FLOOR_SUMP_PUMP_R,"MOC 2025-2479, Stg 5 - D3 floor sump pump replacement and line reroute",MOC,FAC_HARMATTAN,,Active,true
+653db951-ba8b-4ddb-9cd1-a463ed27f64f,MOC_2025_2477_DRILLSOL_REBOILER_TO_SIDES,"MOC 2025-2477, Drillsol Reboiler to Sidestripper Piping OPP",MOC,FAC_SLAVE_LAKE,,Active,true
+2a686ee8-a5ca-4548-a593-56872a6c87c1,MOC_2025_2476_SULPHUR_PLANT_INCINERATOR,"MOC 2025-2476, Sulphur Plant Incinerator Demolition",MOC,FAC_HARMATTAN,,Active,true
+4503705b-0629-4837-9828-ac65a6c98777,MOC_2025_2475_CNRL_6_30_TIE_IN_AT_3_12,"MOC 2025-2475, CNRL 6-30 Tie-In at 3-12",MOC,FAC_PIPESTONE,,Active,true
+3488eee6-7f22-46c5-a1bb-a34f5264b988,MOC_2025_2471_K210_K211_PLC_COMMUNICATIO,"MOC 2025-2471, K210, K211 PLC Communication Troubleshooting",MOC,FAC_FERNDALE,,Active,true
+c2c0cd39-98ba-4a23-b47a-2f0b6d228290,MOC_2025_2470_NIS_STG_7_HAK0801_DISCONNE,"MOC 2025-2470, NIS Stg 7 HAK0801 disconnect",MOC,FAC_HARMATTAN,,Active,true
+70ba19a5-378a-4103-a293-ce0c608405fc,MOC_2025_2469_REMOVAL_OF_TAHH_2254,"MOC 2025-2469, Removal of TAHH-2254",MOC,FAC_PIPESTONE,,Active,true
+e24afd44-b6c5-4014-9eb3-2dcaeba10476,MOC_2025_2468_NORTH_PINE_PIPELINE_RISER,"MOC 2025-2468, North Pine Pipeline Riser Satellite Upgrade",MOC,FAC_NORTH_PINE,,Active,true
+b0c3e34f-e657-434e-a779-659dfd8528f6,MOC_2025_2465_UPDATES_TO_INSTRUMENT_TAGS,"MOC 2025-2465, Updates to Instrument Tags and SD Set Points",MOC,FAC_SLAVE_LAKE,,Active,true
+991d2af0-adc8-4b94-8492-49c2f79c6246,MOC_2025_2464_P_501_P_504_CONSTANT_LEVEL,"MOC 2025-2464, P-501 - P-504 Constant level Oiler Upgrade",MOC,FAC_AFS,,Active,true
+7bd8032e-bd8c-49de-bc87-ce17dbf3bac1,MOC_2025_2462_140A_B_FEED_COMPRESSOR_PUR,"MOC 2025-2462, 140A/B Feed Compressor Purge Gas PSVs",MOC,FAC_PIPESTONE,,Active,true
+f9178c02-4e20-4b34-ac9d-67436acaee75,MOC_2025_2461_EHB840_BURNER_3_WAY_SOLENO,"MOC 2025-2461, EHB840 Burner 3-Way Solenoid Valve Change",MOC,FAC_EAGLE_HILL,,Active,true
+62f3abd8-d7f6-41df-8817-a0ec6afc7247,MOC_2025_2460_MARATHON_C4_BATCHING_PROJE,"MOC 2025-2460, Marathon C4 Batching Project",MOC,FAC_GRIFFITH,,Active,true
+9bcb0f37-93f8-46ee-9bb8-410de071bb5f,MOC_2025_2458_RAIL_RACK_AND_FLARE_LOADIN,"MOC 2025-2458, Rail Rack and Flare Loading Arm Modification",MOC,FAC_AFS,,Active,true
+cb033e66-1973-439f-a58c-7b2bc3f95d37,MOC_2025_2457_P_11_P_13_PRESSURE_CONTROL,"MOC 2025-2457, P-11/P-13 Pressure Control Logic",MOC,FAC_FERNDALE,,Active,true
+e5e42aad-c44a-4552-9a8b-d47511ea357c,MOC_2025_2456_ADDITION_OF_FUEL_GAS_MAKEU,"MOC 2025-2456, Addition of Fuel Gas Makeup to T2B Inlet DeC2",MOC,FAC_TOWNSEND,,Active,true
+875d703b-8a73-407c-8a2a-8a6ccf7921e9,MOC_2025_2454_REPLACE_PSHH_WITH_UE_ONE_S,"MOC 2025-2454, Replace PSHH with UE-One Smart Pressure Switch",MOC,FAC_TOWNSEND,,Active,true
+ac737124-72f1-4892-9b81-348eb623d85e,MOC_2025_2452_EQUAL_TUBING_LINE_TO_TOU_1,"MOC 2025-2452, Equal. Tubing Line to TOU 10"" Pig Receiver Block Valve",MOC,FAC_TOWNSEND,,Active,true
+d6f357eb-dde3-4c9c-9883-6b54e1594669,MOC_2025_2450_DECOMMISSION_O2_ANALYZER_F,"MOC 2025-2450, Decommission O2 Analyzer from T1 VRU Suction",MOC,FAC_TOWNSEND,,Active,true
+6d532132-ceaf-4efc-9608-2f3ba91f4a41,MOC_2025_2449_NEW_ALTAGAS_PIPE_SPEC_PIPE,"MOC 2025-2449, New AltaGas Pipe Spec - Pipestone adoption",MOC,FAC_PIPESTONE,,Active,true
+2c6d7bfb-95e9-4508-bb51-3e14e6867a4c,MOC_2025_2448_EHB840_THERMINOL_HEATER_NE,"MOC 2025-2448, EHB840 Therminol Heater new style of thief hatch",MOC,FAC_EAGLE_HILL,,Active,true
+f590d734-09e6-4367-9273-c2fa5f37aeca,MOC_2025_2447_K_102_GEARBOX_UPGRADE,"MOC 2025-2447, K-102 Gearbox upgrade",MOC,FAC_JEEP,,Active,true
+8d5ac2c8-e7ed-4322-b31d-683a5458f3ee,MOC_2025_2445_NORTH_PINE_BULLET_LALL_SET,"MOC 2025-2445, North Pine - Bullet LALL Setpoint Update",MOC,FAC_NORTH_PINE,,Active,true
+01a65418-f6da-40d7-bc76-5547b9475cda,MOC_2025_2442_V_21_LIQUID_TO_E_17_CHILLE,"MOC 2025-2442, V-21 Liquid to E-17 Chiller",MOC,FAC_FERNDALE,,Active,true
+d3b598bb-dbb7-4c9f-9b4c-9f7efc7a52a9,MOC_2025_2439_DE_RATE_V_104_PROPANE_BULL,"MOC 2025-2439, De-rate V-104 Propane Bullet to 225 PSIG",MOC,FAC_AFS,,Active,true
+4b52e668-2bf9-4cfd-8461-5479331d9cdc,MOC_2025_2437_OFFLOAD_COMPRESSOR_MODIFIC,"MOC 2025-2437, Offload Compressor Modifications for Liquid Handling",MOC,FAC_FERNDALE,,Active,true
+2827c919-1151-4b9a-b8c4-cef04709131a,MOC_2025_2436_RW_2025_00874_STALE_DGS_BY,"MOC 2025-2436, RW 2025-00874 - Stale DGS Bypass - FALL-9160C",MOC,FAC_TOWNSEND,,Active,true
+bf0f0916-61cd-45cb-b439-ada4f09c5c7f,MOC_2025_2435_RICH_AMINE_PIPING_REPLACEM,"MOC 2025-2435, Rich Amine Piping Replacement",MOC,FAC_PIPESTONE,,Active,true
+7df1a82d-ee89-46d6-8e00-bb3f7695cdda,MOC_2025_2434_AMINE_FLASH_TANK_INLET_PIP,"MOC 2025-2434, Amine Flash Tank Inlet Piping",MOC,FAC_PIPESTONE,,Active,true
+8f131633-f351-42dd-9cf7-4d0cbf55ce85,MOC_2025_2431_RIPET_SAFETY_INSTRUMENT_DE,"MOC 2025-2431, RIPET Safety Instrument Devices",MOC,FAC_RIPET,,Active,true
+d25bdb4a-4f98-42f2-a8e0-8d4c6ad10879,MOC_2025_2428_AUTOMATE_C4_3RD_STAGE_GAS,"MOC 2025-2428, Automate C4 3rd Stage Gas to Offload Comps",MOC,FAC_FERNDALE,,Active,true
+0292a165-d9b1-42b8-8569-172f02de3bcf,MOC_2025_2415_TANK_HUB_GAUGING_UPGRADES,"MOC 2025-2415, Tank Hub Gauging Upgrades",MOC,FAC_FERNDALE,,Active,true
+472a63c3-c447-4bc8-b8af-abd9bec6beb5,MOC_2025_2414_TWSD_T2B_CRYO_TURBO_EXPAND,"MOC 2025-2414, TWSD T2B Cryo Turbo Expander Shutdown Modification",MOC,FAC_TOWNSEND,,Active,true
+af8aaabf-1bcb-4d95-a4d8-59e9666c4a6d,MOC_2025_2413_GLYCOL_FILL_PUMP_PERMANENT,"MOC 2025-2413, Glycol Fill Pump Permanent Install for KM-202",MOC,FAC_JEEP,,Active,true
+f3a83e1d-190b-4cc3-b631-e82e6891c68f,MOC_2025_2412_NP1_FEED_PUMPS_P_110A_B_FL,"MOC 2025-2412, NP1 Feed Pumps P-110A/B Flare Tie-In",MOC,FAC_NORTH_PINE,,Active,true
+f3ba61a1-ae39-4157-8951-56ebe109f2e6,MOC_2025_2411_BUTANE_CAVERN_PUMP_P_101_R,"MOC 2025-2411, Butane Cavern Pump P-101 Replacement",MOC,FAC_GRIFFITH,,Active,true
+bc794ee8-0c7b-407e-ada6-fdaded670c9d,MOC_2025_2410_PSV_1340_SET_PRESSURE_CHAN,"MOC 2025-2410, PSV-1340 Set Pressure Change",MOC,FAC_FERNDALE,,Active,true
+df0fa6f9-6b1d-4909-9ceb-ae95f6d75b34,MOC_2025_2409_HAG0714_RESTORING_TANDEM_S,"MOC 2025-2409, HAG0714 Restoring Tandem Seal to API Plan 14",MOC,FAC_HARMATTAN,,Active,true
+fd3b1e39-89a8-4303-9596-f567999c0cc0,MOC_2025_2408_RIPET_BOG_CONDENSER_LOGIC,"MOC 2025-2408, RIPET BOG Condenser Logic Changes",MOC,FAC_RIPET,,Active,true
+275da1fd-735d-451e-8201-d883f1b3dfd3,MOC_2025_2407_HAG0240B_IMPELLER_MODIFICA,"MOC 2025-2407, HAG0240B Impeller Modification",MOC,FAC_HARMATTAN,,Active,true
+70b409af-e079-4740-ad0f-fdb5a7153ad3,MOC_2025_2406_REPLACEMENT_INSTRUMENT_AIR,"MOC 2025-2406, Replacement Instrument Air Compressor",MOC,FAC_FERNDALE,,Active,true
+58ab134c-a2ec-43a4-b1ed-246acb7a6486,MOC_2025_2404_FERNDALE_PIER_INTALCO_EQUI,"MOC 2025-2404, Ferndale Pier Intalco Equipment Removal",MOC,FAC_FERNDALE_PIER,,Active,true
+902defc7-9ef5-49b0-8d40-1ed66a904a28,MOC_2025_2403_HAD318_REFRIG_RECEIVER_DRA,"MOC 2025-2403, HAD318 Refrig Receiver Drain Deadleg Removal/Reroute",MOC,FAC_HARMATTAN,,Active,true
+e2662857-fa0b-4eea-beea-87aeaef0d79d,MOC_2025_2402_15_30_IA_UPGRADES,"MOC 2025-2402, 15-30 IA Upgrades",MOC,FAC_OTHER,,Active,true
+d4fce7bf-f88f-4cdd-9ee3-96ce471a7131,MOC_2025_2401_CGGS_8_INLET_CONTROL_VALVE,"MOC 2025-2401, CGGS 8"" Inlet control valve resize from 8"" to 6""",MOC,FAC_HARMATTAN,,Active,true
+021c73d0-26a8-4d7b-9f8b-7b88e30293fe,MOC_2025_2400_P_7_PIER_FIREWATER_PUMP_PE,"MOC 2025-2400, P-7 Pier firewater pump Performance monitoring",MOC,FAC_FERNDALE_PIER,,Active,true
+45945c27-9ad3-4a9b-81f2-7deb333970d3,MOC_2025_2397_PT_118_RESIDUE_LINE_PRESSU,"MOC 2025-2397, PT-118 Residue Line Pressure Transmitter",MOC,FAC_EEEP,,Active,true
+a09b7adb-2f28-4997-b836-c34b1e2729f3,MOC_2025_2389_WASTE_LIQUIDS_TANK,"MOC 2025-2389, Waste Liquids Tank",MOC,FAC_EEEP,,Active,true
+a3b7195a-ac13-46c9-beb2-4c2a596faf13,MOC_2025_2388_PIER_PUD_BACKUP_SALTWATER,"MOC 2025-2388, Pier PUD Backup Saltwater Pump Tie-In",MOC,FAC_FERNDALE_PIER,,Active,true
+9b17be24-cd74-41c0-bddb-d6ec5dd59d2e,MOC_2025_2387_TANK_901_MIXER_REMOVAL,"MOC 2025-2387, Tank 901 Mixer Removal",MOC,FAC_SLAVE_LAKE,,Active,true
+24a18eae-2d5f-4ffd-abb2-7c4a9f9bb13e,MOC_2025_2384_RIPET_METHANOL_REMOVAL_PRO,"MOC 2025-2384, RIPET Methanol Removal Project",MOC,FAC_RIPET,,Active,true
+48526f3c-5cc0-4d9f-8b54-f088d24e348b,MOC_2025_2383_K1_SUCTION_ISOLATION_VALVE,"MOC 2025-2383, K1 suction isolation Valve replacement",MOC,FAC_FERNDALE,,Active,true
+e160850f-0bc8-40fc-bcad-69805523de28,MOC_2025_2380_EH_10_34_PVRV_REPLACEMENT,"MOC 2025-2380, EH 10-34 PVRV replacement on EHF0702",MOC,FAC_EAGLE_HILL,,Active,true
+3c7ef0ac-7f53-405b-842f-079021ae1351,MOC_2025_2379_STG_7_HAE0101_SATURN_INLET,"MOC 2025-2379, Stg 7 HAE0101 Saturn Inlet heater disconnects/removal",MOC,FAC_HARMATTAN,,Active,true
+806da025-a3e5-471f-85df-d8a2a9221f84,MOC_2025_2378_STAGE_5_3001_VALVE_HEATER,"MOC 2025-2378, Stage 5 3001 valve heater and box addition",MOC,FAC_HARMATTAN,,Active,true
+e6ae3574-b2dd-41a5-bfa6-81f3b4b80e14,MOC_2025_2377_P_101_TRIAL_SEAL,"MOC 2025-2377, P-101 Trial Seal",MOC,FAC_EEEP,,Active,true
+d982c417-6c32-4713-b10e-f07cda8baaf8,MOC_2025_2376_EHK0210_DISCHARGE_VALVE_RE,"MOC 2025-2376, EHK0210 Discharge Valve Repair",MOC,FAC_EAGLE_HILL,,Active,true
+88bcd523-8df5-44a4-91a9-af35aba5765b,MOC_2025_2374_SALT_BATH_HEATER_LOADING_P,"MOC 2025-2374, Salt Bath Heater Loading Port Safety",MOC,FAC_SUNDRE,,Active,true
+53792f3d-361d-4da7-856e-a7ef15a5ec74,MOC_2025_2373_CHECK_VALVE_REMOVAL,"MOC 2025-2373, Check Valve Removal",MOC,FAC_SUNDRE,,Active,true
+fbcfd18d-fb9a-484a-9111-9dc24abd9122,MOC_2025_2372_CAR_SEALED_VALVES_UPDATE,"MOC 2025-2372, Car Sealed Valves Update",MOC,FAC_SUNDRE,,Active,true
+fb1e4991-239e-4ce0-8167-61a688335db3,MOC_2025_2371_TURBINE_B_LUBE_OIL_COOLER,"MOC 2025-2371, Turbine B Lube Oil Cooler vibration SP increase",MOC,FAC_PIPESTONE,,Active,true
+68454e2f-1ea7-456e-a20e-0e36cdada8d7,MOC_2025_2370_BOTTOMS_PUMPS_SEAL_FLUSH_F,"MOC 2025-2370, Bottoms Pumps Seal Flush Filter",MOC,FAC_SUNDRE,,Active,true
+9a50df39-6d5c-41b6-a96b-697dbcfc20b3,MOC_2025_2368_D2_1_CRUDE_EXCHANGER_SHELL,"MOC 2025-2368, D2.1 Crude Exchanger Shell Flange Mismatch",MOC,FAC_SLAVE_LAKE,,Active,true
+b7d4d959-317c-4ad6-9331-a34f2f80dfd7,MOC_2025_2367_P_600_DISCHARGE_BLEED_SPOO,"MOC 2025-2367, P-600 Discharge Bleed Spool",MOC,FAC_SLAVE_LAKE,,Active,true
+fb8b6068-65f8-4dd5-9049-db768d12f45f,MOC_2025_2365_FEED_EMERGENCY_POWER_TO_ST,"MOC 2025-2365, Feed emergency power to Stg 5 MCC from D3 HAN0605",MOC,FAC_HARMATTAN,,Active,true
+5ff1b6d7-4b1f-411c-ac0f-9173dcb4a532,MOC_2025_2364_CGGS_10_REPLACE_HYDRAULIC,"MOC 2025-2364, CGGS 10"" Replace hydraulic actuator with pneumatic one",MOC,FAC_HARMATTAN,,Active,true
+512bf853-8e4d-44fe-97de-a377e996839f,MOC_2025_2363_THIOLEX_EFFLUENT_FLARE_RED,"MOC 2025-2363, Thiolex Effluent Flare Reduction",MOC,FAC_PIPESTONE,,Active,true
+cb69c815-8c84-4754-b72f-84d2e5c9b2dc,MOC_2025_2362_AS_BUILD_EFFORT_FOR_FACILI,"MOC 2025-2362, As-Build Effort for Facility SDK to include PLC shutdowns",MOC,FAC_FERNDALE,,Active,true
+d40cdd14-704e-4dd4-9199-ec20610a2eea,MOC_2025_2359_BCPL_01_SG_13603_01_SPOOL,"MOC 2025-2359, BCPL-01-SG-13603-01 - Spool Replacement for Pigging",MOC,FAC_BLAIR_CREEK_2,,Active,true
+30ebd619-39fb-42e5-bad8-5785c2ee42c2,MOC_2025_2357_HAE0704_AMINE_STRIPPER_REB,"MOC 2025-2357, HAE0704 Amine stripper reboiler replace and piping mod.",MOC,FAC_HARMATTAN,,Active,true
+a55bb1e5-13b6-49be-8a03-21fb5440a149,MOC_2025_2355_ADDITIONAL_ISOLATION_FOR_P,"MOC 2025-2355, Additional Isolation for PSVs",MOC,FAC_FERNDALE,,Active,true
+d7ebc278-9d48-44f9-bbf0-5024ee15636b,MOC_2025_2353_PIER_POWER_GENERATOR_AND_T,"MOC 2025-2353, Pier Power - Generator and Transformer Installation",MOC,FAC_FERNDALE_PIER,,Active,true
+45f3b878-6c4d-4652-b6a4-cbb48435d5da,MOC_2025_2352_TTT_VFD_HARMONIC_TRAP_REAC,"MOC 2025-2352, TTT VFD Harmonic Trap Reactor Post Filter Removal",MOC,FAC_TOWNSEND_TANK_TERMINAL,,Active,true
+817a64ba-bbfc-4a61-879b-646795f60d9e,MOC_2025_2350_EXCHANGER_SHELL_TUBE_PSV_M,"MOC 2025-2350, Exchanger Shell & Tube PSV Modifications",MOC,FAC_SLAVE_LAKE,,Active,true
+78ed867c-94b7-4226-95fb-71e46d804564,MOC_2025_2348_T2B_INLET_FLOW_CASCADE_CON,"MOC 2025-2348, T2B Inlet Flow Cascade Control Upgrade",MOC,FAC_TOWNSEND,,Active,true
+ebb0c25c-c784-4370-9d00-0438a33311b9,MOC_2025_2347_IMPROVED_SITE_ACCESS_STAIR,"MOC 2025-2347, Improved Site Access - stairs",MOC,FAC_FERNDALE,,Active,true
+6df59397-3279-4455-a6d1-9bfe3d12df96,MOC_2025_2344_EAGLE_HILL_COMPRESSOR_EXHA,"MOC 2025-2344, Eagle Hill Compressor Exhaust Redesign to Stainless",MOC,FAC_EAGLE_HILL,,Active,true
+e62dfb57-6519-41b2-b60b-3387b57ce50a,MOC_2025_2343_RIPET_TANK_ROOF_COATING,"MOC 2025-2343, RIPET Tank Roof Coating",MOC,FAC_RIPET,,Active,true
+b4bf0821-798a-4ec7-a9b7-437af52fc376,MOC_2025_2341_PHA_RESOLUTION_T_2_OVERFIL,"MOC 2025-2341, PHA Resolution-T-2 Overfill Protection",MOC,FAC_FERNDALE,,Active,true
+ab81fade-1fdc-4b17-907d-bb7dbd301c24,MOC_2025_2339_BUTANE_CAVERN_EASY_WIN_LOP,"MOC 2025-2339, Butane Cavern easy-win LOPA recommendations",MOC,FAC_GRIFFITH,,Active,true
+14e44721-b1c7-4361-ba71-9fea8a9729ca,MOC_2025_2338_PROPANE_CAVERN_EASY_WIN_LO,"MOC 2025-2338, Propane Cavern easy-win LOPA recommendations",MOC,FAC_GRIFFITH,,Active,true
+cccdb206-9b95-482d-a2e7-ff75a046928f,MOC_2025_2337_TURN_AROUND_2025_PIPING_MO,"MOC 2025-2337, Turn-Around 2025 Piping Modifications",MOC,FAC_SUNDRE,,Active,true
+6effed1e-bb46-46ed-bc0b-13485158c29a,MOC_2025_2334_TWSD_GENERATORS_VIBRATION,"MOC 2025-2334, TWSD Generators Vibration Sensor Upgrades",MOC,FAC_TOWNSEND,,Active,true
+2fbbc37d-6ec8-4e0a-a5e3-bb9fcea725ce,MOC_2025_2329_OPTI_LOSS_TELEMETRY_ADDITI,"MOC 2025-2329, Opti/Loss Telemetry Additions",MOC,FAC_FERNDALE,,Active,true
+15206fa7-98aa-4a95-b5ef-437aee6953c8,MOC_2025_2327_TWSD_T2A_REFRIG_GLYCOL_FIL,"MOC 2025-2327, TWSD T2A Refrig Glycol Filters Closed Vent Tie-In",MOC,FAC_TOWNSEND,,Active,true
+11744874-6c6a-4f5d-a343-6c45d91db5ef,MOC_2025_2326_DECOMMISSION_B_48_G_C_46_C,"MOC 2025-2326, Decommission B-48-G & C-46-C & TWSD NGL Treating",MOC,FAC_TOWNSEND,,Active,true
+07baf073-0545-415a-ae56-1859103d3ebf,MOC_2025_2314_PROPANE_ENRAF_RELOCATION,"MOC 2025-2314, Propane ENRAF Relocation",MOC,FAC_GRIFFITH,,Active,true
+99bb7547-0df5-4713-b205-84cf098304e4,MOC_2025_2309_BLIND_OFF_STARTING_AIR_TO,"MOC 2025-2309, Blind off starting air to Stg 2 Comp Building",MOC,FAC_HARMATTAN,,Active,true
+c88c2383-2dcd-4b22-8a4a-2505d406f748,MOC_2025_2307_BUTANE_WATER_KO_V_43_INST,"MOC 2025-2307, Butane Water KO V-43 Inst End of Life Upgrade",MOC,FAC_GRIFFITH,,Active,true
+f1a624f0-1f43-4f7b-b666-02ed8aba93fb,MOC_2025_2305_GRIFFITH_2500KVA_TRANSFORM,"MOC 2025-2305, Griffith 2500kVa Transformer Install",MOC,FAC_GRIFFITH,,Active,true
+dd05cd00-7759-4d9a-b3d0-89968bba61a0,MOC_2025_2303_BUTANE_WATER_KNOCKOUT_V_44,"MOC 2025-2303, Butane Water Knockout V-44 Inst. End of Life Upgrade",MOC,FAC_GRIFFITH,,Active,true
+9745acd4-4e66-472c-b15d-4aac48e45d8b,MOC_2025_2302_ADD_CH3OH_INJECTION_PORT_I,"MOC 2025-2302, Add CH3OH Injection Port in AGI Metering Building",MOC,FAC_HARMATTAN,,Active,true
+86c3ad8b-de2a-4e50-a82f-eff8cd02f307,MOC_2025_2300_TOWER_BOTTOMS_SECONDARY_LE,"MOC 2025-2300, Tower bottoms secondary level measurement (LT-1)",MOC,FAC_SLAVE_LAKE,,Active,true
+9dde2472-1e44-44da-be9a-80f37ab234ee,MOC_2025_2299_RIPET_60_ESDV_6510_REPLACE,"MOC 2025-2299, RIPET 60-ESDV-6510 Replacement",MOC,FAC_RIPET,,Active,true
+77b4de05-ba81-43d1-8e9a-af5bb1732622,MOC_2025_2298_RIPET_ENGINE_DAY_TANK_OIL,"MOC 2025-2298, RIPET Engine Day Tank Oil Filtration",MOC,FAC_RIPET,,Active,true
+ac5f8b6b-9592-4d31-83fb-5b26557cbc2f,MOC_2025_2297_T2B_FUEL_GAS_MAKE_UP_REGUL,"MOC 2025-2297, T2B Fuel Gas Make Up Regulator Failures",MOC,FAC_TOWNSEND,,Active,true
+afe136cf-3dac-4cc4-93fe-7485adcefe76,MOC_2025_2295_V_42_PIT_800_INSTRUMENT_SE,"MOC 2025-2295, V-42 PIT-800 Instrument Segregation",MOC,FAC_GRIFFITH,,Active,true
+48f464a2-38f9-49f0-9531-ea57b8ff3810,MOC_2025_2294_PIER_FIREWATER_MODS_REMOVE,"MOC 2025-2294, Pier Firewater Mods – Remove redundant P7 fuel filter",MOC,FAC_FERNDALE_PIER,,Active,true
+ceaa7aa4-359b-478a-a2f0-437253da3fe7,MOC_2025_2292_AGI_COMP_HAK9152_TEMP_NEW,"MOC 2025-2292, AGI Comp HAK9152 Temp new oil due to tin content",MOC,FAC_HARMATTAN,,Active,true
+1194a720-8e3b-4f90-8344-f4405084d65d,1894776_H2S_BLOWBY_TO_ATMOSPHERIC_AMINE,1894776 - H2S blowby to atmospheric amine surge tank TK-2011,Improvements,FAC_PIPESTONE,Medium,Active,true
+2fa6455d-c138-480d-88fd-3428dfb0dbfc,1033702_NEW_PIPELINE_FOR_MARATHON_CONNEC,1033702 - New pipeline for Marathon connection,Improvements,FAC_GRIFFITH,Low,Active,true
+e39463f8-c859-4ce0-af3f-6fd45b4930ff,1969177_TRAIN_II_PLANT_GGS_BENCHMARKING,1969177 - Train II Plant/GGS Benchmarking,Improvements,FAC_PIPESTONE,Medium,Active,true
+132b3608-ea74-4c46-8a66-6346ad673be1,1970076_REVIEW_OF_OVERHEAD_CRANE_PREVENT,1970076 - Review of Overhead Crane Preventative Maintenance,Improvements,FAC_MIDSTREAM,Low,Active,true
+a8920399-086d-4cf2-bf4b-83f9b2bee2c8,1980794_AER_UPDATES_FOR_EPZ_DIR_71_CALCS,1980794 - AER updates for EPZ Dir 71 calcs (Harmattan & Pipestone),Improvements,FAC_MIDSTREAM,Low,Active,true
+579ee25d-1aff-41bf-ba29-9d3d7ec60c00,1971165_K_210_K_211_CAT_ENGINE_COMMUNICA,1971165 - K-210 K-211 CAT Engine Communication Failure to PLC Control,Improvements,FAC_FERNDALE,Medium,Active,true
+72e2b2b9-808e-4331-9dcd-c7fe576a72c1,2001249_UTILITY_BUILDING_AREA_CLASSIFICA,2001249 - Utility Building - Area Classification,Improvements,FAC_EEEP,Low,Active,true
+3350d75b-b37e-47bc-872b-f407ce35628a,2002149_ENGINEERING_TO_LOOK_AT_INSTALLIN,2002149 - Engineering to look at installing compressor impact sensors,Improvements,FAC_PIPESTONE,Medium,Active,true
+c09b0f25-8c58-4b5a-9b96-9b203df9dcae,2009549_SUPPORT_IDENTIFYING_VALVES_FOR_R,2009549 - Support Identifying Valves for Resolution of EEEP LOPA,Improvements,FAC_EEEP,Low,Active,true
+8a875b5b-6a34-4ad1-9597-0493d68d9519,2020679_MAXIMUM_PRESSURE_ASSESSMENT_FOR,2020679 - Maximum Pressure Assessment for Cavern,Improvements,FAC_GRIFFTH,Low,Active,true
+d732f67b-d72d-4d75-8cf0-9be2b500bb18,2020680_MAXIMUM_PRESSURE_ASSESSMENT_FOR,2020680 - Maximum Pressure Assessment for Cavern,Improvements,FAC_GRIFFTH,Medium,Active,true
+0a31ccec-a612-4b6f-b524-07fd2ed8593d,2045452_DEVELOP_REMEDIATION_PLAN_FOR_NOR,2045452 - Develop remediation plan for North Pine OT hypervisors,Improvements,FAC_NORTH_PINE,Medium,Active,true
+cb92a5d8-f11c-4f7e-b17c-52baffb6b7ee,2048278_RCFA_REQUIRED_FOR_RIPET_6300_GEA,2048278 - RCFA Required for RIPET 6300 Gearbox Failure,Improvements,FAC_RIPET,High,Active,true
+3cb216b4-32ed-4f9e-9b12-c28d35c42503,2048687_EEEP_CRYO_FLARE_SOURCE_AUDIT,2048687 - EEEP - Cryo Flare Source Audit,Improvements,FAC_EEEP,Medium,Active,true
+5ae4a0fb-b059-40d9-9ab6-81ef3ea70bfe,2054059_SUPPORT_CLAIR_MAINTENANCE_OUTAGE,2054059 - Support Clair Maintenance Outage,Improvements,FAC_CLAIR,Low,Active,true
+27b6b8b3-0204-4f3c-ace8-5395200b28da,2054190_SLAVE_LAKE_FIRED_HEATER_BMS_UPGR,2054190 - Slave Lake Fired Heater BMS Upgrades,Improvements,FAC_SLAVE_LAKE,Medium,Active,true
+301fae72-ce06-4fbe-9261-b28343d38d44,2061812_EMERGENCY_GENERATOR_REQUIRES_TUN,2061812 - Emergency Generator Requires Tuning to Start Up,Improvements,FAC_JEEP,Medium,Active,true
+848edec6-53ff-4eb5-8323-ba56704a7044,2061823_Q_500_INCINERATOR_DEVELOPED_HOT,2061823 - Q-500 Incinerator Developed Hot Spot and Failed Shell,Improvements,FAC_TOWNSEND,Medium,Active,true
+c0ba5d0e-46d9-4606-aa39-676bceebe1a9,2062029_RELIABILITY_OF_K_201,2062029 - Reliability of K-201,Improvements,FAC_DIMSDALE,High,Active,true
+8a6c34ed-a29b-4b56-a10a-0672f988abc3,2062281_VIBRATION_MITIGATION_ON_K201,2062281 - Vibration Mitigation on K201,Improvements,FAC_DIMSDALE,High,Active,true
+1c62c188-b331-4923-8f41-8b1715f54ea3,2062287_SWITCH_GEAR_BREAKER_INTERLOCK,2062287 - Switch Gear Breaker Interlock,Improvements,FAC_RIPET,Medium,Active,true
+37f10c0f-3836-44e4-8076-1535df3a8821,2062412_AMINE_CHARGE_PUMP_MOTORS_BEARING,2062412 - Amine Charge Pump Motors - Bearing RTDs Add to Shutdown,Improvements,FAC_PIPESTONE,Medium,Active,true
+b3f74644-0db2-43c9-95a8-2860d2fe61c0,2062415_CURRENT_PROTECTION_REQUIRED_FOR,2062415 - Current Protection Required for Transformer,Improvements,FAC_RIPET,Medium,Active,true
+abb4c707-74fd-468b-9970-24f35c73c110,2064292_FUEL_GAS_TEMPS_TO_T2_SOLAR_IS_TO,2064292 - Fuel Gas Temps to T2 Solar is Too Low,Improvements,FAC_PIPESTONE,Medium,Active,true
+2b5b0510-8700-4a33-83ed-91a35ae859b2,RIPET,RIPET,Asset Support,FAC_RIPET,,Active,true
+bbfb1ba6-e3b4-44f4-8264-c1a87b6123ff,EEEP,EEEP,Asset Support,FAC_EEEP,,Active,true
+3cb9f875-5d96-4af5-81e2-3d281cb07495,FERNDALE,Ferndale,Asset Support,FAC_FERNDALE,,Active,true
+db9fa824-d44c-40b6-bda0-39b76d413b3a,JEEP,JEEP,Asset Support,FAC_JEEP,,Active,true
+dfb839ed-ffe4-4a26-8e4e-961ef362c500,NEBC,NEBC,Asset Support,FAC_NEBC,,Active,true
+b7c2845a-a638-413c-9eea-e9f54b8eec8c,HARMATTAN,Harmattan,Asset Support,FAC_HARMATTAN,,Active,true
+366b9650-62a6-4c44-ba4c-0d9dfabe18fd,PIPESTONE,Pipestone,Asset Support,FAC_PIPESTONE,,Active,true
+ba2ae6bf-fad2-4e4a-9196-87b1314a0050,DIMSDALE,Dimsdale,Asset Support,FAC_DIMSDALE,,Active,true
+10bd31a7-f2ba-42ba-a9b8-7ed5843cf7c1,GRIFFITH,Griffith,Asset Support,FAC_GRIFFITH,,Active,true
+4a88f70b-679a-4ac9-868e-8eee3d29ef43,AFS,AFS,Asset Support,FAC_AFS,,Active,true
+7758b5c2-3284-4905-be10-22c1024b0aa5,ENERCHEM,Enerchem,Asset Support,FAC_ENERCHEM,,Active,true
+95349d0a-f983-4bad-940c-952c8398d978,ALL,All,OMS,FAC_ALL,,Active,true
+275e2c7e-5fcd-48b3-8b90-1ab80f5e9363,AFS_WOLF_SSLP_TIE_IN,AFS WOLF SSLP TIE IN,Growth & Opti Projects,FAC_AFS,,Active,true
+1a4da08e-452c-49d8-b45a-60c1a2a8dbb5,DIMSDALE_IT_S_WELLS,Dimsdale IT-S  Wells,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+5d26b8f6-f929-48e5-badc-79c20de65b1f,DIMSDALE_IT_S_05_36_EXECUTION,Dimsdale IT-S 05-36 Execution,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+1550d3fd-1c1a-493d-a12f-fa5928e95e57,DIMSDALE_IT_S_05_36_FAC_FEED,Dimsdale IT-S 05-36 FAC FEED,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+729e442e-7634-46e8-ab50-8bfc540eb8c2,DIMSDALE_IT_S_08_25_FAC_FEED,Dimsdale IT-S 08-25 FAC FEED,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+1839615b-2121-4d5c-8e9f-e26f23684dc5,DIMSDALE_IT_S_COMMON,Dimsdale IT-S Common,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+04545219-5cff-4402-a62d-c47cb9e1adec,DIMSDALE_IT_S_PIPELINE_EXE,Dimsdale IT-S Pipeline Exe,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+80a62765-f239-4356-9317-5269f9ff3996,DIMSDALE_IT_S_PIPELINE_FEED,Dimsdale IT-S Pipeline FEED,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+3401019d-9abb-4cd5-b05c-03169c9694a4,BNSF_SELF_SWITCHING,BNSF Self-Switching,Growth & Opti Projects,FAC_FERNDALE,,Active,true
+f649365b-e979-42f7-bfcd-4c26d3611d77,DE_ETHANIZER_DEHYDRATION,De-Ethanizer/Dehydration,Growth & Opti Projects,FAC_FERNDALE,,Active,true
+29441b3a-1f12-46a8-a620-33df26e0c0c7,ENCLOSED_GROUND_FLARE,Enclosed Ground Flare,Growth & Opti Projects,FAC_FERNDALE,,Active,true
+d9f49103-0e0e-4e13-89a4-a0e7c7091b52,FUEL_GAS_BLEND,Fuel Gas Blend,Growth & Opti Projects,FAC_FERNDALE,,Active,true
+2e4540ee-b1bb-44b3-ad53-d2f7f3d475d6,GRIFFITH_MARATHON_C4_PIPELINE,Griffith Marathon C4 Pipeline,Growth & Opti Projects,FAC_GRIFFITH,,Active,true
+00e7438a-e51f-4830-be03-5c56b10bc8f7,HARM_CCS_PRE_FEED,HARM - CCS - Pre-Feed,Growth & Opti Projects,FAC_HARMATTAN,,Active,true
+680e219c-1439-4a62-82a4-612b7316d979,NEBC_C41F_NORTH_GAS_BYPASS,NEBC C41F North Gas Bypass,Growth & Opti Projects,FAC_NEBC,,Active,true
+07aa03f1-3d5d-4fa6-8fe3-f1fa82fd2c74,NEBC_CAPACITY_EXP_FEED,NEBC Capacity Exp - FEED,Growth & Opti Projects,FAC_NEBC,,Active,true
+31b37998-6565-4c85-b08d-428bf1ef8ee2,NORTH_PAD_PL_MODIFICATIONS,North Pad PL Modifications,Growth & Opti Projects,FAC_NEBC,,Active,true
+78f6a34e-3bd4-4fc0-9bae-87cf17618ef9,NORTH_PINE_BACKUP_GENERATOR,North Pine Backup Generator,Growth & Opti Projects,FAC_NEBC,,Active,true
+b00808bd-4014-43f6-a039-1c9aa3edc702,ROLLING_HILLS_HUB_DEVELOPMENT,Rolling Hills Hub Development,Growth & Opti Projects,FAC_NEBC,,Active,true
+4bafdec0-2600-407f-9608-c99d0ac7adb5,TTT_WATER_IN_NGL_ANALYZER,TTT Water-In-NGL Analyzer,Growth & Opti Projects,FAC_NEBC,,Active,true
+216bb5ae-a6f1-4221-9670-cb940820c033,TWN_NGL_TREATER_DEBOTTLENECK,TWN NGL Treater Debottleneck,Growth & Opti Projects,FAC_NEBC,,Active,true
+00972b0f-c594-4e57-8da5-56f7c13488c7,REEF_OPIT_PHASE_1,REEF Opit Phase 1,Growth & Opti Projects,FAC_REEF,,Active,true
+cf498494-6034-4e89-b276-1a16e07a6a6a,RIEEF_CONTRACTUAL_FID_PAYMENT,RIEEF Contractual FID Payment,Growth & Opti Projects,FAC_REEF,,Active,true
+608a801c-44c2-42eb-9b6b-77f5b830b457,RIEEF_CSU_EXECUTE,RIEEF CSU - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+31b1e3ec-d86b-4b75-9245-6574169d3a4f,RIEEF_FEED_COMMON,RIEEF FEED - Common,Growth & Opti Projects,FAC_REEF,,Active,true
+bd089b0e-e5f1-4a19-8cb0-c07509f16323,RIEEF_HO_OWNERS_COSTS_EXECUTE,RIEEF HO Owners Costs - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+6b866c16-99bd-4b9f-b684-4e0144ddc633,RIEEF_JETTY_EXECUTE,RIEEF Jetty - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+dde1b989-f873-4626-8d50-91ed50a244d9,RIEEF_RRUC_OFFLOADING_EXECUTE,RIEEF RRUC Offloading - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+7572cfcd-cc2a-488b-87cf-5b95ba2cfe5e,RIEEF_RRUC_RAIL_YARD_EXECUTE,RIEEF RRUC Rail Yard - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+8e0942a3-796c-49c6-9783-326deefe4972,RIEEF_SITE_OFFICE_COSTS_EXECUTE,RIEEF Site Office Costs - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+fd19885d-7276-4ffc-9bfd-57dd4646f0ff,RIEEF_UPLANDS_FACILITY_EXECUTE,RIEEF Uplands Facility - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+3f74c09f-0d61-4e83-a8a0-7a39b732ab07,RIEEF_UPLANDS_STORAGE_EXECUTE,RIEEF Uplands Storage - EXECUTE,Growth & Opti Projects,FAC_REEF,,Active,true
+bda0e43a-a91c-496a-a5df-f98d2468d6c0,RIPET_3RD_LPG_FEED_PUMP,RIPET 3rd LPG FEED Pump,Growth & Opti Projects,FAC_RIPET,,Active,true
+9ba1eade-0f10-46cc-a653-04bfb0f15a67,RIPET_METHANOL_REMOVAL_FEED,RIPET Methanol Removal - FEED,Growth & Opti Projects,FAC_RIPET,,Active,true
+e57f8992-7f04-4933-b678-2c27ba2871b4,RIPET_METHANOL_REMOVAL_FID,RIPET Methanol Removal - FID,Growth & Opti Projects,FAC_RIPET,,Active,true
+73def0b5-fd93-4721-89db-da2fbb2c4f86,MERCAPTAN_TREATING_EXPANSION,Mercaptan Treating Expansion,Growth & Opti Projects,,,Active,true
+6500dcfa-d2b5-461e-8699-61be5234f610,DIMSDALE_PHASE_1,Dimsdale Phase 1,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+a951204d-847c-4591-8482-f8a956cb83b9,DIMSDALE_PHASE_2,Dimsdale Phase 2,Growth & Opti Projects,FAC_DIMSDALE,,Active,true
+9d4e08e5-05ac-4146-b324-2b0556bc6d2e,FERNDALE_ENCLOSED_GROUND_FLARE,Ferndale Enclosed Ground Flare,Growth & Opti Projects,FAC_FERNDALE,,Active,true
+9198d805-e239-4b15-84a2-a9c678268f5e,HARMATTAN_CCS_RH_HUB,Harmattan CCS + RH Hub,Growth & Opti Projects,FAC_HARMATTAN,,Active,true
+daaf5c32-5b6d-4b6b-925e-c050ccfffbf0,NEBC_FRAC_LIQUIDS_EXPANSION,NEBC Frac/Liquids Expansion,Growth & Opti Projects,FAC_NEBC,,Active,true
+cd15bafd-481e-4762-b0ab-51f1cbe42105,PIPESTONE_II,Pipestone II,Growth & Opti Projects,FAC_PIPESTONE,,Active,true
+63c64ed0-12e4-475b-ad68-80cca3c0830b,PIPESTONE_III,Pipestone III,Growth & Opti Projects,FAC_PIPESTONE,,Active,true
+4ec77b24-2aca-467a-9157-2411c72cd0c4,PIPESTONE_II_DEBOTTLENECK,Pipestone II Debottleneck,Growth & Opti Projects,FAC_PIPESTONE,,Active,true
+694e8da0-8d21-4c90-b484-65c523c202d2,REEF_OPTIMIZATION_PHASE_1,REEF Optimization Phase 1,Growth & Opti Projects,FAC_REEF,,Active,true
+8da79461-020f-4556-96c7-a65eb3e9ab5f,REEF_EXPANSION,REEF Expansion,Growth & Opti Projects,FAC_REEF,,Active,true
+28caa434-120c-4504-baef-98ae13993bb0,REEF_OPTIMIZATION_PHASE_2,REEF Optimization Phase 2,Growth & Opti Projects,FAC_REEF,,Active,true
+831d081e-8490-4ba5-9273-a17053808fa7,RIPET_PERMANENT_CHILLER,RIPET Permanent Chiller,Growth & Opti Projects,FAC_RIPET,,Active,true
+ef2f0790-5d7d-414c-8d00-9896b9f623a5,TOWNSEND_SC_RESTAGE,Townsend SC Restage,Growth & Opti Projects,FAC_NEBC,,Active,true
+e8945fb6-2412-4e4c-b25c-0189b7547494,ENERCHEM_SUNDRE_EPEA_COMPL,EnerChem Sundre EPEA Compl.,MC Projects,FAC_ENERCHEM,,Active,true
+a444966d-cf36-4f59-8d6a-e3383d0b09b3,ENERCHEM_SLAVE_LAKE_EPEA_COMPL,EnerChem Slave Lake EPEA Compl,MC Projects,FAC_ENERCHEM,,Active,true
+9a597d79-3512-4580-a10f-d549d9269592,FRND_CRITICAL_CONTROL_UPGRADE,FRND Critical Control Upgrade,MC Projects,FAC_FERNDALE,,Active,true
+15b135c6-bcd9-490b-ac43-ef0c525b7879,FERNDALE_OPTI_LOSS,Ferndale Opti Loss,MC Projects,FAC_FERNDALE,,Active,true
+43031389-0f09-4ad8-9255-13a8164c1b1d,FERNDALE_PIER_POWER_SUPPLY,Ferndale Pier Power Supply,MC Projects,FAC_FERNDALE,,Active,true
+769bf36d-27fd-497e-a0db-5701f037dfa6,FERNDALE_E17_EXCHANGER,Ferndale E17 Exchanger,MC Projects,FAC_FERNDALE,,Active,true
+89a74d8d-6109-4115-8674-5df6aed88680,GORDONDALE_WATER_PIPE_UPGRADES,Gordondale Water Pipe Upgrades,MC Projects,FAC_GORDONDALE,,Active,true
+496d44b0-6d7a-40d8-bf5b-ee431f258a0e,GRIFFITH_PUMP_COMPLETIONS,Griffith Pump Completions,MC Projects,FAC_GRIFFITH,,Active,true
+731614e4-77a8-4743-a638-ef6f81dfd402,HARM_AMINE_STRIPPER_REBOILER,HARM - Amine Stripper Reboiler,MC Projects,FAC_HARMATTAN,,Active,true
+6ff5e848-c000-40cc-8c69-6a7004c8389a,HARM_2026_TA_LONG_LEAD_ITEMS,HARM - 2026 TA Long Lead Items,MC Projects,FAC_HARMATTAN,,Active,true
+3169f6c2-83f9-4336-8eca-edb6a1808ac0,HARMATTAN_2026_SMALL_PROJECTS,Harmattan 2026 Small Projects,MC Projects,FAC_HARMATTAN,,Active,true
+db050706-dba1-48c9-91cc-cd4acdc98e8e,HARMATTAN_PLC_DCS_UPGRADES,Harmattan PLC/DCS Upgrades,MC Projects,FAC_HARMATTAN,,Active,true
+2acff9be-b405-432d-aae2-23677af1aa46,HARMATTAN_K100_K500_UPGRADES,Harmattan K100 & K500 Upgrades,MC Projects,FAC_HARMATTAN,,Active,true
+93e64af5-104a-4cfb-9977-82f061d49e4a,HARM_HAK410_420_ELEC,HARM HAK410/420 ELEC,MC Projects,FAC_HARMATTAN,,Active,true
+d36bcfd8-f9b4-43cf-9915-fb06c098d6e1,HARMATTAN_K203_MAJOR_OVERHAUL,Harmattan K203 Major Overhaul,MC Projects,FAC_HARMATTAN,,Active,true
+e9d4f874-570e-43f5-b305-a05d3dd25907,PIPESTONE_1_2025_SMALL_PROJ,Pipestone 1 2025 Small Proj,MC Projects,FAC_PIPESTONE,,Active,true
+1bca10d1-cb3d-425d-9b5d-20bff06ad958,PS1_8_34_WATER_INJ_WELL_FRAC,PS1 8-34 Water INJ Well Frac,MC Projects,FAC_PIPESTONE,,Active,true
+b753bf35-a45c-488b-a3f5-b5c6da5ab1e2,PIPESTONE_PIPELINE_UPGRADES,PipeStone Pipeline Upgrades,MC Projects,FAC_PIPESTONE,,Active,true
+69c7ea1c-1b4c-4ed8-bdca-f0552f1f41fd,PIPESTONE_2_CAPITAL_SPARES,Pipestone 2 - Capital Spares,MC Projects,FAC_PIPESTONE,,Active,true
+16fed095-62f3-4d23-bbc8-f604e8f6897f,PS2_PI_IMPLEMENTATION,PS2 PI Implementation,MC Projects,FAC_PIPESTONE,,Active,true
+b1d9a9e6-9b15-44ba-8408-4a7791047e6e,RIPET_TANK_ROOF_COATING,RIPET Tank Roof Coating,MC Projects,FAC_RIPET,,Active,true
+85ed3d3f-6daf-468b-9f94-c171609e21fe,YELLOWKNIFE_BERM_INSTALLATION,Yellowknife Berm Installation,MC Projects,FAC_YELLOWKNIFE,,Active,true
+6af2d5a3-53f2-4146-95bf-3bd309bfb394,PSM,PSM,MLT,FAC_ALL,,Active,true
+e30b0ccf-7c8c-4268-85dc-728198d5c57c,MOC_2024_2283_CONTROL_ROOM_H2S_LEL_DETEC,"MOC 2024-2283, Control Room H2S/LEL Detection",MOC,FAC_PIPESTONE,,Active,true
+3335f29f-d97a-4d54-98a8-dc7c8053f3a3,MOC_2024_2278_BIOCIDE_INJECTION_TK_105,"MOC 2024-2278, Biocide Injection TK-105",MOC,FAC_SLAVE_LAKE,,Active,true
+c3fa970f-b728-4bfc-bb6d-b334fbf67ad7,MOC_2024_2274_RIPET_UPGRADING_GAS_DETECT,"MOC 2024-2274, RIPET Upgrading Gas Detector",MOC,FAC_RIPET,,Active,true
+9f30ba65-0af5-44f0-adc8-41ee0bd81f59,MOC_2024_2273_NEW_SPOOL_FOR_FORMATION_TA,"MOC 2024-2273, New spool for formation tank water pumps",MOC,FAC_HARMATTAN,,Active,true
+e628b8cb-1f88-43f1-b321-f32412222d1b,MOC_2024_2270_TOTE_UTILIZATION_FOR_REDUC,"MOC 2024-2270, Tote Utilization for Reducing Water to Comp Crankcases",MOC,FAC_FERNDALE_FACILITY,,Active,true
+6aff08c6-61b8-4a2f-a10d-97c19ae963ed,MOC_2024_2268_MOTHBALL_K212,"MOC 2024-2268, Mothball K212",MOC,FAC_FERNDALE_FACILITY,,Active,true
+f6fde9e4-3cd0-4379-9f20-31c236f50342,MOC_2024_2267_C_105_LUBE_OIL_EXCHANGER_D,"MOC 2024-2267, C-105 Lube Oil Exchanger Drain Valve additions",MOC,FAC_EEEP,,Active,true
+678c71e4-f4ed-4652-b48f-3f46fa03094e,MOC_2024_2265_C_105A_B_LUBE_OIL_HEATERS,"MOC 2024-2265, C-105A/B Lube Oil Heaters",MOC,FAC_EEEP,,Active,true
+1f2ab1db-cc62-4ad9-b0e9-ffe4ad547f21,MOC_2024_2264_CHANGE_EAGLE_HILL_MCC_SMOK,"MOC 2024-2264, Change Eagle Hill MCC smoke detection programming",MOC,FAC_EAGLE_HILL,,Active,true
+93626dfc-6baa-4350-b86d-445bf1f735bc,MOC_2024_2263_NORTH_PINE_MCC_NETWORK,"MOC 2024-2263, North Pine MCC Network",MOC,FAC_NORTH_PINE,,Active,true
+9087de99-0793-4e61-801b-0cecf8aeb42c,MOC_2024_2261_SWEET_GAS_SCRUBBER_HAD0333,"MOC 2024-2261, Sweet Gas Scrubber HAD0333 High Level Switch",MOC,FAC_HARMATTAN,,Active,true
+4360e82d-89ae-4ac5-8c1c-f6333445573c,MOC_2024_2260_K302_OPTIMIZATION_WEST_INL,"MOC 2024-2260, K302 Optimization West Inlet Reroute to K302",MOC,FAC_HARMATTAN,,Active,true
+1dad11dc-76ff-404b-a80f-e6fd2fd9a926,MOC_2024_2257_RATIONALIZE_VALVE_STATION,MOC 2024-2257 Rationalize Valve Station HH Pressure SD Philosophy,MOC,FAC_NORTH_PINE,,Active,true
+216eb3c6-99dd-4832-b053-9a12022fedb5,MOC_2024_2255_POUCE_COUPE_FIELD_ABANDONM,"MOC 2024-2255, Pouce Coupe Field Abandonment",MOC,FAC_POUCE_COUPE,,Active,true
+7c6485bc-16ca-42bd-ad29-0382dbd0599c,MOC_2024_2253_IONS_PROJECT_SUPPORT,"MOC 2024-2253, IONS Project Support",MOC,FAC_HARMATTAN,,Active,true
+dbbb9e7a-13c6-4c72-a65c-20f3b7b43b86,MOC_2024_2251_EAGLE_HILL_METHANOL_CH3OH,"MOC 2024-2251, Eagle Hill Methanol (CH3OH) Pump EHG906 control rev",MOC,FAC_EAGLE_HILL,,Active,true
+0dc38378-955b-4059-a877-363b26f90a15,MOC_2024_2246_FERNDALE_CRITICAL_CONTROLS,"MOC 2024-2246, Ferndale Critical Controls Upgrade - Alertus Replacement",MOC,FAC_FERNDALE_FACILITY,,Active,true
+8d95b72f-0d9c-4147-af9f-5bee705d0572,MOC_2024_2245_DIB_BODY_BLEED_VALVES,"MOC 2024-2245, DIB Body Bleed Valves",MOC,FAC_PIPESTONE,,Active,true
+15007c35-6213-4100-b604-e6752f4e2ce8,MOC_2024_2242_A_2313_LUBE_OIL_COOLER_PSV,"MOC 2024-2242, A-2313 Lube Oil Cooler PSV",MOC,FAC_PIPESTONE,,Active,true
+24377a28-0e03-4bb2-aa18-1dbc25177eff,MOC_2024_2241_STABILIZER_PUMP_SEAL_UPGRA,"MOC 2024-2241, Stabilizer Pump Seal Upgrade",MOC,FAC_PIPESTONE,,Active,true
+0223a538-d9cc-44e9-a014-5edaf9c33650,MOC_2024_2237_EAST_INLET_SEP_WATER_BOOT,"MOC 2024-2237, East Inlet Sep Water Boot Drain Header LP Drain Repair",MOC,FAC_HARMATTAN,,Active,true
+9f54679d-9b2a-4ad0-ba83-82ecd287228a,MOC_2024_2236_FV_1_UPTREAM_REPLACMENT_PI,"MOC 2024-2236, FV-1 Uptream Replacment Piping",MOC,FAC_SLAVE_LAKE,,Active,true
+a12d4607-d457-460a-ab5e-21388d8fa723,MOC_2024_2235_PIT_INSTALL_ON_EAST_END_OF,"MOC 2024-2235, PIT install on East end of Lateral Pipeline",MOC,FAC_SLAVE_LAKE,,Active,true
+e1be13af-5bba-4f25-b903-2453cf1e2b98,MOC_2024_2234_JET_A1_LOADOUT_GROUND_PROT,"MOC 2024-2234, Jet A1 Loadout Ground Protection Change",MOC,FAC_SLAVE_LAKE,,Active,true
+7dc57b70-f565-481a-acbe-ae12953f5475,MOC_2024_2232_V_33_LEVEL_TRANSMITTER_REL,"MOC 2024-2232, V-33 Level Transmitter Reliability Improvement",MOC,FAC_GRIFFITH,,Active,true
+c07c8cbe-8808-40df-b740-f2d973a01005,MOC_2024_2224_K1AB_LOW_SUCTION_TRIP_LOCA,"MOC 2024-2224, K1AB Low Suction trip Location and set point",MOC,FAC_FERNDALE_FACILITY,,Active,true
+29fff17d-1d51-4d26-9655-c4cf2d870345,MOC_2024_2222_NGL_CROSS_PRODUCT_HEAT_INT,"MOC 2024-2222, NGL Cross-Product Heat Integration - Tie-Ins Only",MOC,FAC_TOWNSEND,,Active,true
+787de493-80db-4b9d-ba65-e713fc34389f,MOC_2024_2221_RIPET_OFFLOADING_COMPRESSO,"MOC 2024-2221, RIPET Offloading Compressor Overhead Crane",MOC,FAC_RIPET,,Active,true
+a80d96e1-7b87-481a-a947-acb47ebe2d00,MOC_2024_2219_REMOVE_COMPRESSOR_TRANSMIT,"MOC 2024-2219, Remove Compressor ""Transmitter Failure SD""",MOC,FAC_PIPESTONE,,Active,true
+c73f7795-edbe-4358-a86f-46658af9d36f,MOC_2024_2218_UPDATE_K1A_B_LUBE_OIL_TEMP,"MOC 2024-2218, Update K1A B lube Oil temperature set points",MOC,FAC_FERNDALE_FACILITY,,Active,true
+11500e7e-efb9-4348-9896-a39e6d4fa588,MOC_2024_2216_INSTALL_CHECK_VALVE_ON_AGI,"MOC 2024-2216, Install check valve on AGI HAK9152&9252 skid edge",MOC,FAC_HARMATTAN,,Active,true
+3b9dd1b7-d422-4f49-97db-b11f012b81aa,MOC_2024_2213_COALESCER_UPGRADES_WATER_W,"MOC 2024-2213, Coalescer Upgrades - Water Wash + Filter design",MOC,FAC_PIPESTONE,,Active,true
+b4bdbb18-261c-40b7-a1d1-9c941790562f,MOC_2024_2210_REPLACE_CHECK_VALVE_WITH_S,"MOC 2024-2210, Replace Check Valve with Spool on AEGS Flare",MOC,FAC_HARMATTAN,,Active,true
+ed7d5a5c-c745-429c-92eb-38c41aa35179,MOC_2024_2206_STABILIZER_OH_COMPESSOR,"MOC 2024-2206, Stabilizer OH compessor",MOC,FAC_PIPESTONE,,Active,true
+28b1f579-9820-4567-a657-444e48e9f91f,MOC_2024_2204_SCAVENGER_INJECTION_TO_CON,"MOC 2024-2204, Scavenger Injection to Condensate Loadout",MOC,FAC_SLAVE_LAKE,,Active,true
+d3055c74-bd62-462b-a600-f164e988a8e6,MOC_2024_2203_ACID_GAS_PUMP_BACKFLOW_OVE,"MOC 2024-2203, Acid Gas Pump Backflow Overpressure",MOC,FAC_PIPESTONE,,Active,true
+95d2ba6e-3d2e-4b8e-b472-19bcf4c3fa55,MOC_2024_2200_INSTALL_DIB_VALVES_ON_HAG0,"MOC 2024-2200, Install DIB Valves on HAG0321 A/B/C pump suctions",MOC,FAC_HARMATTAN,,Active,true
+0db8c2ba-8c92-469a-83d9-d8f56667d20b,MOC_2024_2194_CHANGE_THE_COOLER_VIBRATIO,"MOC 2024-2194, Change the Cooler Vibration SD philosophy",MOC,FAC_PIPESTONE,,Active,true
+3f640f23-5518-4a30-9bab-0fe202417f2e,MOC_2024_2192_C41F_COMPRESSOR_PACKAGE_CY,"MOC 2024-2192, C41F - Compressor Package - Cyclonic Suction Scrubber",MOC,FAC_C41F,,Active,true
+0f34bacd-1030-486f-b694-da061cd46a16,MOC_2024_2183_TTT_NGL_SAMPLE_CONDITIONIN,"MOC 2024-2183, TTT - NGL Sample Conditioning System (AIT-6312)",MOC,FAC_TOWNSEND_TANK_TERMINAL,,Active,true
+b1383d39-6dd8-4e03-b86c-96663242f895,MOC_2024_2180_PIPESTONE_WAREHOUSE_UPSIZE,"MOC 2024-2180, Pipestone Warehouse upsized feeder breaker",MOC,FAC_PIPESTONE,,Active,true
+436cba08-82c0-4238-ac5d-ee8851d2a885,MOC_2024_2179_RIPET_XV_4004_VALVE_STYLE,"MOC 2024-2179, RIPET XV-4004 Valve Style Change",MOC,FAC_RIPET,,Active,true
+d0658590-2299-4375-b6fd-e9366f59fae5,MOC_2024_2175_RW2024_00725_NGL_BULLET_PE,"MOC 2024-2175, RW2024-00725 - NGL Bullet Permissive Optimization",MOC,FAC_NORTH_PINE,,Active,true
+fcbaf209-1831-425f-9d0e-850ec879e3d9,MOC_2024_2173_REROUTE_HAV1985_DISCHARGE,"MOC 2024-2173, Reroute HAV1985 Discharge Routing to tie into CHD",MOC,FAC_HARMATTAN,,Active,true
+363f7f68-03b4-4b3c-a91b-9d555fd6c80e,MOC_2024_2166_H2S_ANALYZER_INSTALLATION,"MOC 2024-2166, H2S Analyzer Installation",MOC,FAC_SLAVE_LAKE,,Active,true
+8973716b-4075-4122-8dc0-8f02b5b34cb3,MOC_2024_2165_DCS_SYSTEM_AS_BUILTS,"MOC 2024-2165, DCS System As-Builts",MOC,FAC_FERNDALE_FACILITY,,Active,true
+6acbe233-9ea3-4935-903b-13f6c4d7dcc3,MOC_2024_2157_RIPET_ALARM_RATIONALIZATIO,"MOC 2024-2157, RIPET Alarm Rationalization",MOC,FAC_RIPET,,Active,true
+3f96ca6a-0420-441c-96f7-9a797fdb355d,MOC_2024_2150_H2S_SCAVENGER_FOR_DRILLSOL,"MOC 2024-2150, H2S Scavenger for Drillsol Plus",MOC,FAC_SLAVE_LAKE,,Active,true
+9cf7a281-8033-4bf2-b528-29ef59d219ec,MOC_2024_2149_ACTUATOR_INSTALLATION_DESA,"MOC 2024-2149, Actuator Installation Desalter Sample Cabinet Pump",MOC,FAC_SLAVE_LAKE,,Active,true
+7fee6346-0613-4ee5-a9e8-ce5ea1bdbc3d,MOC_2024_2144_1887441_TOWNSEND_LOAD_SHED,"MOC 2024-2144, 1887441 - Townsend Load Shed Philosophy Update",MOC,FAC_TOWNSEND,,Active,true
+dffb39c6-68bd-48fc-9487-d587a34cbe57,MOC_2024_2140_REPLACE_PIER_NORTH_MOORING,"MOC 2024-2140, Replace Pier North Mooring Dolphin",MOC,FAC_FERNDALE_PIER,,Active,true
+893f27a6-e716-4d6c-990f-67b9d932a8e4,MOC_2024_2086_K_210_K_211_CAT_DRIVER_BHP,"MOC 2024-2086, K-210 / K-211 CAT Driver BHP Rating",MOC,FAC_FERNDALE_FACILITY,,Active,true
+546fa0b2-0bea-4a40-9516-c378198a8fa6,MOC_2024_2082_CHANGE_HAG0509A_PUMP_STYLE,"MOC 2024-2082, Change HAG0509A pump style to match HAG0509C",MOC,FAC_HARMATTAN,,Active,true
+e414a114-44f2-4f7b-a5b9-32ad6e535cce,MOC_2024_2076_SULPHUR_PLANT_DISCONNECT_F,"MOC 2024-2076, Sulphur Plant Disconnect from Live Process",MOC,FAC_HARMATTAN,,Active,true
+9d26ec34-a61b-49e2-8b3c-5f6fd0167d99,MOC_2024_2075_CRUDE_HEATER_D1_1_TEMPERAT,"MOC 2024-2075, Crude Heater D1.1 Temperature Rerate",MOC,FAC_SLAVE_LAKE,,Active,true
+11518701-e0ce-4553-ae2c-0d2d78808331,MOC_2024_2054_ELIMINATION_OF_RAIL_RACK_S,"MOC 2024-2054, Elimination of Rail Rack Swivel Joint",MOC,FAC_RIPET,,Active,true
+be9500e6-c5fb-49d7-b78f-5e1da3f7f18d,MOC_2024_2053_COSEPERATOR_POSITIVE_ISOLA,"MOC 2024-2053, Coseperator Positive Isolation",MOC,FAC_RIPET,,Active,true
+ea3cb6a5-9d00-4cee-bbe3-3ce2507f0b73,MOC_2024_2048_BUTANE_WATER_PUMP_CONTROLS,"MOC 2024-2048, Butane Water Pump Controls and VFD",MOC,FAC_GRIFFITH,,Active,true
+06e56b1f-992e-4772-8922-be11373b17e5,MOC_2024_2042_1_MCC_END_OF_LIFE_REPLACEM,"MOC 2024-2042, #1 MCC End of Life Replacement",MOC,FAC_GRIFFITH,,Active,true
+7faf9f57-661d-4c24-9bde-1cd0cdbc691b,MOC_2024_2038_5_36_PLC_UPGRADE,"MOC 2024-2038, 5-36 PLC UPGRADE",MOC,FAC_DIMSDALE,,Active,true
+2fbef850-19a0-459d-996f-25e9a0b3c30e,MOC_2024_2032_STAGE_V_FLARE_TEMPORARY_LE,"MOC 2024-2032, Stage V Flare Temporary Leak Repair Coffin Box",MOC,FAC_HARMATTAN,,Active,true
+a236ccd0-9e43-477b-b90c-c14de047a27a,MOC_2024_2028_EAGLE_HILL_THERMINOL_HEATE,"MOC 2024-2028, Eagle Hill Therminol Heater Stack Modification/Repair",MOC,FAC_EAGLE_HILL,,Active,true
+ec50b5ca-f86b-4363-8a93-f5c494586ac0,MOC_2024_2016_AMINE_REGENERATOR_REPLACEM,"MOC 2024-2016, Amine Regenerator Replacement",MOC,FAC_PIPESTONE,,Active,true
+2d53e7fc-7b44-493f-a740-77f28eec3e74,MOC_2024_2015_RICH_AMINE_FILTER_INLET_VA,"MOC 2024-2015, Rich Amine Filter Inlet Valves",MOC,FAC_PIPESTONE,,Active,true
+e1e39490-b856-4794-bc08-ee7e3cfe5521,MOC_2024_2012_INLET_VALVES,"MOC 2024-2012, Inlet Valves",MOC,FAC_PIPESTONE,,Active,true
+7c7d6380-1c8b-4986-8372-40148848b185,MOC_2024_2011_TEMPORARY_INCREASE_TO_H_20,"MOC 2024-2011, Temporary Increase to H-20 High Stack Temp SD Setting",MOC,FAC_FERNDALE_FACILITY,,Active,true
+4ef9edd4-854f-4781-84e6-5f60440c591d,MOC_2024_2004_CO2_CONTACTOR_PRESSURE_CON,"MOC 2024-2004, CO2 Contactor Pressure Control",MOC,FAC_HARMATTAN,,Active,true
+88f12e6a-28a4-463b-b539-21d0b730c7a0,MOC_2023_1964_PIPELINE_PUMP_MOTOR_AND_BE,"MOC 2023-1964, Pipeline Pump Motor and Bearing Temperature alarm SD",MOC,FAC_AFS,,Active,true
+73efe459-2673-46a2-914e-ec3ea6fab457,MOC_2023_1957_C2_REJECTION_LINE,"MOC 2023-1957, C2 Rejection Line",MOC,FAC_JEEP,,Active,true
+9c127098-c14a-4551-bf91-a5ae86eb5ed3,MOC_2023_1939_RW2023_00643_NP1_PSV_3309,"MOC 2023-1939, RW2023-00643 - NP1 - PSV-3309 Undersized",MOC,FAC_NORTH_PINE,,Active,true
+4174dd3c-cede-4d5a-960a-61e2042c7889,MOC_2023_1863_FIREWATER_PUD_PLANT_ISOLAT,"MOC 2023-1863, Firewater PUD Plant Isolation",MOC,FAC_FERNDALE_FACILITY,,Active,true
+76b4de8a-3af4-40bc-b356-56e5942d3cc9,MOC_2023_1832_REMOVE_THE_NGL_BULLETS_S_D,"MOC 2023-1832, Remove the NGL bullets S/D to pump suction",MOC,FAC_HARMATTAN,,Active,true
+fd5aa01e-12b8-4085-b5bb-ca11b865a3ab,MOC_2023_1810_CONDENSATE_SAMPLING_VALVE,"MOC 2023-1810, Condensate sampling valve upgrade",MOC,FAC_AFS,,Active,true
+ef79c9eb-7301-4cb8-93c6-3f7d41a0ab9d,MOC_2023_1808_PRESSURE_INDICATION_FROM_D,"MOC 2023-1808, Pressure Indication from D1s to T-2",MOC,FAC_FERNDALE_FACILITY,,Active,true
+9b3b278f-f08b-4fdf-a778-4cdfc643c021,MOC_2023_1792_HARMATTAN_OUT_OF_SERVICE_T,"MOC 2023-1792, Harmattan Out of Service Tank Isolation",MOC,FAC_HARMATTAN,,Active,true
+0f90203d-c92e-4afa-a391-108c19756eda,MOC_2023_1778_BUTANE_STORAGE_BULLET_U_G,"MOC 2023-1778, Butane Storage Bullet U/G FG Line Abandonment",MOC,FAC_HARMATTAN,,Active,true
+cbce3a7e-8d78-4fbe-a247-245c9e813062,MOC_2023_1777_STAGE_5_INLET_LIQUID_HEATE,"MOC 2023-1777, Stage 5 Inlet Liquid Heater - Remove from Service",MOC,FAC_HARMATTAN,,Active,true
+fd8df409-7daf-49c7-844e-7751615a463d,MOC_2023_1763_FERNDALE_DOT_PIPELINE_OVER,"MOC 2023-1763, Ferndale DOT Pipeline Overpressure protection",MOC,FAC_FERNDALE_FACILITY,,Active,true
+1bc9f6d4-1613-4b51-9f63-bca7508b7335,MOC_2022_1728_T2B_SALES_GAS_COMPRESSOR_L,"MOC 2022-1728, T2B – Sales Gas Compressor Lube Oil Cooler",MOC,FAC_TOWNSEND,,Active,true
+85f997fc-e6f7-446c-a951-116f40d886a9,MOC_2022_1698_MERCAPTAN_133_CAPACITY_INC,"MOC 2022-1698, Mercaptan 133% Capacity Increase",MOC,FAC_TOWNSEND,,Active,true
+0b10a742-726a-4d30-b3d1-82fae2e6a46e,MOC_2022_1653_NORTH_PINE_FACILITY_BACK_U,"MOC 2022-1653, North Pine Facility Back-Up Generator Install",MOC,FAC_NORTH_PINE,,Active,true
+677465bf-b004-4fed-aa38-f5f27efc0d48,MOC_2022_1638_GLYCOL_PUMP_MODIFICATION,"MOC 2022-1638, Glycol Pump Modification",MOC,FAC_C41F,,Active,true
+7c25af97-b188-4efb-8e36-e260dd15d230,MOC_2022_1637_VI_3140_STABILIZER_FANS_SH,"MOC 2022-1637, VI-3140 Stabilizer Fans Shut Down (RW-2022-240)",MOC,FAC_TOWNSEND,,Active,true
+0ea45e61-6def-4aa3-96e9-08534b8ef177,MOC_2022_1630_STAGE1_2_3_4_FIRE_DETECTIO,"MOC 2022-1630, Stage1/2/3/4 Fire Detection Heads Removal and Upgrade",MOC,FAC_HARMATTAN,,Active,true
+000d80a3-3aac-4a13-a244-6e76301e0410,MOC_2022_1621_TWN_CONDENSING_TANKS_INTER,"MOC 2022-1621, TWN Condensing Tanks Internal Coating Change",MOC,FAC_TOWNSEND,,Active,true
+d0acaebd-16c0-47be-bbc8-b88b0a8634e2,MOC_2022_1602_MERCAPTAN_115_CAPACITY_INC,"MOC 2022-1602, Mercaptan 115% capacity increase",MOC,FAC_TOWNSEND,,Active,true
+718bd95d-191d-4dce-a65a-3473980966e9,MOC_2022_1559_TEMPORARY_HIGH_PRESSURE_SD,"MOC 2022-1559, Temporary High Pressure SD on P-66 C4 Pipeline",MOC,FAC_FERNDALE_FACILITY,,Active,true
+16785f34-2e06-44a0-b68a-f9f39efe5ec1,MOC_2022_1557_SOLAR_AFTERCOOLER_PROGRAMM,"MOC 2022-1557, Solar Aftercooler Programming",MOC,FAC_TOWNSEND,,Active,true
+389ded1b-f706-48ef-9522-3ef680409285,MOC_2022_1546_TA_2022_ADDED_WORK_FLARE_S,"MOC 2022-1546, TA 2022 - Added Work Flare Sweep Solar Skid",MOC,FAC_TOWNSEND,,Active,true
+c174c5ac-d9c1-4bca-b1c0-459941102a31,MOC_2022_1377_RAIL_NGL_OFFLOADING,"MOC 2022-1377, Rail NGL Offloading",MOC,FAC_NORTH_PINE,,Active,true
+481b24a3-42f4-4bd9-92d4-d47d6aa4cc98,MOC_2021_1361_HARMATTAN_PLC_RELIABILITY,"MOC 2021-1361, Harmattan PLC Reliability Upgrades",MOC,FAC_HARMATTAN,,Active,true
+b5d3e515-b367-4d37-a1f7-7c6d1b174dba,MOC_2021_1330_HAZOP_RW_CLOSE_OUT_IFC_AND,"MOC 2021-1330, HAZOP RW Close out IFC and Asbuilt",MOC,FAC_BLAIR_CREEK_2,,Active,true
+295487ff-b2e1-4258-8af7-a02fb2e64f23,MOC_2021_1220_GATE_VALVE_CSO_DEPROP_EQUA,"MOC 2021-1220, Gate Valve CSO Deprop Equalization",MOC,FAC_NORTH_PINE,,Active,true
+c9531f0f-b3a4-41c6-b100-4a5bc41c53a1,MOC_2021_1210_RIPET_K_6200_DISCHARGE_FLO,"MOC 2021-1210, RIPET K-6200 Discharge Flow Meter",MOC,FAC_RIPET,,Active,true
+95f1fd2e-76dc-4742-aee6-cd4332e58569,MOC_2021_1159_MERC_NGL_PRE_HEATER_TWINNI,"MOC 2021-1159, MERC - NGL Pre-Heater Twinning",MOC,FAC_TOWNSEND,,Active,true
+a27ed449-366c-49b2-87cb-40e3d104cb27,MOC_2021_1148_TWN_OPS_CAMP_WATER_STORAGE,"MOC 2021-1148, TWN OPS Camp - water storage and distribution",MOC,FAC_TOWNSEND,,Active,true
+ac4c5a18-679b-4052-b5e2-eb00bb4cfc0d,MOC_2021_1144_DEPRO_DEBUTE_STAIRCASE,"MOC 2021-1144, Depro-Debute Staircase",MOC,FAC_NORTH_PINE,,Active,true
+f78ca06e-561e-453a-8ec9-1f7cdf44b12b,MOC_2021_1136_OUTAGE_WORK_REMOTE_MOUNT_S,"MOC 2021-1136, Outage work - Remote mount switch",MOC,FAC_TOWNSEND,,Active,true
+be856641-9f71-42ef-a1e5-f102983cb7b3,MOC_2021_1093_PIT_1010_DUPLICATE_TAGGING,"MOC 2021-1093, PIT-1010 Duplicate Tagging Change",MOC,FAC_TOWNSEND,,Active,true
+3dd96e48-c455-4fda-a039-ee7671d03263,MOC_2021_1076_TWN_1_PLC_UPGRADE,"MOC 2021-1076, TWN 1 PLC Upgrade",MOC,FAC_TOWNSEND,,Active,true
+2a1d2f0f-8727-461e-a256-5cf9649ccdd1,MOC_2020_1037_MERC_IA_FG_AD_HOC_SUPPLY,"MOC 2020-1037, MERC IA & FG Ad hoc supply",MOC,FAC_TOWNSEND,,Active,true
+77745c95-0df2-4fb0-b2a9-a25f06a301e2,MOC_2020_1031_PSV_SIZING_REVIEW,"MOC 2020-1031, PSV Sizing Review",MOC,FAC_NORTH_PINE,,Active,true
+f7155f1b-44fd-46f8-a474-5514c22f861c,MOC_2020_1021_2021_TA_FLARE_SWEEP_IN_T2B,"MOC 2020-1021, 2021 TA Flare Sweep in T2B Solar Skid",MOC,FAC_TOWNSEND,,Active,true
+0f77b563-46d2-4468-8c27-4c8eaa7eee7c,MOC_2020_1014_TA_2021_SLUG_CATCHER_1_2_D,"MOC 2020-1014, TA 2021 Slug Catcher 1/2 Desanding Nozzle Upgrades",MOC,FAC_TOWNSEND,,Active,true
+8013de8f-c00b-4909-8fb6-d323b51733b8,MOC_2020_1010_TA_2021_CONDENSING_TANK_PU,"MOC 2020-1010, TA 2021 Condensing Tank Pumps",MOC,FAC_TOWNSEND,,Active,true
+34775010-516a-432c-910d-02d3004814ae,MOC_2020_1009_TA_2021_DIB2_ADDITION_TO_S,"MOC 2020-1009, TA 2021 DIB2 Addition to Solar Drains",MOC,FAC_TOWNSEND,,Active,true
